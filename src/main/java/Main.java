@@ -7,18 +7,21 @@ public class Main {
         System.out.println("Detector 1.0 -  UFLA");
         System.out.println("Autores: Julio Verissimo, Rafael Durelli, Matheus Antônio Flausino");
 
-        //SmellsAndroidUiApp.NotFragments();
-        //SmellsAndroidUiApp.BadStringResource();
         //SmellsAndroidUiApp.frequentStyleResource();
-        //SmellsAndroidUiApp.LongStyleResource();
         //SmellsAndroidUiApp.InapropriateString();
-        //SmellsAndroidUiApp.NotFoundImage();
 
+        /*
         SmellsAndroidUiApp.CompUIIO("C:\\Users\\julio\\Desktop\\SystemAppMover\\src\\main\\java\\de\\j4velin\\systemappmover");
         SmellsAndroidUiApp.magicResource("C:\\Users\\julio\\Desktop\\SystemAppMover\\src\\main\\res\\layout");
         SmellsAndroidUiApp.HideListener("C:\\Users\\julio\\Desktop\\SystemAppMover\\src\\main\\res\\layout");
+        SmellsAndroidUiApp.layoutProfundamenteAninhado("C:\\Users\\julio\\Desktop\\SystemAppMover\\src\\main\\res\\layout");
+        SmellsAndroidUiApp.NotFragments("C:\\Users\\julio\\Desktop\\SystemAppMover\\src\\main\\res\\layout");
+        SmellsAndroidUiApp.LongStyleResource("C:\\Users\\julio\\Desktop\\SystemAppMover\\src\\main\\res\\values");
+        SmellsAndroidUiApp.BadStringResource("C:\\Users\\julio\\Desktop\\SystemAppMover\\src\\main\\res\\values");
 
+        */
 
+        SmellsAndroidUiApp.NotFoundImage("C:\\Users\\julio\\Desktop\\Amostragem de Apps a Analisar\\Bucket\\app\\src\\main\\res");
 
 
 
