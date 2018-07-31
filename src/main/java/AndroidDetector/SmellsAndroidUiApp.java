@@ -54,7 +54,47 @@ public class SmellsAndroidUiApp {
     }
 
     //Não Uso de Fragments
-    public static void NotFragments(){
+    public static void NotFragments(String pathApp){
+        boolean isfragment = false;
+        try{
+            File arquivos[];
+            File diretorio = new File(pathApp);
+            arquivos = diretorio.listFiles();
+
+            for(int cont = 0; cont < arquivos.length; cont++){
+                System.out.println("Arquivo analisado:" +arquivos[cont]);
+                System.out.println("---------------------------------------------------------------------------------------");
+
+                File f = new File(arquivos[cont].toString());
+
+                //SAX BUILDER PARA PROCESSAR O XML
+                SAXBuilder sb = new SAXBuilder();
+
+                //LER TODA A ESTRUTURA DO XML
+                Document d = sb.build(f);
+
+                //ACESSAR O ROOT ELEMENT
+                Element rootElmnt = d.getRootElement();
+
+                //BUSCAR ELEMENTOS FILHOS DA TAG
+                List elements = rootElmnt.getChildren();
+
+                for(int i =0; i < elements.size(); i++){
+                    org.jdom2.Element el = (org.jdom2.Element)elements.get(i);
+
+                    if(el.getName() == "fragment"){
+                        isfragment = true;
+                    }
+                }
+                if(!isfragment){
+                    System.out.println("Não uso de Fragments detectado  " + arquivos[cont].toString());
+                }
+                System.out.println("---------------------------------------------------------------------------------------");
+            }
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+        }
 
     }
 
