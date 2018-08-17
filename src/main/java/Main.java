@@ -1,3 +1,4 @@
+import AndroidDetector.ImportantSmells;
 import AndroidDetector.SmellsAndroidUiApp;
 import org.jdom2.JDOMException;
 import java.io.IOException;
@@ -21,7 +22,7 @@ public class Main {
 
         */
 
-        SmellsAndroidUiApp.NotFoundImage("C:\\Users\\julio\\Desktop\\Amostragem de Apps a Analisar\\Bucket\\app\\src\\main\\res");
+        ImportantSmells.DuplicateStyleAttributes("C:\\Users\\julio\\Desktop\\Amostragem de Apps a Analisar\\Bucket\\app\\src\\main\\res\\layout");
 
 
 
