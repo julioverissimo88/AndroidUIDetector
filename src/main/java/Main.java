@@ -4,9 +4,11 @@ import org.jdom2.JDOMException;
 import java.io.IOException;
 
 public class Main {
-    public static void main(String[] args) throws IOException, JDOMException {
+    public static void main(String[] args) throws Exception, IOException, JDOMException {
         System.out.println("Detector 1.0 -  UFLA");
         System.out.println("Autores: Julio Verissimo, Rafael Durelli, Matheus Antônio Flausino");
+        System.out.println("---------------------------------------------------------------------------------------");
+        System.out.println("");
 
         //SmellsAndroidUiApp.frequentStyleResource();
         //SmellsAndroidUiApp.InapropriateString();
@@ -22,7 +24,8 @@ public class Main {
 
         */
 
-        ImportantSmells.DuplicateStyleAttributes("C:\\Users\\julio\\Desktop\\Amostragem de Apps a Analisar\\Bucket\\app\\src\\main\\res\\layout");
+
+        ImportantSmells.SuspiciousBehavior("C:\\Users\\julio\\Desktop\\SystemAppMover\\src\\main\\java\\de\\j4velin\\systemappmover\\MoverActivity.java");
 
 
 
