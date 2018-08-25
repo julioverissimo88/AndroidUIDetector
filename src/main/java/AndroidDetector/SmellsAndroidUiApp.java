@@ -1,4 +1,5 @@
 package AndroidDetector;
+import com.github.javaparser.ast.stmt.LocalClassDeclarationStmt;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.input.SAXBuilder;
@@ -32,6 +33,9 @@ public class SmellsAndroidUiApp {
 
                 System.out.println(cu.getClass().getName());
 
+
+
+                cu.findAll(LocalClassDeclarationStmt.class);
 
                 System.out.println("Classe analisada: ");
 

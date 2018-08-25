@@ -3,10 +3,9 @@ package AndroidDetector;
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.Node;
-import com.github.javaparser.ast.body.BodyDeclaration;
-import com.github.javaparser.ast.body.FieldDeclaration;
-import com.github.javaparser.ast.body.TypeDeclaration;
-import com.github.javaparser.ast.body.VariableDeclarator;
+import com.github.javaparser.ast.NodeList;
+import com.github.javaparser.ast.body.*;
+import com.github.javaparser.ast.stmt.LocalClassDeclarationStmt;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.input.SAXBuilder;
@@ -75,6 +74,22 @@ public class ImportantSmells {
     }
 
     public static void SuspiciousBehavior(String pathApp) throws FileNotFoundException {
+        diretorio = new File(pathApp);
+        arquivos = diretorio.listFiles();
+
+        for (int cont = 0; cont < arquivos.length; cont++) {
+            System.out.println("Arquivo analisado:" + arquivos[cont]);
+            System.out.println("---------------------------------------------------------------------------------------");
+
+            File f = new File(arquivos[cont].toString());
+            CompilationUnit cu = JavaParser.parse(f);
+            ClassOrInterfaceDeclaration n = new ClassOrInterfaceDeclaration();
+            List<LocalClassDeclarationStmt> classes = cu.findAll(LocalClassDeclarationStmt.class);
+
+            for (LocalClassDeclarationStmt item : classes){
+                System.out.println("Comportamento suspeito encontrado  na classe " + item.getClassDeclaration().getName() + " - " + item.getRange());
+            }
+        }
 
     }
 

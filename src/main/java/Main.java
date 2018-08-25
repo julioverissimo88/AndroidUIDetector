@@ -5,7 +5,7 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) throws Exception, IOException, JDOMException {
-        System.out.println("Detector 1.0 -  UFLA");
+        System.out.println("Detector AndroidSmells 1.0 -  UFLA");
         System.out.println("Autores: Julio Verissimo, Rafael Durelli, Matheus Antônio Flausino");
         System.out.println("---------------------------------------------------------------------------------------");
         System.out.println("");
@@ -25,7 +25,7 @@ public class Main {
         */
 
 
-        ImportantSmells.SuspiciousBehavior("C:\\Users\\julio\\Desktop\\SystemAppMover\\src\\main\\java\\de\\j4velin\\systemappmover\\MoverActivity.java");
+        ImportantSmells.SuspiciousBehavior("C:\\Users\\julio\\Dropbox\\Mestrado\\Detector\\src\\main\\java\\AndroidDetector\\");
 
 
 
