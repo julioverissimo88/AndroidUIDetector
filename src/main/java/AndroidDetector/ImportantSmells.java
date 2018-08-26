@@ -5,7 +5,9 @@ import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.Node;
 import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.body.*;
+import com.github.javaparser.ast.expr.AnnotationExpr;
 import com.github.javaparser.ast.stmt.LocalClassDeclarationStmt;
+import com.github.javaparser.ast.type.ClassOrInterfaceType;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.input.SAXBuilder;
@@ -19,6 +21,7 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ImportantSmells {
@@ -98,7 +101,68 @@ public class ImportantSmells {
     }
 
     public static void FlexAdapter(String pathApp) {
+        try {
+            File arquivos[];
+            File diretorio = new File(pathApp);
+            arquivos = diretorio.listFiles();
 
+            for (File arquivo : arquivos) {
+                CompilationUnit compilationunit = JavaParser.parse(arquivo);
+
+                //Extrai cada Classe analisada pelo CompilationUnit
+                ArrayList<ClassOrInterfaceDeclaration> classes = new ArrayList<ClassOrInterfaceDeclaration>();
+                NodeList<TypeDeclaration<?>> types = compilationunit.getTypes();
+                for (int i = 0; i < types.size(); i++) {
+                    classes.add((ClassOrInterfaceDeclaration) types.get(i));
+                }
+
+                //Para cada uma dessas classes, verifica se ela é um Adapter (ou seja, se ela extende de BaseAdapter).
+                for (ClassOrInterfaceDeclaration classe : classes) {
+
+                    //Como a classe vai ser analisada ainda, não contém smells por enquanto
+                    Boolean isFlexAdapter = false;
+
+                    //Para ver se a classe é um Adapter, precisamos ver se ela extende de BaseAdapter
+                    //Pegamos todas as classes que ela implementa
+                    NodeList<ClassOrInterfaceType> implementacoes = classe.getExtendedTypes();
+                    for (ClassOrInterfaceType implementacao : implementacoes) {
+                        if (implementacao.getName().getIdentifier().equals("BaseAdapter")) {
+                            //Se chegou até aqui, temos certeza de que é um adapter.
+                            //Se a classe que extende do BaseAdapter tiver algum método que não seja sobrescrever um método de interface, é um FlexAdapter.
+                            //Pegamos todos os membros da classe
+                            NodeList<BodyDeclaration<?>> membros = classe.getMembers();
+                            for (BodyDeclaration<?> membro : membros) {
+                                //Verifica se o membro é um método
+                                if (membro.isMethodDeclaration()) {
+                                    //Para cada método, pega suas annotações, se não tiver, é lógica de negócio e é um flexAdapter
+                                    NodeList<AnnotationExpr> annotations = membro.getAnnotations();
+
+                                    //Sem annotations, dá erro
+                                    if(annotations.size() == 0) {
+                                        isFlexAdapter = true;
+                                    }
+
+                                    for (AnnotationExpr annotation : annotations ) {
+                                        //Se tiver annotacoes, mas nenhuma dessas anotações forem Override, é um método que não implementa método de interface, ou seja, é lógica de negócio e é um FlexAdapter
+                                        if (!annotation.getName().getIdentifier().equals("Override")) {
+                                            isFlexAdapter = true;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    //Se a classe for um flexAdapter, imprime o erro na tela
+                    if (isFlexAdapter) {
+                        System.out.println("Flex Adapter detectado na classe " + classe.getName().getIdentifier());
+                    }
+                }
+            }
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+        }
     }
 
 
