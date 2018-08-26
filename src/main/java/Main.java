@@ -25,8 +25,9 @@ public class Main {
         */
 
 
-        ImportantSmells.SuspiciousBehavior("C:\\Users\\julio\\Dropbox\\Mestrado\\Detector\\src\\main\\java\\AndroidDetector\\");
+//        ImportantSmells.SuspiciousBehavior("C:\\Users\\julio\\Dropbox\\Mestrado\\Detector\\src\\main\\java\\AndroidDetector\\");
 
+        ImportantSmells.FlexAdapter("/home/gtbono/Cursos-Alura/app/src/main/java/br/com/alura/cursos/adapter/");
 
 
     }
