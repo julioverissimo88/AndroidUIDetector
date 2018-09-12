@@ -5,7 +5,9 @@ import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.Node;
 import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.body.*;
+import com.github.javaparser.ast.expr.AnnotationExpr;
 import com.github.javaparser.ast.stmt.LocalClassDeclarationStmt;
+import com.github.javaparser.ast.type.ClassOrInterfaceType;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.input.SAXBuilder;
@@ -19,6 +21,7 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ImportantSmells {
@@ -82,19 +85,89 @@ public class ImportantSmells {
             System.out.println("---------------------------------------------------------------------------------------");
 
             File f = new File(arquivos[cont].toString());
-            CompilationUnit cu = JavaParser.parse(f);
+            CompilationUnit compilationunit = JavaParser.parse(f);
+
+
+
             ClassOrInterfaceDeclaration n = new ClassOrInterfaceDeclaration();
-            List<LocalClassDeclarationStmt> classes = cu.findAll(LocalClassDeclarationStmt.class);
+
+            List<LocalClassDeclarationStmt> classes = compilationunit.findAll(LocalClassDeclarationStmt.class);
+
+
 
             for (LocalClassDeclarationStmt item : classes){
-                System.out.println("Comportamento suspeito encontrado  na classe " + item.getClassDeclaration().getName() + " - " + item.getRange());
+                System.out.println(compilationunit.getTypes().get(0).getName().getIdentifier());
+                if (compilationunit.getTypes().get(0).getName().getIdentifier().equals("AppCompatActivity") || compilationunit.getTypes().get(0).getName().getIdentifier().equals("Activity") || compilationunit.getTypes().get(0).getName().getIdentifier().equals("Fragment") || compilationunit.getTypes().get(0).getName().getIdentifier().equals("BaseAdapter") ) {
+                    System.out.println("Comportamento suspeito encontrado  na classe " + item.getClassDeclaration().getName() + " - " + item.getRange());
+                }
             }
         }
 
     }
 
     public static void BrainUIComponent(String pathApp) {
+        try {
+            for (int cont = 0; cont < arquivos.length; cont++) {
+                System.out.println("Arquivo analisado:" + arquivos[cont]);
+                System.out.println("---------------------------------------------------------------------------------------");
 
+                File f = new File(arquivos[cont].toString());
+                CompilationUnit compilationunit = JavaParser.parse(f);
+                ClassOrInterfaceDeclaration n = new ClassOrInterfaceDeclaration();
+
+                ArrayList<ClassOrInterfaceDeclaration> classes = new ArrayList<ClassOrInterfaceDeclaration>();
+                NodeList<TypeDeclaration<?>> types = compilationunit.getTypes();
+                for (int i = 0; i < types.size(); i++) {
+                    classes.add((ClassOrInterfaceDeclaration) types.get(i));
+                }
+
+                for (ClassOrInterfaceDeclaration classe : classes) {
+                    Boolean isComponentUiBrain = false;
+                    //Testa se é adapter, activity, Fragment
+                    NodeList<ClassOrInterfaceType> implementacoes = classe.getExtendedTypes();
+                    for (ClassOrInterfaceType implementacao : implementacoes) {
+                        if (implementacao.getName().getIdentifier().equals("Activity") || implementacao.getName().getIdentifier().equals("Fragments") || implementacao.getName().getIdentifier().equals("BaseAdapter") || implementacao.getName().getIdentifier().endsWith("Listener")) {
+                            NodeList<BodyDeclaration<?>> itens = classe.getMembers();
+
+                            //Testa se existe atributo do tipo FINAL
+                            for (BodyDeclaration<?> atributos : itens) {
+                                System.out.println(atributos.toString());
+                                if (atributos.isFieldDeclaration()) {
+                                    if (atributos.toString().contains("final")) {
+                                        System.out.println("Componente de UI Cérebro Encontrado - " + atributos.getRange());
+                                    }
+                                }
+                            }
+
+                            //Testa se Existem étodos que não sejam override
+                            for (BodyDeclaration<?> met : itens) {
+                                if (met.isMethodDeclaration()) {
+                                    NodeList<AnnotationExpr> annotations = met.getAnnotations();
+
+                                    for (AnnotationExpr annotation : annotations) {
+                                        //Se tiver annotacoes que ão seja overide considera que possui implementação indevida logo uma smells
+                                        if (!annotation.getName().getIdentifier().equals("Override")) {
+                                            System.out.println("Componente de UI Cérebro Encontrado - " + annotation.getRange());
+                                        }
+                                    }
+                                }
+                            }
+
+                            //Testa se existe Conversão de dados
+
+
+                            //Testa se existe Operações de IO
+
+
+                        }
+                    }
+                }
+            }
+
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+        }
     }
 
     public static void FlexAdapter(String pathApp) {

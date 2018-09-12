@@ -32,9 +32,6 @@ public class SmellsAndroidUiApp {
                 ClassOrInterfaceDeclaration n = new ClassOrInterfaceDeclaration();
 
                 System.out.println(cu.getClass().getName());
-
-
-
                 cu.findAll(LocalClassDeclarationStmt.class);
 
                 System.out.println("Classe analisada: ");
