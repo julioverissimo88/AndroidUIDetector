@@ -7,6 +7,9 @@ import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.body.TypeDeclaration;
 import com.github.javaparser.ast.expr.AnnotationExpr;
 import com.github.javaparser.ast.type.ClassOrInterfaceType;
+import org.jdom2.Document;
+import org.jdom2.Element;
+import org.jdom2.input.SAXBuilder;
 
 import java.io.File;
 import java.lang.reflect.Field;
@@ -17,6 +20,7 @@ import java.util.List;
 public class Test {
     public static void main(String[] args) {
         try {
+            /*
             //System.out.println("Arquivo analisado:" + arquivos[cont]);
             System.out.println("---------------------------------------------------------------------------------------");
 
@@ -73,7 +77,38 @@ public class Test {
                     }
                 }
             }
+            */
 
+            long qtdSubelementos = 0;
+            File arquivos[];
+            File diretorio = null;
+            SAXBuilder sb = new SAXBuilder();
+            int qtdLimiteStilos = 5;
+
+            diretorio = new File("C:\\Users\\julio\\AndroidStudioProjects\\AppTestAndroidSmells\\app\\src\\main\\res\\values\\");
+            arquivos = diretorio.listFiles();
+            boolean isGodStyle = false;
+            int qtdFilesStyle = 0;
+
+
+            for (int cont = 0; cont < arquivos.length; cont++) {
+                System.out.println("Arquivo analisado:" + arquivos[cont]);
+                System.out.println("---------------------------------------------------------------------------------------");
+
+                File f = new File(arquivos[cont].toString());
+
+                //LER TODA A ESTRUTURA DO XML
+                Document d = sb.build(f);
+
+                if(d.getRootElement().getChildren().get(0).getName() == "style") {
+                    qtdFilesStyle = qtdFilesStyle +1;
+                }
+
+                if((qtdFilesStyle == 1) && (d.getRootElement().getChildren().size() > qtdLimiteStilos )){
+                    System.out.println("Longo recurso de Estilo detectado (existe apenas um arquivo para estilos no aplicativo que possui " + d.getRootElement().getChildren().size() + " estilos)");
+                    System.out.println("---------------------------------------------------------------------------------------");
+                }
+            }
         }
         catch(Exception ex){
             ex.printStackTrace();

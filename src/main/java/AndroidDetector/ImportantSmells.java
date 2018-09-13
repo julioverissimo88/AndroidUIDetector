@@ -177,19 +177,28 @@ public class ImportantSmells {
 
     public static void GodStyleResource(String pathApp) {
         try {
+            int qtdLimiteStilos = 5;
             diretorio = new File(pathApp);
             arquivos = diretorio.listFiles();
-            int numStyles = 0;
-
+            int qtdFilesStyle = 0;
 
             for (int cont = 0; cont < arquivos.length; cont++) {
-                if (arquivos[cont].toString().contains("styles")) {
-                    numStyles = numStyles + 1;
-                }
-            }
-            if (numStyles <= 1) {
-                System.out.println("Longo recurso de Estilo detectado (existe apenas um arquivo para estilos no aplicativo)");
+                System.out.println("Arquivo analisado:" + arquivos[cont]);
                 System.out.println("---------------------------------------------------------------------------------------");
+
+                File f = new File(arquivos[cont].toString());
+
+                //LER TODA A ESTRUTURA DO XML
+                Document d = sb.build(f);
+
+                if(d.getRootElement().getChildren().get(0).getName() == "style") {
+                    qtdFilesStyle = qtdFilesStyle +1;
+                }
+
+                if((qtdFilesStyle == 1) && (d.getRootElement().getChildren().size() > qtdLimiteStilos )){
+                    System.out.println("Longo recurso de Estilo detectado (existe apenas um arquivo para estilos no aplicativo que possui " + d.getRootElement().getChildren().size() + " estilos)");
+                    System.out.println("---------------------------------------------------------------------------------------");
+                }
             }
         } catch (Exception ex) {
             ex.printStackTrace();
