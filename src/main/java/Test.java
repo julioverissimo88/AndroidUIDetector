@@ -7,6 +7,7 @@ import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.body.TypeDeclaration;
 import com.github.javaparser.ast.expr.AnnotationExpr;
 import com.github.javaparser.ast.type.ClassOrInterfaceType;
+import org.jdom2.Attribute;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.input.SAXBuilder;
@@ -18,6 +19,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Test {
+    private void verificaDuplicateAttribute(String linha){
+
+    }
+
     public static void main(String[] args) {
         try {
             /*
@@ -85,7 +90,7 @@ public class Test {
             SAXBuilder sb = new SAXBuilder();
             int qtdLimiteStilos = 5;
 
-            diretorio = new File("C:\\Users\\julio\\AndroidStudioProjects\\AppTestAndroidSmells\\app\\src\\main\\res\\values\\");
+            diretorio = new File("C:\\Users\\julio\\AndroidStudioProjects\\AppTestAndroidSmells\\app\\src\\main\\res\\layout\\");
             arquivos = diretorio.listFiles();
             boolean isGodStyle = false;
             int qtdFilesStyle = 0;
@@ -100,14 +105,37 @@ public class Test {
                 //LER TODA A ESTRUTURA DO XML
                 Document d = sb.build(f);
 
-                if(d.getRootElement().getChildren().get(0).getName() == "style") {
-                    qtdFilesStyle = qtdFilesStyle +1;
+                List<String> listSmellsEcontradas = new ArrayList<String>();
+
+                for(int i= 0; i < d.getRootElement().getChildren().size(); i++){
+                    List<Element> filhos = d.getRootElement().getChildren();
+                    for(int j =0; j < filhos.size(); j++){
+                        List<Attribute> attr =  filhos.get(j).getAttributes();
+                        for(Attribute atributo : attr){
+                            String atributo_atual = atributo.toString();
+
+                            for(int ii= 0; ii < d.getRootElement().getChildren().size(); ii++){
+                                List<Element> filhosInterno = d.getRootElement().getChildren();
+                                for(int jj =0; jj < filhosInterno.size(); jj++){
+                                    List<Attribute> attrInterno =  filhosInterno.get(jj).getAttributes();
+                                    for(Attribute atributoInterno : attrInterno){
+
+                                        if(jj > j) {
+                                            if (atributo_atual.toString().equals(atributoInterno.toString()) && !listSmellsEcontradas.contains(atributo_atual.toString())) {
+                                                listSmellsEcontradas.add(atributo_atual.toString());
+                                                System.out.println("Duplicate Style Attributes " + atributoInterno.getName() + " - Considere colocar a formatação das propriedades em um recurso de estilo:");
+                                            }
+                                        }
+                                    }
+                                }
+
+                            }
+                        }
+                    }
+
                 }
 
-                if((qtdFilesStyle == 1) && (d.getRootElement().getChildren().size() > qtdLimiteStilos )){
-                    System.out.println("Longo recurso de Estilo detectado (existe apenas um arquivo para estilos no aplicativo que possui " + d.getRootElement().getChildren().size() + " estilos)");
-                    System.out.println("---------------------------------------------------------------------------------------");
-                }
+
             }
         }
         catch(Exception ex){

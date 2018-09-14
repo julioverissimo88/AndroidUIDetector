@@ -8,6 +8,7 @@ import com.github.javaparser.ast.body.*;
 import com.github.javaparser.ast.expr.AnnotationExpr;
 import com.github.javaparser.ast.stmt.LocalClassDeclarationStmt;
 import com.github.javaparser.ast.type.ClassOrInterfaceType;
+import org.jdom2.Attribute;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.input.SAXBuilder;
@@ -30,6 +31,14 @@ public class ImportantSmells {
     private static File diretorio = null;
     private static SAXBuilder sb = new SAXBuilder();
 
+    private void getAttributesItem(){
+        try{
+
+        }
+        catch (Exception ex){
+            ex.printStackTrace();
+        }
+    }
 
     public static void CoupledUIComponent(String pathApp) {
         try {
@@ -244,33 +253,39 @@ public class ImportantSmells {
                 System.out.println("---------------------------------------------------------------------------------------");
 
                 File f = new File(arquivos[cont].toString());
+
+                //LER TODA A ESTRUTURA DO XML
                 Document d = sb.build(f);
-                Element rootElmnt = d.getRootElement();
-                List elements = rootElmnt.getChildren();
 
-                for (int i = 0; i < elements.size(); i++) {
-                    org.jdom2.Element el = (org.jdom2.Element) elements.get(i);
+                List<String> listSmellsEcontradas = new ArrayList<String>();
 
-                    List<Element> SubElements = el.getChildren();
+                for(int i= 0; i < d.getRootElement().getChildren().size(); i++){
+                    List<Element> filhos = d.getRootElement().getChildren();
+                    for(int j =0; j < filhos.size(); j++){
+                        List<Attribute> attr =  filhos.get(j).getAttributes();
+                        for(Attribute atributo : attr){
+                            String atributo_atual = atributo.toString();
 
-                    for (int j = 0; j < SubElements.size(); j++) {
-                        org.jdom2.Element elChildren = (org.jdom2.Element) SubElements.get(j);
-                        List<org.jdom2.Attribute> listAttr = (List<org.jdom2.Attribute>) elChildren.getAttributes();
+                            for(int ii= 0; ii < d.getRootElement().getChildren().size(); ii++){
+                                List<Element> filhosInterno = d.getRootElement().getChildren();
+                                for(int jj =0; jj < filhosInterno.size(); jj++){
+                                    List<Attribute> attrInterno =  filhosInterno.get(jj).getAttributes();
+                                    for(Attribute atributoInterno : attrInterno){
 
-                        Boolean style = false;
-                        for (org.jdom2.Attribute item : listAttr) {
-                            if (item.getName() == "style") {
-                                style = true;
+                                        if(jj > j) {
+                                            if (atributo_atual.toString().equals(atributoInterno.toString()) && !listSmellsEcontradas.contains(atributo_atual.toString())) {
+                                                listSmellsEcontradas.add(atributo_atual.toString());
+                                                System.out.println("Duplicate Style Attributes " + atributoInterno.getName() + " - Considere colocar a formatação das propriedades em um recurso de estilo:");
+                                            }
+                                        }
+                                    }
+                                }
+
                             }
                         }
-                        if (!style) {
-                            System.out.println("Duplicate Style Attributes " + elChildren.getName() + " - Considere colocar a formatação das propriedades em um recurso de estilo:");
-                        }
                     }
+
                 }
-
-
-                System.out.println("---------------------------------------------------------------------------------------");
             }
         } catch (Exception ex) {
             ex.printStackTrace();
