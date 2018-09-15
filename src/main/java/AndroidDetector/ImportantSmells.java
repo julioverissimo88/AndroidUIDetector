@@ -94,22 +94,30 @@ public class ImportantSmells {
             System.out.println("---------------------------------------------------------------------------------------");
 
             File f = new File(arquivos[cont].toString());
-            CompilationUnit compilationunit = JavaParser.parse(f);
+            CompilationUnit cu = JavaParser.parse(f);
 
+            for (TypeDeclaration<?> typeDec : cu.getTypes()) {
+                for (BodyDeclaration<?> member : typeDec.getMembers()) {
+                    member.toFieldDeclaration().ifPresent(field -> {
+                        for (VariableDeclarator variable : field.getVariables()) {
+                            //Print the field's class typr
+                            //System.out.println(variable.getType());
 
+                            System.out.println("Comportamento suspeito detectado  - " + variable.getType()+ " - " + variable.getRange().get().begin);
+                            //Print the field's name
+                            //System.out.println(variable.getName());
+                            //Print the field's init value, if not null
 
-            ClassOrInterfaceDeclaration n = new ClassOrInterfaceDeclaration();
-
-            List<LocalClassDeclarationStmt> classes = compilationunit.findAll(LocalClassDeclarationStmt.class);
-
-
-
-            for (LocalClassDeclarationStmt item : classes){
-                System.out.println(compilationunit.getTypes().get(0).getName().getIdentifier());
-                if (compilationunit.getTypes().get(0).getName().getIdentifier().equals("AppCompatActivity") || compilationunit.getTypes().get(0).getName().getIdentifier().equals("Activity") || compilationunit.getTypes().get(0).getName().getIdentifier().equals("Fragment") || compilationunit.getTypes().get(0).getName().getIdentifier().equals("BaseAdapter") ) {
-                    System.out.println("Comportamento suspeito encontrado  na classe " + item.getClassDeclaration().getName() + " - " + item.getRange());
+                            variable.getInitializer().ifPresent(initValue -> {
+                                if(initValue.isLambdaExpr()){
+                                    System.out.println("Comportamento suspeito detectado  - " + initValue.getRange());
+                                }
+                            });
+                        }
+                    });
                 }
             }
+
         }
 
     }
@@ -291,14 +299,6 @@ public class ImportantSmells {
             ex.printStackTrace();
         }
     }
-
-
-        public static void teste() throws Exception {
-            SAXParserFactory factory = SAXParserFactory.newInstance();
-            factory.setValidating(true);
-            SAXParser parser = factory.newSAXParser();
-            parser.parse("C:\\Users\\julio\\Desktop\\Amostragem de Apps a Analisar\\Bucket\\app\\src\\main\\res\\layout\\activity_detailed.xml", new SampleOfXmlLocator());
-        }
 
         private static void recursiveChildrenElement(List elements) {
             for (int i = 0; i < elements.size(); i++) {

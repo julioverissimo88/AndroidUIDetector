@@ -1,10 +1,7 @@
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.NodeList;
-import com.github.javaparser.ast.body.BodyDeclaration;
-import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
-import com.github.javaparser.ast.body.MethodDeclaration;
-import com.github.javaparser.ast.body.TypeDeclaration;
+import com.github.javaparser.ast.body.*;
 import com.github.javaparser.ast.expr.AnnotationExpr;
 import com.github.javaparser.ast.type.ClassOrInterfaceType;
 import org.jdom2.Attribute;
@@ -90,7 +87,7 @@ public class Test {
             SAXBuilder sb = new SAXBuilder();
             int qtdLimiteStilos = 5;
 
-            diretorio = new File("C:\\Users\\julio\\AndroidStudioProjects\\AppTestAndroidSmells\\app\\src\\main\\res\\layout\\");
+            diretorio = new File("C:\\Users\\julio\\AndroidStudioProjects\\AppTestAndroidSmells\\app\\src\\main\\java\\br\\com\\julioverissimo\\apptestandroidsmells\\");
             arquivos = diretorio.listFiles();
             boolean isGodStyle = false;
             int qtdFilesStyle = 0;
@@ -101,40 +98,29 @@ public class Test {
                 System.out.println("---------------------------------------------------------------------------------------");
 
                 File f = new File(arquivos[cont].toString());
+                CompilationUnit cu = JavaParser.parse(f);
 
-                //LER TODA A ESTRUTURA DO XML
-                Document d = sb.build(f);
+                for (TypeDeclaration<?> typeDec : cu.getTypes()) {
+                    for (BodyDeclaration<?> member : typeDec.getMembers()) {
+                        member.toFieldDeclaration().ifPresent(field -> {
+                            for (VariableDeclarator variable : field.getVariables()) {
+                                //Print the field's class typr
+                                //System.out.println(variable.getType());
 
-                List<String> listSmellsEcontradas = new ArrayList<String>();
+                                System.out.println("Comportamento suspeito detectado  - " + variable.getType()+ " - " + variable.getRange().get().begin);
+                                //Print the field's name
+                                //System.out.println(variable.getName());
+                                //Print the field's init value, if not null
 
-                for(int i= 0; i < d.getRootElement().getChildren().size(); i++){
-                    List<Element> filhos = d.getRootElement().getChildren();
-                    for(int j =0; j < filhos.size(); j++){
-                        List<Attribute> attr =  filhos.get(j).getAttributes();
-                        for(Attribute atributo : attr){
-                            String atributo_atual = atributo.toString();
-
-                            for(int ii= 0; ii < d.getRootElement().getChildren().size(); ii++){
-                                List<Element> filhosInterno = d.getRootElement().getChildren();
-                                for(int jj =0; jj < filhosInterno.size(); jj++){
-                                    List<Attribute> attrInterno =  filhosInterno.get(jj).getAttributes();
-                                    for(Attribute atributoInterno : attrInterno){
-
-                                        if(jj > j) {
-                                            if (atributo_atual.toString().equals(atributoInterno.toString()) && !listSmellsEcontradas.contains(atributo_atual.toString())) {
-                                                listSmellsEcontradas.add(atributo_atual.toString());
-                                                System.out.println("Duplicate Style Attributes " + atributoInterno.getName() + " - Considere colocar a formatação das propriedades em um recurso de estilo:");
-                                            }
-                                        }
+                                variable.getInitializer().ifPresent(initValue -> {
+                                    if(initValue.isLambdaExpr()){
+                                        System.out.println("Comportamento suspeito detectado  - " + initValue.getRange());
                                     }
-                                }
-
+                                });
                             }
-                        }
+                        });
                     }
-
                 }
-
 
             }
         }
