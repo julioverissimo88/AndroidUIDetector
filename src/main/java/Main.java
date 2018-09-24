@@ -38,14 +38,14 @@ public class Main {
         try {
             if (caminho != "") {
                 if (xmlOrjava == 1) { //Smells XML
-                    //ImportantSmells.GodStyleResource(caminho);
-                    //AndroidDetector.ImportantSmells.CoupledUIComponent(caminho);
+                    ImportantSmells.GodStyleResource(caminho);
+                    AndroidDetector.ImportantSmells.CoupledUIComponent(caminho);
                     AndroidDetector.ImportantSmells.DeepNestedLayout(caminho);                
-                    //AndroidDetector.ImportantSmells.DuplicateStyleAttributes(caminho);
-                    //AndroidDetector.ImportantSmells.GodStyleResource(caminho);
-                    //AndroidDetector.ImportantSmells.SuspiciousBehavior(caminho);
-                } else {//Smells JAVA
-                    ImportantSmells.SuspiciousBehavior(caminho);                    
+                    AndroidDetector.ImportantSmells.DuplicateStyleAttributes(caminho);
+                    AndroidDetector.ImportantSmells.GodStyleResource(caminho);
+                } else {//Smel1ls JAVA
+                    ImportantSmells.SuspiciousBehavior(caminho);
+                    ImportantSmells.FlexAdapter(caminho);
                 }
             }
         }

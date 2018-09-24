@@ -17,11 +17,13 @@ import org.xml.sax.Attributes;
 import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
+import sun.rmi.runtime.NewThreadAction;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FilenameFilter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,15 +32,36 @@ public class ImportantSmells {
     private static File arquivos[];
     private static File diretorio = null;
     private static SAXBuilder sb = new SAXBuilder();
+    public static  Boolean classeValida = true;
+    public static List<File> arquivosAnalise =  new ArrayList<File>();
+    public static final String JAVA = ".java";
+    public static final String XML = ".xml";
 
-    private void getAttributesItem(){
-        try{
+    private  static List<OutputSmells> ListSmells = new ArrayList<OutputSmells>();
 
-        }
-        catch (Exception ex){
-            ex.printStackTrace();
+    public static void listar(File directory,String tipo) {
+        if(directory.isDirectory()) {
+            //System.out.println(directory.getPath());
+
+            String[] myFiles = directory.list(new FilenameFilter() {
+                public boolean accept(File directory, String fileName) {
+                    return fileName.endsWith(tipo);
+                }
+            });
+
+            for(int i = 0; i < myFiles.length; i++){
+                arquivosAnalise.add(new File(directory.getPath() + "\\" + myFiles[i].toString()));
+            }
+
+            String[] subDirectory = directory.list();
+            if(subDirectory != null) {
+                for(String dir : subDirectory){
+                    listar(new File(directory + File.separator  + dir),tipo);
+                }
+            }
         }
     }
+
 
     public static void CoupledUIComponent(String pathApp) {
         try {
@@ -86,17 +109,45 @@ public class ImportantSmells {
     }
 
     public static void SuspiciousBehavior(String pathApp) throws FileNotFoundException {
-        diretorio = new File(pathApp);
-        arquivos = diretorio.listFiles();
+        ListSmells.clear();
+        arquivosAnalise.clear();
+        listar(new File(pathApp),JAVA);
 
-        for (int cont = 0; cont < arquivos.length; cont++) {
-            System.out.println("Arquivo analisado:" + arquivos[cont]);
+        for (int cont = 0; cont < arquivosAnalise.toArray().length; cont++) {
+            classeValida = true;
+            System.out.println("Arquivo analisado:" + arquivosAnalise.toArray()[cont]);
             System.out.println("---------------------------------------------------------------------------------------");
 
-            File f = new File(arquivos[cont].toString());
+            File f = new File(arquivosAnalise.toArray()[cont].toString());
             CompilationUnit cu = JavaParser.parse(f);
 
+            ArrayList<ClassOrInterfaceDeclaration> classes = new ArrayList<ClassOrInterfaceDeclaration>();
+            NodeList<TypeDeclaration<?>> types = cu.getTypes();
+            for (int i = 0; i < types.size(); i++) {
+                classes.add((ClassOrInterfaceDeclaration) types.get(i));
+            }
+
+            for (ClassOrInterfaceDeclaration classe : classes) {
+                NodeList<ClassOrInterfaceType> implementacoes = classe.getExtendedTypes();
+                if(implementacoes.size() != 0){
+                    for (ClassOrInterfaceType implementacao : implementacoes) {
+                        if (implementacao.getName().getIdentifier().equals("BaseActivity") || implementacao.getName().getIdentifier().equals("Activity") || implementacao.getName().getIdentifier().equals("Fragments") || implementacao.getName().getIdentifier().equals("BaseAdapter") || implementacao.getName().getIdentifier().endsWith("Listener")) {
+                            classeValida  = true;
+                        }
+                    }
+                }
+                else{
+                    classeValida  = false;
+                }
+            }
+
+            //Se não for válida activity entre outros pula o laço para o próximo arquivo
+            if(!classeValida){
+                continue;
+            }
+
             for (TypeDeclaration<?> typeDec : cu.getTypes()) {
+
                 for (BodyDeclaration<?> member : typeDec.getMembers()) {
                     member.toFieldDeclaration().ifPresent(field -> {
                         for (VariableDeclarator variable : field.getVariables()) {
@@ -117,18 +168,19 @@ public class ImportantSmells {
                     });
                 }
             }
-
         }
-
     }
 
     public static void BrainUIComponent(String pathApp) {
         try {
-            for (int cont = 0; cont < arquivos.length; cont++) {
-                System.out.println("Arquivo analisado:" + arquivos[cont]);
+            arquivosAnalise.clear();
+            listar(new File(pathApp),JAVA);
+
+            for (int cont = 0; cont < arquivosAnalise.toArray().length; cont++) {
+                System.out.println("Arquivo analisado:" + arquivosAnalise.toArray()[cont]);
                 System.out.println("---------------------------------------------------------------------------------------");
 
-                File f = new File(arquivos[cont].toString());
+                File f = new File(arquivosAnalise.toArray()[cont].toString());
                 CompilationUnit compilationunit = JavaParser.parse(f);
                 ClassOrInterfaceDeclaration n = new ClassOrInterfaceDeclaration();
 
@@ -188,22 +240,81 @@ public class ImportantSmells {
     }
 
     public static void FlexAdapter(String pathApp) {
+        try {
+            arquivosAnalise.clear();
+            listar(new File(pathApp),JAVA);
 
+            for (int cont = 0; cont < arquivosAnalise.toArray().length; cont++) {
+                System.out.println("Arquivo analisado:" + arquivosAnalise.toArray()[cont]);
+                System.out.println("---------------------------------------------------------------------------------------");
+
+                File f = new File(arquivosAnalise.toArray()[cont].toString());
+                CompilationUnit compilationunit = JavaParser.parse(f);
+
+                //Extrai cada Classe analisada pelo CompilationUnit
+                ArrayList<ClassOrInterfaceDeclaration> classes = new ArrayList<ClassOrInterfaceDeclaration>();
+                NodeList<TypeDeclaration<?>> types = compilationunit.getTypes();
+                for (int i = 0; i < types.size(); i++) {
+                    classes.add((ClassOrInterfaceDeclaration) types.get(i));
+                }
+                //Para cada uma dessas classes, verifica se ela é um Adapter (ou seja, se ela extende de BaseAdapter).
+                for (ClassOrInterfaceDeclaration classe : classes) {
+                    //Como a classe vai ser analisada ainda, não contém smells por enquanto
+                    Boolean isFlexAdapter = false;
+                    //Para ver se a classe é um Adapter, precisamos ver se ela extende de BaseAdapter
+                    //Pegamos todas as classes que ela implementa
+                    NodeList<ClassOrInterfaceType> implementacoes = classe.getExtendedTypes();
+                    for (ClassOrInterfaceType implementacao : implementacoes) {
+                        if (implementacao.getName().getIdentifier().equals("BaseAdapter")) {
+                            //Se chegou até aqui, temos certeza de que é um adapter.
+                            //Se a classe que extende do BaseAdapter tiver algum método que não seja sobrescrever um método de interface, é um FlexAdapter.
+                            //Pegamos todos os membros da classe
+                            NodeList<BodyDeclaration<?>> membros = classe.getMembers();
+                            for (BodyDeclaration<?> membro : membros) {
+                                //Verifica se o membro é um método
+                                if (membro.isMethodDeclaration()) {
+                                    //Para cada método, pega suas annotações, se não tiver, é lógica de negócio e é um flexAdapter
+                                    NodeList<AnnotationExpr> annotations = membro.getAnnotations();
+                                    //Sem annotations, dá erro
+                                    if(annotations.size() == 0) {
+                                        isFlexAdapter = true;
+                                    }
+                                    for (AnnotationExpr annotation : annotations ) {
+                                        //Se tiver annotacoes, mas nenhuma dessas anotações forem Override, é um método que não implementa método de interface, ou seja, é lógica de negócio e é um FlexAdapter
+                                        if (!annotation.getName().getIdentifier().equals("Override")) {
+                                            System.out.println("Flex Adapter detectado na classe " + annotation.getRange());
+                                            System.out.println("---------------------------------------------------------------------------------------");
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    //Se a classe for um flexAdapter, imprime o erro na tela
+                    if (isFlexAdapter) {
+                        System.out.println("Flex Adapter detectado na classe " + classe.getName().getIdentifier());
+                    }
+                }
+            }
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+        }
     }
 
 
     public static void GodStyleResource(String pathApp) {
         try {
+            arquivosAnalise.clear();
+            listar(new File(pathApp),XML);
             int qtdLimiteStilos = 5;
-            diretorio = new File(pathApp);
-            arquivos = diretorio.listFiles();
             int qtdFilesStyle = 0;
 
-            for (int cont = 0; cont < arquivos.length; cont++) {
-                System.out.println("Arquivo analisado:" + arquivos[cont]);
+            for (int cont = 0; cont < arquivosAnalise.toArray().length; cont++) {
+                System.out.println("Arquivo analisado:" + arquivosAnalise.toArray()[cont]);
                 System.out.println("---------------------------------------------------------------------------------------");
 
-                File f = new File(arquivos[cont].toString());
+                File f = new File(arquivosAnalise.toArray()[cont].toString());
 
                 //LER TODA A ESTRUTURA DO XML
                 Document d = sb.build(f);
@@ -224,14 +335,14 @@ public class ImportantSmells {
 
     public static void DeepNestedLayout(String pathApp) {
         try {
-            diretorio = new File(pathApp);
-            arquivos = diretorio.listFiles();
+            arquivosAnalise.clear();
+            listar(new File(pathApp),XML);
 
-            for (int cont = 0; cont < arquivos.length; cont++) {
-                System.out.println("Arquivo analisado:" + arquivos[cont]);
+            for (int cont = 0; cont < arquivosAnalise.toArray().length; cont++) {
+                System.out.println("Arquivo analisado:" + arquivosAnalise.toArray()[cont]);
                 System.out.println("---------------------------------------------------------------------------------------");
 
-                File f = new File(arquivos[cont].toString());
+                File f = new File(arquivosAnalise.toArray()[cont].toString());
 
                 //LER TODA A ESTRUTURA DO XML
                 Document d = sb.build(f);
@@ -253,14 +364,14 @@ public class ImportantSmells {
 
     public static void DuplicateStyleAttributes(String pathApp) {
         try {
-            diretorio = new File(pathApp);
-            arquivos = diretorio.listFiles();
+            arquivosAnalise.clear();
+            listar(new File(pathApp),XML);
 
-            for (int cont = 0; cont < arquivos.length; cont++) {
-                System.out.println("Arquivo analisado:" + arquivos[cont]);
+            for (int cont = 0; cont < arquivosAnalise.toArray().length; cont++) {
+                System.out.println("Arquivo analisado:" + arquivosAnalise.toArray()[cont]);
                 System.out.println("---------------------------------------------------------------------------------------");
 
-                File f = new File(arquivos[cont].toString());
+                File f = new File(arquivosAnalise.toArray()[cont].toString());
 
                 //LER TODA A ESTRUTURA DO XML
                 Document d = sb.build(f);
