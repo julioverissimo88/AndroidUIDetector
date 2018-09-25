@@ -37,6 +37,9 @@ public class ImportantSmells {
     public static final String JAVA = ".java";
     public static final String XML = ".xml";
 
+    private static OutputSmells JsonOut = new  OutputSmells();
+    private static List<OutputSmells> ListJsonSmell = new ArrayList<OutputSmells>();
+
     private  static List<OutputSmells> ListSmells = new ArrayList<OutputSmells>();
 
     public static void listar(File directory,String tipo) {
@@ -95,11 +98,15 @@ public class ImportantSmells {
                             }
                             if (!style) {
                                 System.out.println("Componente de UI Acoplado " + elChildren.getName() + " - Considere utilizar viewGroup");
+                                JsonOut.setTipoSmell("XML");
+                                JsonOut.setArquivo(arquivos[cont].toString());
+                                ListJsonSmell.add(JsonOut);
                             }
                         }
                     }
                 }
 
+                JsonOut.saveJson(ListJsonSmell,"CoupledUIComponent.json");
 
                 System.out.println("---------------------------------------------------------------------------------------");
             }
@@ -115,6 +122,7 @@ public class ImportantSmells {
 
         for (int cont = 0; cont < arquivosAnalise.toArray().length; cont++) {
             classeValida = true;
+            String nomeArquivo = arquivosAnalise.toArray()[cont].toString();
             System.out.println("Arquivo analisado:" + arquivosAnalise.toArray()[cont]);
             System.out.println("---------------------------------------------------------------------------------------");
 
@@ -162,6 +170,10 @@ public class ImportantSmells {
                             variable.getInitializer().ifPresent(initValue -> {
                                 if(initValue.isLambdaExpr()){
                                     System.out.println("Comportamento suspeito detectado  - " + initValue.getRange());
+                                    JsonOut.setTipoSmell("JAVA");
+                                    JsonOut.setLinha(initValue.getRange().get().begin.toString());
+                                    JsonOut.setArquivo(nomeArquivo);
+                                    ListJsonSmell.add(JsonOut);
                                 }
                             });
                         }
@@ -169,6 +181,8 @@ public class ImportantSmells {
                 }
             }
         }
+
+        JsonOut.saveJson(ListJsonSmell,"SuspiciousBehavior.json");
     }
 
     public static void BrainUIComponent(String pathApp) {
@@ -204,6 +218,10 @@ public class ImportantSmells {
                                 if (atributos.isFieldDeclaration()) {
                                     if (atributos.toString().contains("final")) {
                                         System.out.println("Componente de UI Cérebro Encontrado - " + atributos.getRange());
+                                        JsonOut.setTipoSmell("JAVA");
+                                        JsonOut.setLinha(atributos.getRange().get().begin.toString());
+                                        JsonOut.setArquivo(arquivosAnalise.toArray()[cont].toString());
+                                        ListJsonSmell.add(JsonOut);
                                     }
                                 }
                             }
@@ -217,6 +235,10 @@ public class ImportantSmells {
                                         //Se tiver annotacoes que ão seja overide considera que possui implementação indevida logo uma smells
                                         if (!annotation.getName().getIdentifier().equals("Override")) {
                                             System.out.println("Componente de UI Cérebro Encontrado - " + annotation.getRange());
+                                            JsonOut.setTipoSmell("JAVA");
+                                            JsonOut.setLinha(annotation.getRange().get().begin.toString());
+                                            JsonOut.setArquivo(arquivosAnalise.toArray()[cont].toString());
+                                            ListJsonSmell.add(JsonOut);
                                         }
                                     }
                                 }
@@ -232,6 +254,8 @@ public class ImportantSmells {
                     }
                 }
             }
+
+            JsonOut.saveJson(ListJsonSmell,"BrainUIComponent.json");
 
         }
         catch(Exception ex){
@@ -284,6 +308,10 @@ public class ImportantSmells {
                                         if (!annotation.getName().getIdentifier().equals("Override")) {
                                             System.out.println("Flex Adapter detectado na classe " + annotation.getRange());
                                             System.out.println("---------------------------------------------------------------------------------------");
+                                            JsonOut.setTipoSmell("JAVA");
+                                            JsonOut.setLinha(annotation.getRange().get().begin.toString());
+                                            JsonOut.setArquivo(arquivosAnalise.toArray()[cont].toString());
+                                            ListJsonSmell.add(JsonOut);
                                         }
                                     }
                                 }
@@ -296,6 +324,8 @@ public class ImportantSmells {
                     }
                 }
             }
+
+            JsonOut.saveJson(ListJsonSmell,"FlexAdapter.json");
         }
         catch(Exception ex){
             ex.printStackTrace();
@@ -326,8 +356,13 @@ public class ImportantSmells {
                 if((qtdFilesStyle == 1) && (d.getRootElement().getChildren().size() > qtdLimiteStilos )){
                     System.out.println("Longo recurso de Estilo detectado (existe apenas um arquivo para estilos no aplicativo que possui " + d.getRootElement().getChildren().size() + " estilos)");
                     System.out.println("---------------------------------------------------------------------------------------");
+                    JsonOut.setTipoSmell("XML");
+                    JsonOut.setArquivo(arquivosAnalise.toArray()[cont].toString());
+                    ListJsonSmell.add(JsonOut);
                 }
             }
+
+            JsonOut.saveJson(ListJsonSmell,"GodStyleResource.json");
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -347,16 +382,22 @@ public class ImportantSmells {
                 //LER TODA A ESTRUTURA DO XML
                 Document d = sb.build(f);
 
-                //ACESSAR O ROOT ELEMENT
-                Element rootElmnt = d.getRootElement();
+                if (arquivosAnalise.toArray()[cont].toString().contains("\\layout\\")) {
+                    //ACESSAR O ROOT ELEMENT
+                    Element rootElmnt = d.getRootElement();
 
-                //BUSCAR ELEMENTOS FILHOS DA TAG
-                List elements = rootElmnt.getChildren();
+                    //BUSCAR ELEMENTOS FILHOS DA TAG
+                    List elements = rootElmnt.getChildren();
 
-                recursiveChildrenElement(elements);
+                    recursiveChildrenElement(elements);
 
-                System.out.println("---------------------------------------------------------------------------------------");
+                    System.out.println("---------------------------------------------------------------------------------------");
+
+                }
             }
+
+            JsonOut.saveJson(ListJsonSmell,"DeepNestedLayout.json");
+
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -376,36 +417,43 @@ public class ImportantSmells {
                 //LER TODA A ESTRUTURA DO XML
                 Document d = sb.build(f);
 
-                List<String> listSmellsEcontradas = new ArrayList<String>();
+                if (d.getRootElement().getChildren().get(0).getName().toString() == "style") {
 
-                for(int i= 0; i < d.getRootElement().getChildren().size(); i++){
-                    List<Element> filhos = d.getRootElement().getChildren();
-                    for(int j =0; j < filhos.size(); j++){
-                        List<Attribute> attr =  filhos.get(j).getAttributes();
-                        for(Attribute atributo : attr){
-                            String atributo_atual = atributo.toString();
+                    List<String> listSmellsEcontradas = new ArrayList<String>();
 
-                            for(int ii= 0; ii < d.getRootElement().getChildren().size(); ii++){
-                                List<Element> filhosInterno = d.getRootElement().getChildren();
-                                for(int jj =0; jj < filhosInterno.size(); jj++){
-                                    List<Attribute> attrInterno =  filhosInterno.get(jj).getAttributes();
-                                    for(Attribute atributoInterno : attrInterno){
+                    for (int i = 0; i < d.getRootElement().getChildren().size(); i++) {
+                        List<Element> filhos = d.getRootElement().getChildren();
+                        for (int j = 0; j < filhos.size(); j++) {
+                            List<Attribute> attr = filhos.get(j).getAttributes();
+                            for (Attribute atributo : attr) {
+                                String atributo_atual = atributo.toString();
 
-                                        if(jj > j) {
-                                            if (atributo_atual.toString().equals(atributoInterno.toString()) && !listSmellsEcontradas.contains(atributo_atual.toString())) {
-                                                listSmellsEcontradas.add(atributo_atual.toString());
-                                                System.out.println("Duplicate Style Attributes " + atributoInterno.getName() + " - Considere colocar a formatação das propriedades em um recurso de estilo:");
+                                for (int ii = 0; ii < d.getRootElement().getChildren().size(); ii++) {
+                                    List<Element> filhosInterno = d.getRootElement().getChildren();
+                                    for (int jj = 0; jj < filhosInterno.size(); jj++) {
+                                        List<Attribute> attrInterno = filhosInterno.get(jj).getAttributes();
+                                        for (Attribute atributoInterno : attrInterno) {
+
+                                            if (jj > j) {
+                                                if (atributo_atual.toString().equals(atributoInterno.toString()) && !listSmellsEcontradas.contains(atributo_atual.toString())) {
+                                                    listSmellsEcontradas.add(atributo_atual.toString());
+                                                    System.out.println("Duplicate Style Attributes " + atributoInterno.getName() + " - Considere colocar a formatação das propriedades em um recurso de estilo:");
+                                                    JsonOut.setTipoSmell("XML");
+                                                    JsonOut.setArquivo(arquivosAnalise.toArray()[cont].toString());
+                                                    ListJsonSmell.add(JsonOut);
+                                                }
                                             }
                                         }
                                     }
-                                }
 
+                                }
                             }
                         }
                     }
-
                 }
             }
+
+            JsonOut.saveJson(ListJsonSmell,"DuplicateStyleAttributes.json");
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -423,6 +471,9 @@ public class ImportantSmells {
                 } else {
                     if (qtdSubelementos > 3) {
                         System.out.println("Layout Profundamente Aninhado encontrado " + el.getName());
+                        JsonOut.setTipoSmell("XML");
+                        JsonOut.setArquivo("");
+                        ListJsonSmell.add(JsonOut);
                         break;
                     }
                 }

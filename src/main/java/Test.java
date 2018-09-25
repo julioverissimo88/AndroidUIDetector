@@ -6,12 +6,14 @@ import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.TypeDeclaration;
 import com.github.javaparser.ast.body.VariableDeclarator;
 import com.github.javaparser.ast.type.ClassOrInterfaceType;
+import sun.plugin2.message.Serializer;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FilenameFilter;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import com.google.gson.Gson;
+import AndroidDetector.*;
+
 
 public class Test {
 
@@ -45,8 +47,8 @@ public class Test {
 
     public static void main(String[] args) {
         try {
+            ImportantSmells.GodStyleResource("C:\\Users\\julio\\AndroidStudioProjects\\AppTestAndroidSmells\\");
 
-            SuspiciousBehavior("C:\\Users\\julio\\AndroidStudioProjects\\");
         }
         catch(Exception ex){
             ex.printStackTrace();
