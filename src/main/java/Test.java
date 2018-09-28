@@ -1,19 +1,18 @@
+import AndroidDetector.ImportantSmells;
+import AndroidDetector.OutputSmells;
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ast.CompilationUnit;
+import com.github.javaparser.ast.Node;
 import com.github.javaparser.ast.NodeList;
-import com.github.javaparser.ast.body.BodyDeclaration;
-import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
-import com.github.javaparser.ast.body.TypeDeclaration;
-import com.github.javaparser.ast.body.VariableDeclarator;
+import com.github.javaparser.ast.body.*;
+import com.github.javaparser.ast.expr.LambdaExpr;
+import com.github.javaparser.ast.expr.VariableDeclarationExpr;
 import com.github.javaparser.ast.type.ClassOrInterfaceType;
-import com.sun.xml.internal.ws.wsdl.writer.document.Import;
-import sun.plugin2.message.Serializer;
+import com.github.javaparser.ast.type.Type;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import com.google.gson.Gson;
-import AndroidDetector.*;
 
 
 public class Test {
@@ -22,14 +21,15 @@ public class Test {
     public static final String XML = ".xml";
     public static List<File> arquivosAnalise =  new ArrayList<File>();
     public static  Boolean classeValida = true;
-    public static void listar(File directory) {
+    private  static List<OutputSmells> ListSmells = new ArrayList<OutputSmells>();
 
+    public static void listar(File directory,String tipo) {
         if(directory.isDirectory()) {
             //System.out.println(directory.getPath());
 
             String[] myFiles = directory.list(new FilenameFilter() {
                 public boolean accept(File directory, String fileName) {
-                    return fileName.endsWith(JAVA);
+                    return fileName.endsWith(tipo);
                 }
             });
 
@@ -40,7 +40,7 @@ public class Test {
             String[] subDirectory = directory.list();
             if(subDirectory != null) {
                 for(String dir : subDirectory){
-                    listar(new File(directory + File.separator  + dir));
+                    listar(new File(directory + File.separator  + dir),tipo);
                 }
             }
         }
@@ -67,9 +67,10 @@ public class Test {
             //ImportantSmells.CoupledUIComponent("C:\\Users\\julio\\Desktop\\codigos\\java\\CoupledUI");
 
             //Flex Adapter
-            ImportantSmells.FlexAdapter("C:\\Users\\julio\\Desktop\\codigos\\java\\FlexAdapter");
+            //ImportantSmells.FlexAdapter("C:\\Users\\julio\\Desktop\\codigos\\java\\FlexAdapter");
 
             //
+            //CoupledUIComponent("C:\\Users\\julio\\Desktop\\codigos\\java\\SuspiciousBehavior");
 
         }
         catch(Exception ex){
@@ -77,12 +78,14 @@ public class Test {
         }
     }
 
-    public static void SuspiciousBehavior(String pathApp) throws FileNotFoundException {
+    public static void CoupledUIComponent(String pathApp) throws FileNotFoundException {
+        ListSmells.clear();
         arquivosAnalise.clear();
-        listar(new File(pathApp));
+        listar(new File(pathApp),JAVA);
 
         for (int cont = 0; cont < arquivosAnalise.toArray().length; cont++) {
             classeValida = true;
+            String nomeArquivo = arquivosAnalise.toArray()[cont].toString();
             System.out.println("Arquivo analisado:" + arquivosAnalise.toArray()[cont]);
             System.out.println("---------------------------------------------------------------------------------------");
 
@@ -99,7 +102,7 @@ public class Test {
                 NodeList<ClassOrInterfaceType> implementacoes = classe.getExtendedTypes();
                 if(implementacoes.size() != 0){
                     for (ClassOrInterfaceType implementacao : implementacoes) {
-                        if (implementacao.getName().getIdentifier().equals("BaseActivity") || implementacao.getName().getIdentifier().equals("Activity") || implementacao.getName().getIdentifier().equals("Fragments") || implementacao.getName().getIdentifier().equals("BaseAdapter") || implementacao.getName().getIdentifier().endsWith("Listener")) {
+                        if (implementacao.getName().getIdentifier().contains("Activity") || implementacao.getName().getIdentifier().contains("Adapter")) {
                             classeValida  = true;
                         }
                     }
@@ -114,42 +117,32 @@ public class Test {
                 continue;
             }
 
-
-/*
-
-            cu.getTypes().forEach(item -> {
-                if (item.getName().getIdentifier().equals("BaseActivity") || item.getName().getIdentifier().equals("Activity") || item.getName().getIdentifier().equals("Fragments") || item.getName().getIdentifier().equals("BaseAdapter") || item.getName().getIdentifier().endsWith("Listener")) {
-                    classeValida  = true;
-                }
-            });
-
-            if(!classeValida){
-                continue;
-            }
-            */
-
             for (TypeDeclaration<?> typeDec : cu.getTypes()) {
-
+                //System.out.println(typeDec.getName().toString());
                 for (BodyDeclaration<?> member : typeDec.getMembers()) {
-                    member.toFieldDeclaration().ifPresent(field -> {
-                        for (VariableDeclarator variable : field.getVariables()) {
-                            //Print the field's class typr
-                            //System.out.println(variable.getType());
+                    if(member.isMethodDeclaration()) {
+                        MethodDeclaration field = (MethodDeclaration) member;
 
-                            System.out.println("Comportamento suspeito detectado  - " + variable.getType()+ " - " + variable.getRange().get().begin);
-                            //Print the field's name
-                            //System.out.println(variable.getName());
-                            //Print the field's init value, if not null
-
-                            variable.getInitializer().ifPresent(initValue -> {
-                                if(initValue.isLambdaExpr()){
-                                    System.out.println("Comportamento suspeito detectado  - " + initValue.getRange());
-                                }
+                        field.findAll(MethodDeclaration.class).forEach(item-> {
+                            //System.out.println(item);
+                            item.getChildNodes().forEach(sub ->{
+                                sub.findAll(MethodDeclaration.class).forEach(i->{
+                                    System.out.println("Comportamento suspeito detectado  - " + i.getName() + " - " + i.getRange().get().begin);
+                                });
                             });
+                        });
+
+                        if(field.getNameAsString().equals("onCreateView") || field.getNameAsString().equals("onActivityCreated")){
+                            //System.out.println("Coupled UI Component  - " + field.getRange());
                         }
-                    });
+                    }
                 }
             }
         }
     }
+
+
+
+
+
 }

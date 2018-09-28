@@ -212,6 +212,17 @@ public class ImportantSmells {
             for (TypeDeclaration<?> typeDec : cu.getTypes()) {
                 //System.out.println(typeDec.getName().toString());
                 for (BodyDeclaration<?> member : typeDec.getMembers()) {
+
+                    member.findAll(MethodDeclaration.class).forEach(item-> {
+                        //System.out.println(item);
+                        item.getChildNodes().forEach(sub ->{
+                            sub.findAll(MethodDeclaration.class).forEach(i->{
+                                System.out.println("Comportamento suspeito detectado  - " + i.getName() + " - " + i.getRange().get().begin);
+                            });
+                        });
+                    });
+
+
                     member.toFieldDeclaration().ifPresent(field -> {
                         for (VariableDeclarator variable : field.getVariables()) {
                             //Print the field's class typr
