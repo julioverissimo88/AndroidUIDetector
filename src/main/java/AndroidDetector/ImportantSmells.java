@@ -65,7 +65,61 @@ public class ImportantSmells {
         }
     }
 
+    public static void CoupledUIComponent(String pathApp) throws FileNotFoundException {
+        ListSmells.clear();
+        arquivosAnalise.clear();
+        listar(new File(pathApp),JAVA);
 
+        for (int cont = 0; cont < arquivosAnalise.toArray().length; cont++) {
+            classeValida = true;
+            String nomeArquivo = arquivosAnalise.toArray()[cont].toString();
+            System.out.println("Arquivo analisado:" + arquivosAnalise.toArray()[cont]);
+            System.out.println("---------------------------------------------------------------------------------------");
+
+            File f = new File(arquivosAnalise.toArray()[cont].toString());
+            CompilationUnit cu = JavaParser.parse(f);
+
+            ArrayList<ClassOrInterfaceDeclaration> classes = new ArrayList<ClassOrInterfaceDeclaration>();
+            NodeList<TypeDeclaration<?>> types = cu.getTypes();
+            for (int i = 0; i < types.size(); i++) {
+                classes.add((ClassOrInterfaceDeclaration) types.get(i));
+            }
+
+            for (ClassOrInterfaceDeclaration classe : classes) {
+                NodeList<ClassOrInterfaceType> implementacoes = classe.getExtendedTypes();
+                if(implementacoes.size() != 0){
+                    for (ClassOrInterfaceType implementacao : implementacoes) {
+                        if (implementacao.getName().getIdentifier().contains("Fragment") || implementacao.getName().getIdentifier().contains("Adapter")) {
+                            classeValida  = true;
+                        }
+                    }
+                }
+                else{
+                    classeValida  = false;
+                }
+            }
+
+            //Se não for válida activity entre outros pula o laço para o próximo arquivo
+            if(!classeValida){
+                continue;
+            }
+
+            for (TypeDeclaration<?> typeDec : cu.getTypes()) {
+                //System.out.println(typeDec.getName().toString());
+                for (BodyDeclaration<?> member : typeDec.getMembers()) {
+                    if(member.isMethodDeclaration()) {
+                        MethodDeclaration field = (MethodDeclaration) member;
+                        if(field.getNameAsString().equals("onCreateView") || field.getNameAsString().equals("onActivityCreated")){
+                            System.out.println("Coupled UI Component  - " + field.getRange());
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+    /*
     public static void CoupledUIComponent(String pathApp) {
         try {
             diretorio = new File(pathApp);
@@ -114,6 +168,7 @@ public class ImportantSmells {
             ex.printStackTrace();
         }
     }
+    */
 
     public static void SuspiciousBehavior(String pathApp) throws FileNotFoundException {
         ListSmells.clear();
@@ -155,14 +210,16 @@ public class ImportantSmells {
             }
 
             for (TypeDeclaration<?> typeDec : cu.getTypes()) {
-
+                //System.out.println(typeDec.getName().toString());
                 for (BodyDeclaration<?> member : typeDec.getMembers()) {
                     member.toFieldDeclaration().ifPresent(field -> {
                         for (VariableDeclarator variable : field.getVariables()) {
                             //Print the field's class typr
                             //System.out.println(variable.getType());
 
-                            System.out.println("Comportamento suspeito detectado  - " + variable.getType()+ " - " + variable.getRange().get().begin);
+                            if(variable.getType().toString().contains("Listener")) {
+                                System.out.println("Comportamento suspeito detectado  - " + variable.getType() + " - " + variable.getRange().get().begin);
+                            }
                             //Print the field's name
                             //System.out.println(variable.getName());
                             //Print the field's init value, if not null
@@ -209,13 +266,14 @@ public class ImportantSmells {
                     //Testa se é adapter, activity, Fragment
                     NodeList<ClassOrInterfaceType> implementacoes = classe.getExtendedTypes();
                     for (ClassOrInterfaceType implementacao : implementacoes) {
-                        if (implementacao.getName().getIdentifier().equals("Activity") || implementacao.getName().getIdentifier().equals("Fragments") || implementacao.getName().getIdentifier().equals("BaseAdapter") || implementacao.getName().getIdentifier().endsWith("Listener")) {
+                        if (implementacao.getName().getIdentifier().contains("Activity") || implementacao.getName().getIdentifier().equals("Fragments") || implementacao.getName().getIdentifier().equals("BaseAdapter") || implementacao.getName().getIdentifier().endsWith("Listener")) {
                             NodeList<BodyDeclaration<?>> itens = classe.getMembers();
 
                             //Testa se existe atributo do tipo FINAL
                             for (BodyDeclaration<?> atributos : itens) {
-                                System.out.println(atributos.toString());
+                                //System.out.println(atributos.toString());
                                 if (atributos.isFieldDeclaration()) {
+
                                     if (atributos.toString().contains("final")) {
                                         System.out.println("Componente de UI Cérebro Encontrado - " + atributos.getRange());
                                         JsonOut.setTipoSmell("JAVA");
@@ -289,7 +347,7 @@ public class ImportantSmells {
                     //Pegamos todas as classes que ela implementa
                     NodeList<ClassOrInterfaceType> implementacoes = classe.getExtendedTypes();
                     for (ClassOrInterfaceType implementacao : implementacoes) {
-                        if (implementacao.getName().getIdentifier().equals("BaseAdapter")) {
+                        if (implementacao.getName().getIdentifier().contains("Adapter")) {
                             //Se chegou até aqui, temos certeza de que é um adapter.
                             //Se a classe que extende do BaseAdapter tiver algum método que não seja sobrescrever um método de interface, é um FlexAdapter.
                             //Pegamos todos os membros da classe
@@ -303,6 +361,7 @@ public class ImportantSmells {
                                     if(annotations.size() == 0) {
                                         isFlexAdapter = true;
                                     }
+
                                     for (AnnotationExpr annotation : annotations ) {
                                         //Se tiver annotacoes, mas nenhuma dessas anotações forem Override, é um método que não implementa método de interface, ou seja, é lógica de negócio e é um FlexAdapter
                                         if (!annotation.getName().getIdentifier().equals("Override")) {
@@ -417,7 +476,7 @@ public class ImportantSmells {
                 //LER TODA A ESTRUTURA DO XML
                 Document d = sb.build(f);
 
-                if (d.getRootElement().getChildren().get(0).getName().toString() == "style") {
+                //if (d.getRootElement().getChildren().get(0).getName().toString() == "style") {
 
                     List<String> listSmellsEcontradas = new ArrayList<String>();
 
@@ -450,7 +509,7 @@ public class ImportantSmells {
                             }
                         }
                     }
-                }
+                //}
             }
 
             JsonOut.saveJson(ListJsonSmell,"DuplicateStyleAttributes.json");
@@ -470,7 +529,7 @@ public class ImportantSmells {
                     recursiveChildrenElement(SubElements);
                 } else {
                     if (qtdSubelementos > 3) {
-                        System.out.println("Layout Profundamente Aninhado encontrado " + el.getName());
+                        System.out.println("Layout Profundamente Aninhado encontrado " + el.getName() + "(Mais de três níveis)");
                         JsonOut.setTipoSmell("XML");
                         JsonOut.setArquivo("");
                         ListJsonSmell.add(JsonOut);

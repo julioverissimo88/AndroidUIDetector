@@ -38,10 +38,8 @@ public class DetectorUI extends javax.swing.JFrame {
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
         jBtnRunAnalise = new javax.swing.JButton();
-        txtCaminhoFontes = new javax.swing.JTextField();
-        txtLayouts = new javax.swing.JTextField();
+        txtCaminhoApp = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTxtOutput = new javax.swing.JTextArea();
         jCheckCoupledUI = new javax.swing.JCheckBox();
@@ -60,9 +58,7 @@ public class DetectorUI extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Layout Xml");
-
-        jLabel2.setText("Java");
+        jLabel1.setText("App:");
 
         jTxtOutput.setColumns(20);
         jTxtOutput.setRows(5);
@@ -88,13 +84,9 @@ public class DetectorUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1))
+                        .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtLayouts)
-                            .addComponent(txtCaminhoFontes))
+                        .addComponent(txtCaminhoApp)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jBtnRunAnalise))
                     .addComponent(jScrollPane1)
@@ -116,13 +108,9 @@ public class DetectorUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(51, 51, 51)
+                        .addGap(77, 77, 77)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtCaminhoFontes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtLayouts, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCaminhoApp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
@@ -166,30 +154,30 @@ public class DetectorUI extends javax.swing.JFrame {
             System.setOut(ps);
             
             
-            if(txtCaminhoFontes.getText() != "" && txtLayouts.getText() != ""){
+            if(txtCaminhoApp.getText() != ""){
                 
                 if(jCheckCoupledUI.isSelected()){
-                    AndroidDetector.ImportantSmells.CoupledUIComponent(txtLayouts.getText());
+                    AndroidDetector.ImportantSmells.CoupledUIComponent(txtCaminhoApp.getText());
                 }                
                 
                 if(jCheckDeepNestedLayout.isSelected()){
-                    AndroidDetector.ImportantSmells.DeepNestedLayout(txtLayouts.getText());
+                    AndroidDetector.ImportantSmells.DeepNestedLayout(txtCaminhoApp.getText());
                 }
                 
                 if(jCheckDuplicateStyle.isSelected()){
-                    AndroidDetector.ImportantSmells.DuplicateStyleAttributes(txtLayouts.getText());
+                    AndroidDetector.ImportantSmells.DuplicateStyleAttributes(txtCaminhoApp.getText());
                 }
                 
                 if(jCheckGodStyleResource.isSelected()){
-                    AndroidDetector.ImportantSmells.GodStyleResource(txtLayouts.getText());
+                    AndroidDetector.ImportantSmells.GodStyleResource(txtCaminhoApp.getText());
                 }
                 
                 if(jCheckSuspiciousBehavior.isSelected()){
-                    AndroidDetector.ImportantSmells.SuspiciousBehavior(txtCaminhoFontes.getText());
+                    AndroidDetector.ImportantSmells.SuspiciousBehavior(txtCaminhoApp.getText());
                 }
             }
             else{
-                JOptionPane.showMessageDialog(rootPane, "Informe Caminhos para a análise!");
+                JOptionPane.showMessageDialog(rootPane, "Informe Aplicativo para a análise!");
                 
             }
         }
@@ -244,10 +232,8 @@ public class DetectorUI extends javax.swing.JFrame {
     private javax.swing.JCheckBox jCheckGodStyleResource;
     private javax.swing.JCheckBox jCheckSuspiciousBehavior;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTxtOutput;
-    private javax.swing.JTextField txtCaminhoFontes;
-    private javax.swing.JTextField txtLayouts;
+    private javax.swing.JTextField txtCaminhoApp;
     // End of variables declaration//GEN-END:variables
 }

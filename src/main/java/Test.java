@@ -6,6 +6,7 @@ import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.TypeDeclaration;
 import com.github.javaparser.ast.body.VariableDeclarator;
 import com.github.javaparser.ast.type.ClassOrInterfaceType;
+import com.sun.xml.internal.ws.wsdl.writer.document.Import;
 import sun.plugin2.message.Serializer;
 
 import java.io.*;
@@ -47,7 +48,28 @@ public class Test {
 
     public static void main(String[] args) {
         try {
-            ImportantSmells.GodStyleResource("C:\\Users\\julio\\AndroidStudioProjects\\AppTestAndroidSmells\\");
+            //layout profundamente aninhado
+            //ImportantSmells.DeepNestedLayout("C:\\Users\\julio\\Desktop\\codigos\\layout\\layoutProfundamenteAninhado");
+
+            //atributos de estilo repetidos
+            //ImportantSmells.DuplicateStyleAttributes("C:\\Users\\julio\\Desktop\\codigos\\layout\\atributosEstiloRepetidos\\");
+
+            //God Style Resource
+            //ImportantSmells.GodStyleResource("C:\\Users\\julio\\AndroidStudioProjects\\AppTestAndroidSmells");
+
+            //Suspicious Behavior
+            //ImportantSmells.SuspiciousBehavior("C:\\Users\\julio\\Desktop\\codigos\\java\\SuspiciousBehavior");
+
+            //Brain Component
+            //ImportantSmells.BrainUIComponent("C:\\Users\\julio\\Desktop\\codigos\\java\\Brain");
+
+            //Coupled UI Component
+            //ImportantSmells.CoupledUIComponent("C:\\Users\\julio\\Desktop\\codigos\\java\\CoupledUI");
+
+            //Flex Adapter
+            ImportantSmells.FlexAdapter("C:\\Users\\julio\\Desktop\\codigos\\java\\FlexAdapter");
+
+            //
 
         }
         catch(Exception ex){

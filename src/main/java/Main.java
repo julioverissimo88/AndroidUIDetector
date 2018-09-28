@@ -46,6 +46,7 @@ public class Main {
                 } else {//Smel1ls JAVA
                     ImportantSmells.SuspiciousBehavior(caminho);
                     ImportantSmells.FlexAdapter(caminho);
+                    ImportantSmells.BrainUIComponent(caminho);
                 }
             }
         }
