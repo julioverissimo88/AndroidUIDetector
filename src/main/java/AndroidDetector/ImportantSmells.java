@@ -6,7 +6,10 @@ import com.github.javaparser.ast.Node;
 import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.body.*;
 import com.github.javaparser.ast.expr.AnnotationExpr;
+import com.github.javaparser.ast.stmt.ForStmt;
+import com.github.javaparser.ast.stmt.IfStmt;
 import com.github.javaparser.ast.stmt.LocalClassDeclarationStmt;
+import com.github.javaparser.ast.stmt.SwitchEntryStmt;
 import com.github.javaparser.ast.type.ClassOrInterfaceType;
 import org.jdom2.Attribute;
 import org.jdom2.Document;
@@ -340,7 +343,7 @@ public class ImportantSmells {
             for (int cont = 0; cont < arquivosAnalise.toArray().length; cont++) {
                 System.out.println("Arquivo analisado:" + arquivosAnalise.toArray()[cont]);
                 System.out.println("---------------------------------------------------------------------------------------");
-
+                String arquivo = arquivosAnalise.toArray()[cont].toString();
                 File f = new File(arquivosAnalise.toArray()[cont].toString());
                 CompilationUnit compilationunit = JavaParser.parse(f);
 
@@ -366,31 +369,27 @@ public class ImportantSmells {
                             for (BodyDeclaration<?> membro : membros) {
                                 //Verifica se o membro é um método
                                 if (membro.isMethodDeclaration()) {
-                                    //Para cada método, pega suas annotações, se não tiver, é lógica de negócio e é um flexAdapter
-                                    NodeList<AnnotationExpr> annotations = membro.getAnnotations();
-                                    //Sem annotations, dá erro
-                                    if(annotations.size() == 0) {
-                                        isFlexAdapter = true;
-                                    }
 
-                                    for (AnnotationExpr annotation : annotations ) {
-                                        //Se tiver annotacoes, mas nenhuma dessas anotações forem Override, é um método que não implementa método de interface, ou seja, é lógica de negócio e é um FlexAdapter
-                                        if (!annotation.getName().getIdentifier().equals("Override")) {
-                                            System.out.println("Flex Adapter detectado na classe " + annotation.getRange());
-                                            System.out.println("---------------------------------------------------------------------------------------");
-                                            JsonOut.setTipoSmell("JAVA");
-                                            JsonOut.setLinha(annotation.getRange().get().begin.toString());
-                                            JsonOut.setArquivo(arquivosAnalise.toArray()[cont].toString());
-                                            ListJsonSmell.add(JsonOut);
-                                        }
-                                    }
+                                    membro.findAll(IfStmt.class).forEach(item->{
+                                        System.out.println("Flex Adapter detectado na classe " + item.getRange() + " (lógica utilizando if detectada)");
+                                        System.out.println("---------------------------------------------------------------------------------------");
+                                        JsonOut.setTipoSmell("JAVA");
+                                        JsonOut.setLinha(item.getRange().get().begin.toString());
+                                        JsonOut.setArquivo(arquivo);
+                                        ListJsonSmell.add(JsonOut);
+                                    });
+
+                                    membro.findAll(SwitchEntryStmt.class).forEach(item->{
+                                        System.out.println("Flex Adapter detectado na classe " + item.getRange() + " (lógica utilizando Switch/Case detectada)");
+                                        System.out.println("---------------------------------------------------------------------------------------");
+                                        JsonOut.setTipoSmell("JAVA");
+                                        JsonOut.setLinha(item.getRange().get().begin.toString());
+                                        JsonOut.setArquivo(arquivo);
+                                        ListJsonSmell.add(JsonOut);
+                                    });
                                 }
                             }
                         }
-                    }
-                    //Se a classe for um flexAdapter, imprime o erro na tela
-                    if (isFlexAdapter) {
-                        System.out.println("Flex Adapter detectado na classe " + classe.getName().getIdentifier());
                     }
                 }
             }
@@ -423,7 +422,7 @@ public class ImportantSmells {
                     qtdFilesStyle = qtdFilesStyle +1;
                 }
 
-                if((qtdFilesStyle == 1) && (d.getRootElement().getChildren().size() > qtdLimiteStilos )){
+                if((qtdFilesStyle == 1) || (d.getRootElement().getChildren().size() > qtdLimiteStilos )){
                     System.out.println("Longo recurso de Estilo detectado (existe apenas um arquivo para estilos no aplicativo que possui " + d.getRootElement().getChildren().size() + " estilos)");
                     System.out.println("---------------------------------------------------------------------------------------");
                     JsonOut.setTipoSmell("XML");

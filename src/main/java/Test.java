@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+
 public class Test {
 
     public static final String JAVA = ".java";
@@ -67,10 +68,9 @@ public class Test {
             //ImportantSmells.CoupledUIComponent("C:\\Users\\julio\\Desktop\\codigos\\java\\CoupledUI");
 
             //Flex Adapter
-            //ImportantSmells.FlexAdapter("C:\\Users\\julio\\Desktop\\codigos\\java\\FlexAdapter");
+            ImportantSmells.FlexAdapter("C:\\Users\\julio\\Desktop\\codigos\\java\\FlexAdapter");
 
-            //
-            //CoupledUIComponent("C:\\Users\\julio\\Desktop\\codigos\\java\\SuspiciousBehavior");
+
 
         }
         catch(Exception ex){
