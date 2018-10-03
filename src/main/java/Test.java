@@ -62,10 +62,10 @@ public class Test {
             //ImportantSmells.SuspiciousBehavior("C:\\Users\\julio\\Desktop\\codigos\\java\\SuspiciousBehavior");
 
             //Brain Component
-            //ImportantSmells.BrainUIComponent("C:\\Users\\julio\\Desktop\\codigos\\java\\Brain");
+            ImportantSmells.BrainUIComponent("C:\\Users\\julio\\Desktop\\codigos\\java\\Brain");
 
             //Coupled UI Component
-            ImportantSmells.CoupledUIComponent("C:\\Users\\julio\\Desktop\\codigos\\java\\CoupledUI");
+            //ImportantSmells.CoupledUIComponent("C:\\Users\\julio\\Desktop\\codigos\\java\\CoupledUI");
 
             //Flex Adapter
             //ImportantSmells.FlexAdapter("C:\\Users\\julio\\Desktop\\codigos\\java\\FlexAdapter");

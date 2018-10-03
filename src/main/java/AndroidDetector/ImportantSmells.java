@@ -251,68 +251,38 @@ public class ImportantSmells {
 
             for (int cont = 0; cont < arquivosAnalise.toArray().length; cont++) {
                 System.out.println("Arquivo analisado:" + arquivosAnalise.toArray()[cont]);
+                String nomeArquivo = arquivosAnalise.toArray()[cont].toString();
                 System.out.println("---------------------------------------------------------------------------------------");
 
                 File f = new File(arquivosAnalise.toArray()[cont].toString());
-                CompilationUnit compilationunit = JavaParser.parse(f);
-                ClassOrInterfaceDeclaration n = new ClassOrInterfaceDeclaration();
-
-                ArrayList<ClassOrInterfaceDeclaration> classes = new ArrayList<ClassOrInterfaceDeclaration>();
-                NodeList<TypeDeclaration<?>> types = compilationunit.getTypes();
-                for (int i = 0; i < types.size(); i++) {
-                    classes.add((ClassOrInterfaceDeclaration) types.get(i));
-                }
-
-                for (ClassOrInterfaceDeclaration classe : classes) {
-                    Boolean isComponentUiBrain = false;
-                    //Testa se é adapter, activity, Fragment
-                    NodeList<ClassOrInterfaceType> implementacoes = classe.getExtendedTypes();
-                    for (ClassOrInterfaceType implementacao : implementacoes) {
-                        if (implementacao.getName().getIdentifier().contains("Activity") || implementacao.getName().getIdentifier().equals("Fragments") || implementacao.getName().getIdentifier().equals("BaseAdapter") || implementacao.getName().getIdentifier().endsWith("Listener")) {
-                            NodeList<BodyDeclaration<?>> itens = classe.getMembers();
-
-                            //Testa se existe atributo do tipo FINAL
-                            for (BodyDeclaration<?> atributos : itens) {
-                                //System.out.println(atributos.toString());
-                                if (atributos.isFieldDeclaration()) {
-
-                                    if (atributos.toString().contains("final")) {
-                                        System.out.println("Componente de UI Cérebro Encontrado - " + atributos.getRange());
-                                        JsonOut.setTipoSmell("JAVA");
-                                        JsonOut.setLinha(atributos.getRange().get().begin.toString());
-                                        JsonOut.setArquivo(arquivosAnalise.toArray()[cont].toString());
-                                        ListJsonSmell.add(JsonOut);
-                                    }
-                                }
+                CompilationUnit cUnit = JavaParser.parse(f);
+                cUnit.findAll(ClassOrInterfaceDeclaration.class).forEach(classe->{
+                    if(classe.getExtendedTypes().get(0).toString().contains("Activity") || classe.getExtendedTypes().get(0).toString().contains("Fragment") || classe.getExtendedTypes().get(0).toString().contains("Adapter") ) {
+                        classe.findAll(FieldDeclaration.class).forEach(campos -> {
+                            if (campos.getElementType().toString().contains("PFASQLiteHelper") || campos.getElementType().toString().contains("SQLite")) {
+                                System.out.println("Brain UI Component detectado na classe " + classe.getName() + " (Acesso a banco de dados) " + campos.getRange());
+                                System.out.println("---------------------------------------------------------------------------------------");
+                                JsonOut.setTipoSmell("JAVA");
+                                JsonOut.setLinha(campos.getRange().get().begin.toString());
+                                JsonOut.setArquivo(nomeArquivo);
+                                ListJsonSmell.add(JsonOut);
                             }
+                        });
 
-                            //Testa se Existem étodos que não sejam override
-                            for (BodyDeclaration<?> met : itens) {
-                                if (met.isMethodDeclaration()) {
-                                    NodeList<AnnotationExpr> annotations = met.getAnnotations();
-
-                                    for (AnnotationExpr annotation : annotations) {
-                                        //Se tiver annotacoes que ão seja overide considera que possui implementação indevida logo uma smells
-                                        if (!annotation.getName().getIdentifier().equals("Override")) {
-                                            System.out.println("Componente de UI Cérebro Encontrado - " + annotation.getRange());
-                                            JsonOut.setTipoSmell("JAVA");
-                                            JsonOut.setLinha(annotation.getRange().get().begin.toString());
-                                            JsonOut.setArquivo(arquivosAnalise.toArray()[cont].toString());
-                                            ListJsonSmell.add(JsonOut);
-                                        }
-                                    }
+                        classe.findAll(MethodDeclaration.class).forEach(metodo -> {
+                            metodo.findAll(FieldDeclaration.class).forEach(campos->{
+                                if (campos.getElementType().toString().contains("PFASQLiteHelper") || campos.getElementType().toString().contains("SQLite")) {
+                                    System.out.println("Brain UI Component detectado na classe " + classe.getName() + " (Acesso a banco de dados) " + campos.getRange());
+                                    System.out.println("---------------------------------------------------------------------------------------");
+                                    JsonOut.setTipoSmell("JAVA");
+                                    JsonOut.setLinha(campos.getRange().get().begin.toString());
+                                    JsonOut.setArquivo(nomeArquivo);
+                                    ListJsonSmell.add(JsonOut);
                                 }
-                            }
-
-                            //Testa se existe Conversão de dados
-
-
-                            //Testa se existe Operações de IO
-
-
-                        }
+                            });
+                        });
                     }
-                }
+                });
             }
 
             JsonOut.saveJson(ListJsonSmell,"BrainUIComponent.json");
