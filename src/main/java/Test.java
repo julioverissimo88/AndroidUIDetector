@@ -65,10 +65,10 @@ public class Test {
             //ImportantSmells.BrainUIComponent("C:\\Users\\julio\\Desktop\\codigos\\java\\Brain");
 
             //Coupled UI Component
-            //ImportantSmells.CoupledUIComponent("C:\\Users\\julio\\Desktop\\codigos\\java\\CoupledUI");
+            ImportantSmells.CoupledUIComponent("C:\\Users\\julio\\Desktop\\codigos\\java\\CoupledUI");
 
             //Flex Adapter
-            ImportantSmells.FlexAdapter("C:\\Users\\julio\\Desktop\\codigos\\java\\FlexAdapter");
+            //ImportantSmells.FlexAdapter("C:\\Users\\julio\\Desktop\\codigos\\java\\FlexAdapter");
 
 
 

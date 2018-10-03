@@ -77,6 +77,7 @@ public class ImportantSmells {
             classeValida = true;
             String nomeArquivo = arquivosAnalise.toArray()[cont].toString();
             System.out.println("Arquivo analisado:" + arquivosAnalise.toArray()[cont]);
+
             System.out.println("---------------------------------------------------------------------------------------");
 
             File f = new File(arquivosAnalise.toArray()[cont].toString());
@@ -92,28 +93,15 @@ public class ImportantSmells {
                 NodeList<ClassOrInterfaceType> implementacoes = classe.getExtendedTypes();
                 if(implementacoes.size() != 0){
                     for (ClassOrInterfaceType implementacao : implementacoes) {
-                        if (implementacao.getName().getIdentifier().contains("Fragment") || implementacao.getName().getIdentifier().contains("Adapter")) {
-                            classeValida  = true;
-                        }
-                    }
-                }
-                else{
-                    classeValida  = false;
-                }
-            }
-
-            //Se não for válida activity entre outros pula o laço para o próximo arquivo
-            if(!classeValida){
-                continue;
-            }
-
-            for (TypeDeclaration<?> typeDec : cu.getTypes()) {
-                //System.out.println(typeDec.getName().toString());
-                for (BodyDeclaration<?> member : typeDec.getMembers()) {
-                    if(member.isMethodDeclaration()) {
-                        MethodDeclaration field = (MethodDeclaration) member;
-                        if(field.getNameAsString().equals("onCreateView") || field.getNameAsString().equals("onActivityCreated")){
-                            System.out.println("Coupled UI Component  - " + field.getRange());
+                        if (implementacao.getName().getIdentifier().contains("Fragment") || implementacao.getName().getIdentifier().contains("Adapter") || implementacao.getName().getIdentifier().contains("Activity")) {
+                            classe.getFields().forEach(item->{
+                                if(item.getElementType().toString().contains("Activity")){
+                                    System.out.println("Componente de UI Acoplado " + item.getElementType().toString() + item.getRange());
+                                    JsonOut.setTipoSmell("XML");
+                                    JsonOut.setArquivo(nomeArquivo);
+                                    ListJsonSmell.add(JsonOut);
+                                }
+                            });
                         }
                     }
                 }
