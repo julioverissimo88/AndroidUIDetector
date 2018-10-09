@@ -5,6 +5,7 @@
  */
 package DetectUI;
 
+import com.sun.glass.ui.Cursor;
 import java.awt.TextArea;
 import java.io.OutputStream;
 import java.io.PrintStream;
@@ -48,6 +49,7 @@ public class DetectorUI extends javax.swing.JFrame {
         jCheckGodStyleResource = new javax.swing.JCheckBox();
         jCheckDeepNestedLayout = new javax.swing.JCheckBox();
         jCheckDuplicateStyle = new javax.swing.JCheckBox();
+        jCheckBrainUIComponent = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -76,6 +78,8 @@ public class DetectorUI extends javax.swing.JFrame {
 
         jCheckDuplicateStyle.setText("Duplicate Style Attributes");
 
+        jCheckBrainUIComponent.setText("Brain UI Component");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -99,8 +103,11 @@ public class DetectorUI extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jCheckDeepNestedLayout)
                             .addComponent(jCheckDuplicateStyle)
-                            .addComponent(jCheckGodStyleResource))
-                        .addGap(0, 504, Short.MAX_VALUE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jCheckGodStyleResource)
+                                .addGap(43, 43, 43)
+                                .addComponent(jCheckBrainUIComponent)))
+                        .addGap(0, 368, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -124,7 +131,9 @@ public class DetectorUI extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jCheckFlexAdapter))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jCheckGodStyleResource)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jCheckGodStyleResource)
+                            .addComponent(jCheckBrainUIComponent))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jCheckDeepNestedLayout)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -175,14 +184,24 @@ public class DetectorUI extends javax.swing.JFrame {
                 if(jCheckSuspiciousBehavior.isSelected()){
                     AndroidDetector.ImportantSmells.SuspiciousBehavior(txtCaminhoApp.getText());
                 }
+                
+                if(jCheckFlexAdapter.isSelected()){
+                    AndroidDetector.ImportantSmells.FlexAdapter(txtCaminhoApp.getText());
+                }
+                
+                if(jCheckBrainUIComponent.isSelected()){
+                    AndroidDetector.ImportantSmells.BrainUIComponent(txtCaminhoApp.getText());
+                }
             }
             else{
-                JOptionPane.showMessageDialog(rootPane, "Informe Aplicativo para a análise!");
-                
+                JOptionPane.showMessageDialog(rootPane, "Informe Aplicativo para a análise!");                
             }
         }
         catch(Exception ex){
             JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+        }
+        finally{
+            
         }
     }//GEN-LAST:event_jBtnRunAnaliseActionPerformed
 
@@ -225,6 +244,7 @@ public class DetectorUI extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JButton jBtnRunAnalise;
+    private javax.swing.JCheckBox jCheckBrainUIComponent;
     private javax.swing.JCheckBox jCheckCoupledUI;
     private javax.swing.JCheckBox jCheckDeepNestedLayout;
     private javax.swing.JCheckBox jCheckDuplicateStyle;

@@ -50,9 +50,13 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jCheckDeepNestedLayout" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jCheckDuplicateStyle" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jCheckGodStyleResource" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jCheckGodStyleResource" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+                              <Component id="jCheckBrainUIComponent" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace min="0" pref="504" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="368" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -85,7 +89,10 @@
                       <Component id="jCheckFlexAdapter" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
-                      <Component id="jCheckGodStyleResource" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jCheckGodStyleResource" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jCheckBrainUIComponent" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jCheckDeepNestedLayout" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -158,6 +165,11 @@
     <Component class="javax.swing.JCheckBox" name="jCheckDuplicateStyle">
       <Properties>
         <Property name="text" type="java.lang.String" value="Duplicate Style Attributes"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="jCheckBrainUIComponent">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Brain UI Component"/>
       </Properties>
     </Component>
   </SubComponents>

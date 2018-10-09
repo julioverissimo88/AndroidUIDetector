@@ -374,7 +374,7 @@ public class ImportantSmells {
                 File f = new File(arquivosAnalise.toArray()[cont].toString());
 
                 //LER TODA A ESTRUTURA DO XML
-                Document d = sb.build(f);
+                Document d = sb.build(f);                
 
                 if(d.getRootElement().getChildren().get(0).getName() == "style") {
                     qtdFilesStyle = qtdFilesStyle +1;
@@ -505,8 +505,6 @@ public class ImportantSmells {
                     }
                 }
             }
-
         }
-
     }
 

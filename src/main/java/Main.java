@@ -37,13 +37,12 @@ public class Main {
 
         try {
             if (caminho != "") {
-                if (xmlOrjava == 1) { //Smells XML
-                    ImportantSmells.GodStyleResource(caminho);
-                    AndroidDetector.ImportantSmells.CoupledUIComponent(caminho);
+                if (xmlOrjava == 1) { //Smells XML                                    
                     AndroidDetector.ImportantSmells.DeepNestedLayout(caminho);                
                     AndroidDetector.ImportantSmells.DuplicateStyleAttributes(caminho);
                     AndroidDetector.ImportantSmells.GodStyleResource(caminho);
                 } else {//Smel1ls JAVA
+                    AndroidDetector.ImportantSmells.CoupledUIComponent(caminho);
                     ImportantSmells.SuspiciousBehavior(caminho);
                     ImportantSmells.FlexAdapter(caminho);
                     ImportantSmells.BrainUIComponent(caminho);
