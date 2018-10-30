@@ -50,12 +50,4 @@ public class IOClass {
         }
 
     }
-
-    public static void main(String[] args) {
-        getIOClass();
-
-        System.out.println("Adicionou");
-
-    }
-
 }
