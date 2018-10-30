@@ -7,10 +7,7 @@ import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.body.*;
 import com.github.javaparser.ast.expr.AnnotationExpr;
 import com.github.javaparser.ast.expr.VariableDeclarationExpr;
-import com.github.javaparser.ast.stmt.ForStmt;
-import com.github.javaparser.ast.stmt.IfStmt;
-import com.github.javaparser.ast.stmt.LocalClassDeclarationStmt;
-import com.github.javaparser.ast.stmt.SwitchEntryStmt;
+import com.github.javaparser.ast.stmt.*;
 import com.github.javaparser.ast.type.ClassOrInterfaceType;
 import org.jdom2.Attribute;
 import org.jdom2.Document;
@@ -30,6 +27,7 @@ import java.io.FileNotFoundException;
 import java.io.FilenameFilter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class ImportantSmells {
     private ImportantSmells(){
@@ -99,13 +97,64 @@ public class ImportantSmells {
                     for (ClassOrInterfaceType implementacao : implementacoes) {
                         if (implementacao.getName().getIdentifier().contains("Fragment") || implementacao.getName().getIdentifier().contains("Adapter") || implementacao.getName().getIdentifier().contains("Activity")) {
                             classe.getFields().forEach(item->{
-                                if(item.getElementType().toString().contains("Activity")){
+                                //System.out.println(item.getElementType().toString());
+                                if((item.getElementType().toString().contains("Activity") || item.getElementType().toString().contains("Fragment"))){
                                     System.out.println("Componente de UI Acoplado " + item.getElementType().toString() + item.getRange());
-                                    JsonOut.setTipoSmell("XML");
+                                    JsonOut.setTipoSmell("JAVA");
                                     JsonOut.setArquivo(nomeArquivo);
                                     ListJsonSmell.add(JsonOut);
                                 }
                             });
+
+                            classe.findAll(ConstructorDeclaration.class).forEach(metodo->{
+                                metodo.getParameters().forEach(item->{
+                                    if (item.getType().toString().contains("Activity") || item.getType().toString().contains("Fragment")) {
+                                        System.out.println("Componente de UI Acoplado  " + classe.getName() + " " + metodo.getRange().get().begin);
+                                        System.out.println("---------------------------------------------------------------------------------------");
+                                        JsonOut.setTipoSmell("JAVA");
+                                        JsonOut.setLinha(metodo.getRange().get().begin.toString());
+                                        JsonOut.setArquivo(nomeArquivo);
+                                        ListJsonSmell.add(JsonOut);
+                                    }
+                                });
+                            });
+
+                            classe.findAll(MethodDeclaration.class).forEach(metodo -> {
+
+                                    //Procura Libs de IO no TIPO em declaração  nos Parametros de  Métodos
+                                    if (metodo.getParameters().contains("Activity") || metodo.getParameters().contains("Fragment")) {
+                                        System.out.println("Componente de UI Acoplado  " + classe.getName() + " " + metodo.getRange().get().begin);
+                                        System.out.println("---------------------------------------------------------------------------------------");
+                                        JsonOut.setTipoSmell("JAVA");
+                                        JsonOut.setLinha(metodo.getRange().get().begin.toString());
+                                        JsonOut.setArquivo(nomeArquivo);
+                                        ListJsonSmell.add(JsonOut);
+                                    }
+
+                                    //Procura Libs de IO no TIPO em retorno  de Métodos
+                                    if (metodo.getType().toString().contains("Activity") || metodo.getType().toString().contains("Fragment")) {
+                                        System.out.println("Componente de UI Acoplado  " + classe.getName() + " " + metodo.getRange().get().begin);
+                                        System.out.println("---------------------------------------------------------------------------------------");
+                                        JsonOut.setTipoSmell("JAVA");
+                                        JsonOut.setLinha(metodo.getRange().get().begin.toString());
+                                        JsonOut.setArquivo(nomeArquivo);
+                                        ListJsonSmell.add(JsonOut);
+                                    }
+
+                                    //Procura Libs IO no TIPO  em declaração de campos
+                                    metodo.findAll(FieldDeclaration.class).forEach(campos->{
+                                        if (campos.getElementType().toString().contains("Activity") || campos.getElementType().toString().contains("Fragment")) {
+                                            System.out.println("Componente de UI Acoplado  " + classe.getName() + ") " + campos.getRange().get().begin);
+                                            System.out.println("---------------------------------------------------------------------------------------");
+                                            JsonOut.setTipoSmell("JAVA");
+                                            JsonOut.setLinha(campos.getRange().get().begin.toString());
+                                            JsonOut.setArquivo(nomeArquivo);
+                                            ListJsonSmell.add(JsonOut);
+                                        }
+                                    });
+
+                            });
+
                         }
                     }
                 }
@@ -191,8 +240,19 @@ public class ImportantSmells {
                 NodeList<ClassOrInterfaceType> implementacoes = classe.getExtendedTypes();
                 if(implementacoes.size() != 0){
                     for (ClassOrInterfaceType implementacao : implementacoes) {
-                        if (implementacao.getName().getIdentifier().equals("BaseActivity") || implementacao.getName().getIdentifier().equals("Activity") || implementacao.getName().getIdentifier().equals("Fragments") || implementacao.getName().getIdentifier().equals("BaseAdapter") || implementacao.getName().getIdentifier().endsWith("Listener")) {
+                        if (implementacao.getName().getIdentifier().contains("BaseActivity") || implementacao.getName().getIdentifier().contains("Activity") || implementacao.getName().getIdentifier().contains("Fragments") || implementacao.getName().getIdentifier().contains("BaseAdapter") || implementacao.getName().getIdentifier().endsWith("Listener")) {
                             classeValida  = true;
+                            classe.getImplementedTypes().forEach(item->{
+                                //System.out.println(item.getNameAsString());
+                                if(item.getName().toString().contains("Listener")) {
+                                    System.out.println("Comportamento suspeito detectado  - " + item.getRange());
+                                    JsonOut.setTipoSmell("JAVA");
+                                    JsonOut.setLinha(item.getRange().get().begin.toString());
+                                    JsonOut.setArquivo(nomeArquivo);
+                                    ListJsonSmell.add(JsonOut);
+                                }
+
+                            });
                         }
                     }
                 }
@@ -352,9 +412,6 @@ public class ImportantSmells {
 
                             });
                         });
-
-
-
                     }
                 });
             }
@@ -411,7 +468,7 @@ public class ImportantSmells {
                                         ListJsonSmell.add(JsonOut);
                                     });
 
-                                    membro.findAll(SwitchEntryStmt.class).forEach(item->{
+                                    membro.findAll(SwitchStmt.class).forEach(item->{
                                         System.out.println("Flex Adapter detectado na classe " + item.getRange() + " (lógica utilizando Switch/Case detectada)");
                                         System.out.println("---------------------------------------------------------------------------------------");
                                         JsonOut.setTipoSmell("JAVA");

@@ -52,27 +52,26 @@ public class Test {
 
     public static void main(String[] args) {
         try {
-            //layout profundamente aninhado
-            //ImportantSmells.DeepNestedLayout("C:\\Users\\julio\\Desktop\\codigos\\layout\\layoutProfundamenteAninhado");
-
-            //atributos de estilo repetidos
-            //ImportantSmells.DuplicateStyleAttributes("C:\\Users\\julio\\Desktop\\codigos\\layout\\atributosEstiloRepetidos\\");
-
-            //God Style Resource
-            //ImportantSmells.GodStyleResource("C:\\Users\\julio\\AndroidStudioProjects\\AppTestAndroidSmells");
-
-            //Suspicious Behavior
-            //ImportantSmells.SuspiciousBehavior("C:\\Users\\julio\\Desktop\\codigos\\java\\SuspiciousBehavior");
-
             //Brain Component
-            ImportantSmells.BrainUIComponent("C:\\Users\\julio\\Desktop\\codigos\\java\\Brain");
+            //ImportantSmells.BrainUIComponent("C:\\Users\\julio\\Desktop\\codigos\\java\\Brain");
 
             //Coupled UI Component
             //ImportantSmells.CoupledUIComponent("C:\\Users\\julio\\Desktop\\codigos\\java\\CoupledUI");
 
+            //Suspicious Behavior
+            //ImportantSmells.SuspiciousBehavior("C:\\Users\\julio\\Desktop\\codigos\\java\\SuspiciousBehavior");
+
             //Flex Adapter
             //ImportantSmells.FlexAdapter("C:\\Users\\julio\\Desktop\\codigos\\java\\FlexAdapter");
 
+            //layout profundamente aninhado
+            ImportantSmells.DeepNestedLayout("C:\\Users\\julio\\Desktop\\codigos\\layout\\layoutProfundamenteAninhado");
+
+            //God Style Resource
+            //ImportantSmells.GodStyleResource("C:\\Users\\julio\\AndroidStudioProjects\\AppTestAndroidSmells");
+
+            //atributos de estilo repetidos
+            //ImportantSmells.DuplicateStyleAttributes("C:\\Users\\julio\\Desktop\\codigos\\layout\\atributosEstiloRepetidos\\");
 
 
         }
