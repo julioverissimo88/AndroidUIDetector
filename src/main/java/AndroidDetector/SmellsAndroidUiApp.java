@@ -245,41 +245,43 @@ public class SmellsAndroidUiApp {
             arquivos = diretorio.listFiles();
 
             for(int cont = 0; cont < arquivos.length; cont++){
-                System.out.println("Arquivo analisado:" +arquivos[cont]);
-                System.out.println("---------------------------------------------------------------------------------------");
+                if(arquivos[cont].toString().endsWith(".xml")) {
+                    System.out.println("Arquivo analisado:" + arquivos[cont]);
+                    System.out.println("---------------------------------------------------------------------------------------");
 
-                File f = new File(arquivos[cont].toString());
+                    File f = new File(arquivos[cont].toString());
 
-                //SAX BUILDER PARA PROCESSAR O XML
-                SAXBuilder sb = new SAXBuilder();
+                    //SAX BUILDER PARA PROCESSAR O XML
+                    SAXBuilder sb = new SAXBuilder();
 
-                //LER TODA A ESTRUTURA DO XML
-                Document d = sb.build(f);
+                    //LER TODA A ESTRUTURA DO XML
+                    Document d = sb.build(f);
 
-                //ACESSAR O ROOT ELEMENT
-                Element rootElmnt = d.getRootElement();
+                    //ACESSAR O ROOT ELEMENT
+                    Element rootElmnt = d.getRootElement();
 
-                //BUSCAR ELEMENTOS FILHOS DA TAG
-                List elements = rootElmnt.getChildren();
+                    //BUSCAR ELEMENTOS FILHOS DA TAG
+                    List elements = rootElmnt.getChildren();
 
-                for(int i =0; i < elements.size(); i++){
-                    org.jdom2.Element el = (org.jdom2.Element)elements.get(i);
+                    for (int i = 0; i < elements.size(); i++) {
+                        org.jdom2.Element el = (org.jdom2.Element) elements.get(i);
 
-                    List SubElements = el.getChildren();
-                    subItensListener(SubElements);
+                        List SubElements = el.getChildren();
+                        subItensListener(SubElements);
 
-                    List<org.jdom2.Attribute> listAttr = (List<org.jdom2.Attribute>) el.getAttributes();
+                        List<org.jdom2.Attribute> listAttr = (List<org.jdom2.Attribute>) el.getAttributes();
 
-                    for (org.jdom2.Attribute item : listAttr) {
+                        for (org.jdom2.Attribute item : listAttr) {
+                            System.out.println(item.getName());
+                            if (item.getName() == "onClick") {
+                                System.out.println("Listener Escondido " + el.getName() + " - Onclick:" + item.getValue());
+                            }
 
-                        if(item.getName() == "onClick"){
-                            System.out.println("Listener Escondido " + el.getName() + " - Onclick:" + item.getValue());
                         }
-
                     }
-                }
 
-                System.out.println("---------------------------------------------------------------------------------------");
+                    System.out.println("---------------------------------------------------------------------------------------");
+                }
             }
         }
         catch(Exception ex){
@@ -324,7 +326,7 @@ public class SmellsAndroidUiApp {
 
                     for (org.jdom2.Attribute item : listAttr) {
                         if(item.getName() =="text"){
-                            if(!item.getValue().matches("@[a-z]+\\b/")){
+                            if(!item.getValue().matches("@.*/.*")){
                                 System.out.println("Recurso Mágico " + el.getName() + " - text:" + item.getValue());
                             }
                         }

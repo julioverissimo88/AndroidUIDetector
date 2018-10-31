@@ -1,5 +1,6 @@
 import AndroidDetector.ImportantSmells;
 import AndroidDetector.OutputSmells;
+import AndroidDetector.SmellsAndroidUiApp;
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.Node;
@@ -65,13 +66,17 @@ public class Test {
             //ImportantSmells.FlexAdapter("C:\\Users\\julio\\Desktop\\codigos\\java\\FlexAdapter");
 
             //layout profundamente aninhado
-            ImportantSmells.DeepNestedLayout("C:\\Users\\julio\\Desktop\\codigos\\layout\\layoutProfundamenteAninhado");
+            //ImportantSmells.DeepNestedLayout("C:\\Users\\julio\\Desktop\\codigos\\layout\\layoutProfundamenteAninhado",3);
 
             //God Style Resource
             //ImportantSmells.GodStyleResource("C:\\Users\\julio\\AndroidStudioProjects\\AppTestAndroidSmells");
 
             //atributos de estilo repetidos
             //ImportantSmells.DuplicateStyleAttributes("C:\\Users\\julio\\Desktop\\codigos\\layout\\atributosEstiloRepetidos\\");
+
+            //SmellsAndroidUiApp.HideListener("C:\\Users\\julio\\AndroidStudioProjects\\AppTestAndroidSmells\\app\\src\\main\\res\\layout");
+
+            ImportantSmells.magicResource("C:\\Users\\julio\\AndroidStudioProjects\\AppTestAndroidSmells\\app\\src\\main\\res\\layout");
 
 
         }

@@ -170,7 +170,7 @@ public class DetectorUI extends javax.swing.JFrame {
                 }                
                 
                 if(jCheckDeepNestedLayout.isSelected()){
-                    AndroidDetector.ImportantSmells.DeepNestedLayout(txtCaminhoApp.getText());
+                    AndroidDetector.ImportantSmells.DeepNestedLayout(txtCaminhoApp.getText(),3);
                 }
                 
                 if(jCheckDuplicateStyle.isSelected()){
@@ -178,7 +178,7 @@ public class DetectorUI extends javax.swing.JFrame {
                 }
                 
                 if(jCheckGodStyleResource.isSelected()){
-                    AndroidDetector.ImportantSmells.GodStyleResource(txtCaminhoApp.getText());
+                    AndroidDetector.ImportantSmells.GodStyleResource(txtCaminhoApp.getText(),5);
                 }
                 
                 if(jCheckSuspiciousBehavior.isSelected()){
@@ -194,7 +194,7 @@ public class DetectorUI extends javax.swing.JFrame {
                 }
             }
             else{
-                JOptionPane.showMessageDialog(rootPane, "Informe Aplicativo para a análise!");                
+                JOptionPane.showMessageDialog(rootPane, "Informe Aplicativo para a anï¿½lise!");                
             }
         }
         catch(Exception ex){

@@ -38,9 +38,9 @@ public class Main {
         try {
             if (caminho != "") {
                 if (xmlOrjava == 1) { //Smells XML                                    
-                    AndroidDetector.ImportantSmells.DeepNestedLayout(caminho);                
+                    AndroidDetector.ImportantSmells.DeepNestedLayout(caminho, 3);
                     AndroidDetector.ImportantSmells.DuplicateStyleAttributes(caminho);
-                    AndroidDetector.ImportantSmells.GodStyleResource(caminho);
+                    AndroidDetector.ImportantSmells.GodStyleResource(caminho,5);
                 } else {//Smel1ls JAVA
                     AndroidDetector.ImportantSmells.CoupledUIComponent(caminho);
                     ImportantSmells.SuspiciousBehavior(caminho);

@@ -491,15 +491,15 @@ public class ImportantSmells {
     }
 
 
-    public static void GodStyleResource(String pathApp) {
+    public static void GodStyleResource(String pathApp,int threshold) {
         try {
             arquivosAnalise.clear();
             listar(new File(pathApp),XML);
-            int qtdLimiteStilos = 5;
+            int qtdLimiteStilos = threshold;
             int qtdFilesStyle = 0;
 
-            for (int cont = 0; cont < arquivosAnalise.toArray().length; cont++) {
-                System.out.println("Arquivo analisado:" + arquivosAnalise.toArray()[cont]);
+            for (int cont = 0; cont < (arquivosAnalise.toArray().length - 1); cont++) {
+                //System.out.println("Arquivo analisado:" + arquivosAnalise.toArray()[cont]);
                 System.out.println("---------------------------------------------------------------------------------------");
 
                 File f = new File(arquivosAnalise.toArray()[cont].toString());
@@ -507,11 +507,15 @@ public class ImportantSmells {
                 //LER TODA A ESTRUTURA DO XML
                 Document d = sb.build(f);                
 
-                if(d.getRootElement().getChildren().get(0).getName() == "style") {
-                    qtdFilesStyle = qtdFilesStyle +1;
+                if(d.getRootElement().getChildren().size() > 0) {
+                    if (d.getRootElement().getChildren().get(0).getName() == "style") {
+                        qtdFilesStyle = qtdFilesStyle + 1;
+                        System.out.println(arquivosAnalise.toArray()[cont]);
+                    }
                 }
 
                 if((qtdFilesStyle == 1) || (d.getRootElement().getChildren().size() > qtdLimiteStilos )){
+                    //System.out.println("->"+arquivosAnalise.toArray()[cont].toString());
                     System.out.println("Longo recurso de Estilo detectado (existe apenas um arquivo para estilos no aplicativo que possui " + d.getRootElement().getChildren().size() + " estilos)");
                     System.out.println("---------------------------------------------------------------------------------------");
                     JsonOut.setTipoSmell("XML");
@@ -526,7 +530,7 @@ public class ImportantSmells {
         }
     }
 
-    public static void DeepNestedLayout(String pathApp) {
+    public static void DeepNestedLayout(String pathApp, int threshold) {
         try {
             arquivosAnalise.clear();
             listar(new File(pathApp),XML);
@@ -547,7 +551,7 @@ public class ImportantSmells {
                     //BUSCAR ELEMENTOS FILHOS DA TAG
                     List elements = rootElmnt.getChildren();
 
-                    recursiveChildrenElement(elements);
+                    recursiveChildrenElement(elements, threshold);
 
                     System.out.println("---------------------------------------------------------------------------------------");
 
@@ -617,7 +621,145 @@ public class ImportantSmells {
         }
     }
 
-        private static void recursiveChildrenElement(List elements) {
+    //-----------------------------------------------------------------
+
+    //Recurso Mágico
+    public static void magicResource(String pathApp){
+        try{
+            arquivosAnalise.clear();
+            listar(new File(pathApp),XML);
+
+            for (int cont = 0; cont < arquivosAnalise.toArray().length; cont++) {
+                System.out.println("Arquivo analisado:" + arquivosAnalise.toArray()[cont]);
+                System.out.println("---------------------------------------------------------------------------------------");
+
+                File f = new File(arquivosAnalise.toArray()[cont].toString());
+
+                //LER TODA A ESTRUTURA DO XML
+                Document d = sb.build(f);
+
+                if (arquivosAnalise.toArray()[cont].toString().contains("\\layout\\")) {
+                    //ACESSAR O ROOT ELEMENT
+                    Element rootElmnt = d.getRootElement();
+
+                    //BUSCAR ELEMENTOS FILHOS DA TAG
+                    List elements = rootElmnt.getChildren();
+
+                    for(int i = 0; i < elements.size(); i++) {
+                        org.jdom2.Element el = (org.jdom2.Element) elements.get(i);
+                        //System.out.println(el.getName());
+                        if(el.getChildren().size() > 0){
+                            recursiveChildrenMagic(elements);
+                        }
+                    }
+
+                    System.out.println("---------------------------------------------------------------------------------------");
+
+                }
+            }
+
+                System.out.println("---------------------------------------------------------------------------------------");
+
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+        }
+    }
+
+
+    private static void recursiveChildrenMagic(List elements) {
+        for (int i = 0; i < elements.size(); i++) {
+
+            org.jdom2.Element el = (org.jdom2.Element) elements.get(i);
+            List SubElements = el.getChildren();
+
+            //System.out.println(el.getName());
+
+            if (SubElements.size() > 0) {
+                recursiveChildrenMagic(SubElements);
+            }
+            else{
+                List<org.jdom2.Attribute> listAttr = (List<org.jdom2.Attribute>) el.getAttributes();
+                for (org.jdom2.Attribute item : listAttr) {
+                    //System.out.println(item);
+                    if(item.getName() =="text"){
+                        if(!item.getValue().matches("@.*/.*")){
+                            System.out.println("Recurso Mágico " + el.getName() + " - text:" + item.getValue());
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public static void HideListener(String pathApp){
+        try{
+            arquivosAnalise.clear();
+            listar(new File(pathApp),XML);
+
+            for (int cont = 0; cont < arquivosAnalise.toArray().length; cont++) {
+                System.out.println("Arquivo analisado:" + arquivosAnalise.toArray()[cont]);
+                System.out.println("---------------------------------------------------------------------------------------");
+
+                File f = new File(arquivosAnalise.toArray()[cont].toString());
+
+                //LER TODA A ESTRUTURA DO XML
+                Document d = sb.build(f);
+
+                if (arquivosAnalise.toArray()[cont].toString().contains("\\layout\\")) {
+                    //ACESSAR O ROOT ELEMENT
+                    Element rootElmnt = d.getRootElement();
+
+                    //BUSCAR ELEMENTOS FILHOS DA TAG
+                    List elements = rootElmnt.getChildren();
+
+                    for(int i = 0; i < elements.size(); i++) {
+                        org.jdom2.Element el = (org.jdom2.Element) elements.get(i);
+                        //System.out.println(el.getName());
+
+                        if(el.getChildren().size() > 0){
+                            recursiveChildrenHideListener(elements);
+                        }
+                    }
+
+                    System.out.println("---------------------------------------------------------------------------------------");
+
+                }
+            }
+
+            System.out.println("---------------------------------------------------------------------------------------");
+
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+        }
+    }
+
+
+    private static void recursiveChildrenHideListener(List elements) {
+        for (int i = 0; i < elements.size(); i++) {
+
+            org.jdom2.Element el = (org.jdom2.Element) elements.get(i);
+            List SubElements = el.getChildren();
+
+            //System.out.println(el.getName());
+
+            if (SubElements.size() > 0) {
+                recursiveChildrenHideListener(SubElements);
+            }
+            else{
+                List<org.jdom2.Attribute> listAttr = (List<org.jdom2.Attribute>) el.getAttributes();
+                for (org.jdom2.Attribute item : listAttr) {
+                    if (item.getName() == "onClick") {
+                        System.out.println("Listener Escondido " + el.getName() + " - Onclick:" + item.getValue());
+                    }
+                }
+            }
+        }
+    }
+
+
+        private static void recursiveChildrenElement(List elements, int threshold) {
             for (int i = 0; i < elements.size(); i++) {
 
                 org.jdom2.Element el = (org.jdom2.Element) elements.get(i);
@@ -625,10 +767,10 @@ public class ImportantSmells {
 
                 if (SubElements.size() > 0) {
                     qtdSubelementos = qtdSubelementos + 1;
-                    recursiveChildrenElement(SubElements);
+                    recursiveChildrenElement(SubElements, threshold);
                 } else {
-                    if (qtdSubelementos > 3) {
-                        System.out.println("Layout Profundamente Aninhado encontrado " + el.getName() + "(Mais de três níveis)");
+                    if (qtdSubelementos > threshold) {
+                        System.out.println("Layout Profundamente Aninhado encontrado " + el.getName() + "(Mais de " + threshold + " níveis)");
                         JsonOut.setTipoSmell("XML");
                         JsonOut.setArquivo("");
                         ListJsonSmell.add(JsonOut);
