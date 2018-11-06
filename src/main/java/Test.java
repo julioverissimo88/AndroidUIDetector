@@ -27,6 +27,8 @@ public class Test {
     public static List<File> arquivosAnalise =  new ArrayList<File>();
     public static  Boolean classeValida = true;
     private  static List<OutputSmells> ListSmells = new ArrayList<OutputSmells>();
+    private  static List<String> FilesIMG = new ArrayList<String>();
+
 
     public static void listar(File directory,String tipo) {
         if(directory.isDirectory()) {
@@ -76,14 +78,63 @@ public class Test {
 
             //SmellsAndroidUiApp.HideListener("C:\\Users\\julio\\AndroidStudioProjects\\AppTestAndroidSmells\\app\\src\\main\\res\\layout");
 
-            ImportantSmells.magicResource("C:\\Users\\julio\\AndroidStudioProjects\\AppTestAndroidSmells\\app\\src\\main\\res\\layout");
+            //ImportantSmells.magicResource("C:\\Users\\julio\\AndroidStudioProjects\\AppTestAndroidSmells\\app\\src\\main\\res\\layout");
 
+            //SmellsAndroidUiApp.NotFoundImage("C:\\Users\\julio\\AndroidStudioProjects\\AppTestAndroidSmells\\");
+
+            ImportantSmells.reusoInadequadoDeString("C:\\\\Users\\\\julio\\\\Desktop\\\\codigos\\\\layout\\\\");
+
+            /*
+            listar2(new File("C:\\Users\\julio\\Desktop\\codigos\\Calculator\\mobile\\"));
+
+            FilesIMG.forEach(caminho->{
+                File directory = new File(caminho);
+                for(File arquivo : directory.listFiles()){
+                    FilesIMG.forEach(item->{
+
+                            File arquivoImg = new File(item + "\\" + arquivo.getName());
+
+                            if (!arquivoImg.exists()) {
+                                System.out.println("Imagem Faltante detectado " + arquivo.getName() + " para pasta " + item);
+                                //System.out.println(arquivoImg.length());
+                            }
+                            else if((arquivo.length() != arquivoImg.length())){
+                                System.out.println("Imagem Faltante detectado (Imagem existe porem a resolução é incompatível) " + arquivo.getName() + " para pasta " + item);
+                            }
+
+                    });
+                    //System.out.println(arquivo.getName());
+                }
+            });
+            */
 
         }
         catch(Exception ex){
             ex.printStackTrace();
         }
     }
+
+    public static void listar2(File directory) {
+        if(directory.isDirectory()) {
+            if(directory.getPath().contains("mipmap")){
+                //System.out.println(directory.getPath());
+                FilesIMG.add(directory.getPath());
+            }
+
+            String[] subDirectory = directory.list();
+            if(subDirectory != null) {
+                for(String dir : subDirectory){
+                    listar2(new File(directory + File.separator  + dir));
+                }
+            }
+        }
+    }
+
+    public static void NotFoundImage(String pathApp){
+        listar2(new File("C:\\Users\\julio\\Desktop\\codigos\\Calculator"));
+    }
+
+
 
     public static void CoupledUIComponent(String pathApp) throws FileNotFoundException {
         ListSmells.clear();

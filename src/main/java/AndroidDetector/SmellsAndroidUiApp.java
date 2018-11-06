@@ -114,6 +114,7 @@ public class SmellsAndroidUiApp {
 
             for(int cont = 0; cont < arquivos.length; cont++){
                 if(arquivos[cont].toString().contains("mipmap")){
+                    System.out.println(arquivos[cont].toString());
                     File arquivosSubDir[];
                     File subDiretorio = new File(pathApp+arquivos[cont].toString());
                     arquivosSubDir = subDiretorio.listFiles();

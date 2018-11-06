@@ -2,6 +2,7 @@ package AndroidDetector;
 
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ast.CompilationUnit;
+import com.github.javaparser.ast.ImportDeclaration;
 import com.github.javaparser.ast.Node;
 import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.body.*;
@@ -25,9 +26,7 @@ import javax.xml.parsers.SAXParserFactory;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FilenameFilter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class ImportantSmells {
     private ImportantSmells(){
@@ -46,6 +45,7 @@ public class ImportantSmells {
     private static OutputSmells JsonOut = new  OutputSmells();
     private static List<OutputSmells> ListJsonSmell = new ArrayList<OutputSmells>();
     private  static List<OutputSmells> ListSmells = new ArrayList<OutputSmells>();
+    private static Map<String,String> MaptextStringArquivo = new HashMap<>();
 
     public static void listar(File directory,String tipo) {
         if(directory.isDirectory()) {
@@ -69,6 +69,84 @@ public class ImportantSmells {
             }
         }
     }
+
+    //Componente de UI Fazendo IO
+    public static void CompUIIO(String pathApp){
+        try {
+            arquivosAnalise.clear();
+            listar(new File(pathApp),JAVA);
+
+            for (int cont = 0; cont < arquivosAnalise.toArray().length; cont++) {
+                System.out.println("Arquivo analisado:" + arquivosAnalise.toArray()[cont]);
+                String nomeArquivo = arquivosAnalise.toArray()[cont].toString();
+                System.out.println("---------------------------------------------------------------------------------------");
+
+                File f = new File(arquivosAnalise.toArray()[cont].toString());
+                CompilationUnit cUnit = JavaParser.parse(f);
+
+                cUnit.findAll(ClassOrInterfaceDeclaration.class).forEach(classe->{
+                    if(classe.getExtendedTypes().get(0).toString().contains("Activity") || classe.getExtendedTypes().get(0).toString().contains("Fragment") || classe.getExtendedTypes().get(0).toString().contains("Adapter") ) {
+
+                        //Procura Libs IO no TIPO  em declaração de campos
+                        classe.getFields().forEach(campos -> {
+                            if (IOClass.getIOClass().contains(campos.getElementType().toString())) {
+                                System.out.println("UI IO Component detectado na classe " + classe.getName() + " (Acesso a banco de dados) " + campos.getRange().get().begin);
+                                System.out.println("---------------------------------------------------------------------------------------");
+                                JsonOut.setTipoSmell("JAVA");
+                                JsonOut.setLinha(campos.getRange().get().begin.toString());
+                                JsonOut.setArquivo(nomeArquivo);
+                                ListJsonSmell.add(JsonOut);
+                            }
+                        });
+
+                        //Procura Libs de IO no TIPO em declaração  de Métodos
+                        classe.findAll(MethodDeclaration.class).forEach(metodo -> {
+                            IOClass.getIOClass().forEach(item->{
+                                //Procura Libs de IO no TIPO em declaração  nos Parametros de  Métodos
+                                if (metodo.getParameters().contains(item)) {
+                                    System.out.println("UI IO Component detectado na classe " + classe.getName() + " (Acesso a banco de dados) nos parâmetros do método " + metodo.getRange().get().begin);
+                                    System.out.println("---------------------------------------------------------------------------------------");
+                                    JsonOut.setTipoSmell("JAVA");
+                                    JsonOut.setLinha(metodo.getRange().get().begin.toString());
+                                    JsonOut.setArquivo(nomeArquivo);
+                                    ListJsonSmell.add(JsonOut);
+                                }
+
+                                //Procura Libs de IO no TIPO em retorno  de Métodos
+                                if (metodo.getType().toString().contains(item)) {
+                                    System.out.println("UI IO Component detectado na classe " + classe.getName() + " (Acesso a banco de dados) no retorno do método " + metodo.getRange().get().begin);
+                                    System.out.println("---------------------------------------------------------------------------------------");
+                                    JsonOut.setTipoSmell("JAVA");
+                                    JsonOut.setLinha(metodo.getRange().get().begin.toString());
+                                    JsonOut.setArquivo(nomeArquivo);
+                                    ListJsonSmell.add(JsonOut);
+                                }
+
+                                //Procura Libs IO no TIPO  em declaração de campos
+                                metodo.findAll(FieldDeclaration.class).forEach(campos->{
+                                    if (campos.getElementType().toString().contains(item)) {
+                                        System.out.println("UI IO Component detectado na classe " + classe.getName() + " (Acesso a banco de dados) " + campos.getRange().get().begin);
+                                        System.out.println("---------------------------------------------------------------------------------------");
+                                        JsonOut.setTipoSmell("JAVA");
+                                        JsonOut.setLinha(campos.getRange().get().begin.toString());
+                                        JsonOut.setArquivo(nomeArquivo);
+                                        ListJsonSmell.add(JsonOut);
+                                    }
+                                });
+                            });
+                        });
+                    }
+                });
+            }
+
+            JsonOut.saveJson(ListJsonSmell,"UIIOComponent.json");
+
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+        }
+    }
+
 
     public static void CoupledUIComponent(String pathApp) throws FileNotFoundException {
         ListSmells.clear();
@@ -164,57 +242,6 @@ public class ImportantSmells {
         JsonOut.saveJson(ListJsonSmell,"CoupledUIComponent.json");
     }
 
-
-    /*
-    public static void CoupledUIComponent(String pathApp) {
-        try {
-            diretorio = new File(pathApp);
-            arquivos = diretorio.listFiles();
-
-            for (int cont = 0; cont < arquivos.length; cont++) {
-                System.out.println("Arquivo analisado:" + arquivos[cont]);
-                System.out.println("---------------------------------------------------------------------------------------");
-
-                File f = new File(arquivos[cont].toString());
-                Document d = sb.build(f);
-                Element rootElmnt = d.getRootElement();
-                List elements = rootElmnt.getChildren();
-
-                for (int i = 0; i < elements.size(); i++) {
-                    org.jdom2.Element el = (org.jdom2.Element) elements.get(i);
-
-                    List<Element> SubElements = el.getChildren();
-
-                    for (int j = 0; j < SubElements.size(); j++) {
-                        org.jdom2.Element elChildren = (org.jdom2.Element) SubElements.get(j);
-                        List<org.jdom2.Attribute> listAttr = (List<org.jdom2.Attribute>) elChildren.getAttributes();
-
-                        if(elChildren.getName() == "fragment") {
-                            Boolean style = false;
-                            for (org.jdom2.Attribute item : listAttr) {
-                                if (item.getName() == "name") {
-                                    style = true;
-                                }
-                            }
-                            if (!style) {
-                                System.out.println("Componente de UI Acoplado " + elChildren.getName() + " - Considere utilizar viewGroup");
-                                JsonOut.setTipoSmell("XML");
-                                JsonOut.setArquivo(arquivos[cont].toString());
-                                ListJsonSmell.add(JsonOut);
-                            }
-                        }
-                    }
-                }
-
-                JsonOut.saveJson(ListJsonSmell,"CoupledUIComponent.json");
-
-                System.out.println("---------------------------------------------------------------------------------------");
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
-    */
 
     public static void SuspiciousBehavior(String pathApp) throws FileNotFoundException {
         ListSmells.clear();
@@ -658,7 +685,7 @@ public class ImportantSmells {
                 }
             }
 
-                System.out.println("---------------------------------------------------------------------------------------");
+            System.out.println("---------------------------------------------------------------------------------------");
 
         }
         catch(Exception ex){
@@ -691,6 +718,104 @@ public class ImportantSmells {
             }
         }
     }
+
+
+
+
+
+
+
+
+
+    //Reuso inadequado de string
+    public static void reusoInadequadoDeString(String pathApp){
+        try{
+            arquivosAnalise.clear();
+            listar(new File(pathApp),XML);
+
+            for (int cont = 0; cont < arquivosAnalise.toArray().length; cont++) {
+                System.out.println("Arquivo analisado:" + arquivosAnalise.toArray()[cont]);
+                System.out.println("---------------------------------------------------------------------------------------");
+
+                File f = new File(arquivosAnalise.toArray()[cont].toString());
+
+                //LER TODA A ESTRUTURA DO XML
+                Document d = sb.build(f);
+
+                if (arquivosAnalise.toArray()[cont].toString().contains("\\layout\\")) {
+                    //ACESSAR O ROOT ELEMENT
+                    Element rootElmnt = d.getRootElement();
+
+                    //BUSCAR ELEMENTOS FILHOS DA TAG
+                    List elements = rootElmnt.getChildren();
+
+                    for(int i = 0; i < elements.size(); i++) {
+                        org.jdom2.Element el = (org.jdom2.Element) elements.get(i);
+                        //System.out.println(el.getName());
+                        if(el.getChildren().size() > 0){
+                            recursiveChildrenReusoInadequadoDeString(elements,arquivosAnalise.toArray()[cont].toString());
+                        }
+                    }
+
+                    System.out.println("---------------------------------------------------------------------------------------");
+
+                }
+            }
+
+            for (String key : MaptextStringArquivo.keySet()) {
+
+                //Capturamos o valor a partir da chave
+                String value = MaptextStringArquivo.get(key);
+                System.out.println(key + " = " + value);
+            }
+
+            System.out.println("---------------------------------------------------------------------------------------");
+
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+        }
+    }
+
+
+    private static void recursiveChildrenReusoInadequadoDeString(List elements, String arquivo) {
+        for (int i = 0; i < elements.size(); i++) {
+
+            org.jdom2.Element el = (org.jdom2.Element) elements.get(i);
+            List SubElements = el.getChildren();
+
+            //System.out.println(el.getName());
+
+            if (SubElements.size() > 0) {
+                recursiveChildrenReusoInadequadoDeString(SubElements, arquivo);
+            }
+            else{
+                List<org.jdom2.Attribute> listAttr = (List<org.jdom2.Attribute>) el.getAttributes();
+                for (org.jdom2.Attribute item : listAttr) {
+                    //System.out.println(item);
+                    if(item.getName() =="text"){
+                        if(item.getValue().matches("@.*/.*")){
+                            //System.out.println("Recurso Mágico " + el.getName() + " - text:" + item.getValue());
+                            //System.out.println(item.getValue());
+                            MaptextStringArquivo.put(item.getValue(),arquivo);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 
     public static void HideListener(String pathApp){
         try{

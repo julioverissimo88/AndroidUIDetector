@@ -41,11 +41,14 @@ public class Main {
                     AndroidDetector.ImportantSmells.DeepNestedLayout(caminho, 3);
                     AndroidDetector.ImportantSmells.DuplicateStyleAttributes(caminho);
                     AndroidDetector.ImportantSmells.GodStyleResource(caminho,5);
+                    AndroidDetector.ImportantSmells.HideListener(caminho);
+                    AndroidDetector.ImportantSmells.magicResource(caminho);
                 } else {//Smel1ls JAVA
                     AndroidDetector.ImportantSmells.CoupledUIComponent(caminho);
-                    ImportantSmells.SuspiciousBehavior(caminho);
-                    ImportantSmells.FlexAdapter(caminho);
-                    ImportantSmells.BrainUIComponent(caminho);
+                    AndroidDetector.ImportantSmells.SuspiciousBehavior(caminho);
+                    AndroidDetector.ImportantSmells.FlexAdapter(caminho);
+                    AndroidDetector.ImportantSmells.BrainUIComponent(caminho);
+                    AndroidDetector.ImportantSmells.CompUIIO(caminho);
                 }
             }
         }
