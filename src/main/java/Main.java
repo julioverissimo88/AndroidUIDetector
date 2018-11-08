@@ -38,17 +38,21 @@ public class Main {
         try {
             if (caminho != "") {
                 if (xmlOrjava == 1) { //Smells XML                                    
-                    AndroidDetector.ImportantSmells.DeepNestedLayout(caminho, 3);
-                    AndroidDetector.ImportantSmells.DuplicateStyleAttributes(caminho);
-                    AndroidDetector.ImportantSmells.GodStyleResource(caminho,5);
-                    AndroidDetector.ImportantSmells.HideListener(caminho);
-                    AndroidDetector.ImportantSmells.magicResource(caminho);
+                    AndroidDetector.ImportantSmells.DeepNestedLayout(caminho, 3);   //Layout Profundamente Aninhado
+                    AndroidDetector.ImportantSmells.DuplicateStyleAttributes(caminho);       //Atributo de Estilo repetido
+                    AndroidDetector.ImportantSmells.GodStyleResource(caminho,5);  //Longo Recurso de Estilo
+                    AndroidDetector.ImportantSmells.HideListener(caminho);                 //Listener Escondido
+                    AndroidDetector.ImportantSmells.magicResource(caminho);               //Recurso Mágico
+                    AndroidDetector.ImportantSmells.BadStringResource(caminho);          //Recurso de String Bagunçado
+                    AndroidDetector.ImportantSmells.reusoInadequadoDeString(caminho);   //Reuso inadequado de String
+                    AndroidDetector.ImportantSmells.NotFoundImage(caminho);            //Imagem Faltante
+
                 } else {//Smel1ls JAVA
-                    AndroidDetector.ImportantSmells.CoupledUIComponent(caminho);
-                    AndroidDetector.ImportantSmells.SuspiciousBehavior(caminho);
-                    AndroidDetector.ImportantSmells.FlexAdapter(caminho);
-                    AndroidDetector.ImportantSmells.BrainUIComponent(caminho);
-                    AndroidDetector.ImportantSmells.CompUIIO(caminho);
+                    AndroidDetector.ImportantSmells.CoupledUIComponent(caminho);      //Componente de UI Acoplado
+                    AndroidDetector.ImportantSmells.SuspiciousBehavior(caminho);     //Comportamento Suspeito
+                    AndroidDetector.ImportantSmells.FlexAdapter(caminho);           // Adapter Complexo
+                    AndroidDetector.ImportantSmells.BrainUIComponent(caminho);     //Componente de Ui Cerebro
+                    AndroidDetector.ImportantSmells.CompUIIO(caminho);            //Componente de UI fazendo IO
                 }
             }
         }

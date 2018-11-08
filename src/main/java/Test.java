@@ -1,6 +1,7 @@
 import AndroidDetector.ImportantSmells;
 import AndroidDetector.OutputSmells;
 import AndroidDetector.SmellsAndroidUiApp;
+import UTIL.Trashold;
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.Node;
@@ -80,11 +81,13 @@ public class Test {
 
             //ImportantSmells.magicResource("C:\\Users\\julio\\AndroidStudioProjects\\AppTestAndroidSmells\\app\\src\\main\\res\\layout");
 
-            //SmellsAndroidUiApp.NotFoundImage("C:\\Users\\julio\\AndroidStudioProjects\\AppTestAndroidSmells\\");
+            //ImportantSmells.NotFoundImage("C:\\\\Users\\\\julio\\\\Desktop\\\\codigos\\\\Calculator\\\\mobile\\\\");
 
-            ImportantSmells.reusoInadequadoDeString("C:\\\\Users\\\\julio\\\\Desktop\\\\codigos\\\\layout\\\\");
+            //ImportantSmells.reusoInadequadoDeString("C:\\\\Users\\\\julio\\\\Desktop\\\\codigos\\\\layout\\\\");
 
-            /*
+            //Trashold.DeepNestedLayout("C:\\\\Users\\\\julio\\\\Desktop\\\\codigos\\\\layout\\\\");
+
+             /*
             listar2(new File("C:\\Users\\julio\\Desktop\\codigos\\Calculator\\mobile\\"));
 
             FilesIMG.forEach(caminho->{
@@ -107,6 +110,7 @@ public class Test {
                 }
             });
             */
+
 
         }
         catch(Exception ex){

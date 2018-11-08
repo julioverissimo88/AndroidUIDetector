@@ -27,6 +27,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FilenameFilter;
 import java.util.*;
+import UTIL.ReusoStringData;
 
 public class ImportantSmells {
     private ImportantSmells(){
@@ -45,7 +46,8 @@ public class ImportantSmells {
     private static OutputSmells JsonOut = new  OutputSmells();
     private static List<OutputSmells> ListJsonSmell = new ArrayList<OutputSmells>();
     private  static List<OutputSmells> ListSmells = new ArrayList<OutputSmells>();
-    private static Map<String,String> MaptextStringArquivo = new HashMap<>();
+    private static List<ReusoStringData> textStringArquivo = new ArrayList<ReusoStringData>();
+    private  static List<String> FilesIMG = new ArrayList<String>();
 
     public static void listar(File directory,String tipo) {
         if(directory.isDirectory()) {
@@ -557,6 +559,50 @@ public class ImportantSmells {
         }
     }
 
+    //Recurso de String Bagunçado
+    public static void BadStringResource(String pathApp) {
+        try {
+            arquivosAnalise.clear();
+            listar(new File(pathApp),XML);
+
+            int qtdFilesString = 0;
+
+            for (int cont = 0; cont < (arquivosAnalise.toArray().length - 1); cont++) {
+                //System.out.println("Arquivo analisado:" + arquivosAnalise.toArray()[cont]);
+                System.out.println("---------------------------------------------------------------------------------------");
+
+                File f = new File(arquivosAnalise.toArray()[cont].toString());
+
+                //LER TODA A ESTRUTURA DO XML
+                Document d = sb.build(f);
+
+                if(d.getRootElement().getChildren().size() > 0) {
+                    if (d.getRootElement().getChildren().get(0).getName() == "string") {
+                        qtdFilesString = qtdFilesString + 1;
+                    }
+                }
+
+                if((qtdFilesString == 1) ){
+                    //System.out.println("->"+arquivosAnalise.toArray()[cont].toString());
+                    System.out.println("Recurso de String Bagunçado detectado (existe apenas um arquivo para strings no aplicativo  ");
+                    System.out.println("---------------------------------------------------------------------------------------");
+                    JsonOut.setTipoSmell("XML");
+                    JsonOut.setArquivo(arquivosAnalise.toArray()[cont].toString());
+                    ListJsonSmell.add(JsonOut);
+                }
+            }
+
+            JsonOut.saveJson(ListJsonSmell,"BadStringResource.json");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+
+
+
+
+
     public static void DeepNestedLayout(String pathApp, int threshold) {
         try {
             arquivosAnalise.clear();
@@ -720,13 +766,6 @@ public class ImportantSmells {
     }
 
 
-
-
-
-
-
-
-
     //Reuso inadequado de string
     public static void reusoInadequadoDeString(String pathApp){
         try{
@@ -762,11 +801,13 @@ public class ImportantSmells {
                 }
             }
 
-            for (String key : MaptextStringArquivo.keySet()) {
-
-                //Capturamos o valor a partir da chave
-                String value = MaptextStringArquivo.get(key);
-                System.out.println(key + " = " + value);
+            for (ReusoStringData linha : textStringArquivo) {
+                textStringArquivo.forEach(itemTexto->{
+                    if((linha.strString.equals(itemTexto.strString)) && (!linha.arquivo.equals(itemTexto.arquivo))){
+                        System.out.println("Reuso inadequado de String detectado " + itemTexto.strString + "(Arquivo " + linha.arquivo +" e " + itemTexto.arquivo + ")");
+                    }
+                });
+                //System.out.println(linha.strString + " = " + linha.arquivo);
             }
 
             System.out.println("---------------------------------------------------------------------------------------");
@@ -797,25 +838,53 @@ public class ImportantSmells {
                         if(item.getValue().matches("@.*/.*")){
                             //System.out.println("Recurso Mágico " + el.getName() + " - text:" + item.getValue());
                             //System.out.println(item.getValue());
-                            MaptextStringArquivo.put(item.getValue(),arquivo);
+                            ReusoStringData data =  new ReusoStringData();
+                            data.arquivo = arquivo;
+                            data.strString = item.getValue();
+                            textStringArquivo.add(data);
                         }
                     }
                 }
             }
         }
     }
+    public static void ObtemImagensList(File directory) {
+        if(directory.isDirectory()) {
+            if(directory.getPath().contains("mipmap")){
+                //System.out.println(directory.getPath());
+                FilesIMG.add(directory.getPath());
+            }
 
+            String[] subDirectory = directory.list();
+            if(subDirectory != null) {
+                for(String dir : subDirectory){
+                    ObtemImagensList(new File(directory + File.separator  + dir));
+                }
+            }
+        }
+    }
 
+    public static void NotFoundImage(String pathApp){
+        ObtemImagensList(new File(pathApp));
 
+        FilesIMG.forEach(caminho->{
+            File directory = new File(caminho);
+            for(File arquivo : directory.listFiles()){
+                FilesIMG.forEach(item->{
 
+                    File arquivoImg = new File(item + "\\" + arquivo.getName());
 
-
-
-
-
-
-
-
+                    if (!arquivoImg.exists()) {
+                        System.out.println("Imagem Faltante detectado " + arquivo.getName() + " para pasta " + item);
+                        //System.out.println(arquivoImg.length());
+                    }
+                    else if((arquivo.length() != arquivoImg.length())){
+                        System.out.println("Imagem Faltante detectado (Imagem existe porem a resolução é incompatível) " + arquivo.getName() + " para pasta " + item);
+                    }
+                });
+            }
+        });
+    }
 
     public static void HideListener(String pathApp){
         try{
