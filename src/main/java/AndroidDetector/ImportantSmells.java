@@ -848,6 +848,95 @@ public class ImportantSmells {
             }
         }
     }
+
+    public static void NotFragment(String pathApp){
+        try{
+
+            arquivosAnalise.clear();
+            listar(new File(pathApp),JAVA);
+
+            for (int cont = 0; cont < arquivosAnalise.toArray().length; cont++) {
+                System.out.println("Arquivo analisado:" + arquivosAnalise.toArray()[cont]);
+                String nomeArquivo = arquivosAnalise.toArray()[cont].toString();
+                System.out.println("---------------------------------------------------------------------------------------");
+
+                File f = new File(arquivosAnalise.toArray()[cont].toString());
+                CompilationUnit cUnit = JavaParser.parse(f);
+
+                List<String> ViewsAndroid = new ArrayList<String>();
+                ViewsAndroid.add("TextView");
+                ViewsAndroid.add("EditText");
+                ViewsAndroid.add("Sppiner");
+
+                //Não existir fragmentos na aplicação
+
+                // Uso de Views(EditText, Spinner, ou Outras Views Diretamente pela activity)
+                cUnit.findAll(ClassOrInterfaceDeclaration.class).forEach(classe->{
+                    if(classe.getExtendedTypes().get(0).toString().contains("Activity") ) {
+                        NodeList<BodyDeclaration<?>> membros = classe.getMembers();
+
+                        //Procura ViewsAndroid no TIPO  em declaração de campos
+                        classe.getFields().forEach(campos -> {
+                            if (ViewsAndroid.contains(campos.getElementType().toString())) {
+                                System.out.println("Não Uso de Fragments detectado na classe " + classe.getName() + " () " + campos.getRange().get().begin);
+                                System.out.println("---------------------------------------------------------------------------------------");
+                                JsonOut.setTipoSmell("JAVA");
+                                JsonOut.setLinha(campos.getRange().get().begin.toString());
+                                JsonOut.setArquivo(nomeArquivo);
+                                ListJsonSmell.add(JsonOut);
+                            }
+                        });
+
+                        //Procura ViewsAndroid no TIPO em declaração  de Métodos
+                        classe.findAll(MethodDeclaration.class).forEach(metodo -> {
+                            ViewsAndroid.forEach(item->{
+                                //Procura Libs de IO no TIPO em declaração  nos Parametros de  Métodos
+                                if (metodo.getParameters().contains(item)) {
+                                    System.out.println("Não Uso de Fragments detectado na classe " + classe.getName() + " () nos parâmetros do método " + metodo.getRange().get().begin);
+                                    System.out.println("---------------------------------------------------------------------------------------");
+                                    JsonOut.setTipoSmell("JAVA");
+                                    JsonOut.setLinha(metodo.getRange().get().begin.toString());
+                                    JsonOut.setArquivo(nomeArquivo);
+                                    ListJsonSmell.add(JsonOut);
+                                }
+
+                                //Procura ViewsAndroid no TIPO em retorno  de Métodos
+                                if (metodo.getType().toString().contains(item)) {
+                                    System.out.println("Não Uso de Fragments detectado na classe " + classe.getName() + " () no retorno do método " + metodo.getRange().get().begin);
+                                    System.out.println("---------------------------------------------------------------------------------------");
+                                    JsonOut.setTipoSmell("JAVA");
+                                    JsonOut.setLinha(metodo.getRange().get().begin.toString());
+                                    JsonOut.setArquivo(nomeArquivo);
+                                    ListJsonSmell.add(JsonOut);
+                                }
+
+                                //Procura ViewsAndroid no TIPO  em declaração de campos
+                                metodo.findAll(FieldDeclaration.class).forEach(campos->{
+                                    if (campos.getElementType().toString().contains(item)) {
+                                        System.out.println("Não Uso de Fragments detectado na classe " + classe.getName() + " () " + campos.getRange().get().begin);
+                                        System.out.println("---------------------------------------------------------------------------------------");
+                                        JsonOut.setTipoSmell("JAVA");
+                                        JsonOut.setLinha(campos.getRange().get().begin.toString());
+                                        JsonOut.setArquivo(nomeArquivo);
+                                        ListJsonSmell.add(JsonOut);
+                                    }
+                                });
+
+                            });
+                        });
+                    }
+                });
+            }
+
+            JsonOut.saveJson(ListJsonSmell,"NotFragment.json");
+
+
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+        }
+    }
+
     public static void ObtemImagensList(File directory) {
         if(directory.isDirectory()) {
             if(directory.getPath().contains("mipmap")){

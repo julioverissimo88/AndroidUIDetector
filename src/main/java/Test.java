@@ -87,6 +87,8 @@ public class Test {
 
             //Trashold.DeepNestedLayout("C:\\\\Users\\\\julio\\\\Desktop\\\\codigos\\\\layout\\\\");
 
+            ImportantSmells.NotFragment("C:\\Users\\julio\\Desktop\\codigos\\java\\SuspiciousBehavior\\");
+
              /*
             listar2(new File("C:\\Users\\julio\\Desktop\\codigos\\Calculator\\mobile\\"));
 

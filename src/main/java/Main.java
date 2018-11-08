@@ -53,6 +53,7 @@ public class Main {
                     AndroidDetector.ImportantSmells.FlexAdapter(caminho);           // Adapter Complexo
                     AndroidDetector.ImportantSmells.BrainUIComponent(caminho);     //Componente de Ui Cerebro
                     AndroidDetector.ImportantSmells.CompUIIO(caminho);            //Componente de UI fazendo IO
+                    AndroidDetector.ImportantSmells.NotFragment(caminho);        //Não Uso de Fragments
                 }
             }
         }
