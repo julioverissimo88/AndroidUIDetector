@@ -87,7 +87,11 @@ public class Test {
 
             //Trashold.DeepNestedLayout("C:\\\\Users\\\\julio\\\\Desktop\\\\codigos\\\\layout\\\\");
 
-            ImportantSmells.NotFragment("C:\\Users\\julio\\Desktop\\codigos\\java\\SuspiciousBehavior\\");
+            //ImportantSmells.NotFragment("C:\\Users\\julio\\Desktop\\codigos\\java\\SuspiciousBehavior\\");
+
+            Trashold.DeepNestedLayout("C:\\Users\\julio\\Desktop\\codigos\\");
+            Trashold.GodStyleResource("C:\\Users\\julio\\Desktop\\codigos\\");
+            Trashold.ExcessiveFragment("C:\\Users\\julio\\Desktop\\codigos\\");
 
              /*
             listar2(new File("C:\\Users\\julio\\Desktop\\codigos\\Calculator\\mobile\\"));

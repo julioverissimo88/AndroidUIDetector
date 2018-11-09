@@ -23,9 +23,7 @@ import sun.rmi.runtime.NewThreadAction;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FilenameFilter;
+import java.io.*;
 import java.util.*;
 import UTIL.ReusoStringData;
 
@@ -1016,6 +1014,47 @@ public class ImportantSmells {
         catch(Exception ex){
             ex.printStackTrace();
         }
+    }
+
+    public static void ExcessiveFragment(String pathApp, long threshold) throws IOException {
+        arquivosAnalise.clear();
+        listar(new File(pathApp),JAVA);
+        long totalFragments = 0;
+        List<ReusoStringData> listaExcessiveFragment = new ArrayList<ReusoStringData>();
+
+        for (int cont = 0; cont < arquivosAnalise.toArray().length; cont++) {
+
+            //System.out.println("Arquivo analisado:" + arquivosAnalise.toArray()[cont]);
+            //System.out.println("---------------------------------------------------------------------------------------");
+
+            File f = new File(arquivosAnalise.toArray()[cont].toString());
+            CompilationUnit cu = JavaParser.parse(f);
+
+            ArrayList<ClassOrInterfaceDeclaration> classes = new ArrayList<ClassOrInterfaceDeclaration>();
+            NodeList<TypeDeclaration<?>> types = cu.getTypes();
+            for (int i = 0; i < types.size(); i++) {
+                classes.add((ClassOrInterfaceDeclaration) types.get(i));
+            }
+
+            for (ClassOrInterfaceDeclaration classe : classes) {
+                NodeList<ClassOrInterfaceType> implementacoes = classe.getExtendedTypes();
+                if(implementacoes.size() != 0){
+                    for (ClassOrInterfaceType implementacao : implementacoes) {
+                        if (implementacao.getName().getIdentifier().contains("Fragment")) {
+                            totalFragments = totalFragments +1;
+                        }
+                    }
+                }
+            }
+
+            if(totalFragments > threshold){
+                System.out.println("Uso Excessivo de Fragment " + "(Mais de " + threshold + " Fragments no aplicativo)");
+                JsonOut.setTipoSmell("XML");
+                JsonOut.setArquivo("");
+                ListJsonSmell.add(JsonOut);
+            }
+        }
+
     }
 
 
