@@ -57,25 +57,30 @@ public class Trashold {
             System.out.println("arquivo" + ";" + "Níveis");
 
             for (int cont = 0; cont < arquivosAnalise.toArray().length; cont++) {
-                //System.out.println("Arquivo analisado:" + arquivosAnalise.toArray()[cont]);
-                //System.out.println("---------------------------------------------------------------------------------------");
-                arquivo_analisado = arquivosAnalise.toArray()[cont].toString();
-
-                File f = new File(arquivosAnalise.toArray()[cont].toString());
-
-                //LER TODA A ESTRUTURA DO XML
-                Document d = sb.build(f);
-
-                if (arquivosAnalise.toArray()[cont].toString().contains("\\layout\\")) {
-                    //ACESSAR O ROOT ELEMENT
-                    Element rootElmnt = d.getRootElement();
-
-                    //BUSCAR ELEMENTOS FILHOS DA TAG
-                    List elements = rootElmnt.getChildren();
-
-                    recursiveChildrenElement(elements);
-
+                try {
+                    //System.out.println("Arquivo analisado:" + arquivosAnalise.toArray()[cont]);
                     //System.out.println("---------------------------------------------------------------------------------------");
+                    arquivo_analisado = arquivosAnalise.toArray()[cont].toString();
+
+                    File f = new File(arquivosAnalise.toArray()[cont].toString());
+
+                    //LER TODA A ESTRUTURA DO XML
+                    Document d = sb.build(f);
+
+                    if (arquivosAnalise.toArray()[cont].toString().contains("\\layout\\")) {
+                        //ACESSAR O ROOT ELEMENT
+                        Element rootElmnt = d.getRootElement();
+
+                        //BUSCAR ELEMENTOS FILHOS DA TAG
+                        List elements = rootElmnt.getChildren();
+
+                        recursiveChildrenElement(elements);
+
+                        //System.out.println("---------------------------------------------------------------------------------------");
+
+                    }
+                }
+                catch(Exception ex){
 
                 }
             }
@@ -107,22 +112,25 @@ public class Trashold {
 
     private static void recursiveChildrenElement(List elements) {
         for (int i = 0; i < elements.size(); i++) {
+            try {
+                org.jdom2.Element el = (org.jdom2.Element) elements.get(i);
+                List SubElements = el.getChildren();
 
-            org.jdom2.Element el = (org.jdom2.Element) elements.get(i);
-            List SubElements = el.getChildren();
+                if (SubElements.size() > 0) {
+                    qtdSubelementos = qtdSubelementos + 1;
+                    recursiveChildrenElement(SubElements);
+                } else {
+                    System.out.println(arquivo_analisado + ";" + qtdSubelementos);
+                    ReusoStringData data = new ReusoStringData();
+                    data.arquivo = arquivo_analisado;
+                    data.strString = qtdSubelementos + "";
 
-            if (SubElements.size() > 0) {
-                qtdSubelementos = qtdSubelementos + 1;
-                recursiveChildrenElement(SubElements);
+                    listaDeepNested.add(data);
+                    qtdSubelementos = 0;
+                }
             }
-            else{
-                System.out.println(arquivo_analisado + ";" + qtdSubelementos);
-                ReusoStringData data = new ReusoStringData();
-                data.arquivo = arquivo_analisado;
-                data.strString = qtdSubelementos + "";
+            catch(Exception ex){
 
-                listaDeepNested.add(data);
-                qtdSubelementos = 0;
             }
         }
     }
@@ -137,23 +145,28 @@ public class Trashold {
             System.out.println("arquivo" + ";" + "Qtd Stilos");
 
             for (int cont = 0; cont < (arquivosAnalise.toArray().length - 1); cont++) {
-                arquivo_analisado = arquivosAnalise.toArray()[cont].toString();
-                File f = new File(arquivosAnalise.toArray()[cont].toString());
+                try {
+                    arquivo_analisado = arquivosAnalise.toArray()[cont].toString();
+                    File f = new File(arquivosAnalise.toArray()[cont].toString());
 
-                //LER TODA A ESTRUTURA DO XML
-                Document d = sb.build(f);
+                    //LER TODA A ESTRUTURA DO XML
+                    Document d = sb.build(f);
 
-                if(d.getRootElement().getChildren().size() > 0) {
-                    if (d.getRootElement().getChildren().get(0).getName() == "style") {
-                        //qtdFilesStyle = qtdFilesStyle + 1;
-                        //System.out.println(arquivosAnalise.toArray()[cont]);
-                        ReusoStringData data = new ReusoStringData();
-                        data.arquivo = arquivo_analisado;
-                        data.strString = d.getRootElement().getChildren().size() + "";
+                    if (d.getRootElement().getChildren().size() > 0) {
+                        if (d.getRootElement().getChildren().get(0).getName() == "style") {
+                            //qtdFilesStyle = qtdFilesStyle + 1;
+                            //System.out.println(arquivosAnalise.toArray()[cont]);
+                            ReusoStringData data = new ReusoStringData();
+                            data.arquivo = arquivo_analisado;
+                            data.strString = d.getRootElement().getChildren().size() + "";
 
-                        lista.add(data);
-                        System.out.println(arquivo_analisado + ";" + d.getRootElement().getChildren().size());
+                            lista.add(data);
+                            System.out.println(arquivo_analisado + ";" + d.getRootElement().getChildren().size());
+                        }
                     }
+                }
+                catch(Exception ex){
+
                 }
             }
 
@@ -188,37 +201,42 @@ public class Trashold {
         List<ReusoStringData> listaExcessiveFragment = new ArrayList<ReusoStringData>();
 
         for (int cont = 0; cont < arquivosAnalise.toArray().length; cont++) {
-            arquivo_analisado = arquivosAnalise.toArray()[cont].toString();
-            //System.out.println("Arquivo analisado:" + arquivosAnalise.toArray()[cont]);
-            //System.out.println("---------------------------------------------------------------------------------------");
+            try {
+                arquivo_analisado = arquivosAnalise.toArray()[cont].toString();
+                //System.out.println("Arquivo analisado:" + arquivosAnalise.toArray()[cont]);
+                //System.out.println("---------------------------------------------------------------------------------------");
 
-            File f = new File(arquivosAnalise.toArray()[cont].toString());
-            CompilationUnit cu = JavaParser.parse(f);
+                File f = new File(arquivosAnalise.toArray()[cont].toString());
+                CompilationUnit cu = JavaParser.parse(f);
 
-            ArrayList<ClassOrInterfaceDeclaration> classes = new ArrayList<ClassOrInterfaceDeclaration>();
-            NodeList<TypeDeclaration<?>> types = cu.getTypes();
-            for (int i = 0; i < types.size(); i++) {
-                classes.add((ClassOrInterfaceDeclaration) types.get(i));
-            }
+                ArrayList<ClassOrInterfaceDeclaration> classes = new ArrayList<ClassOrInterfaceDeclaration>();
+                NodeList<TypeDeclaration<?>> types = cu.getTypes();
+                for (int i = 0; i < types.size(); i++) {
+                    classes.add((ClassOrInterfaceDeclaration) types.get(i));
+                }
 
-            for (ClassOrInterfaceDeclaration classe : classes) {
-                NodeList<ClassOrInterfaceType> implementacoes = classe.getExtendedTypes();
-                if(implementacoes.size() != 0){
-                    for (ClassOrInterfaceType implementacao : implementacoes) {
-                        if (implementacao.getName().getIdentifier().contains("Fragment")) {
-                            totalFragments = totalFragments +1;
+                for (ClassOrInterfaceDeclaration classe : classes) {
+                    NodeList<ClassOrInterfaceType> implementacoes = classe.getExtendedTypes();
+                    if (implementacoes.size() != 0) {
+                        for (ClassOrInterfaceType implementacao : implementacoes) {
+                            if (implementacao.getName().getIdentifier().contains("Fragment")) {
+                                totalFragments = totalFragments + 1;
+                            }
                         }
                     }
                 }
+                ReusoStringData data = new ReusoStringData();
+                data.arquivo = arquivo_analisado;
+                data.strString = totalFragments + "";
+
+                listaExcessiveFragment.add(data);
+
+                System.out.println(arquivo_analisado + ";" + totalFragments);
+                totalFragments = 0;
             }
-            ReusoStringData data = new ReusoStringData();
-            data.arquivo = arquivo_analisado;
-            data.strString = totalFragments + "";
+            catch(Exception ex){
 
-            listaExcessiveFragment.add(data);
-
-            System.out.println(arquivo_analisado + ";" + totalFragments);
-            totalFragments = 0;
+            }
         }
 
         File file = new File("C:\\Detector\\TrasholdExcessiveFragment.csv");
