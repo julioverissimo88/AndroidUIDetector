@@ -13,13 +13,13 @@ import com.github.javaparser.ast.type.ClassOrInterfaceType;
 import com.github.javaparser.ast.type.Type;
 
 import java.io.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.input.SAXBuilder;
-
-
 
 public class Test {
 
@@ -29,7 +29,6 @@ public class Test {
     public static  Boolean classeValida = true;
     private  static List<OutputSmells> ListSmells = new ArrayList<OutputSmells>();
     private  static List<String> FilesIMG = new ArrayList<String>();
-
 
     public static void listar(File directory,String tipo) {
         if(directory.isDirectory()) {
@@ -53,7 +52,8 @@ public class Test {
             }
         }
     }
-
+    
+    
     public static void main(String[] args) {
         try {
             //Brain Component
@@ -89,123 +89,94 @@ public class Test {
 
             //ImportantSmells.NotFragment("C:\\Users\\julio\\Desktop\\codigos\\java\\SuspiciousBehavior\\");
 
-            Trashold.DeepNestedLayout("C:\\Users\\julio\\Desktop\\Repositorio01\\Repositorio01");
-            Trashold.GodStyleResource("C:\\Users\\julio\\Desktop\\Repositorio01\\Repositorio01");
-            Trashold.ExcessiveFragment("C:\\Users\\julio\\Desktop\\Repositorio01\\Repositorio01");
+            //Trashold.DeepNestedLayout("C:\\Users\\julio\\Desktop\\Repositorio01\\Repositorio01");
+            //Trashold.GodStyleResource("C:\\Users\\julio\\Desktop\\Repositorio01\\Repositorio01");
 
-             /*
-            listar2(new File("C:\\Users\\julio\\Desktop\\codigos\\Calculator\\mobile\\"));
-
-            FilesIMG.forEach(caminho->{
-                File directory = new File(caminho);
-                for(File arquivo : directory.listFiles()){
-                    FilesIMG.forEach(item->{
-
-                            File arquivoImg = new File(item + "\\" + arquivo.getName());
-
-                            if (!arquivoImg.exists()) {
-                                System.out.println("Imagem Faltante detectado " + arquivo.getName() + " para pasta " + item);
-                                //System.out.println(arquivoImg.length());
-                            }
-                            else if((arquivo.length() != arquivoImg.length())){
-                                System.out.println("Imagem Faltante detectado (Imagem existe porem a resolução é incompatível) " + arquivo.getName() + " para pasta " + item);
-                            }
-
-                    });
-                    //System.out.println(arquivo.getName());
-                }
-            });
-            */
+            //Trashold.ExcessiveFragment("C:\\Users\\julio\\Desktop\\Repositorio01\\Repositorio01");
 
 
+            long inicio = System.currentTimeMillis();
+            System.out.println(new SimpleDateFormat("HH:mm:ss").format(new Date(inicio)));
+
+            File fileCsv = new File("C:\\Detector\\AnaliseFinal.csv");
+
+            // creates the file
+            fileCsv.createNewFile();
+            FileWriter writer = new FileWriter(fileCsv);
+            writer.append("Aplicativo" + ";" + "DeepNestedLayout" + ";" + "DuplicateStyleAttributes" + ";" + "GodStyleResource" + ";" + "HideListener" + ";" + "magicResource" + ";" + "BadStringResource" + ";" + "reusoInadequadoDeString" + ";" + "NotFoundImage" + ";" + "CoupledUIComponent" + ";" + "SuspiciousBehavior" + ";" + "FlexAdapter" + ";" + "BrainUIComponent" + ";" + "CompUIIO" + ";" + "NotFragment" + ";" + "ExcessiveFragment"+ ";" + "FoolAdapter");
+            writer.append("\n");
+
+
+            File file = new File("C:\\Users\\julio\\Desktop\\Repositorio01\\Repositorio01");
+            File afile[] = file.listFiles();
+
+            for(int j = 0; j< afile.length; j++) {
+                File f = new File(afile[j].toString());
+                ImportantSmells.carregaArquivosXMLAnalise(f);
+                
+                System.out.println();
+                System.out.println();
+                System.out.println(f.getName() + " - " + j);
+                System.out.println();
+                System.out.println();
+                String caminho = afile[j].toString();
+
+
+                String app = f.getName();
+                long totalDeepNested = AndroidDetector.ImportantSmells.DeepNestedLayout(caminho, 4);
+                long totalDuplicateStyleAttributes = AndroidDetector.ImportantSmells.DuplicateStyleAttributes(caminho);
+                long totalGodStyleResource = AndroidDetector.ImportantSmells.GodStyleResource(caminho,11);
+                long totalHideListener = AndroidDetector.ImportantSmells.HideListener(caminho);
+                long totalmagicResource = AndroidDetector.ImportantSmells.magicResource(caminho);
+                long totalBadStringResource = AndroidDetector.ImportantSmells.BadStringResource(caminho);
+                long totalreusoInadequadoDeString = AndroidDetector.ImportantSmells.reusoInadequadoDeString(caminho);
+                long totalNotFoundImage = AndroidDetector.ImportantSmells.NotFoundImage(caminho);
+
+                //analise de codigo java
+                ImportantSmells.carregaArquivosJAVAAnalise(f);
+
+                long totalCoupledUIComponent = AndroidDetector.ImportantSmells.CoupledUIComponent(caminho);
+                long totalSuspiciousBehavior = AndroidDetector.ImportantSmells.SuspiciousBehavior(caminho);
+                long totalFoolAdapter = AndroidDetector.ImportantSmells.FoolAdapter(caminho);
+                long totalFlexAdapter = AndroidDetector.ImportantSmells.FlexAdapter(caminho);
+                long totalBrainUIComponent = AndroidDetector.ImportantSmells.BrainUIComponent(caminho);
+                long totalCompUIIO = AndroidDetector.ImportantSmells.CompUIIO(caminho);
+                long totalNotFragment = AndroidDetector.ImportantSmells.NotFragment(caminho);
+                long totalExcessiveFragment = AndroidDetector.ImportantSmells.ExcessiveFragment(caminho,10);
+
+                writer.append(
+                        app + ";" +
+                        totalDeepNested + ";" +
+                        totalDuplicateStyleAttributes  + ";" +
+                        totalGodStyleResource + ";" +
+                        totalHideListener + ";" +
+                        totalmagicResource + ";" +
+                        totalBadStringResource + ";" +
+                        totalreusoInadequadoDeString + ";" +
+                        totalNotFoundImage + ";" +
+                        totalCoupledUIComponent + ";" +
+                        totalSuspiciousBehavior + ";" +
+                        totalFlexAdapter + ";" +
+                        totalBrainUIComponent + ";" +
+                        totalCompUIIO + ";" +
+                        totalNotFragment + ";" +
+                        totalExcessiveFragment + ";" +
+                        totalFoolAdapter + ";"
+                );
+
+
+
+                writer.append("\n");
+            }
+
+            writer.flush();
+            writer.close();
+
+            long fim  = System.currentTimeMillis();
+            System.out.println( new SimpleDateFormat("HH:mm:ss").format(new Date(inicio - fim)));     
         }
         catch(Exception ex){
             ex.printStackTrace();
         }
-    }
-
-    public static void listar2(File directory) {
-        if(directory.isDirectory()) {
-            if(directory.getPath().contains("mipmap")){
-                //System.out.println(directory.getPath());
-                FilesIMG.add(directory.getPath());
-            }
-
-            String[] subDirectory = directory.list();
-            if(subDirectory != null) {
-                for(String dir : subDirectory){
-                    listar2(new File(directory + File.separator  + dir));
-                }
-            }
-        }
-    }
-
-    public static void NotFoundImage(String pathApp){
-        listar2(new File("C:\\Users\\julio\\Desktop\\codigos\\Calculator"));
-    }
-
-
-
-    public static void CoupledUIComponent(String pathApp) throws FileNotFoundException {
-        ListSmells.clear();
-        arquivosAnalise.clear();
-        listar(new File(pathApp),JAVA);
-
-        for (int cont = 0; cont < arquivosAnalise.toArray().length; cont++) {
-            classeValida = true;
-            String nomeArquivo = arquivosAnalise.toArray()[cont].toString();
-            System.out.println("Arquivo analisado:" + arquivosAnalise.toArray()[cont]);
-            System.out.println("---------------------------------------------------------------------------------------");
-
-            File f = new File(arquivosAnalise.toArray()[cont].toString());
-            CompilationUnit cu = JavaParser.parse(f);
-
-            ArrayList<ClassOrInterfaceDeclaration> classes = new ArrayList<ClassOrInterfaceDeclaration>();
-            NodeList<TypeDeclaration<?>> types = cu.getTypes();
-            for (int i = 0; i < types.size(); i++) {
-                classes.add((ClassOrInterfaceDeclaration) types.get(i));
-            }
-
-            for (ClassOrInterfaceDeclaration classe : classes) {
-                NodeList<ClassOrInterfaceType> implementacoes = classe.getExtendedTypes();
-                if(implementacoes.size() != 0){
-                    for (ClassOrInterfaceType implementacao : implementacoes) {
-                        if (implementacao.getName().getIdentifier().contains("Activity") || implementacao.getName().getIdentifier().contains("Adapter")) {
-                            classeValida  = true;
-                        }
-                    }
-                }
-                else{
-                    classeValida  = false;
-                }
-            }
-
-            //Se não for válida activity entre outros pula o laço para o próximo arquivo
-            if(!classeValida){
-                continue;
-            }
-
-            for (TypeDeclaration<?> typeDec : cu.getTypes()) {
-                //System.out.println(typeDec.getName().toString());
-                for (BodyDeclaration<?> member : typeDec.getMembers()) {
-                    if(member.isMethodDeclaration()) {
-                        MethodDeclaration field = (MethodDeclaration) member;
-
-                        field.findAll(MethodDeclaration.class).forEach(item-> {
-                            //System.out.println(item);
-                            item.getChildNodes().forEach(sub ->{
-                                sub.findAll(MethodDeclaration.class).forEach(i->{
-                                    System.out.println("Comportamento suspeito detectado  - " + i.getName() + " - " + i.getRange().get().begin);
-                                });
-                            });
-                        });
-
-                        if(field.getNameAsString().equals("onCreateView") || field.getNameAsString().equals("onActivityCreated")){
-                            //System.out.println("Coupled UI Component  - " + field.getRange());
-                        }
-                    }
-                }
-            }
-        }
-    }
+    }   
 }

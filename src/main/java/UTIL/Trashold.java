@@ -195,55 +195,69 @@ public class Trashold {
 
 
     public static void ExcessiveFragment(String pathApp) throws IOException {
-        arquivosAnalise.clear();
-        listar(new File(pathApp),JAVA);
+
         long totalFragments = 0;
         List<ReusoStringData> listaExcessiveFragment = new ArrayList<ReusoStringData>();
 
-        for (int cont = 0; cont < arquivosAnalise.toArray().length; cont++) {
-            try {
-                arquivo_analisado = arquivosAnalise.toArray()[cont].toString();
-                //System.out.println("Arquivo analisado:" + arquivosAnalise.toArray()[cont]);
-                //System.out.println("---------------------------------------------------------------------------------------");
+        File file = new File(pathApp);
+        File afile[] = file.listFiles();
 
-                File f = new File(arquivosAnalise.toArray()[cont].toString());
-                CompilationUnit cu = JavaParser.parse(f);
+        for(int j = 0; j< afile.length; j++){
+            //System.out.println(afile[j]);
+            arquivosAnalise.clear();
 
-                ArrayList<ClassOrInterfaceDeclaration> classes = new ArrayList<ClassOrInterfaceDeclaration>();
-                NodeList<TypeDeclaration<?>> types = cu.getTypes();
-                for (int i = 0; i < types.size(); i++) {
-                    classes.add((ClassOrInterfaceDeclaration) types.get(i));
-                }
+            listar(new File(afile[j].toString()),JAVA);
 
-                for (ClassOrInterfaceDeclaration classe : classes) {
-                    NodeList<ClassOrInterfaceType> implementacoes = classe.getExtendedTypes();
-                    if (implementacoes.size() != 0) {
-                        for (ClassOrInterfaceType implementacao : implementacoes) {
-                            if (implementacao.getName().getIdentifier().contains("Fragment")) {
-                                totalFragments = totalFragments + 1;
+            for (int cont = 0; cont < arquivosAnalise.toArray().length; cont++) {
+                try {
+                    arquivo_analisado = arquivosAnalise.toArray()[cont].toString();
+                    //System.out.println("Arquivo analisado:" + arquivosAnalise.toArray()[cont]);
+                    //System.out.println("---------------------------------------------------------------------------------------");
+
+                    File f = new File(arquivosAnalise.toArray()[cont].toString());
+                    CompilationUnit cu = JavaParser.parse(f);
+
+                    ArrayList<ClassOrInterfaceDeclaration> classes = new ArrayList<ClassOrInterfaceDeclaration>();
+                    NodeList<TypeDeclaration<?>> types = cu.getTypes();
+                    for (int i = 0; i < types.size(); i++) {
+                        classes.add((ClassOrInterfaceDeclaration) types.get(i));
+                    }
+
+                    for (ClassOrInterfaceDeclaration classe : classes) {
+                        NodeList<ClassOrInterfaceType> implementacoes = classe.getExtendedTypes();
+                        if (implementacoes.size() != 0) {
+                            for (ClassOrInterfaceType implementacao : implementacoes) {
+                                if (implementacao.getName().getIdentifier().contains("Fragment")) {
+                                    totalFragments = totalFragments + 1;
+                                }
                             }
                         }
                     }
+
                 }
-                ReusoStringData data = new ReusoStringData();
-                data.arquivo = arquivo_analisado;
-                data.strString = totalFragments + "";
+                catch(Exception ex){
 
-                listaExcessiveFragment.add(data);
-
-                System.out.println(arquivo_analisado + ";" + totalFragments);
-                totalFragments = 0;
+                }
             }
-            catch(Exception ex){
 
-            }
+            ReusoStringData data = new ReusoStringData();
+            data.arquivo = afile[j].toString();
+            data.strString = totalFragments + "";
+
+            listaExcessiveFragment.add(data);
+
+            System.out.println(arquivo_analisado + ";" + totalFragments);
+            totalFragments = 0;
         }
 
-        File file = new File("C:\\Detector\\TrasholdExcessiveFragment.csv");
+
+
+
+        File fileCsv = new File("C:\\Detector\\TrasholdExcessiveFragment.csv");
 
         // creates the file
-        file.createNewFile();
-        FileWriter writer = new FileWriter(file);
+        fileCsv.createNewFile();
+        FileWriter writer = new FileWriter(fileCsv);
         writer.append("arquivo" + ";" + "Qtd Fragment");
         writer.append("\n");
 
@@ -255,6 +269,7 @@ public class Trashold {
 
         writer.flush();
         writer.close();
+
 
     }
 

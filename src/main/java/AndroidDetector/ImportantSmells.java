@@ -38,7 +38,11 @@ public class ImportantSmells {
     private static File diretorio = null;
     private static SAXBuilder sb = new SAXBuilder();
     public static  Boolean classeValida = true;
+
+    public static List<File> ListArquivosAnaliseXML =  new ArrayList<File>();
+    public static List<File> ListArquivosAnaliseJava =  new ArrayList<File>();
     public static List<File> arquivosAnalise =  new ArrayList<File>();
+
     public static final String JAVA = ".java";
     public static final String XML = ".xml";
     private static OutputSmells JsonOut = new  OutputSmells();
@@ -46,6 +50,19 @@ public class ImportantSmells {
     private  static List<OutputSmells> ListSmells = new ArrayList<OutputSmells>();
     private static List<ReusoStringData> textStringArquivo = new ArrayList<ReusoStringData>();
     private  static List<String> FilesIMG = new ArrayList<String>();
+    private static long totalSmells = 0;
+
+    public static void carregaArquivosXMLAnalise(File directory){
+        arquivosAnalise.clear();
+        listar(directory,XML);
+        ListArquivosAnaliseXML = arquivosAnalise;
+    }
+
+    public static void carregaArquivosJAVAAnalise(File directory){
+        arquivosAnalise.clear();
+        listar(directory,JAVA);
+        ListArquivosAnaliseJava = arquivosAnalise;
+    }
 
     public static void listar(File directory,String tipo) {
         if(directory.isDirectory()) {
@@ -71,19 +88,21 @@ public class ImportantSmells {
     }
 
     //Componente de UI Fazendo IO
-    public static void CompUIIO(String pathApp){
+    public static long CompUIIO(String pathApp){
         try {
-            arquivosAnalise.clear();
-            listar(new File(pathApp),JAVA);
+            //arquivosAnalise.clear();
+            totalSmells = 0;
 
-            for (int cont = 0; cont < arquivosAnalise.toArray().length; cont++) {
+            //listar(new File(pathApp),JAVA);
+
+            for (int cont = 0; cont < ListArquivosAnaliseJava.toArray().length; cont++) {
                     try
                     {
-                        System.out.println("Arquivo analisado:" + arquivosAnalise.toArray()[cont]);
-                        String nomeArquivo = arquivosAnalise.toArray()[cont].toString();
+                        System.out.println("Arquivo analisado:" + ListArquivosAnaliseJava.toArray()[cont]);
+                        String nomeArquivo = ListArquivosAnaliseJava.toArray()[cont].toString();
                         System.out.println("---------------------------------------------------------------------------------------");
 
-                        File f = new File(arquivosAnalise.toArray()[cont].toString());
+                        File f = new File(ListArquivosAnaliseJava.toArray()[cont].toString());
                         CompilationUnit cUnit = JavaParser.parse(f);
 
                         cUnit.findAll(ClassOrInterfaceDeclaration.class).forEach(classe -> {
@@ -98,6 +117,7 @@ public class ImportantSmells {
                                         JsonOut.setLinha(campos.getRange().get().begin.toString());
                                         JsonOut.setArquivo(nomeArquivo);
                                         ListJsonSmell.add(JsonOut);
+                                        totalSmells++;
                                     }
                                 });
 
@@ -112,6 +132,7 @@ public class ImportantSmells {
                                             JsonOut.setLinha(metodo.getRange().get().begin.toString());
                                             JsonOut.setArquivo(nomeArquivo);
                                             ListJsonSmell.add(JsonOut);
+                                            totalSmells++;
                                         }
 
                                         //Procura Libs de IO no TIPO em retorno  de MÃ©todos
@@ -122,6 +143,7 @@ public class ImportantSmells {
                                             JsonOut.setLinha(metodo.getRange().get().begin.toString());
                                             JsonOut.setArquivo(nomeArquivo);
                                             ListJsonSmell.add(JsonOut);
+                                            totalSmells++;
                                         }
 
                                         //Procura Libs IO no TIPO  em declaraÃ§Ã£o de campos
@@ -133,6 +155,7 @@ public class ImportantSmells {
                                                 JsonOut.setLinha(campos.getRange().get().begin.toString());
                                                 JsonOut.setArquivo(nomeArquivo);
                                                 ListJsonSmell.add(JsonOut);
+                                                totalSmells++;
                                             }
                                         });
                                     });
@@ -141,33 +164,37 @@ public class ImportantSmells {
                         });
                     }
                     catch(Exception ex){
-
+                        ex.printStackTrace();
                     }
             }
 
             JsonOut.saveJson(ListJsonSmell,"UIIOComponent.json");
 
+
         }
         catch(Exception ex){
             ex.printStackTrace();
         }
+
+        return totalSmells;
     }
 
 
-    public static void CoupledUIComponent(String pathApp) throws FileNotFoundException {
+    public static long CoupledUIComponent(String pathApp) throws FileNotFoundException {
         ListSmells.clear();
-        arquivosAnalise.clear();
-        listar(new File(pathApp),JAVA);
+        //arquivosAnalise.clear();
+        totalSmells = 0;
+        //listar(new File(pathApp),JAVA);
 
-        for (int cont = 0; cont < arquivosAnalise.toArray().length; cont++) {
+        for (int cont = 0; cont < ListArquivosAnaliseJava.toArray().length; cont++) {
             try {
                 classeValida = true;
-                String nomeArquivo = arquivosAnalise.toArray()[cont].toString();
-                System.out.println("Arquivo analisado:" + arquivosAnalise.toArray()[cont]);
+                String nomeArquivo = ListArquivosAnaliseJava.toArray()[cont].toString();
+                System.out.println("Arquivo analisado:" + ListArquivosAnaliseJava.toArray()[cont]);
 
                 System.out.println("---------------------------------------------------------------------------------------");
 
-                File f = new File(arquivosAnalise.toArray()[cont].toString());
+                File f = new File(ListArquivosAnaliseJava.toArray()[cont].toString());
                 CompilationUnit cu = JavaParser.parse(f);
 
                 ArrayList<ClassOrInterfaceDeclaration> classes = new ArrayList<ClassOrInterfaceDeclaration>();
@@ -188,6 +215,7 @@ public class ImportantSmells {
                                         JsonOut.setTipoSmell("JAVA");
                                         JsonOut.setArquivo(nomeArquivo);
                                         ListJsonSmell.add(JsonOut);
+                                        totalSmells++;
                                     }
                                 });
 
@@ -200,6 +228,7 @@ public class ImportantSmells {
                                             JsonOut.setLinha(metodo.getRange().get().begin.toString());
                                             JsonOut.setArquivo(nomeArquivo);
                                             ListJsonSmell.add(JsonOut);
+                                            totalSmells++;
                                         }
                                     });
                                 });
@@ -214,6 +243,7 @@ public class ImportantSmells {
                                         JsonOut.setLinha(metodo.getRange().get().begin.toString());
                                         JsonOut.setArquivo(nomeArquivo);
                                         ListJsonSmell.add(JsonOut);
+                                        totalSmells++;
                                     }
 
                                     //Procura Libs de IO no TIPO em retorno  de MÃ©todos
@@ -224,6 +254,7 @@ public class ImportantSmells {
                                         JsonOut.setLinha(metodo.getRange().get().begin.toString());
                                         JsonOut.setArquivo(nomeArquivo);
                                         ListJsonSmell.add(JsonOut);
+                                        totalSmells++;
                                     }
 
                                     //Procura Libs IO no TIPO  em declaraÃ§Ã£o de campos
@@ -235,6 +266,7 @@ public class ImportantSmells {
                                             JsonOut.setLinha(campos.getRange().get().begin.toString());
                                             JsonOut.setArquivo(nomeArquivo);
                                             ListJsonSmell.add(JsonOut);
+                                            totalSmells++;
                                         }
                                     });
 
@@ -246,27 +278,29 @@ public class ImportantSmells {
                 }
             }
             catch(Exception ex){
-
+                ex.printStackTrace();
             }
         }
         
         JsonOut.saveJson(ListJsonSmell,"CoupledUIComponent.json");
+        return totalSmells;
     }
 
 
-    public static void SuspiciousBehavior(String pathApp) throws FileNotFoundException {
+    public static long SuspiciousBehavior(String pathApp) throws FileNotFoundException {
         ListSmells.clear();
-        arquivosAnalise.clear();
-        listar(new File(pathApp),JAVA);
+        //arquivosAnalise.clear();
+        totalSmells = 0;
+        //listar(new File(pathApp),JAVA);
 
-        for (int cont = 0; cont < arquivosAnalise.toArray().length; cont++) {
+        for (int cont = 0; cont < ListArquivosAnaliseJava.toArray().length; cont++) {
             try {
                 classeValida = true;
-                String nomeArquivo = arquivosAnalise.toArray()[cont].toString();
-                System.out.println("Arquivo analisado:" + arquivosAnalise.toArray()[cont]);
+                String nomeArquivo = ListArquivosAnaliseJava.toArray()[cont].toString();
+                System.out.println("Arquivo analisado:" + ListArquivosAnaliseJava.toArray()[cont]);
                 System.out.println("---------------------------------------------------------------------------------------");
 
-                File f = new File(arquivosAnalise.toArray()[cont].toString());
+                File f = new File(ListArquivosAnaliseJava.toArray()[cont].toString());
                 CompilationUnit cu = JavaParser.parse(f);
 
                 ArrayList<ClassOrInterfaceDeclaration> classes = new ArrayList<ClassOrInterfaceDeclaration>();
@@ -289,6 +323,7 @@ public class ImportantSmells {
                                         JsonOut.setLinha(item.getRange().get().begin.toString());
                                         JsonOut.setArquivo(nomeArquivo);
                                         ListJsonSmell.add(JsonOut);
+                                        totalSmells++;
                                     }
 
                                 });
@@ -313,6 +348,11 @@ public class ImportantSmells {
                             item.getChildNodes().forEach(sub -> {
                                 sub.findAll(MethodDeclaration.class).forEach(i -> {
                                     System.out.println("Comportamento suspeito detectado  - " + i.getName() + " - " + i.getRange().get().begin);
+                                    JsonOut.setTipoSmell("JAVA");
+                                    JsonOut.setLinha(i.getRange().get().begin.toString());
+                                    JsonOut.setArquivo(nomeArquivo);
+                                    ListJsonSmell.add(JsonOut);
+                                    totalSmells++;
                                 });
                             });
                         });
@@ -325,6 +365,11 @@ public class ImportantSmells {
 
                                 if (variable.getType().toString().contains("Listener")) {
                                     System.out.println("Comportamento suspeito detectado  - " + variable.getType() + " - " + variable.getRange().get().begin);
+                                    JsonOut.setTipoSmell("JAVA");
+                                    JsonOut.setLinha(variable.getRange().get().begin.toString());
+                                    JsonOut.setArquivo(nomeArquivo);
+                                    ListJsonSmell.add(JsonOut);
+                                    totalSmells++;
                                 }
                                 //Print the field's name
                                 //System.out.println(variable.getName());
@@ -337,6 +382,7 @@ public class ImportantSmells {
                                         JsonOut.setLinha(initValue.getRange().get().begin.toString());
                                         JsonOut.setArquivo(nomeArquivo);
                                         ListJsonSmell.add(JsonOut);
+                                        totalSmells++;
                                     }
                                 });
                             }
@@ -345,27 +391,29 @@ public class ImportantSmells {
                 }
             }
             catch(Exception ex){
-
+                ex.printStackTrace();
             }
         }
 
         JsonOut.saveJson(ListJsonSmell,"SuspiciousBehavior.json");
+        return totalSmells;
     }
 
-    public static void BrainUIComponent(String pathApp) {
+    public static long BrainUIComponent(String pathApp) {
         try {
             ListSmells.clear();
-            arquivosAnalise.clear();
+            //arquivosAnalise.clear();
+            totalSmells = 0;
 
-            listar(new File(pathApp),JAVA);
+            //listar(new File(pathApp),JAVA);
 
-            for (int cont = 0; cont < arquivosAnalise.toArray().length; cont++) {
+            for (int cont = 0; cont < ListArquivosAnaliseJava.toArray().length; cont++) {
                 try {
-                    System.out.println("Arquivo analisado:" + arquivosAnalise.toArray()[cont]);
-                    String nomeArquivo = arquivosAnalise.toArray()[cont].toString();
+                    System.out.println("Arquivo analisado:" + ListArquivosAnaliseJava.toArray()[cont]);
+                    String nomeArquivo = ListArquivosAnaliseJava.toArray()[cont].toString();
                     System.out.println("---------------------------------------------------------------------------------------");
 
-                    File f = new File(arquivosAnalise.toArray()[cont].toString());
+                    File f = new File(ListArquivosAnaliseJava.toArray()[cont].toString());
                     CompilationUnit cUnit = JavaParser.parse(f);
 
                     cUnit.findAll(ClassOrInterfaceDeclaration.class).forEach(classe -> {
@@ -383,6 +431,7 @@ public class ImportantSmells {
                                         JsonOut.setLinha(item.getRange().get().begin.toString());
                                         JsonOut.setArquivo(nomeArquivo);
                                         ListJsonSmell.add(JsonOut);
+                                        totalSmells++;
                                     });
 
                                     membro.findAll(SwitchEntryStmt.class).forEach(item -> {
@@ -392,6 +441,7 @@ public class ImportantSmells {
                                         JsonOut.setLinha(item.getRange().get().begin.toString());
                                         JsonOut.setArquivo(nomeArquivo);
                                         ListJsonSmell.add(JsonOut);
+                                        totalSmells++;
                                     });
                                 }
                             }
@@ -405,6 +455,7 @@ public class ImportantSmells {
                                     JsonOut.setLinha(item.getRange().get().begin.toString());
                                     JsonOut.setArquivo(nomeArquivo);
                                     ListJsonSmell.add(JsonOut);
+                                    totalSmells++;
                                 }
                             });
 
@@ -417,6 +468,7 @@ public class ImportantSmells {
                                     JsonOut.setLinha(campos.getRange().get().begin.toString());
                                     JsonOut.setArquivo(nomeArquivo);
                                     ListJsonSmell.add(JsonOut);
+                                    totalSmells++;
                                 }
                             });
 
@@ -431,6 +483,7 @@ public class ImportantSmells {
                                         JsonOut.setLinha(metodo.getRange().get().begin.toString());
                                         JsonOut.setArquivo(nomeArquivo);
                                         ListJsonSmell.add(JsonOut);
+                                        totalSmells++;
                                     }
 
                                     //Procura Libs de IO no TIPO em retorno  de MÃ©todos
@@ -441,6 +494,7 @@ public class ImportantSmells {
                                         JsonOut.setLinha(metodo.getRange().get().begin.toString());
                                         JsonOut.setArquivo(nomeArquivo);
                                         ListJsonSmell.add(JsonOut);
+                                        totalSmells++;
                                     }
 
                                     //Procura Libs IO no TIPO  em declaraÃ§Ã£o de campos
@@ -452,6 +506,7 @@ public class ImportantSmells {
                                             JsonOut.setLinha(campos.getRange().get().begin.toString());
                                             JsonOut.setArquivo(nomeArquivo);
                                             ListJsonSmell.add(JsonOut);
+                                            totalSmells++;
                                         }
                                     });
 
@@ -461,7 +516,7 @@ public class ImportantSmells {
                     });
                 }
                 catch(Exception ex){
-
+                    ex.printStackTrace();
                 }
             }
 
@@ -471,21 +526,125 @@ public class ImportantSmells {
         catch(Exception ex){
             ex.printStackTrace();
         }
-    }
 
-    public static void FlexAdapter(String pathApp) {
+        return totalSmells;
+    }
+    
+    public static long FoolAdapter(String pathApp){
         try {
             ListSmells.clear();
-            arquivosAnalise.clear();
+            //arquivosAnalise.clear();
+            totalSmells = 0;           
 
-            listar(new File(pathApp),JAVA);
-
-            for (int cont = 0; cont < arquivosAnalise.toArray().length; cont++) {
-                try {
-                    System.out.println("Arquivo analisado:" + arquivosAnalise.toArray()[cont]);
+            for (int cont = 0; cont < ListArquivosAnaliseJava.toArray().length; cont++) {
+                try{
+                    System.out.println("Arquivo analisado:" + ListArquivosAnaliseJava.toArray()[cont]);
                     System.out.println("---------------------------------------------------------------------------------------");
-                    String arquivo = arquivosAnalise.toArray()[cont].toString();
-                    File f = new File(arquivosAnalise.toArray()[cont].toString());
+                    String arquivo = ListArquivosAnaliseJava.toArray()[cont].toString();
+                    File f = new File(ListArquivosAnaliseJava.toArray()[cont].toString());
+                    CompilationUnit compilationunit = JavaParser.parse(f);
+
+                    //Extrai cada Classe analisada pelo CompilationUnit
+                    ArrayList<ClassOrInterfaceDeclaration> classes = new ArrayList<ClassOrInterfaceDeclaration>();
+                    NodeList<TypeDeclaration<?>> types = compilationunit.getTypes();
+                    for (int i = 0; i < types.size(); i++) {
+                        classes.add((ClassOrInterfaceDeclaration) types.get(i));
+                    }
+
+                    //Para cada uma dessas classes, verifica se ela é um Adapter (ou seja, se ela extende de BaseAdapter).
+                    for (ClassOrInterfaceDeclaration classe : classes) {
+
+                        //Como a classe vai ser analisada ainda, não contém smells por enquanto
+                        Boolean isFoolAdapter = false;
+
+                        //Para ver se a classe é um Adapter, precisamos ver se ela extende de BaseAdapter
+                        //Pegamos todas as classes que ela implementa
+                        NodeList<ClassOrInterfaceType> implementacoes = classe.getExtendedTypes();
+                        for (ClassOrInterfaceType implementacao : implementacoes) {
+                            if (implementacao.getName().getIdentifier().equals("BaseAdapter")) {
+                                //Se chegou até aqui, temos certeza de que é um adapter.
+                                //Se a classe que extende do BaseAdapter tiver algum método que não seja sobrescrever um método de interface, é um FlexAdapter.
+                                //Pegamos todos os membros da classe
+                                NodeList<BodyDeclaration<?>> membros = classe.getMembers();
+                                //Verifica se o membro é um método
+                                for (BodyDeclaration<?> membro : membros)
+                                    if (membro.isMethodDeclaration()) {
+                                        MethodDeclaration metodo = (MethodDeclaration) membro;
+                                        //Verifica se este método chama getView
+                                        if (metodo.getName().getIdentifier().equals("getView")) {
+
+                                            //Pega o parametro do tipo View e armazena o nome dele
+                                            //Pode ser útil para verificar por findViewById dentro de laços
+                                            Parameter viewParameter = metodo.getParameter(1);
+                                            String nomeParametroView = viewParameter.getName().getIdentifier();
+
+                                            //Pega o bloco de declarações dentro método getView
+                                            BlockStmt body = metodo.getBody().get();
+                                            NodeList<Statement> statements = body.getStatements();
+
+                                            //Itera sobre as declarações até achar expressões
+                                            for (Statement statement : statements) {
+                                                if (statement.isExpressionStmt()) {
+                                                    //Se em alguma dessas expressões tiver o texto findViewById
+                                                    //Quer dizer que o ViewHolder não está sendo utilizado, o que caracteriza o smell
+                                                    if(statement.toString().contains("findViewById(")) {
+                                                        isFoolAdapter = true;
+                                                        JsonOut.setTipoSmell("JAVA");
+                                                        JsonOut.setLinha(statement.getRange().get().begin.toString());
+                                                        JsonOut.setArquivo(arquivo);
+                                                        ListJsonSmell.add(JsonOut);
+                                                        totalSmells++;
+                                                    }
+
+                                                    //Se ele infla um Layout em toda chamada ao getView, isso também caracteriza o smell
+                                                    if(statement.toString().contains("getLayoutInflater(")) {
+                                                        isFoolAdapter = true;
+                                                        JsonOut.setTipoSmell("JAVA");
+                                                        JsonOut.setLinha(statement.getRange().get().begin.toString());
+                                                        JsonOut.setArquivo(arquivo);
+                                                        ListJsonSmell.add(JsonOut);
+                                                        totalSmells++;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                            }
+                        }
+
+                        //Se a classe for um foolAdapter, imprime o erro na tela
+                        if (isFoolAdapter) {
+                            System.out.println("Fool Adapter detectado na classe " + classe.getName().getIdentifier());
+                        }
+                    }
+                }
+                catch(Exception ex){
+                    ex.printStackTrace();
+                }
+            }
+            JsonOut.saveJson(ListJsonSmell,"FoolAdapter.json");
+            return totalSmells;
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+            return totalSmells;
+        }  
+    }
+
+    public static long FlexAdapter(String pathApp) {
+        try {
+            ListSmells.clear();
+            //arquivosAnalise.clear();
+            totalSmells = 0;
+
+            //listar(new File(pathApp),JAVA);
+
+            for (int cont = 0; cont < ListArquivosAnaliseJava.toArray().length; cont++) {
+                try {
+                    System.out.println("Arquivo analisado:" + ListArquivosAnaliseJava.toArray()[cont]);
+                    System.out.println("---------------------------------------------------------------------------------------");
+                    String arquivo = ListArquivosAnaliseJava.toArray()[cont].toString();
+                    File f = new File(ListArquivosAnaliseJava.toArray()[cont].toString());
                     CompilationUnit compilationunit = JavaParser.parse(f);
 
                     //Extrai cada Classe analisada pelo CompilationUnit
@@ -518,6 +677,7 @@ public class ImportantSmells {
                                             JsonOut.setLinha(item.getRange().get().begin.toString());
                                             JsonOut.setArquivo(arquivo);
                                             ListJsonSmell.add(JsonOut);
+                                            totalSmells++;
                                         });
 
                                         membro.findAll(SwitchStmt.class).forEach(item -> {
@@ -527,6 +687,7 @@ public class ImportantSmells {
                                             JsonOut.setLinha(item.getRange().get().begin.toString());
                                             JsonOut.setArquivo(arquivo);
                                             ListJsonSmell.add(JsonOut);
+                                            totalSmells++;
                                         });
                                     }
                                 }
@@ -535,7 +696,7 @@ public class ImportantSmells {
                     }
                 }
                 catch(Exception ex){
-
+                    ex.printStackTrace();
                 }
             }
 
@@ -544,24 +705,27 @@ public class ImportantSmells {
         catch(Exception ex){
             ex.printStackTrace();
         }
+
+        return totalSmells;
     }
 
 
-    public static void GodStyleResource(String pathApp,int threshold) {
+    public static long GodStyleResource(String pathApp,int threshold) {
         try {
-            arquivosAnalise.clear();
+            //arquivosAnalise.clear();
             ListSmells.clear();
+            totalSmells = 0;
 
-            listar(new File(pathApp),XML);
+            //listar(new File(pathApp),XML);
             int qtdLimiteStilos = threshold;
             int qtdFilesStyle = 0;
 
-            for (int cont = 0; cont < (arquivosAnalise.toArray().length - 1); cont++) {
+            for (int cont = 0; cont < (ListArquivosAnaliseXML.toArray().length - 1); cont++) {
                 try {
                     //System.out.println("Arquivo analisado:" + arquivosAnalise.toArray()[cont]);
                     System.out.println("---------------------------------------------------------------------------------------");
 
-                    File f = new File(arquivosAnalise.toArray()[cont].toString());
+                    File f = new File(ListArquivosAnaliseXML.toArray()[cont].toString());
 
                     //LER TODA A ESTRUTURA DO XML
                     Document d = sb.build(f);
@@ -569,7 +733,7 @@ public class ImportantSmells {
                     if (d.getRootElement().getChildren().size() > 0) {
                         if (d.getRootElement().getChildren().get(0).getName() == "style") {
                             qtdFilesStyle = qtdFilesStyle + 1;
-                            System.out.println(arquivosAnalise.toArray()[cont]);
+                            System.out.println(ListArquivosAnaliseXML.toArray()[cont]);
                         }
                     }
 
@@ -578,12 +742,13 @@ public class ImportantSmells {
                         System.out.println("Longo recurso de Estilo detectado (existe apenas um arquivo para estilos no aplicativo que possui " + d.getRootElement().getChildren().size() + " estilos)");
                         System.out.println("---------------------------------------------------------------------------------------");
                         JsonOut.setTipoSmell("XML");
-                        JsonOut.setArquivo(arquivosAnalise.toArray()[cont].toString());
+                        JsonOut.setArquivo(ListArquivosAnaliseXML.toArray()[cont].toString());
                         ListJsonSmell.add(JsonOut);
+                        totalSmells++;
                     }
                 }
                 catch(Exception ex){
-
+                    ex.printStackTrace();
                 }
             }
 
@@ -592,24 +757,27 @@ public class ImportantSmells {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+
+        return totalSmells;
     }
 
     //Recurso de String BagunÃ§ado
-    public static void BadStringResource(String pathApp) {
+    public static long BadStringResource(String pathApp) {
         try {
-            arquivosAnalise.clear();
+            //arquivosAnalise.clear();
             ListSmells.clear();
+            totalSmells = 0;
 
-            listar(new File(pathApp),XML);
+            //listar(new File(pathApp),XML);
 
             int qtdFilesString = 0;
 
-            for (int cont = 0; cont < (arquivosAnalise.toArray().length - 1); cont++) {
+            for (int cont = 0; cont < (ListArquivosAnaliseXML.toArray().length - 1); cont++) {
                 try {
                     //System.out.println("Arquivo analisado:" + arquivosAnalise.toArray()[cont]);
                     System.out.println("---------------------------------------------------------------------------------------");
 
-                    File f = new File(arquivosAnalise.toArray()[cont].toString());
+                    File f = new File(ListArquivosAnaliseXML.toArray()[cont].toString());
 
                     //LER TODA A ESTRUTURA DO XML
                     Document d = sb.build(f);
@@ -622,15 +790,16 @@ public class ImportantSmells {
 
                     if ((qtdFilesString == 1)) {
                         //System.out.println("->"+arquivosAnalise.toArray()[cont].toString());
-                        System.out.println("Recurso de String BagunÃ§ado detectado (existe apenas um arquivo para strings no aplicativo  ");
+                        System.out.println("Recurso de String Bagunçado detectado (existe apenas um arquivo para strings no aplicativo  ");
                         System.out.println("---------------------------------------------------------------------------------------");
                         JsonOut.setTipoSmell("XML");
-                        JsonOut.setArquivo(arquivosAnalise.toArray()[cont].toString());
+                        JsonOut.setArquivo(ListArquivosAnaliseXML.toArray()[cont].toString());
                         ListJsonSmell.add(JsonOut);
+                        totalSmells++;
                     }
                 }
                 catch(Exception ex){
-
+                    ex.printStackTrace();
                 }
             }
 
@@ -639,28 +808,31 @@ public class ImportantSmells {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+
+        return totalSmells;
     }
 
 
 
-    public static void DeepNestedLayout(String pathApp, int threshold) {
+    public static long DeepNestedLayout(String pathApp, int threshold) {
         try {
-            arquivosAnalise.clear();
+            //arquivosAnalise.clear();
             ListSmells.clear();
+            totalSmells = 0;
 
-            listar(new File(pathApp),XML);
+            //listar(new File(pathApp),XML);
 
-            for (int cont = 0; cont < arquivosAnalise.toArray().length; cont++) {
+            for (int cont = 0; cont < ListArquivosAnaliseXML.toArray().length; cont++) {
                 try {
-                    System.out.println("Arquivo analisado:" + arquivosAnalise.toArray()[cont]);
+                    System.out.println("Arquivo analisado:" + ListArquivosAnaliseXML.toArray()[cont]);
                     System.out.println("---------------------------------------------------------------------------------------");
 
-                    File f = new File(arquivosAnalise.toArray()[cont].toString());
+                    File f = new File(ListArquivosAnaliseXML.toArray()[cont].toString());
 
                     //LER TODA A ESTRUTURA DO XML
                     Document d = sb.build(f);
 
-                    if (arquivosAnalise.toArray()[cont].toString().contains("\\layout\\")) {
+                    if (ListArquivosAnaliseXML.toArray()[cont].toString().contains("\\layout\\")) {
                         //ACESSAR O ROOT ELEMENT
                         Element rootElmnt = d.getRootElement();
 
@@ -674,7 +846,7 @@ public class ImportantSmells {
                     }
                 }
                 catch(Exception ex){
-
+                    ex.printStackTrace();
                 }
             }
 
@@ -683,62 +855,68 @@ public class ImportantSmells {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+
+        return totalSmells;
     }
 
-    public static void DuplicateStyleAttributes(String pathApp) {
+    public static long DuplicateStyleAttributes(String pathApp) {
         try {
-            arquivosAnalise.clear();
+            //arquivosAnalise.clear();
             ListSmells.clear();
+            totalSmells = 0;
 
-            listar(new File(pathApp),XML);
+            //listar(new File(pathApp),XML);
 
-            for (int cont = 0; cont < arquivosAnalise.toArray().length; cont++) {
+            for (int cont = 0; cont < ListArquivosAnaliseXML.toArray().length; cont++) {
                 try {
-                    System.out.println("Arquivo analisado:" + arquivosAnalise.toArray()[cont]);
+                    System.out.println("Arquivo analisado:" + ListArquivosAnaliseXML.toArray()[cont]);
                     System.out.println("---------------------------------------------------------------------------------------");
 
-                    File f = new File(arquivosAnalise.toArray()[cont].toString());
+                    File f = new File(ListArquivosAnaliseXML.toArray()[cont].toString());
 
                     //LER TODA A ESTRUTURA DO XML
                     Document d = sb.build(f);
 
-                    //if (d.getRootElement().getChildren().get(0).getName().toString() == "style") {
+                    if (d.getRootElement().getChildren().get(0).getName().toString() == "style") {
+                        List<String> listSmellsEcontradas = new ArrayList<String>();
 
-                    List<String> listSmellsEcontradas = new ArrayList<String>();
+                        for (int i = 0; i < d.getRootElement().getChildren().size(); i++) {
 
-                    for (int i = 0; i < d.getRootElement().getChildren().size(); i++) {
-                        List<Element> filhos = d.getRootElement().getChildren();
-                        for (int j = 0; j < filhos.size(); j++) {
-                            List<Attribute> attr = filhos.get(j).getAttributes();
-                            for (Attribute atributo : attr) {
-                                String atributo_atual = atributo.toString();
+                            List<Element> filhos = d.getRootElement().getChildren();
+                            for (int j = 0; j < filhos.size(); j++) {
+                                List<Attribute> attr = filhos.get(j).getAttributes();
+                                for (Attribute atributo : attr) {
 
-                                for (int ii = 0; ii < d.getRootElement().getChildren().size(); ii++) {
-                                    List<Element> filhosInterno = d.getRootElement().getChildren();
-                                    for (int jj = 0; jj < filhosInterno.size(); jj++) {
-                                        List<Attribute> attrInterno = filhosInterno.get(jj).getAttributes();
-                                        for (Attribute atributoInterno : attrInterno) {
+                                    String atributo_atual = atributo.toString();
+                                    System.out.println(atributo_atual);
 
-                                            if (jj > j) {
-                                                if (atributo_atual.toString().equals(atributoInterno.toString()) && !listSmellsEcontradas.contains(atributo_atual.toString())) {
-                                                    listSmellsEcontradas.add(atributo_atual.toString());
-                                                    System.out.println("Duplicate Style Attributes " + atributoInterno.getName() + " - Considere colocar a formataÃ§Ã£o das propriedades em um recurso de estilo:");
-                                                    JsonOut.setTipoSmell("XML");
-                                                    JsonOut.setArquivo(arquivosAnalise.toArray()[cont].toString());
-                                                    ListJsonSmell.add(JsonOut);
+                                    for (int ii = 0; ii < d.getRootElement().getChildren().size(); ii++) {
+                                        List<Element> filhosInterno = d.getRootElement().getChildren();
+                                        for (int jj = 0; jj < filhosInterno.size(); jj++) {
+                                            List<Attribute> attrInterno = filhosInterno.get(jj).getAttributes();
+                                            for (Attribute atributoInterno : attrInterno) {
+
+                                                if (jj > j) {
+                                                    if (atributo_atual.toString().equals(atributoInterno.toString()) && !listSmellsEcontradas.contains(atributo_atual.toString())) {
+                                                        listSmellsEcontradas.add(atributo_atual.toString());
+                                                        System.out.println("Duplicate Style Attributes " + atributoInterno.getName() + " - Considere colocar a formataÃ§Ã£o das propriedades em um recurso de estilo:");
+                                                        JsonOut.setTipoSmell("XML");
+                                                        JsonOut.setArquivo(ListArquivosAnaliseXML.toArray()[cont].toString());
+                                                        ListJsonSmell.add(JsonOut);
+                                                        totalSmells++;
+                                                    }
                                                 }
                                             }
                                         }
-                                    }
 
+                                    }
                                 }
                             }
                         }
                     }
-                    //}
                 }
                 catch (Exception ex){
-
+                    ex.printStackTrace();
                 }
             }
 
@@ -747,29 +925,32 @@ public class ImportantSmells {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+
+        return totalSmells;
     }
 
     //-----------------------------------------------------------------
 
     //Recurso MÃ¡gico
-    public static void magicResource(String pathApp){
+    public static long magicResource(String pathApp){
         try{
-            arquivosAnalise.clear();
+            //arquivosAnalise.clear();
             ListSmells.clear();
+            totalSmells = 0;
 
-            listar(new File(pathApp),XML);
+            //listar(new File(pathApp),XML);
 
-            for (int cont = 0; cont < arquivosAnalise.toArray().length; cont++) {
+            for (int cont = 0; cont < ListArquivosAnaliseXML.toArray().length; cont++) {
                 try {
-                    System.out.println("Arquivo analisado:" + arquivosAnalise.toArray()[cont]);
+                    System.out.println("Arquivo analisado:" + ListArquivosAnaliseXML.toArray()[cont]);
                     System.out.println("---------------------------------------------------------------------------------------");
 
-                    File f = new File(arquivosAnalise.toArray()[cont].toString());
+                    File f = new File(ListArquivosAnaliseXML.toArray()[cont].toString());
 
                     //LER TODA A ESTRUTURA DO XML
                     Document d = sb.build(f);
 
-                    if (arquivosAnalise.toArray()[cont].toString().contains("\\layout\\")) {
+                    if (ListArquivosAnaliseXML.toArray()[cont].toString().contains("\\layout\\")) {
                         //ACESSAR O ROOT ELEMENT
                         Element rootElmnt = d.getRootElement();
 
@@ -789,7 +970,7 @@ public class ImportantSmells {
                     }
                 }
                 catch(Exception ex){
-
+                    ex.printStackTrace();
                 }
             }
 
@@ -801,6 +982,8 @@ public class ImportantSmells {
         catch(Exception ex){
             ex.printStackTrace();
         }
+
+        return totalSmells;
     }
 
 
@@ -825,37 +1008,39 @@ public class ImportantSmells {
                                 JsonOut.setTipoSmell("XML");
                                 JsonOut.setArquivo("");
                                 ListJsonSmell.add(JsonOut);
+                                totalSmells++;
                             }
                         }
                     }
                 }
             }
             catch(Exception ex){
-
+                ex.printStackTrace();
             }
         }
     }
 
 
     //Reuso inadequado de string
-    public static void reusoInadequadoDeString(String pathApp){
+    public static long reusoInadequadoDeString(String pathApp){
         try{
-            arquivosAnalise.clear();
+            //arquivosAnalise.clear();
             ListSmells.clear();
+            totalSmells = 0;
 
-            listar(new File(pathApp),XML);
+            //listar(new File(pathApp),XML);
 
-            for (int cont = 0; cont < arquivosAnalise.toArray().length; cont++) {
+            for (int cont = 0; cont < ListArquivosAnaliseXML.toArray().length; cont++) {
                 try {
-                    System.out.println("Arquivo analisado:" + arquivosAnalise.toArray()[cont]);
+                    System.out.println("Arquivo analisado:" + ListArquivosAnaliseXML.toArray()[cont]);
                     System.out.println("---------------------------------------------------------------------------------------");
 
-                    File f = new File(arquivosAnalise.toArray()[cont].toString());
+                    File f = new File(ListArquivosAnaliseXML.toArray()[cont].toString());
 
                     //LER TODA A ESTRUTURA DO XML
                     Document d = sb.build(f);
 
-                    if (arquivosAnalise.toArray()[cont].toString().contains("\\layout\\")) {
+                    if (ListArquivosAnaliseXML.toArray()[cont].toString().contains("\\layout\\")) {
                         //ACESSAR O ROOT ELEMENT
                         Element rootElmnt = d.getRootElement();
 
@@ -866,7 +1051,7 @@ public class ImportantSmells {
                             org.jdom2.Element el = (org.jdom2.Element) elements.get(i);
                             //System.out.println(el.getName());
                             if (el.getChildren().size() > 0) {
-                                recursiveChildrenReusoInadequadoDeString(elements, arquivosAnalise.toArray()[cont].toString());
+                                recursiveChildrenReusoInadequadoDeString(elements, ListArquivosAnaliseXML.toArray()[cont].toString());
                             }
                         }
 
@@ -875,7 +1060,7 @@ public class ImportantSmells {
                     }
                 }
                 catch(Exception ex){
-
+                    ex.printStackTrace();
                 }
             }
 
@@ -886,6 +1071,7 @@ public class ImportantSmells {
                         JsonOut.setTipoSmell("XML");
                         JsonOut.setArquivo(linha.arquivo.toString());
                         ListJsonSmell.add(JsonOut);
+                        totalSmells++;
                     }
                 });
                 //System.out.println(linha.strString + " = " + linha.arquivo);
@@ -899,6 +1085,8 @@ public class ImportantSmells {
         catch(Exception ex){
             ex.printStackTrace();
         }
+
+        return totalSmells;
     }
 
 
@@ -930,25 +1118,26 @@ public class ImportantSmells {
                 }
             }
             catch (Exception ex){
-
+                ex.printStackTrace();
             }
         }
     }
 
-    public static void NotFragment(String pathApp){
+    public static long NotFragment(String pathApp){
         try{
-            arquivosAnalise.clear();
+            //arquivosAnalise.clear();
             ListSmells.clear();
+            totalSmells = 0;
 
-            listar(new File(pathApp),JAVA);
+            //listar(new File(pathApp),JAVA);
 
-            for (int cont = 0; cont < arquivosAnalise.toArray().length; cont++) {
+            for (int cont = 0; cont < ListArquivosAnaliseJava.toArray().length; cont++) {
                 try {
-                    System.out.println("Arquivo analisado:" + arquivosAnalise.toArray()[cont]);
-                    String nomeArquivo = arquivosAnalise.toArray()[cont].toString();
+                    System.out.println("Arquivo analisado:" + ListArquivosAnaliseJava.toArray()[cont]);
+                    String nomeArquivo = ListArquivosAnaliseJava.toArray()[cont].toString();
                     System.out.println("---------------------------------------------------------------------------------------");
 
-                    File f = new File(arquivosAnalise.toArray()[cont].toString());
+                    File f = new File(ListArquivosAnaliseJava.toArray()[cont].toString());
                     CompilationUnit cUnit = JavaParser.parse(f);
 
                     List<String> ViewsAndroid = new ArrayList<String>();
@@ -972,6 +1161,7 @@ public class ImportantSmells {
                                     JsonOut.setLinha(campos.getRange().get().begin.toString());
                                     JsonOut.setArquivo(nomeArquivo);
                                     ListJsonSmell.add(JsonOut);
+                                    totalSmells++;
                                 }
                             });
 
@@ -986,6 +1176,7 @@ public class ImportantSmells {
                                         JsonOut.setLinha(metodo.getRange().get().begin.toString());
                                         JsonOut.setArquivo(nomeArquivo);
                                         ListJsonSmell.add(JsonOut);
+                                        totalSmells++;
                                     }
 
                                     //Procura ViewsAndroid no TIPO em retorno  de MÃ©todos
@@ -996,6 +1187,7 @@ public class ImportantSmells {
                                         JsonOut.setLinha(metodo.getRange().get().begin.toString());
                                         JsonOut.setArquivo(nomeArquivo);
                                         ListJsonSmell.add(JsonOut);
+                                        totalSmells++;
                                     }
 
                                     //Procura ViewsAndroid no TIPO  em declaraÃ§Ã£o de campos
@@ -1007,6 +1199,7 @@ public class ImportantSmells {
                                             JsonOut.setLinha(campos.getRange().get().begin.toString());
                                             JsonOut.setArquivo(nomeArquivo);
                                             ListJsonSmell.add(JsonOut);
+                                            totalSmells++;
                                         }
                                     });
 
@@ -1016,7 +1209,7 @@ public class ImportantSmells {
                     });
                 }
                 catch (Exception ex){
-
+                    ex.printStackTrace();
                 }
             }
 
@@ -1027,6 +1220,8 @@ public class ImportantSmells {
         catch(Exception ex){
             ex.printStackTrace();
         }
+
+        return totalSmells;
     }
 
     public static void ObtemImagensList(File directory) {
@@ -1045,55 +1240,65 @@ public class ImportantSmells {
         }
     }
 
-    public static void NotFoundImage(String pathApp){
+    public static long NotFoundImage(String pathApp){
+        totalSmells = 0;
         ListSmells.clear();
         ObtemImagensList(new File(pathApp));
 
         FilesIMG.forEach(caminho->{
             File directory = new File(caminho);
             for(File arquivo : directory.listFiles()){
-                FilesIMG.forEach(item->{
+                try{
+                    FilesIMG.forEach(item->{
 
-                    File arquivoImg = new File(item + "\\" + arquivo.getName());
+                        File arquivoImg = new File(item + "\\" + arquivo.getName());
 
-                    if (!arquivoImg.exists()) {
-                        System.out.println("Imagem Faltante detectado " + arquivo.getName() + " para pasta " + item);
-                        JsonOut.setTipoSmell("XML");
-                        JsonOut.setArquivo(arquivoImg.toString());
-                        ListJsonSmell.add(JsonOut);
-                        //System.out.println(arquivoImg.length());
-                    }
-                    else if((arquivo.length() != arquivoImg.length())){
-                        System.out.println("Imagem Faltante detectado (Imagem existe porem a resoluÃ§Ã£o Ã© incompatÃ­vel) " + arquivo.getName() + " para pasta " + item);
-                        JsonOut.setTipoSmell("XML");
-                        JsonOut.setArquivo(arquivoImg.toString());
-                        ListJsonSmell.add(JsonOut);
-                    }
-                });
+                        if (!arquivoImg.exists()) {
+                            System.out.println("Imagem Faltante detectado " + arquivo.getName() + " para pasta " + item);
+                            JsonOut.setTipoSmell("XML");
+                            JsonOut.setArquivo(arquivoImg.toString());
+                            ListJsonSmell.add(JsonOut);
+                            totalSmells++;
+                            //System.out.println(arquivoImg.length());
+                        }
+                        else if((arquivo.length() != arquivoImg.length())){
+                            System.out.println("Imagem Faltante detectado (Imagem existe porem a resoluÃ§Ã£o Ã© incompatÃ­vel) " + arquivo.getName() + " para pasta " + item);
+                            JsonOut.setTipoSmell("XML");
+                            JsonOut.setArquivo(arquivoImg.toString());
+                            ListJsonSmell.add(JsonOut);
+                            totalSmells++;
+                        }
+                    });
+                }
+                catch (Exception ex){
+                    ex.printStackTrace();
+                }
             }
         });
 
         JsonOut.saveJson(ListJsonSmell,"NotFoundImage.json");
+        return totalSmells;
     }
 
-    public static void HideListener(String pathApp){
+    public static long HideListener(String pathApp){
         try{
-            arquivosAnalise.clear();
+            //arquivosAnalise.clear();
             ListSmells.clear();
+            totalSmells = 0;
 
-            listar(new File(pathApp),XML);
+            //listar(new File(pathApp),XML);
 
-            for (int cont = 0; cont < arquivosAnalise.toArray().length; cont++) {
+            for (int cont = 0; cont < ListArquivosAnaliseXML.toArray().length; cont++) {
                 try {
-                    System.out.println("Arquivo analisado:" + arquivosAnalise.toArray()[cont]);
+                    System.out.println("Arquivo analisado:" + ListArquivosAnaliseXML.toArray()[cont]);
                     System.out.println("---------------------------------------------------------------------------------------");
 
-                    File f = new File(arquivosAnalise.toArray()[cont].toString());
+                    File f = new File(ListArquivosAnaliseXML.toArray()[cont].toString());
 
                     //LER TODA A ESTRUTURA DO XML
                     Document d = sb.build(f);
 
-                    if (arquivosAnalise.toArray()[cont].toString().contains("\\layout\\")) {
+                    if (ListArquivosAnaliseXML.toArray()[cont].toString().contains("\\layout\\")) {
                         //ACESSAR O ROOT ELEMENT
                         Element rootElmnt = d.getRootElement();
 
@@ -1114,7 +1319,7 @@ public class ImportantSmells {
                     }
                 }
                 catch (Exception ex){
-
+                    ex.printStackTrace();
                 }
             }
 
@@ -1126,23 +1331,26 @@ public class ImportantSmells {
         catch(Exception ex){
             ex.printStackTrace();
         }
+
+        return totalSmells;
     }
 
-    public static void ExcessiveFragment(String pathApp, long threshold) throws IOException {
-        arquivosAnalise.clear();
+    public static long ExcessiveFragment(String pathApp, long threshold) throws IOException {
+        //arquivosAnalise.clear();
         ListSmells.clear();
+        totalSmells = 0;
 
-        listar(new File(pathApp),JAVA);
+        //listar(new File(pathApp),JAVA);
         long totalFragments = 0;
         List<ReusoStringData> listaExcessiveFragment = new ArrayList<ReusoStringData>();
 
-        for (int cont = 0; cont < arquivosAnalise.toArray().length; cont++) {
+        for (int cont = 0; cont < ListArquivosAnaliseJava.toArray().length; cont++) {
             try {
 
                 //System.out.println("Arquivo analisado:" + arquivosAnalise.toArray()[cont]);
                 //System.out.println("---------------------------------------------------------------------------------------");
 
-                File f = new File(arquivosAnalise.toArray()[cont].toString());
+                File f = new File(ListArquivosAnaliseJava.toArray()[cont].toString());
                 CompilationUnit cu = JavaParser.parse(f);
 
                 ArrayList<ClassOrInterfaceDeclaration> classes = new ArrayList<ClassOrInterfaceDeclaration>();
@@ -1167,14 +1375,18 @@ public class ImportantSmells {
                     JsonOut.setTipoSmell("XML");
                     JsonOut.setArquivo("");
                     ListJsonSmell.add(JsonOut);
+                    totalSmells++;
                 }
+
+                return totalSmells;
             }
             catch (Exception ex){
-
+                ex.printStackTrace();
             }
         }
 
         JsonOut.saveJson(ListJsonSmell,"ExcessiveFragment.json");
+        return totalSmells;
 
     }
 
@@ -1198,12 +1410,13 @@ public class ImportantSmells {
                             JsonOut.setTipoSmell("XML");
                             JsonOut.setArquivo("");
                             ListJsonSmell.add(JsonOut);
+                            totalSmells++;
                         }
                     }
                 }
             }
             catch (Exception ex){
-
+                ex.printStackTrace();
             }
         }
     }
@@ -1225,12 +1438,13 @@ public class ImportantSmells {
                             JsonOut.setTipoSmell("XML");
                             JsonOut.setArquivo("");
                             ListJsonSmell.add(JsonOut);
+                            totalSmells++;
                             break;
                         }
                     }
                 }
                 catch (Exception ex){
-
+                    ex.printStackTrace();
                 }
             }
         }
