@@ -75,7 +75,7 @@ public class ImportantSmells {
             });
 
             for(int i = 0; i < myFiles.length; i++){
-                arquivosAnalise.add(new File(directory.getPath() + "\\" + myFiles[i].toString()));
+                arquivosAnalise.add(new File(directory.getPath() + ""+File.separator+"" + myFiles[i].toString()));
             }
 
             String[] subDirectory = directory.list();
@@ -551,42 +551,42 @@ public class ImportantSmells {
                         classes.add((ClassOrInterfaceDeclaration) types.get(i));
                     }
 
-                    //Para cada uma dessas classes, verifica se ela é um Adapter (ou seja, se ela extende de BaseAdapter).
+                    //Para cada uma dessas classes, verifica se ela ï¿½ um Adapter (ou seja, se ela extende de BaseAdapter).
                     for (ClassOrInterfaceDeclaration classe : classes) {
 
-                        //Como a classe vai ser analisada ainda, não contém smells por enquanto
+                        //Como a classe vai ser analisada ainda, nï¿½o contï¿½m smells por enquanto
                         Boolean isFoolAdapter = false;
 
-                        //Para ver se a classe é um Adapter, precisamos ver se ela extende de BaseAdapter
+                        //Para ver se a classe ï¿½ um Adapter, precisamos ver se ela extende de BaseAdapter
                         //Pegamos todas as classes que ela implementa
                         NodeList<ClassOrInterfaceType> implementacoes = classe.getExtendedTypes();
                         for (ClassOrInterfaceType implementacao : implementacoes) {
                             if (implementacao.getName().getIdentifier().equals("BaseAdapter")) {
-                                //Se chegou até aqui, temos certeza de que é um adapter.
-                                //Se a classe que extende do BaseAdapter tiver algum método que não seja sobrescrever um método de interface, é um FlexAdapter.
+                                //Se chegou atï¿½ aqui, temos certeza de que ï¿½ um adapter.
+                                //Se a classe que extende do BaseAdapter tiver algum mï¿½todo que nï¿½o seja sobrescrever um mï¿½todo de interface, ï¿½ um FlexAdapter.
                                 //Pegamos todos os membros da classe
                                 NodeList<BodyDeclaration<?>> membros = classe.getMembers();
-                                //Verifica se o membro é um método
+                                //Verifica se o membro ï¿½ um mï¿½todo
                                 for (BodyDeclaration<?> membro : membros)
                                     if (membro.isMethodDeclaration()) {
                                         MethodDeclaration metodo = (MethodDeclaration) membro;
-                                        //Verifica se este método chama getView
+                                        //Verifica se este mï¿½todo chama getView
                                         if (metodo.getName().getIdentifier().equals("getView")) {
 
                                             //Pega o parametro do tipo View e armazena o nome dele
-                                            //Pode ser útil para verificar por findViewById dentro de laços
+                                            //Pode ser ï¿½til para verificar por findViewById dentro de laï¿½os
                                             Parameter viewParameter = metodo.getParameter(1);
                                             String nomeParametroView = viewParameter.getName().getIdentifier();
 
-                                            //Pega o bloco de declarações dentro método getView
+                                            //Pega o bloco de declaraï¿½ï¿½es dentro mï¿½todo getView
                                             BlockStmt body = metodo.getBody().get();
                                             NodeList<Statement> statements = body.getStatements();
 
-                                            //Itera sobre as declarações até achar expressões
+                                            //Itera sobre as declaraï¿½ï¿½es atï¿½ achar expressï¿½es
                                             for (Statement statement : statements) {
                                                 if (statement.isExpressionStmt()) {
-                                                    //Se em alguma dessas expressões tiver o texto findViewById
-                                                    //Quer dizer que o ViewHolder não está sendo utilizado, o que caracteriza o smell
+                                                    //Se em alguma dessas expressï¿½es tiver o texto findViewById
+                                                    //Quer dizer que o ViewHolder nï¿½o estï¿½ sendo utilizado, o que caracteriza o smell
                                                     if(statement.toString().contains("findViewById(")) {
                                                         isFoolAdapter = true;
                                                         JsonOut.setTipoSmell("JAVA");
@@ -596,7 +596,7 @@ public class ImportantSmells {
                                                         totalSmells++;
                                                     }
 
-                                                    //Se ele infla um Layout em toda chamada ao getView, isso também caracteriza o smell
+                                                    //Se ele infla um Layout em toda chamada ao getView, isso tambï¿½m caracteriza o smell
                                                     if(statement.toString().contains("getLayoutInflater(")) {
                                                         isFoolAdapter = true;
                                                         JsonOut.setTipoSmell("JAVA");
@@ -762,7 +762,7 @@ public class ImportantSmells {
     }
 
     //Recurso de String BagunÃ§ado
-    public static long BadStringResource(String pathApp) {
+    public static long godStringResource(String pathApp) {
         try {
             //arquivosAnalise.clear();
             ListSmells.clear();
@@ -790,7 +790,7 @@ public class ImportantSmells {
 
                     if ((qtdFilesString == 1)) {
                         //System.out.println("->"+arquivosAnalise.toArray()[cont].toString());
-                        System.out.println("Recurso de String Bagunçado detectado (existe apenas um arquivo para strings no aplicativo  ");
+                        System.out.println("Recurso de String Bagunï¿½ado detectado (existe apenas um arquivo para strings no aplicativo  ");
                         System.out.println("---------------------------------------------------------------------------------------");
                         JsonOut.setTipoSmell("XML");
                         JsonOut.setArquivo(ListArquivosAnaliseXML.toArray()[cont].toString());
@@ -803,7 +803,7 @@ public class ImportantSmells {
                 }
             }
 
-            JsonOut.saveJson(ListJsonSmell,"BadStringResource.json");
+            JsonOut.saveJson(ListJsonSmell,"godStringResource.json");
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -1022,7 +1022,7 @@ public class ImportantSmells {
 
 
     //Reuso inadequado de string
-    public static long reusoInadequadoDeString(String pathApp){
+    public static long inappropriateStringReuse(String pathApp){
         try{
             //arquivosAnalise.clear();
             ListSmells.clear();
@@ -1077,7 +1077,7 @@ public class ImportantSmells {
                 //System.out.println(linha.strString + " = " + linha.arquivo);
             }
 
-            JsonOut.saveJson(ListJsonSmell,"reusoInadequadoDeString.json");
+            JsonOut.saveJson(ListJsonSmell,"inappropriateStringReuse.json");
 
             System.out.println("---------------------------------------------------------------------------------------");
 
@@ -1251,7 +1251,10 @@ public class ImportantSmells {
                 try{
                     FilesIMG.forEach(item->{
 
-                        File arquivoImg = new File(item + "\\" + arquivo.getName());
+
+
+
+                        File arquivoImg = new File(item + ""+File.separator+"" + arquivo.getName());
 
                         if (!arquivoImg.exists()) {
                             System.out.println("Imagem Faltante detectado " + arquivo.getName() + " para pasta " + item);
@@ -1280,7 +1283,7 @@ public class ImportantSmells {
         return totalSmells;
     }
 
-    public static long HideListener(String pathApp){
+    public static long HiddenListener(String pathApp){
         try{
             //arquivosAnalise.clear();
             ListSmells.clear();
@@ -1323,7 +1326,7 @@ public class ImportantSmells {
                 }
             }
 
-            JsonOut.saveJson(ListJsonSmell,"HideListener.json");
+            JsonOut.saveJson(ListJsonSmell,"HiddenListener.json");
 
             System.out.println("---------------------------------------------------------------------------------------");
 

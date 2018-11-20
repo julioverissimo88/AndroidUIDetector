@@ -6,18 +6,14 @@
 package DetectUI;
 
 import AndroidDetector.ImportantSmells;
-import com.sun.glass.ui.Cursor;
-import java.awt.TextArea;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 import javax.swing.JOptionPane;
-import javax.swing.JTextArea;
 
 /**
  *
@@ -244,7 +240,7 @@ public class DetectorUI extends javax.swing.JFrame {
                 // creates the file
                 fileCsv.createNewFile();
                 FileWriter writer = new FileWriter(fileCsv);
-                writer.append("Aplicativo" + ";" + "DeepNestedLayout" + ";" + "DuplicateStyleAttributes" + ";" + "GodStyleResource" + ";" + "HideListener" + ";" + "magicResource" + ";" + "BadStringResource" + ";" + "reusoInadequadoDeString" + ";" + "NotFoundImage" + ";" + "CoupledUIComponent" + ";" + "SuspiciousBehavior" + ";" + "FlexAdapter" + ";" + "BrainUIComponent" + ";" + "CompUIIO" + ";" + "NotFragment" + ";" + "ExcessiveFragment");
+                writer.append("Aplicativo" + ";" + "DeepNestedLayout" + ";" + "DuplicateStyleAttributes" + ";" + "GodStyleResource" + ";" + "HiddenListener" + ";" + "magicResource" + ";" + "godStringResource" + ";" + "inappropriateStringReuse" + ";" + "NotFoundImage" + ";" + "CoupledUIComponent" + ";" + "SuspiciousBehavior" + ";" + "FlexAdapter" + ";" + "BrainUIComponent" + ";" + "CompUIIO" + ";" + "NotFragment" + ";" + "ExcessiveFragment");
                 writer.append("\n");
 
 
@@ -329,10 +325,10 @@ public class DetectorUI extends javax.swing.JFrame {
                     long totalDeepNested = 0; //AndroidDetector.ImportantSmells.DeepNestedLayout(caminho, 4);
                     long totalDuplicateStyleAttributes = 0; // AndroidDetector.ImportantSmells.DuplicateStyleAttributes(caminho);
                     long totalGodStyleResource = 0; //AndroidDetector.ImportantSmells.GodStyleResource(caminho,11);
-                    long totalHideListener = 0; //AndroidDetector.ImportantSmells.HideListener(caminho)
+                    long totalHideListener = 0; //AndroidDetector.ImportantSmells.HiddenListener(caminho)
                     long totalmagicResource = 0; //AndroidDetector.ImportantSmells.magicResource(caminho);
-                    long totalBadStringResource = 0; //AndroidDetector.ImportantSmells.BadStringResource(caminho);
-                    long totalreusoInadequadoDeString = AndroidDetector.ImportantSmells.reusoInadequadoDeString(caminho);
+                    long totalBadStringResource = 0; //AndroidDetector.ImportantSmells.godStringResource(caminho);
+                    long totalreusoInadequadoDeString = AndroidDetector.ImportantSmells.inappropriateStringReuse(caminho);
                     long totalNotFoundImage = AndroidDetector.ImportantSmells.NotFoundImage(caminho);
 
                     //anÃ¡lises de cÃ³digo java
@@ -373,10 +369,10 @@ public class DetectorUI extends javax.swing.JFrame {
                 long fim  = System.currentTimeMillis();
                 System.out.println( new SimpleDateFormat("HH:mm:ss").format(new Date(inicio - fim)));
                 
-                JOptionPane.showMessageDialog(rootPane, "Analise Concluída resultados salvos em: " + txtOutput.getText());
+                JOptionPane.showMessageDialog(rootPane, "Analise Concluï¿½da resultados salvos em: " + txtOutput.getText());
             }
             else{
-                    JOptionPane.showMessageDialog(rootPane, "Informe Aplicativo para a análise");                
+                    JOptionPane.showMessageDialog(rootPane, "Informe Aplicativo para a anï¿½lise");                
             }
         }
         catch(Exception ex){

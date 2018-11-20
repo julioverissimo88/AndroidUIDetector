@@ -1,5 +1,3 @@
-import AndroidDetector.ImportantSmells;
-import AndroidDetector.SmellsAndroidUiApp;
 import org.jdom2.JDOMException;
 import java.io.IOException;
 import java.util.Scanner;
@@ -29,10 +27,10 @@ public class Main {
                     AndroidDetector.ImportantSmells.DeepNestedLayout(caminho, 3);   //Layout Profundamente Aninhado
                     AndroidDetector.ImportantSmells.DuplicateStyleAttributes(caminho);       //Atributo de Estilo repetido
                     AndroidDetector.ImportantSmells.GodStyleResource(caminho,5);  //Longo Recurso de Estilo
-                    AndroidDetector.ImportantSmells.HideListener(caminho);                 //Listener Escondido
+                    AndroidDetector.ImportantSmells.HiddenListener(caminho);                 //Listener Escondido
                     AndroidDetector.ImportantSmells.magicResource(caminho);               //Recurso Mágico
-                    AndroidDetector.ImportantSmells.BadStringResource(caminho);          //Recurso de String Bagunçado
-                    AndroidDetector.ImportantSmells.reusoInadequadoDeString(caminho);   //Reuso inadequado de String
+                    AndroidDetector.ImportantSmells.godStringResource(caminho);          //Recurso de String Bagunçado
+                    AndroidDetector.ImportantSmells.inappropriateStringReuse(caminho);   //Reuso inadequado de String
                     AndroidDetector.ImportantSmells.NotFoundImage(caminho);            //Imagem Faltante
 
                 } else {//Smel1ls JAVA
