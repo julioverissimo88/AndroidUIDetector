@@ -1,9 +1,13 @@
 package UTIL;
 
+import AndroidDetector.IOClass;
+import AndroidDetector.ImportantSmells;
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.body.*;
+import com.github.javaparser.ast.stmt.IfStmt;
+import com.github.javaparser.ast.stmt.SwitchEntryStmt;
 import com.github.javaparser.ast.type.ClassOrInterfaceType;
 import org.jdom2.Document;
 import org.jdom2.Element;
@@ -25,6 +29,29 @@ public class Trashold {
     private static List<ReusoStringData> listaDeepNested = new ArrayList<ReusoStringData>();
 
 
+    public static List<File> ListArquivosAnaliseJava =  new ArrayList<File>();
+
+    private static long quantidadeIF = 0;
+    private static long quantidadeSWIFT = 0;
+    private static long quantidadeFieldStatic = 0;
+    private static long quantidadeLIBSIODeclaracaoDeCampos = 0;
+    private static long quantidadeLIBSIODeclaracaoDeMethods = 0;
+    private static long quantidadeLIBSIORETORNOMethod = 0;
+    private static long quantidadeLIBSIOFieldDeclaracaoCampos = 0;
+
+    //component UI doing IO
+    private static long libsIOnoTIPOemDeclaracaoDeCampos = 0;
+    private static long libsIONoTipoemDeclaracaoNosParametrosDeMetodo = 0;
+    private static long libsIONoTipoRetornoDeMetodo = 0;
+    private static long libsIOnoTIPODeclaracaoDECAMPOS = 0 ;
+
+
+    public static void carregaArquivosJAVAAnalise(File directory){
+        arquivosAnalise.clear();
+        listar(directory,JAVA);
+        ListArquivosAnaliseJava = arquivosAnalise;
+    }
+
 
     public static void listar(File directory,String tipo) {
         if(directory.isDirectory()) {
@@ -37,7 +64,7 @@ public class Trashold {
             });
 
             for(int i = 0; i < myFiles.length; i++){
-                arquivosAnalise.add(new File(directory.getPath() + "\\" + myFiles[i].toString()));
+                arquivosAnalise.add(new File(directory.getPath() + File.separator + myFiles[i].toString()));
             }
 
             String[] subDirectory = directory.list();
@@ -133,6 +160,302 @@ public class Trashold {
 
             }
         }
+    }
+
+
+// Main do Brain ....
+//    public static void main (String... args) throws  IOException{
+//        File fileCsv = new File("/Users/rafaeldurelli/Desktop/Analise/AnaliseFinalThreshold.csv");
+//
+//        FileWriter writer = new FileWriter(fileCsv);
+//
+//        File file = new File("/Users/rafaeldurelli/Desktop/Repositorio01");
+//        File afile[] = file.listFiles();
+//
+//        fileCsv.createNewFile();
+//
+//        writer.append("Aplicativo" + "," + "QuantidadeIF" + "," + "QuantidadeSWIFT" + "," + "quantidadeFieldStatic" + "," +
+//                "quantidadeLIBSIODeclaracaoDeCampos" + "," + "quantidadeLIBSIODeclaracaoDeMethods" + "," + "" +
+//                "quantidadeLIBSIORETORNOMethod" + "," + "quantidadeLIBSIOFieldDeclaracaoCampos");
+//        writer.append("\n");
+//
+//
+//        for(int j = 0; j< afile.length; j++) {
+//            File f = new File(afile[j].toString());
+//            //Getting all files to apply resource smells
+//
+//            carregaArquivosJAVAAnalise(f);
+//
+//            System.out.println();
+//            System.out.println();
+//            System.out.println(f.getName() + " - " + j);
+//            System.out.println();
+//            System.out.println();
+//
+//            String caminho = afile[j].toString();
+//
+//            String app = f.getName();
+//
+//            BrainUIComponent(caminho);
+//
+//
+//
+//
+//        writer.append(
+//        app + "," +
+//        quantidadeIF + "," +
+//        quantidadeSWIFT  + "," +
+//        quantidadeFieldStatic + "," +
+//        quantidadeLIBSIODeclaracaoDeCampos + "," +
+//        quantidadeLIBSIODeclaracaoDeMethods + "," +
+//        quantidadeLIBSIORETORNOMethod + "," +
+//        quantidadeLIBSIOFieldDeclaracaoCampos + ",");
+//
+//        writer.append("\n");
+//        writer.flush();
+//
+//    }
+//        writer.flush();
+//        writer.close();
+//    }
+
+
+    //Main para verificar o threshold do COmpUI doing IO
+
+    public static void main (String... args) throws  IOException{
+        File fileCsv = new File("/Users/rafaeldurelli/Desktop/Analise/AnaliseCompUIThresholdVALIDO.csv");
+
+        FileWriter writer = new FileWriter(fileCsv);
+
+        File file = new File("/Users/rafaeldurelli/Desktop/Repositorio02");
+        File afile[] = file.listFiles();
+
+        fileCsv.createNewFile();
+
+
+        writer.append("Aplicativo" + "," +
+                "libsIOnoTIPOemDeclaracaoDeCampos" + "," +
+                "libsIONoTipoemDeclaracaoNosParametrosDeMetodo" + ","
+                + "libsIONoTipoRetornoDeMetodo" + "," +
+                "libsIOnoTIPODeclaracaoDECAMPOS");
+        writer.append("\n");
+
+
+        for(int j = 0; j< afile.length; j++) {
+            File f = new File(afile[j].toString());
+            //Getting all files to apply resource smells
+
+            carregaArquivosJAVAAnalise(f);
+
+            System.out.println();
+            System.out.println();
+            System.out.println(f.getName() + " - " + j);
+            System.out.println();
+            System.out.println();
+
+            String caminho = afile[j].toString();
+
+            String app = f.getName();
+
+            CompUIIOTHRESHOLD(caminho, writer, app);
+
+
+
+
+        }
+        writer.flush();
+        writer.close();
+    }
+
+    //Componente de UI Fazendo IO
+    public static void CompUIIOTHRESHOLD(String pathApp, FileWriter writer, String app){
+
+        try {
+
+            for (int cont = 0; cont < ListArquivosAnaliseJava.toArray().length; cont++) {
+
+                libsIOnoTIPOemDeclaracaoDeCampos = 0;
+                libsIONoTipoemDeclaracaoNosParametrosDeMetodo = 0;
+                libsIONoTipoRetornoDeMetodo = 0;
+                libsIOnoTIPODeclaracaoDECAMPOS = 0 ;
+
+                try
+                {
+                    System.out.println("Arquivo analisado:" + ListArquivosAnaliseJava.toArray()[cont]);
+                    String nomeArquivo = ListArquivosAnaliseJava.toArray()[cont].toString();
+                    System.out.println("---------------------------------------------------------------------------------------");
+
+                    File f = new File(ListArquivosAnaliseJava.toArray()[cont].toString());
+                    CompilationUnit cUnit = JavaParser.parse(f);
+
+                    cUnit.findAll(ClassOrInterfaceDeclaration.class).forEach(classe -> {
+
+                        if(classe.getExtendedTypes().size()>0){
+
+                        if (classe.getExtendedTypes().get(0).toString().contains("Activity") || classe.getExtendedTypes().get(0).toString().contains("Fragment") || classe.getExtendedTypes().get(0).toString().contains("Adapter")) {
+
+                            //Procura Libs IO no TIPO  em declaração de campos
+                            classe.getFields().forEach(campos -> {
+                                if (IOClass.getIOClass().contains(campos.getElementType().toString())) {
+                                    libsIOnoTIPOemDeclaracaoDeCampos++;
+
+                                }
+                            });
+
+                            //Procura Libs de IO no TIPO em declaração  de Métodos
+                            classe.findAll(MethodDeclaration.class).forEach(metodo -> {
+                                IOClass.getIOClass().forEach(item -> {
+                                    //Procura Libs de IO no TIPO em declaração  nos Parametros de  Métodos
+                                    if (metodo.getParameters().contains(item)) {
+                                        libsIONoTipoemDeclaracaoNosParametrosDeMetodo++;
+                                    }
+
+                                    //Procura Libs de IO no TIPO em retorno  de Métodos
+                                    if (metodo.getType().toString().contains(item)) {
+                                        libsIONoTipoRetornoDeMetodo++;
+                                    }
+
+                                    //Procura Libs IO no TIPO  em declaração de campos
+                                    metodo.findAll(FieldDeclaration.class).forEach(campos -> {
+                                        if (campos.getElementType().toString().contains(item)) {
+                                            libsIOnoTIPODeclaracaoDECAMPOS++;
+                                        }
+                                    });
+                                });
+                            });
+                        }
+                        }
+                    });
+                }
+                catch(Exception ex){
+                    ex.printStackTrace();
+                }
+
+                writer.append(
+                        app + "," +
+                                libsIOnoTIPOemDeclaracaoDeCampos + "," +
+                                libsIONoTipoemDeclaracaoNosParametrosDeMetodo  + "," +
+                                libsIONoTipoRetornoDeMetodo + "," +
+                                libsIOnoTIPODeclaracaoDECAMPOS + ",");
+
+                writer.append("\n");
+                writer.flush();
+
+            }
+
+
+
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+        }
+    }
+
+
+    public static void BrainUIComponent(String pathApp) {
+
+        quantidadeIF = 0;
+        quantidadeSWIFT = 0;
+        quantidadeFieldStatic = 0;
+        quantidadeLIBSIODeclaracaoDeCampos = 0;
+        quantidadeLIBSIODeclaracaoDeMethods = 0;
+        quantidadeLIBSIORETORNOMethod = 0;
+        quantidadeLIBSIOFieldDeclaracaoCampos = 0;
+
+
+        try {
+            //arquivosAnalise.clear();
+//            totalSmells = 0;
+
+            //listar(new File(pathApp),JAVA);
+
+            for (int cont = 0; cont < ListArquivosAnaliseJava.toArray().length; cont++) {
+                try {
+                    System.out.println("Arquivo analisado:" + ListArquivosAnaliseJava.toArray()[cont]);
+                    String nomeArquivo = ListArquivosAnaliseJava.toArray()[cont].toString();
+                    System.out.println("---------------------------------------------------------------------------------------");
+
+                    File f = new File(ListArquivosAnaliseJava.toArray()[cont].toString());
+                    CompilationUnit cUnit = JavaParser.parse(f);
+
+                    cUnit.findAll(ClassOrInterfaceDeclaration.class).forEach(classe -> {
+                        if (classe.getExtendedTypes().get(0).toString().contains("Activity") || classe.getExtendedTypes().get(0).toString().contains("Fragment") || classe.getExtendedTypes().get(0).toString().contains("Adapter")) {
+                            //ifElseSwitchCase (Regra de negócios)
+                            NodeList<BodyDeclaration<?>> membros = classe.getMembers();
+                            for (BodyDeclaration<?> membro : membros) {
+                                //Verifica se o membro é um método
+                                if (membro.isMethodDeclaration()) {
+
+                                    quantidadeIF =  membro.findAll(IfStmt.class).size();
+
+                                    quantidadeSWIFT =  membro.findAll(SwitchEntryStmt.class).size();
+                                }
+                            }
+
+
+                            //Aqui conta para verificar o threshold de fieldstatic ... mas tem que pensar nisso.
+                            quantidadeFieldStatic = 0;
+                            classe.getFields().forEach(item -> {
+                                if (item.isFieldDeclaration() && item.isStatic()) {
+                                    quantidadeFieldStatic++;
+                                }
+                            });
+
+
+                            //Procura Libs IO no TIPO  em declaração de campos
+                            classe.getFields().forEach(campos -> {
+                                if (IOClass.getIOClass().contains(campos.getElementType().toString())) {
+                                    quantidadeLIBSIODeclaracaoDeCampos++;
+                                }
+                            });
+
+                            //Procura Libs de IO no TIPO em declaração  de Métodos
+                            classe.findAll(MethodDeclaration.class).forEach(metodo -> {
+                                IOClass.getIOClass().forEach(item -> {
+                                    //Procura Libs de IO no TIPO em declaração  nos Parametros de  Métodos
+                                    if (metodo.getParameters().contains(item)) {
+
+                                        quantidadeLIBSIODeclaracaoDeMethods++;
+
+                                    }
+
+                                    //Procura Libs de IO no TIPO em retorno  de Métodos
+                                    if (metodo.getType().toString().contains(item)) {
+                                        quantidadeLIBSIORETORNOMethod++;
+
+                                        //qualquer coisa tirar o tipo de retorno do método..
+                                        //esta me parecendo muito falso positivo....
+                                    }
+
+                                    //Procura Libs IO no TIPO  em declaração de campos
+                                    metodo.findAll(FieldDeclaration.class).forEach(campos -> {
+                                        if (campos.getElementType().toString().contains(item)) {
+                                            quantidadeLIBSIOFieldDeclaracaoCampos++;
+                                        }
+                                    });
+
+                                });
+                            });
+
+
+                        }
+                    });
+                }
+                catch(Exception ex){
+                    ex.printStackTrace();
+                }
+
+
+
+            }
+
+
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+        }
+
+
     }
 
 

@@ -43,52 +43,58 @@ public class Test {
 
                 //XML
                 String app = f.getName();
-                long totalDeepNested = AndroidDetector.ImportantSmells.DeepNestedLayout(caminho, 4);
-                long totalDuplicateStyleAttributes = AndroidDetector.ImportantSmells.DuplicateStyleAttributes(caminho);
+//                long totalDeepNested = AndroidDetector.ImportantSmells.DeepNestedLayout(caminho, 4);
+//                long totalDuplicateStyleAttributes = AndroidDetector.ImportantSmells.DuplicateStyleAttributes(caminho);
                 long totalGodStyleResource = AndroidDetector.ImportantSmells.GodStyleResource(caminho,11);
-                long totalHideListener = AndroidDetector.ImportantSmells.HiddenListener(caminho);
-                long totalmagicResource = AndroidDetector.ImportantSmells.magicResource(caminho);
-                long totalBadStringResource = AndroidDetector.ImportantSmells.godStringResource(caminho);
-                long totalreusoInadequadoDeString = AndroidDetector.ImportantSmells.inappropriateStringReuse(caminho);
-                long totalNotFoundImage = AndroidDetector.ImportantSmells.NotFoundImage(caminho);
+//                long totalHideListener = AndroidDetector.ImportantSmells.HiddenListener(caminho);
+//                long totalmagicResource = AndroidDetector.ImportantSmells.magicResource(caminho);
+//                long totalBadStringResource = AndroidDetector.ImportantSmells.godStringResource(caminho);
+//                long totalreusoInadequadoDeString = AndroidDetector.ImportantSmells.inappropriateStringReuse(caminho);
+//                long totalNotFoundImage = AndroidDetector.ImportantSmells.NotFoundImage(caminho);
 
                 //analise de codigo java
                 ImportantSmells.carregaArquivosJAVAAnalise(f);
-
-                long totalCoupledUIComponent = AndroidDetector.ImportantSmells.CoupledUIComponent(caminho);
+//
+//                long totalCoupledUIComponent = AndroidDetector.ImportantSmells.CoupledUIComponent(caminho);
                 long totalSuspiciousBehavior = AndroidDetector.ImportantSmells.SuspiciousBehavior(caminho);
-                long totalFoolAdapter = AndroidDetector.ImportantSmells.FoolAdapter(caminho);
-                long totalFlexAdapter = AndroidDetector.ImportantSmells.FlexAdapter(caminho);
-                long totalBrainUIComponent = AndroidDetector.ImportantSmells.BrainUIComponent(caminho);
+//                long totalBrainUIComponent = AndroidDetector.ImportantSmells.BrainUIComponent(caminho);
+                    long totalFlexAdapter = AndroidDetector.ImportantSmells.FlexAdapter(caminho);
+                 long totalFoolAdapter = AndroidDetector.ImportantSmells.FoolAdapter(caminho);
+//
+
                 long totalCompUIIO = AndroidDetector.ImportantSmells.CompUIIO(caminho);
-                long totalNotFragment = AndroidDetector.ImportantSmells.NotFragment(caminho);
+//                long totalNotFragment = AndroidDetector.ImportantSmells.NotFragment(caminho);
                 long totalExcessiveFragment = AndroidDetector.ImportantSmells.ExcessiveFragment(caminho,10);
 
-                writer.append(
-                        app + ";" +
-                        totalDeepNested + ";" +
-                        totalDuplicateStyleAttributes  + ";" +
-                        totalGodStyleResource + ";" +
-                        totalHideListener + ";" +
-                        totalmagicResource + ";" +
-                        totalBadStringResource + ";" +
-                        totalreusoInadequadoDeString + ";" +
-                        totalNotFoundImage + ";" +
-                        totalCoupledUIComponent + ";" +
-                        totalSuspiciousBehavior + ";" +
-                        totalFlexAdapter + ";" +
-                        totalBrainUIComponent + ";" +
-                        totalCompUIIO + ";" +
-                        totalNotFragment + ";" +
-                        totalExcessiveFragment + ";" +
-                        totalFoolAdapter + ";"
-                );
+//                writer.append(
+//                        app + ";" +
+//                        totalDeepNested + ";" +
+//                        totalDuplicateStyleAttributes  + ";" +
+//                        totalGodStyleResource + ";" +
+//                        totalHideListener + ";" +
+//                        totalmagicResource + ";" +
+//                        totalBadStringResource + ";" +
+//                        totalreusoInadequadoDeString + ";" +
+//                        totalNotFoundImage + ";" +
+//                        totalCoupledUIComponent + ";" +
+//                        totalSuspiciousBehavior + ";" +
+//                        totalFlexAdapter + ";" +
+//                        totalBrainUIComponent + ";" +
+//                        totalCompUIIO + ";" +
+//                        totalNotFragment + ";" +
+//                        totalExcessiveFragment + ";" +
+//                        totalFoolAdapter + ";"
+//                );
+
+//                writer.append(
+//                        app + ";" +
+////                                totalNotFoundImage + ";"
+//                );
 
 
 
                 writer.append("\n");
                 writer.flush();
-                writer.close();
             }
 
             writer.flush();

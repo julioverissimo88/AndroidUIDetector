@@ -31,7 +31,7 @@ public class Main {
                     AndroidDetector.ImportantSmells.magicResource(caminho);               //Recurso Mágico
                     AndroidDetector.ImportantSmells.godStringResource(caminho);          //Recurso de String Bagunçado
                     AndroidDetector.ImportantSmells.inappropriateStringReuse(caminho);   //Reuso inadequado de String
-                    AndroidDetector.ImportantSmells.NotFoundImage(caminho);            //Imagem Faltante
+//                    AndroidDetector.ImportantSmells.NotFoundImage(caminho);            //Imagem Faltante
 
                 } else {//Smel1ls JAVA
                     AndroidDetector.ImportantSmells.CoupledUIComponent(caminho);      //Componente de UI Acoplado

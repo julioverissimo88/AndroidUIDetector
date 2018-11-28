@@ -21,6 +21,7 @@ public class IOClass {
         listIO.add("Stream");
         listIO.add("Statement");
         listIO.add("Connection");
+        listIO.add("WebView");
         listIO.add("Cursor");
         listIO.add("DatabaseViewerInterface");
 

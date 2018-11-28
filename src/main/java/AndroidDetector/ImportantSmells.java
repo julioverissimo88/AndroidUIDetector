@@ -32,6 +32,7 @@ public class ImportantSmells {
 
     }
 
+    private static int contadorFieldStatic = 0;
 
     private static long qtdSubelementos = 0;
     private static File arquivos[];
@@ -106,7 +107,8 @@ public class ImportantSmells {
                         CompilationUnit cUnit = JavaParser.parse(f);
 
                         cUnit.findAll(ClassOrInterfaceDeclaration.class).forEach(classe -> {
-                            if (classe.getExtendedTypes().get(0).toString().contains("Activity") || classe.getExtendedTypes().get(0).toString().contains("Fragment") || classe.getExtendedTypes().get(0).toString().contains("Adapter")) {
+                            if (classe.getExtendedTypes().get(0).toString().contains("Activity") || classe.getExtendedTypes().get(0).toString().contains("Fragment")
+                                    || classe.getExtendedTypes().get(0).toString().contains("Adapter")) {
 
                                 //Procura Libs IO no TIPO  em declaração de campos
                                 classe.getFields().forEach(campos -> {
@@ -446,6 +448,15 @@ public class ImportantSmells {
                                 }
                             }
 
+
+                            //Aqui conta para verificar o threshold de fieldstatic ... mas tem que pensar nisso.
+                            ImportantSmells.contadorFieldStatic = 0;
+                            classe.getFields().forEach(item -> {
+                                if (item.isFieldDeclaration() && item.isStatic()) {
+                                    ImportantSmells.contadorFieldStatic++;
+                                }
+                            });
+
                             //Static Fields
                             classe.getFields().forEach(item -> {
                                 if (item.isFieldDeclaration() && item.isStatic()) {
@@ -561,7 +572,8 @@ public class ImportantSmells {
                         //Pegamos todas as classes que ela implementa
                         NodeList<ClassOrInterfaceType> implementacoes = classe.getExtendedTypes();
                         for (ClassOrInterfaceType implementacao : implementacoes) {
-                            if (implementacao.getName().getIdentifier().equals("BaseAdapter")) {
+                            //eu: Durelli alterei para verificar se contem problema aqui
+                            if (implementacao.getName().getIdentifier().contains("Adapter")) {
                                 //Se chegou at� aqui, temos certeza de que � um adapter.
                                 //Se a classe que extende do BaseAdapter tiver algum m�todo que n�o seja sobrescrever um m�todo de interface, � um FlexAdapter.
                                 //Pegamos todos os membros da classe
@@ -597,7 +609,7 @@ public class ImportantSmells {
                                                     }
 
                                                     //Se ele infla um Layout em toda chamada ao getView, isso tamb�m caracteriza o smell
-                                                    if(statement.toString().contains("getLayoutInflater(")) {
+                                                        if(statement.toString().contains("inflater")) {
                                                         isFoolAdapter = true;
                                                         JsonOut.setTipoSmell("JAVA");
                                                         JsonOut.setLinha(statement.getRange().get().begin.toString());
@@ -729,6 +741,7 @@ public class ImportantSmells {
 
                     //LER TODA A ESTRUTURA DO XML
                     Document d = sb.build(f);
+                    //vamos mudar aqui
 
                     if (d.getRootElement().getChildren().size() > 0) {
                         if (d.getRootElement().getChildren().get(0).getName() == "style") {
@@ -790,7 +803,7 @@ public class ImportantSmells {
 
                     if ((qtdFilesString == 1)) {
                         //System.out.println("->"+arquivosAnalise.toArray()[cont].toString());
-                        System.out.println("Recurso de String Bagun�ado detectado (existe apenas um arquivo para strings no aplicativo  ");
+                        System.out.println("Recurso de String Baguncado detectado (existe apenas um arquivo para strings no aplicativo  ");
                         System.out.println("---------------------------------------------------------------------------------------");
                         JsonOut.setTipoSmell("XML");
                         JsonOut.setArquivo(ListArquivosAnaliseXML.toArray()[cont].toString());
@@ -832,7 +845,7 @@ public class ImportantSmells {
                     //LER TODA A ESTRUTURA DO XML
                     Document d = sb.build(f);
 
-                    if (ListArquivosAnaliseXML.toArray()[cont].toString().contains("\\layout\\")) {
+                    if (ListArquivosAnaliseXML.toArray()[cont].toString().contains("/layout/")) {
                         //ACESSAR O ROOT ELEMENT
                         Element rootElmnt = d.getRootElement();
 
@@ -950,7 +963,7 @@ public class ImportantSmells {
                     //LER TODA A ESTRUTURA DO XML
                     Document d = sb.build(f);
 
-                    if (ListArquivosAnaliseXML.toArray()[cont].toString().contains("\\layout\\")) {
+                    if (ListArquivosAnaliseXML.toArray()[cont].toString().contains("/layout/")) {
                         //ACESSAR O ROOT ELEMENT
                         Element rootElmnt = d.getRootElement();
 
@@ -1024,10 +1037,10 @@ public class ImportantSmells {
     //Reuso inadequado de string
     public static long inappropriateStringReuse(String pathApp){
         try{
-            //arquivosAnalise.clear();
+//            arquivosAnalise.clear();
             ListSmells.clear();
             totalSmells = 0;
-
+            textStringArquivo.clear();
             //listar(new File(pathApp),XML);
 
             for (int cont = 0; cont < ListArquivosAnaliseXML.toArray().length; cont++) {
@@ -1040,7 +1053,7 @@ public class ImportantSmells {
                     //LER TODA A ESTRUTURA DO XML
                     Document d = sb.build(f);
 
-                    if (ListArquivosAnaliseXML.toArray()[cont].toString().contains("\\layout\\")) {
+                    if (ListArquivosAnaliseXML.toArray()[cont].toString().contains("/layout/")) {
                         //ACESSAR O ROOT ELEMENT
                         Element rootElmnt = d.getRootElement();
 
@@ -1143,7 +1156,7 @@ public class ImportantSmells {
                     List<String> ViewsAndroid = new ArrayList<String>();
                     ViewsAndroid.add("TextView");
                     ViewsAndroid.add("EditText");
-                    ViewsAndroid.add("Sppiner");
+                    ViewsAndroid.add("Spinner");
 
                     //Não existir fragmentos na aplicação
 
@@ -1241,18 +1254,18 @@ public class ImportantSmells {
     }
 
     public static long NotFoundImage(String pathApp){
+        FilesIMG.clear();
         totalSmells = 0;
         ListSmells.clear();
         ObtemImagensList(new File(pathApp));
 
         FilesIMG.forEach(caminho->{
+
             File directory = new File(caminho);
             for(File arquivo : directory.listFiles()){
+
                 try{
                     FilesIMG.forEach(item->{
-
-
-
 
                         File arquivoImg = new File(item + ""+File.separator+"" + arquivo.getName());
 
@@ -1280,7 +1293,7 @@ public class ImportantSmells {
         });
 
         JsonOut.saveJson(ListJsonSmell,"NotFoundImage.json");
-        return totalSmells;
+        return ImportantSmells.totalSmells;
     }
 
     public static long HiddenListener(String pathApp){
@@ -1301,7 +1314,7 @@ public class ImportantSmells {
                     //LER TODA A ESTRUTURA DO XML
                     Document d = sb.build(f);
 
-                    if (ListArquivosAnaliseXML.toArray()[cont].toString().contains("\\layout\\")) {
+                    if (ListArquivosAnaliseXML.toArray()[cont].toString().contains("/layout/")) {
                         //ACESSAR O ROOT ELEMENT
                         Element rootElmnt = d.getRootElement();
 
