@@ -16,24 +16,31 @@ public class WMC {
     protected int cc = 0;
     private File fileToIdentifyTheWMC;
 
+    private CompilationUnit cUnit;
 
     public WMC(File fileToIdentifyTheWMC) {
         this.fileToIdentifyTheWMC = fileToIdentifyTheWMC;
     }
 
+    public WMC(CompilationUnit cUnit) {
+        this.cUnit= cUnit;
+    }
+
     public void run() {
         try {
-            CompilationUnit compilationUnit = JavaParser.parse(this.fileToIdentifyTheWMC);
-            this.visitMethodDeclaration(compilationUnit);
-            this.visitForStatement(compilationUnit);
-            this.visitForStatement2(compilationUnit);
-            this.visitConditionalExpression(compilationUnit);
-            this.visitDoStatement(compilationUnit);
-            this.visitWhileStatement(compilationUnit);
-            this.visitSwitchStatement(compilationUnit);
-            this.visitInitializerStatement(compilationUnit);
-            this.visitCatchStatement(compilationUnit);
-            this.visitIfStatement(compilationUnit);
+            if (this.fileToIdentifyTheWMC!=null) {
+                this.cUnit = JavaParser.parse(this.fileToIdentifyTheWMC);
+            }
+            this.visitMethodDeclaration(this.cUnit);
+            this.visitForStatement(this.cUnit);
+            this.visitForStatement2(this.cUnit);
+            this.visitConditionalExpression(this.cUnit);
+            this.visitDoStatement(this.cUnit);
+            this.visitWhileStatement(this.cUnit);
+            this.visitSwitchStatement(this.cUnit);
+            this.visitInitializerStatement(this.cUnit);
+            this.visitCatchStatement(this.cUnit);
+            this.visitIfStatement(this.cUnit);
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -123,5 +130,6 @@ public class WMC {
     protected void increaseCc(int qtd) {
         cc += qtd;
     }
+
 
 }
