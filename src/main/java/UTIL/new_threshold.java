@@ -9,6 +9,7 @@ import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.body.*;
 import com.github.javaparser.ast.stmt.IfStmt;
 import com.github.javaparser.ast.stmt.SwitchEntryStmt;
+import com.github.javaparser.ast.stmt.SwitchStmt;
 import com.github.javaparser.ast.type.ClassOrInterfaceType;
 import org.jdom2.Document;
 import org.jdom2.Element;
@@ -110,8 +111,6 @@ public class new_threshold {
 
                     //ACESSAR O ROOT ELEMENT
                     Element rootElmnt = d.getRootElement();
-
-
 
                     //BUSCAR ELEMENTOS FILHOS DA TAG
                     List elements = rootElmnt.getChildren();
@@ -240,7 +239,7 @@ public class new_threshold {
 
         for (int cont = 0; cont < arquivosAnalise.toArray().length; cont++) {
             try {
-
+                totalFragments = 0;
                 System.out.println("Arquivo analisado:" + arquivosAnalise.toArray()[cont]);
                 //System.out.println("---------------------------------------------------------------------------------------");
 
@@ -267,7 +266,7 @@ public class new_threshold {
                 writer.append(f.getName() + ";" + totalFragments);
                 writer.append("\n");
 
-                return totalSmells;
+
             }
             catch (Exception ex){
                 ex.printStackTrace();
@@ -283,14 +282,6 @@ public class new_threshold {
 
     //.BrainUIComponent(caminho);
     public static void BrainUIComponent(String pathApp) {
-
-        quantidadeIF = 0;
-        quantidadeSWIFT = 0;
-        quantidadeFieldStatic = 0;
-        quantidadeLIBSIODeclaracaoDeCampos = 0;
-        quantidadeLIBSIODeclaracaoDeMethods = 0;
-        quantidadeLIBSIORETORNOMethod = 0;
-        quantidadeLIBSIOFieldDeclaracaoCampos = 0;
 
         try {
             arquivosAnalise.clear();
@@ -315,12 +306,19 @@ public class new_threshold {
             listar(new File(pathApp),JAVA);
 
             for (int cont = 0; cont < arquivosAnalise.toArray().length; cont++) {
+                quantidadeIF = 0;
+                quantidadeSWIFT = 0;
+                quantidadeFieldStatic = 0;
+                quantidadeLIBSIODeclaracaoDeCampos = 0;
+                quantidadeLIBSIODeclaracaoDeMethods = 0;
+                quantidadeLIBSIORETORNOMethod = 0;
+                quantidadeLIBSIOFieldDeclaracaoCampos = 0;
 
-                    System.out.println("Arquivo analisado:" + arquivosAnalise.toArray()[cont]);
-                    String nomeArquivo = arquivosAnalise.toArray()[cont].toString();
-                    System.out.println("---------------------------------------------------------------------------------------");
+                System.out.println("Arquivo analisado:" + arquivosAnalise.toArray()[cont]);
+                String nomeArquivo = arquivosAnalise.toArray()[cont].toString();
+                System.out.println("---------------------------------------------------------------------------------------");
 
-                    File f = new File(arquivosAnalise.toArray()[cont].toString());
+                File f = new File(arquivosAnalise.toArray()[cont].toString());
                 try {
                     CompilationUnit cUnit = JavaParser.parse(f);
 
@@ -390,16 +388,111 @@ public class new_threshold {
 
 
             }
+
+            writer.flush();
+            writer.close();
         }
         catch(Exception ex){
             ex.printStackTrace();
         }
     }
 
+    public static long FlexAdapterThreshold(String pathApp) {
+        try {
+            ListSmells.clear();
+            arquivosAnalise.clear();
+
+            File fileCsv = new File("C:\\Detector\\FlexAdapterThresholdThresholdFinal.csv");
+            FileWriter writer = new FileWriter(fileCsv);
+            fileCsv.createNewFile();
+
+
+            writer.append("Aplicativo" + ";" +
+                    "quantidadeIF" + ";" +
+                    "quantidadeSWITCH");
+            writer.append("\n");
+
+            listar(new File(pathApp),JAVA);
+
+            for (int cont = 0; cont < arquivosAnalise.toArray().length; cont++) {
+                quantidadeIF = 0;
+                quantidadeSWIFT = 0;
+
+                try {
+                    System.out.println("Arquivo analisado:" + arquivosAnalise.toArray()[cont]);
+                    System.out.println("---------------------------------------------------------------------------------------");
+                    String arquivo = arquivosAnalise.toArray()[cont].toString();
+                    File f = new File(arquivosAnalise.toArray()[cont].toString());
+                    CompilationUnit compilationunit = JavaParser.parse(f);
+
+                    //Extrai cada Classe analisada pelo CompilationUnit
+                    ArrayList<ClassOrInterfaceDeclaration> classes = new ArrayList<ClassOrInterfaceDeclaration>();
+                    NodeList<TypeDeclaration<?>> types = compilationunit.getTypes();
+                    for (int i = 0; i < types.size(); i++) {
+                        classes.add((ClassOrInterfaceDeclaration) types.get(i));
+                    }
+                    //Para cada uma dessas classes, verifica se ela é um Adapter (ou seja, se ela extende de BaseAdapter).
+                    for (ClassOrInterfaceDeclaration classe : classes) {
+                        //Como a classe vai ser analisada ainda, não contém smells por enquanto
+                        Boolean isFlexAdapter = false;
+                        //Para ver se a classe é um Adapter, precisamos ver se ela extende de BaseAdapter
+                        //Pegamos todas as classes que ela implementa
+                        NodeList<ClassOrInterfaceType> implementacoes = classe.getExtendedTypes();
+                        for (ClassOrInterfaceType implementacao : implementacoes) {
+                            if (implementacao.getName().getIdentifier().contains("Adapter")) {
+                                //Se chegou até aqui, temos certeza de que é um adapter.
+                                //Se a classe que extende do BaseAdapter tiver algum método que não seja sobrescrever um método de interface, é um FlexAdapter.
+                                //Pegamos todos os membros da classe
+                                NodeList<BodyDeclaration<?>> membros = classe.getMembers();
+                                for (BodyDeclaration<?> membro : membros) {
+                                    //Verifica se o membro é um método
+                                    if (membro.isMethodDeclaration()) {
+
+                                        membro.findAll(IfStmt.class).forEach(item -> {
+                                            System.out.println("Flex Adapter detectado na classe " + item.getRange() + " (lógica utilizando if detectada)");
+                                            System.out.println("---------------------------------------------------------------------------------------");
+                                            JsonOut.setTipoSmell("JAVA");
+                                            quantidadeIF++;
+                                        });
+
+                                        membro.findAll(SwitchStmt.class).forEach(item -> {
+                                            System.out.println("Flex Adapter detectado na classe " + item.getRange() + " (lógica utilizando Switch/Case detectada)");
+                                            System.out.println("---------------------------------------------------------------------------------------");
+                                            quantidadeSWIFT++;
+                                        });
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+
+                    writer.append(f.getName() + ";" + quantidadeIF + ";" + quantidadeSWIFT );
+                    writer.append("\n");
+
+
+                }
+                catch(Exception ex){
+                    ex.printStackTrace();
+                }
+            }
+
+            writer.flush();
+            writer.close();
+
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+        }
+
+        return totalSmells;
+    }
+
+
     public static void CompUIIOTHRESHOLD(String pathApp){
         try {
             arquivosAnalise.clear();
-            //totalSmells = 0;
+            totalSmells = 0;
 
             File fileCsv = new File("C:\\Detector\\CompUIIOTHRESHOLDThresholdFinal.csv");
             FileWriter writer = new FileWriter(fileCsv);
@@ -487,7 +580,8 @@ public class new_threshold {
 
             }
 
-
+            writer.flush();
+            writer.close();
 
         }
         catch(Exception ex){
@@ -499,8 +593,10 @@ public class new_threshold {
     public static void main (String... args) throws  IOException{
         //DeepNestedLayout("C:\\Users\\julio\\Desktop\\Repositorio01\\Repositorio01",0);
         //GodStyleResource("C:\\Users\\julio\\Desktop\\Repositorio01\\Repositorio01",0);
-        //ExcessiveFragment("C:\\Users\\julio\\Desktop\\Repositorio01\\Repositorio01",0);
+        ExcessiveFragment("C:\\Users\\julio\\Desktop\\Repositorio01\\Repositorio01",0);
+        //FlexAdapterThreshold("C:\\Users\\julio\\Desktop\\Repositorio01\\Repositorio01");
+        //CompUIIOTHRESHOLD("C:\\Users\\julio\\Desktop\\Repositorio01\\Repositorio01");
         //BrainUIComponent("C:\\Users\\julio\\Desktop\\Repositorio01\\Repositorio01");
-        CompUIIOTHRESHOLD("C:\\Users\\julio\\Desktop\\Repositorio01\\Repositorio01");
+
     }
 }
