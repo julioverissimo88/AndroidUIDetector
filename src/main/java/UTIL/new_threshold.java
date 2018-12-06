@@ -292,13 +292,13 @@ public class new_threshold {
             fileCsv.createNewFile();
 
 
-            writer.append("Aplicativo" + "," +
-                    "quantidadeIF" + "," +
-                    "quantidadeSWIT" + "," +
-                    "quantidadeFieldStatic" + "," +
-                    "libsIOnoTIPOemDeclaracaoDeCampos" + "," +
-                    "libsIONoTipoemDeclaracaoNosParametrosDeMetodo" + ","
-                    + "libsIONoTipoRetornoDeMetodo" + "," +
+            writer.append("Aplicativo" + ";" +
+                    "quantidadeIF" + ";" +
+                    "quantidadeSWIT" + ";" +
+                    "quantidadeFieldStatic" + ";" +
+                    "libsIOnoTIPOemDeclaracaoDeCampos" + ";" +
+                    "libsIONoTipoemDeclaracaoNosParametrosDeMetodo" + ";"
+                    + "libsIONoTipoRetornoDeMetodo" + ";" +
                     "libsIOnoTIPODeclaracaoDECAMPOS");
             writer.append("\n");
 
@@ -499,10 +499,10 @@ public class new_threshold {
             fileCsv.createNewFile();
 
 
-            writer.append("Aplicativo" + "," +
-                    "libsIOnoTIPOemDeclaracaoDeCampos" + "," +
-                    "libsIONoTipoemDeclaracaoNosParametrosDeMetodo" + ","
-                    + "libsIONoTipoRetornoDeMetodo" + "," +
+            writer.append("Aplicativo" + ";" +
+                    "libsIOnoTIPOemDeclaracaoDeCampos" + ";" +
+                    "libsIONoTipoemDeclaracaoNosParametrosDeMetodo" + ";"
+                    + "libsIONoTipoRetornoDeMetodo" + ";" +
                     "libsIOnoTIPODeclaracaoDECAMPOS");
             writer.append("\n");
 
