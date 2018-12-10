@@ -1,5 +1,4 @@
 package AndroidDetector;
-
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.ImportDeclaration;
@@ -28,13 +27,13 @@ import java.util.*;
 import UTIL.ReusoStringData;
 
 public class ImportantSmells {
-    private ImportantSmells(){
-
-    }
-
     private static int contadorFieldStatic = 0;
-
+    public static int contadorArquivosAnalisados = 0;
     private static long qtdSubelementos = 0;
+    private static long totalSmells = 0;
+    public static final String JAVA = ".java";
+    public static final String XML = ".xml";
+
     private static File arquivos[];
     private static File diretorio = null;
     private static SAXBuilder sb = new SAXBuilder();
@@ -44,27 +43,24 @@ public class ImportantSmells {
     public static List<File> ListArquivosAnaliseJava =  new ArrayList<File>();
     public static List<File> arquivosAnalise =  new ArrayList<File>();
 
-    public static final String JAVA = ".java";
-    public static final String XML = ".xml";
+
     private static OutputSmells JsonOut = new  OutputSmells();
     private static List<OutputSmells> ListJsonSmell = new ArrayList<OutputSmells>();
     private  static List<OutputSmells> ListSmells = new ArrayList<OutputSmells>();
     private static List<ReusoStringData> textStringArquivo = new ArrayList<ReusoStringData>();
     private  static List<String> FilesIMG = new ArrayList<String>();
-    private static long totalSmells = 0;
 
+    //--> Listagem de Arquivos
     public static void carregaArquivosXMLAnalise(File directory){
         arquivosAnalise.clear();
         listar(directory,XML);
         ListArquivosAnaliseXML = arquivosAnalise;
     }
-
     public static void carregaArquivosJAVAAnalise(File directory){
         arquivosAnalise.clear();
         listar(directory,JAVA);
         ListArquivosAnaliseJava = arquivosAnalise;
     }
-
     public static void listar(File directory,String tipo) {
         if(directory.isDirectory()) {
             //System.out.println(directory.getPath());
@@ -88,9 +84,11 @@ public class ImportantSmells {
         }
     }
 
+    //-->Detecções
     //Componente de UI Fazendo IO
     public static long CompUIIO(String pathApp){
         try {
+            contadorArquivosAnalisados = 0;
             //arquivosAnalise.clear();
             totalSmells = 0;
 
@@ -107,8 +105,12 @@ public class ImportantSmells {
                         CompilationUnit cUnit = JavaParser.parse(f);
 
                         cUnit.findAll(ClassOrInterfaceDeclaration.class).forEach(classe -> {
-                            if (classe.getExtendedTypes().get(0).toString().contains("Activity") || classe.getExtendedTypes().get(0).toString().contains("Fragment")
+                            if (classe.getExtendedTypes().size() > 0 && classe.getExtendedTypes().get(0).toString().contains("Activity")
+                                    || classe.getExtendedTypes().get(0).toString().contains("Fragment")
                                     || classe.getExtendedTypes().get(0).toString().contains("Adapter")) {
+
+                                //Contados de arquivos analisados
+                                contadorArquivosAnalisados = contadorArquivosAnalisados +1;
 
                                 //Procura Libs IO no TIPO  em declaração de campos
                                 classe.getFields().forEach(campos -> {
@@ -180,9 +182,9 @@ public class ImportantSmells {
 
         return totalSmells;
     }
-
-
+    //Componente de UI Acoplado
     public static long CoupledUIComponent(String pathApp) throws FileNotFoundException {
+        contadorArquivosAnalisados = 0;
         ListSmells.clear();
         //arquivosAnalise.clear();
         totalSmells = 0;
@@ -210,6 +212,10 @@ public class ImportantSmells {
                     if (implementacoes.size() != 0) {
                         for (ClassOrInterfaceType implementacao : implementacoes) {
                             if (implementacao.getName().getIdentifier().contains("Fragment") || implementacao.getName().getIdentifier().contains("Adapter") || implementacao.getName().getIdentifier().contains("Activity")) {
+
+                                //Contados de arquivos analisados
+                                contadorArquivosAnalisados = contadorArquivosAnalisados +1;
+
                                 classe.getFields().forEach(item -> {
                                     //System.out.println(item.getElementType().toString());
                                     if ((item.getElementType().toString().contains("Activity") || item.getElementType().toString().contains("Fragment"))) {
@@ -287,9 +293,9 @@ public class ImportantSmells {
         JsonOut.saveJson(ListJsonSmell,"CoupledUIComponent.json");
         return totalSmells;
     }
-
-
+    //Comportamento suspeito
     public static long SuspiciousBehavior(String pathApp) throws FileNotFoundException {
+        contadorArquivosAnalisados = 0;
         ListSmells.clear();
         //arquivosAnalise.clear();
         totalSmells = 0;
@@ -317,6 +323,11 @@ public class ImportantSmells {
                         for (ClassOrInterfaceType implementacao : implementacoes) {
                             if (implementacao.getName().getIdentifier().contains("BaseActivity") || implementacao.getName().getIdentifier().contains("Activity") || implementacao.getName().getIdentifier().contains("Fragments") || implementacao.getName().getIdentifier().contains("BaseAdapter") || implementacao.getName().getIdentifier().endsWith("Listener")) {
                                 classeValida = true;
+
+                                //Contados de arquivos analisados
+                                contadorArquivosAnalisados = contadorArquivosAnalisados +1;
+
+
                                 classe.getImplementedTypes().forEach(item -> {
                                     //System.out.println(item.getNameAsString());
                                     if (item.getName().toString().contains("Listener")) {
@@ -400,9 +411,10 @@ public class ImportantSmells {
         JsonOut.saveJson(ListJsonSmell,"SuspiciousBehavior.json");
         return totalSmells;
     }
-
+    //Componente de UI Cérebro
     public static long BrainUIComponent(String pathApp) {
         try {
+            contadorArquivosAnalisados = 0;
             ListSmells.clear();
             //arquivosAnalise.clear();
             totalSmells = 0;
@@ -419,7 +431,11 @@ public class ImportantSmells {
                     CompilationUnit cUnit = JavaParser.parse(f);
 
                     cUnit.findAll(ClassOrInterfaceDeclaration.class).forEach(classe -> {
-                        if (classe.getExtendedTypes().get(0).toString().contains("Activity") || classe.getExtendedTypes().get(0).toString().contains("Fragment") || classe.getExtendedTypes().get(0).toString().contains("Adapter")) {
+                        if (classe.getExtendedTypes().size() > 0 && classe.getExtendedTypes().get(0).toString().contains("Activity") || classe.getExtendedTypes().get(0).toString().contains("Fragment") || classe.getExtendedTypes().get(0).toString().contains("Adapter")) {
+                            //Contados de arquivos analisados
+                            contadorArquivosAnalisados = contadorArquivosAnalisados +1;
+
+
                             //ifElseSwitchCase (Regra de negócios)
                             NodeList<BodyDeclaration<?>> membros = classe.getMembers();
                             for (BodyDeclaration<?> membro : membros) {
@@ -540,9 +556,10 @@ public class ImportantSmells {
 
         return totalSmells;
     }
-    
+    //Adapter consumista
     public static long FoolAdapter(String pathApp){
         try {
+            contadorArquivosAnalisados = 0;
             ListSmells.clear();
             //arquivosAnalise.clear();
             totalSmells = 0;           
@@ -574,6 +591,11 @@ public class ImportantSmells {
                         for (ClassOrInterfaceType implementacao : implementacoes) {
                             //eu: Durelli alterei para verificar se contem problema aqui
                             if (implementacao.getName().getIdentifier().contains("Adapter")) {
+
+                                //Contados de arquivos analisados
+                                contadorArquivosAnalisados = contadorArquivosAnalisados +1;
+
+
                                 //Se chegou at� aqui, temos certeza de que � um adapter.
                                 //Se a classe que extende do BaseAdapter tiver algum m�todo que n�o seja sobrescrever um m�todo de interface, � um FlexAdapter.
                                 //Pegamos todos os membros da classe
@@ -642,9 +664,10 @@ public class ImportantSmells {
             return totalSmells;
         }  
     }
-
+    //adapter
     public static long FlexAdapter(String pathApp) {
         try {
+            contadorArquivosAnalisados = 0;
             ListSmells.clear();
             //arquivosAnalise.clear();
             totalSmells = 0;
@@ -674,6 +697,11 @@ public class ImportantSmells {
                         NodeList<ClassOrInterfaceType> implementacoes = classe.getExtendedTypes();
                         for (ClassOrInterfaceType implementacao : implementacoes) {
                             if (implementacao.getName().getIdentifier().contains("Adapter")) {
+
+                                //Contados de arquivos analisados
+                                contadorArquivosAnalisados = contadorArquivosAnalisados +1;
+
+
                                 //Se chegou até aqui, temos certeza de que é um adapter.
                                 //Se a classe que extende do BaseAdapter tiver algum método que não seja sobrescrever um método de interface, é um FlexAdapter.
                                 //Pegamos todos os membros da classe
@@ -720,10 +748,10 @@ public class ImportantSmells {
 
         return totalSmells;
     }
-
-
+    //Longo Recurso de Estilo
     public static long GodStyleResource(String pathApp,int threshold) {
         try {
+            contadorArquivosAnalisados = 0;
             //arquivosAnalise.clear();
             ListSmells.clear();
             totalSmells = 0;
@@ -733,6 +761,9 @@ public class ImportantSmells {
             int qtdFilesStyle = 0;
 
             for (int cont = 0; cont < (ListArquivosAnaliseXML.toArray().length - 1); cont++) {
+                //Contados de arquivos analisados
+                contadorArquivosAnalisados = contadorArquivosAnalisados +1;
+
                 try {
                     //System.out.println("Arquivo analisado:" + arquivosAnalise.toArray()[cont]);
                     System.out.println("---------------------------------------------------------------------------------------");
@@ -773,10 +804,10 @@ public class ImportantSmells {
 
         return totalSmells;
     }
-
     //Recurso de String Bagunçado
     public static long godStringResource(String pathApp) {
         try {
+            contadorArquivosAnalisados = 0;
             //arquivosAnalise.clear();
             ListSmells.clear();
             totalSmells = 0;
@@ -786,6 +817,9 @@ public class ImportantSmells {
             int qtdFilesString = 0;
 
             for (int cont = 0; cont < (ListArquivosAnaliseXML.toArray().length - 1); cont++) {
+                //Contados de arquivos analisados
+                contadorArquivosAnalisados = contadorArquivosAnalisados +1;
+
                 try {
                     //System.out.println("Arquivo analisado:" + arquivosAnalise.toArray()[cont]);
                     System.out.println("---------------------------------------------------------------------------------------");
@@ -824,11 +858,10 @@ public class ImportantSmells {
 
         return totalSmells;
     }
-
-
-
+    //Layout Profundamente Aninhado
     public static long DeepNestedLayout(String pathApp, int threshold) {
         try {
+            contadorArquivosAnalisados = 0;
             //arquivosAnalise.clear();
             ListSmells.clear();
             totalSmells = 0;
@@ -836,6 +869,9 @@ public class ImportantSmells {
             //listar(new File(pathApp),XML);
 
             for (int cont = 0; cont < ListArquivosAnaliseXML.toArray().length; cont++) {
+                //Contados de arquivos analisados
+                contadorArquivosAnalisados = contadorArquivosAnalisados +1;
+
                 try {
                     System.out.println("Arquivo analisado:" + ListArquivosAnaliseXML.toArray()[cont]);
                     System.out.println("---------------------------------------------------------------------------------------");
@@ -845,7 +881,7 @@ public class ImportantSmells {
                     //LER TODA A ESTRUTURA DO XML
                     Document d = sb.build(f);
 
-                    if (ListArquivosAnaliseXML.toArray()[cont].toString().contains("/layout/")) {
+                    if (ListArquivosAnaliseXML.toArray()[cont].toString().contains(File.separator + "layout" + File.separator )) {
                         //ACESSAR O ROOT ELEMENT
                         Element rootElmnt = d.getRootElement();
 
@@ -871,9 +907,10 @@ public class ImportantSmells {
 
         return totalSmells;
     }
-
+    //Atributo de estilo duplicado
     public static long DuplicateStyleAttributes(String pathApp) {
         try {
+            contadorArquivosAnalisados = 0;
             //arquivosAnalise.clear();
             ListSmells.clear();
             totalSmells = 0;
@@ -881,6 +918,9 @@ public class ImportantSmells {
             //listar(new File(pathApp),XML);
 
             for (int cont = 0; cont < ListArquivosAnaliseXML.toArray().length; cont++) {
+                //Contados de arquivos analisados
+                contadorArquivosAnalisados = contadorArquivosAnalisados +1;
+
                 try {
                     System.out.println("Arquivo analisado:" + ListArquivosAnaliseXML.toArray()[cont]);
                     System.out.println("---------------------------------------------------------------------------------------");
@@ -941,12 +981,10 @@ public class ImportantSmells {
 
         return totalSmells;
     }
-
-    //-----------------------------------------------------------------
-
     //Recurso Mágico
     public static long magicResource(String pathApp){
         try{
+            contadorArquivosAnalisados = 0;
             //arquivosAnalise.clear();
             ListSmells.clear();
             totalSmells = 0;
@@ -954,6 +992,9 @@ public class ImportantSmells {
             //listar(new File(pathApp),XML);
 
             for (int cont = 0; cont < ListArquivosAnaliseXML.toArray().length; cont++) {
+                //Contados de arquivos analisados
+                contadorArquivosAnalisados = contadorArquivosAnalisados +1;
+
                 try {
                     System.out.println("Arquivo analisado:" + ListArquivosAnaliseXML.toArray()[cont]);
                     System.out.println("---------------------------------------------------------------------------------------");
@@ -963,7 +1004,7 @@ public class ImportantSmells {
                     //LER TODA A ESTRUTURA DO XML
                     Document d = sb.build(f);
 
-                    if (ListArquivosAnaliseXML.toArray()[cont].toString().contains("/layout/")) {
+                    if (ListArquivosAnaliseXML.toArray()[cont].toString().contains(File.separator + "layout" + File.separator )) {
                         //ACESSAR O ROOT ELEMENT
                         Element rootElmnt = d.getRootElement();
 
@@ -998,45 +1039,10 @@ public class ImportantSmells {
 
         return totalSmells;
     }
-
-
-    private static void recursiveChildrenMagic(List elements) {
-        for (int i = 0; i < elements.size(); i++) {
-            try {
-
-                org.jdom2.Element el = (org.jdom2.Element) elements.get(i);
-                List SubElements = el.getChildren();
-
-                //System.out.println(el.getName());
-
-                if (SubElements.size() > 0) {
-                    recursiveChildrenMagic(SubElements);
-                } else {
-                    List<org.jdom2.Attribute> listAttr = (List<org.jdom2.Attribute>) el.getAttributes();
-                    for (org.jdom2.Attribute item : listAttr) {
-                        //System.out.println(item);
-                        if (item.getName() == "text") {
-                            if (!item.getValue().matches("@.*/.*")) {
-                                System.out.println("Recurso Mágico " + el.getName() + " - text:" + item.getValue());
-                                JsonOut.setTipoSmell("XML");
-                                JsonOut.setArquivo("");
-                                ListJsonSmell.add(JsonOut);
-                                totalSmells++;
-                            }
-                        }
-                    }
-                }
-            }
-            catch(Exception ex){
-                ex.printStackTrace();
-            }
-        }
-    }
-
-
     //Reuso inadequado de string
     public static long inappropriateStringReuse(String pathApp){
         try{
+            contadorArquivosAnalisados = 0;
 //            arquivosAnalise.clear();
             ListSmells.clear();
             totalSmells = 0;
@@ -1044,6 +1050,9 @@ public class ImportantSmells {
             //listar(new File(pathApp),XML);
 
             for (int cont = 0; cont < ListArquivosAnaliseXML.toArray().length; cont++) {
+                //Contados de arquivos analisados
+                contadorArquivosAnalisados = contadorArquivosAnalisados +1;
+
                 try {
                     System.out.println("Arquivo analisado:" + ListArquivosAnaliseXML.toArray()[cont]);
                     System.out.println("---------------------------------------------------------------------------------------");
@@ -1053,7 +1062,7 @@ public class ImportantSmells {
                     //LER TODA A ESTRUTURA DO XML
                     Document d = sb.build(f);
 
-                    if (ListArquivosAnaliseXML.toArray()[cont].toString().contains("/layout/")) {
+                    if (ListArquivosAnaliseXML.toArray()[cont].toString().contains(File.separator + "layout" + File.separator )) {
                         //ACESSAR O ROOT ELEMENT
                         Element rootElmnt = d.getRootElement();
 
@@ -1101,43 +1110,10 @@ public class ImportantSmells {
 
         return totalSmells;
     }
-
-
-    private static void recursiveChildrenReusoInadequadoDeString(List elements, String arquivo) {
-        for (int i = 0; i < elements.size(); i++) {
-            try {
-                org.jdom2.Element el = (org.jdom2.Element) elements.get(i);
-                List SubElements = el.getChildren();
-
-                //System.out.println(el.getName());
-
-                if (SubElements.size() > 0) {
-                    recursiveChildrenReusoInadequadoDeString(SubElements, arquivo);
-                } else {
-                    List<org.jdom2.Attribute> listAttr = (List<org.jdom2.Attribute>) el.getAttributes();
-                    for (org.jdom2.Attribute item : listAttr) {
-                        //System.out.println(item);
-                        if (item.getName() == "text") {
-                            if (item.getValue().matches("@.*/.*")) {
-                                //System.out.println("Recurso Mágico " + el.getName() + " - text:" + item.getValue());
-                                //System.out.println(item.getValue());
-                                ReusoStringData data = new ReusoStringData();
-                                data.arquivo = arquivo;
-                                data.strString = item.getValue();
-                                textStringArquivo.add(data);
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception ex){
-                ex.printStackTrace();
-            }
-        }
-    }
-
+    //Não uso de Fragments
     public static long NotFragment(String pathApp){
         try{
+            contadorArquivosAnalisados = 0;
             //arquivosAnalise.clear();
             ListSmells.clear();
             totalSmells = 0;
@@ -1145,6 +1121,9 @@ public class ImportantSmells {
             //listar(new File(pathApp),JAVA);
 
             for (int cont = 0; cont < ListArquivosAnaliseJava.toArray().length; cont++) {
+                //Contados de arquivos analisados
+                contadorArquivosAnalisados = contadorArquivosAnalisados +1;
+
                 try {
                     System.out.println("Arquivo analisado:" + ListArquivosAnaliseJava.toArray()[cont]);
                     String nomeArquivo = ListArquivosAnaliseJava.toArray()[cont].toString();
@@ -1162,7 +1141,7 @@ public class ImportantSmells {
 
                     // Uso de Views(EditText, Spinner, ou Outras Views Diretamente pela activity)
                     cUnit.findAll(ClassOrInterfaceDeclaration.class).forEach(classe -> {
-                        if (classe.getExtendedTypes().get(0).toString().contains("Activity")) {
+                        if (classe.getExtendedTypes().size() > 0 && classe.getExtendedTypes().size() > 0 && classe.getExtendedTypes().get(0).toString().contains("Activity")) {
                             NodeList<BodyDeclaration<?>> membros = classe.getMembers();
 
                             //Procura ViewsAndroid no TIPO  em declaração de campos
@@ -1236,28 +1215,17 @@ public class ImportantSmells {
 
         return totalSmells;
     }
-
-    public static void ObtemImagensList(File directory) {
-        if(directory.isDirectory()) {
-            if(directory.getPath().contains("mipmap")){
-                //System.out.println(directory.getPath());
-                FilesIMG.add(directory.getPath());
-            }
-
-            String[] subDirectory = directory.list();
-            if(subDirectory != null) {
-                for(String dir : subDirectory){
-                    ObtemImagensList(new File(directory + File.separator  + dir));
-                }
-            }
-        }
-    }
-
+    //Imagem Faltante
     public static long NotFoundImage(String pathApp){
+        contadorArquivosAnalisados = 0;
         FilesIMG.clear();
         totalSmells = 0;
         ListSmells.clear();
         ObtemImagensList(new File(pathApp));
+
+        //Contados de arquivos analisados
+        contadorArquivosAnalisados = FilesIMG.size();
+
 
         FilesIMG.forEach(caminho->{
 
@@ -1295,9 +1263,10 @@ public class ImportantSmells {
         JsonOut.saveJson(ListJsonSmell,"NotFoundImage.json");
         return ImportantSmells.totalSmells;
     }
-
+    //Listener Oculto
     public static long HiddenListener(String pathApp){
         try{
+            contadorArquivosAnalisados = 0;
             //arquivosAnalise.clear();
             ListSmells.clear();
             totalSmells = 0;
@@ -1305,6 +1274,9 @@ public class ImportantSmells {
             //listar(new File(pathApp),XML);
 
             for (int cont = 0; cont < ListArquivosAnaliseXML.toArray().length; cont++) {
+                //Contados de arquivos analisados
+                contadorArquivosAnalisados = contadorArquivosAnalisados +1;
+
                 try {
                     System.out.println("Arquivo analisado:" + ListArquivosAnaliseXML.toArray()[cont]);
                     System.out.println("---------------------------------------------------------------------------------------");
@@ -1314,7 +1286,7 @@ public class ImportantSmells {
                     //LER TODA A ESTRUTURA DO XML
                     Document d = sb.build(f);
 
-                    if (ListArquivosAnaliseXML.toArray()[cont].toString().contains("/layout/")) {
+                    if (ListArquivosAnaliseXML.toArray()[cont].toString().contains(File.separator + "layout" + File.separator )) {
                         //ACESSAR O ROOT ELEMENT
                         Element rootElmnt = d.getRootElement();
 
@@ -1350,8 +1322,9 @@ public class ImportantSmells {
 
         return totalSmells;
     }
-
+    //Uso excessivo de Fragments
     public static long ExcessiveFragment(String pathApp, long threshold) throws IOException {
+        contadorArquivosAnalisados = 0;
         //arquivosAnalise.clear();
         ListSmells.clear();
         totalSmells = 0;
@@ -1361,6 +1334,9 @@ public class ImportantSmells {
         List<ReusoStringData> listaExcessiveFragment = new ArrayList<ReusoStringData>();
 
         for (int cont = 0; cont < ListArquivosAnaliseJava.toArray().length; cont++) {
+            //Contados de arquivos analisados
+            contadorArquivosAnalisados = contadorArquivosAnalisados +1;
+
             try {
 
                 //System.out.println("Arquivo analisado:" + arquivosAnalise.toArray()[cont]);
@@ -1369,12 +1345,15 @@ public class ImportantSmells {
                 File f = new File(ListArquivosAnaliseJava.toArray()[cont].toString());
                 CompilationUnit cu = JavaParser.parse(f);
 
+                /*
                 ArrayList<ClassOrInterfaceDeclaration> classes = new ArrayList<ClassOrInterfaceDeclaration>();
                 NodeList<TypeDeclaration<?>> types = cu.getTypes();
                 for (int i = 0; i < types.size(); i++) {
                     classes.add((ClassOrInterfaceDeclaration) types.get(i));
                 }
+                */
 
+                ArrayList<ClassOrInterfaceDeclaration> classes = (ArrayList<ClassOrInterfaceDeclaration>)cu.findAll(ClassOrInterfaceDeclaration.class);
                 for (ClassOrInterfaceDeclaration classe : classes) {
                     NodeList<ClassOrInterfaceType> implementacoes = classe.getExtendedTypes();
                     if (implementacoes.size() != 0) {
@@ -1406,7 +1385,86 @@ public class ImportantSmells {
 
     }
 
+    //--->Chamadas Recursivas
+    public static void ObtemImagensList(File directory) {
+        if(directory.isDirectory()) {
+            if(directory.getPath().contains("mipmap")){
+                //System.out.println(directory.getPath());
+                FilesIMG.add(directory.getPath());
+            }
 
+            String[] subDirectory = directory.list();
+            if(subDirectory != null) {
+                for(String dir : subDirectory){
+                    ObtemImagensList(new File(directory + File.separator  + dir));
+                }
+            }
+        }
+    }
+    private static void recursiveChildrenMagic(List elements) {
+        for (int i = 0; i < elements.size(); i++) {
+            try {
+
+                org.jdom2.Element el = (org.jdom2.Element) elements.get(i);
+                List SubElements = el.getChildren();
+
+                //System.out.println(el.getName());
+
+                if (SubElements.size() > 0) {
+                    recursiveChildrenMagic(SubElements);
+                } else {
+                    List<org.jdom2.Attribute> listAttr = (List<org.jdom2.Attribute>) el.getAttributes();
+                    for (org.jdom2.Attribute item : listAttr) {
+                        //System.out.println(item);
+                        if (item.getName() == "text") {
+                            if (!item.getValue().matches("@.*/.*")) {
+                                System.out.println("Recurso Mágico " + el.getName() + " - text:" + item.getValue());
+                                JsonOut.setTipoSmell("XML");
+                                JsonOut.setArquivo("");
+                                ListJsonSmell.add(JsonOut);
+                                totalSmells++;
+                            }
+                        }
+                    }
+                }
+            }
+            catch(Exception ex){
+                ex.printStackTrace();
+            }
+        }
+    }
+    private static void recursiveChildrenReusoInadequadoDeString(List elements, String arquivo) {
+        for (int i = 0; i < elements.size(); i++) {
+            try {
+                org.jdom2.Element el = (org.jdom2.Element) elements.get(i);
+                List SubElements = el.getChildren();
+
+                //System.out.println(el.getName());
+
+                if (SubElements.size() > 0) {
+                    recursiveChildrenReusoInadequadoDeString(SubElements, arquivo);
+                } else {
+                    List<org.jdom2.Attribute> listAttr = (List<org.jdom2.Attribute>) el.getAttributes();
+                    for (org.jdom2.Attribute item : listAttr) {
+                        //System.out.println(item);
+                        if (item.getName() == "text") {
+                            if (item.getValue().matches("@.*/.*")) {
+                                //System.out.println("Recurso Mágico " + el.getName() + " - text:" + item.getValue());
+                                //System.out.println(item.getValue());
+                                ReusoStringData data = new ReusoStringData();
+                                data.arquivo = arquivo;
+                                data.strString = item.getValue();
+                                textStringArquivo.add(data);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex){
+                ex.printStackTrace();
+            }
+        }
+    }
     private static void recursiveChildrenHideListener(List elements) {
         for (int i = 0; i < elements.size(); i++) {
             try {
@@ -1436,9 +1494,7 @@ public class ImportantSmells {
             }
         }
     }
-
-
-        private static void recursiveChildrenElement(List elements, int threshold) {
+    private static void recursiveChildrenElement(List elements, int threshold) {
             for (int i = 0; i < elements.size(); i++) {
                 try {
 
@@ -1464,5 +1520,5 @@ public class ImportantSmells {
                 }
             }
         }
-    }
+}
 

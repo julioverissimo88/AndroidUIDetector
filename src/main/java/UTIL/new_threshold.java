@@ -81,7 +81,6 @@ public class new_threshold {
         }
     }
 
-
     //.DeepNestedLayout(caminho, 3);
     public static long DeepNestedLayout(String pathApp, int threshold) {
         try {
@@ -156,7 +155,6 @@ public class new_threshold {
             }
         }
     }
-
 
     //.GodStyleResource(caminho,5);
     public static long GodStyleResource(String pathApp,int threshold) {
@@ -487,7 +485,6 @@ public class new_threshold {
 
         return totalSmells;
     }
-
 
     public static void CompUIIOTHRESHOLD(String pathApp){
         try {
