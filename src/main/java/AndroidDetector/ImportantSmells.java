@@ -930,7 +930,7 @@ public class ImportantSmells {
                     //LER TODA A ESTRUTURA DO XML
                     Document d = sb.build(f);
 
-                    if (d.getRootElement().getChildren().get(0).getName().toString() == "style") {
+                    if (d.getRootElement().getChildren().size() > 0 && d.getRootElement().getChildren().get(0).getName().toString() == "style") {
                         List<String> listSmellsEcontradas = new ArrayList<String>();
 
                         for (int i = 0; i < d.getRootElement().getChildren().size(); i++) {
