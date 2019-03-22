@@ -11,9 +11,9 @@ import org.apache.commons.lang3.StringUtils;
 import java.io.File;
 import java.io.FileNotFoundException;
 
-public class WMC {
+public class WMC{
 
-    protected int cc = 0;
+    private int cc = 0;
     private File fileToIdentifyTheWMC;
 
     private CompilationUnit cUnit;
@@ -121,6 +121,10 @@ public class WMC {
                     increaseCc(ands + ors);
                     increaseCc();
                 });
+    }
+
+    public int getCc() {
+        return cc;
     }
 
     private void increaseCc() {
