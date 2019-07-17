@@ -1,7 +1,6 @@
 package UTIL;
 
 import AndroidDetector.IOClass;
-import AndroidDetector.ImportantSmells;
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.NodeList;

@@ -5,8 +5,6 @@
  */
 package DetectUI;
 
-import AndroidDetector.ImportantSmells;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.OutputStream;

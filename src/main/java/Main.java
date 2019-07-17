@@ -24,28 +24,29 @@ public class Main {
         try {
             if (caminho != "") {
                 if (xmlOrjava == 1) { //Smells XML                                    
-                    AndroidDetector.ImportantSmells.DeepNestedLayout(caminho, 3);   //Layout Profundamente Aninhado
-                    AndroidDetector.ImportantSmells.DuplicateStyleAttributes(caminho);       //Atributo de Estilo repetido
-                    AndroidDetector.ImportantSmells.GodStyleResource(caminho,5);  //Longo Recurso de Estilo
-                    AndroidDetector.ImportantSmells.HiddenListener(caminho);                 //Listener Escondido
-                    AndroidDetector.ImportantSmells.magicResource(caminho);               //Recurso Mágico
-                    AndroidDetector.ImportantSmells.godStringResource(caminho);          //Recurso de String Bagunçado
-                    AndroidDetector.ImportantSmells.inappropriateStringReuse(caminho);   //Reuso inadequado de String
-//                    AndroidDetector.ImportantSmells.NotFoundImage(caminho);            //Imagem Faltante
+                    AndroidDetector.AndroidLayoutSmells.DeepNestedLayout(caminho, 3);       //Layout Profundamente Aninhado
+                    AndroidDetector.AndroidLayoutSmells.DuplicateStyleAttributes(caminho);          //Atributo de Estilo repetido
+                    AndroidDetector.AndroidLayoutSmells.GodStyleResource(caminho,5);    //Longo Recurso de Estilo
+                    AndroidDetector.AndroidLayoutSmells.HiddenListener(caminho);                 //Listener Escondido
+                    AndroidDetector.AndroidLayoutSmells.magicResource(caminho);               //Recurso Mágico
+                    AndroidDetector.AndroidLayoutSmells.godStringResource(caminho);          //Recurso de String Bagunçado
+                    AndroidDetector.AndroidLayoutSmells.inappropriateStringReuse(caminho);   //Reuso inadequado de String
+                    AndroidDetector.AndroidLayoutSmells.NotFoundImage(caminho);            //Imagem Faltante
 
                 } else {//Smel1ls JAVA
-                    AndroidDetector.ImportantSmells.CoupledUIComponent(caminho);      //Componente de UI Acoplado
-                    AndroidDetector.ImportantSmells.SuspiciousBehavior(caminho);     //Comportamento Suspeito
-                    AndroidDetector.ImportantSmells.FlexAdapter(caminho);           // Adapter Complexo
-                    AndroidDetector.ImportantSmells.BrainUIComponent(caminho);     //Componente de Ui Cerebro
-                    AndroidDetector.ImportantSmells.CompUIIO(caminho);            //Componente de UI fazendo IO
-                    AndroidDetector.ImportantSmells.NotFragment(caminho);        //Não Uso de Fragments
-                    AndroidDetector.ImportantSmells.ExcessiveFragment(caminho,5);
+                    AndroidDetector.AndroidJavaCodeSmells.CoupledUIComponent(caminho);      //Componente de UI Acoplado
+                    AndroidDetector.AndroidJavaCodeSmells.SuspiciousBehavior(caminho);     //Comportamento Suspeito
+                    AndroidDetector.AndroidJavaCodeSmells.FlexAdapter(caminho);           // Adapter Complexo
+                    AndroidDetector.AndroidJavaCodeSmells.FoolAdapter(caminho);           // Adapter
+                    AndroidDetector.AndroidJavaCodeSmells.BrainUIComponent(caminho);     //Componente de Ui Cerebro
+                    AndroidDetector.AndroidJavaCodeSmells.CompUIIO(caminho);            //Componente de UI fazendo IO
+                    AndroidDetector.AndroidJavaCodeSmells.NotFragment(caminho);        //Não Uso de Fragments
+                    AndroidDetector.AndroidJavaCodeSmells.ExcessiveFragment(caminho,5);
                 }
             }
         }
         catch(Exception ex){
-            //ex.printStackTrace();
+            ex.printStackTrace();
         }        
     }
 }

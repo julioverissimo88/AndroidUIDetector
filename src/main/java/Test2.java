@@ -1,10 +1,7 @@
-import AndroidDetector.ImportantSmells;
 import AndroidDetector.ImportantSmells2;
 import com.dropbox.core.DbxException;
 
 import java.io.*;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 
 public class Test2 {

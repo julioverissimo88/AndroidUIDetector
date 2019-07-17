@@ -2,24 +2,28 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ed645100-bb7d-4c48-a5f2-f9a4be63070e" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_dropbox_core_dropbox_core_sdk_3_0_11.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_7_4.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/AndroidDetector/ImportantSmells2.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/DropboxUpload.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Test2.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Detector.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Detector.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AndroidDetector/ImportantSmells.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AndroidDetector/ImportantSmells.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/AndroidDetector/AndroidJavaCodeSmells.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AndroidDetector/AndroidJavaCodeSmells.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/AndroidDetector/AndroidLayoutSmells.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AndroidDetector/AndroidLayoutSmells.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/AndroidDetector/IOClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AndroidDetector/IOClass.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/AndroidDetector/ImportantSmells.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/AndroidDetector/ImportantSmells2.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/AndroidDetector/LoadFiles.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AndroidDetector/LoadFiles.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/AndroidDetector/OutputSmells.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AndroidDetector/OutputSmells.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/AndroidDetector/SampleOfXmlLocator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/AndroidDetector/SmellsAndroidQuality.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/AndroidDetector/SmellsAndroidUiApp.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/DetectUI/DetectorUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DetectUI/DetectorUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MainOracle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MainOracle.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Test.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/UTIL/Trashold.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UTIL/Threshold.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/metric/WMC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/metric/WMC.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Test2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Test2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/UTIL/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UTIL/Constants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/UTIL/TesteGISTs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UTIL/TesteGISTs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/UTIL/Threshold.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UTIL/Threshold.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/.netbeans_automatic_build" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/AndroidDetector/ImportantSmells$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/AndroidDetector/ImportantSmells$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/AndroidDetector/ImportantSmells.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/AndroidDetector/ImportantSmells.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/DetectUI/FrmDetectorInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DetectUI/FrmDetectorInterface.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/DetectUI/DetectorUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/DetectUI/DetectorUI.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Test$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Test.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Test.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/UTIL/Trashold$1.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/UTIL/Trashold.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/test-classes/.netbeans_automatic_build" beforeDir="false" />
@@ -32,119 +36,11 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="DefaultGradleProjectSettings">
+    <option name="isMigrated" value="true" />
+  </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Test.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="24" column="40" selection-start-line="24" selection-start-column="40" selection-end-line="24" selection-end-column="40" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="555">
-              <caret line="39" column="54" selection-start-line="39" selection-start-column="54" selection-end-line="39" selection-end-column="54" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/metric/WMC.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="15" column="17" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#3878#3879#0" expanded="true" />
-                <element signature="e#3903#3904#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/AndroidDetector/ImportantSmells.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45510">
-              <caret line="3062" column="5" selection-start-line="3001" selection-start-column="4" selection-end-line="3062" selection-end-column="5" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/AndroidDetector/ImportantSmells2.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="151">
-              <caret line="2104" column="93" selection-start-line="2104" selection-start-column="93" selection-end-line="2104" selection-end-column="93" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Test2.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="402">
-              <caret line="308" column="81" lean-forward="true" selection-start-line="308" selection-start-column="81" selection-end-line="308" selection-end-column="81" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/DropboxUpload.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="975">
-              <caret line="74" column="81" selection-start-line="74" selection-start-column="81" selection-end-line="74" selection-end-column="81" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pom.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="615">
-              <caret line="41" selection-start-line="41" selection-end-line="41" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/AndroidDetector/IOClass.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="16" column="31" selection-start-line="16" selection-start-column="31" selection-end-line="16" selection-end-column="31" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar://$MAVEN_REPOSITORY$/com/github/javaparser/javaparser-core/3.6.9/javaparser-core-3.6.9.jar!/com/github/javaparser/ast/Node.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6195">
-              <caret line="503" selection-start-line="503" selection-end-line="503" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -155,26 +51,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>(Acesso a banco de dados)</find>
-      <find>DataSetObserver</find>
-      <find>Acesso a banco de dados</find>
-      <find>quantidadeFieldStatic</find>
-      <find>classe.getExtendedTypes()</find>
-      <find>if (wmc.getCc()</find>
-      <find>if (wmc</find>
-      <find>Flex</find>
-      <find>FLEX</find>
-      <find>Fragment</find>
-      <find>Attribute</find>
-      <find>ex</find>
-      <find>Comportamento suspeito detectado</find>
-      <find>out</find>
-      <find>Analisando aplicativo</find>
-      <find>recursiveChildrenReusoInadequadoDeString</find>
-      <find>FlexAdapter</find>
-      <find>AsyncModelLoader.java</find>
-      <find>contadorDurelli</find>
-      <find>main</find>
       <find>brain</find>
       <find>Brain</find>
       <find>BrainUI</find>
@@ -185,6 +61,26 @@
       <find>caminho</find>
       <find>public static long ExcessiveFragment</find>
       <find>NotFragmentO</find>
+      <find>co</find>
+      <find>View</find>
+      <find>System.out.println</find>
+      <find>DeepNestedLayout</find>
+      <find>DuplicateStyleAttributes</find>
+      <find>GodStyleResource</find>
+      <find>HiddenListener</find>
+      <find>magicResource</find>
+      <find>godStringResource</find>
+      <find>inappropriateStringReuse</find>
+      <find>NotFoundImage</find>
+      <find>CoupledUIComponent</find>
+      <find>SuspiciousBehavior</find>
+      <find>FlexAdapter</find>
+      <find>BrainUIComponent</find>
+      <find>CompUIIO</find>
+      <find>NotFragment</find>
+      <find>FoolAdapter</find>
+      <find>ExcessiveFragment</find>
+      <find>JAVA</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -201,24 +97,29 @@
       <list>
         <option value="$PROJECT_DIR$/src/main/java/AndroidDetector/SampleOfXmlLocator.java" />
         <option value="$PROJECT_DIR$/src/main/java/AndroidDetector/teste.java" />
-        <option value="$PROJECT_DIR$/src/main/java/AndroidDetector/OutputSmells.java" />
         <option value="$PROJECT_DIR$/src/main/java/AndroidDetector/SmellsAndroidUiApp.java" />
         <option value="$PROJECT_DIR$/src/main/java/UTIL/ReusoStringData.java" />
         <option value="$PROJECT_DIR$/src/main/java/AndroidDetector/SmellImageNotFound.java" />
         <option value="$PROJECT_DIR$/src/main/java/DetectUI/DetectorUI.java" />
         <option value="$PROJECT_DIR$/src/main/java/UTIL/Trashold.java" />
-        <option value="$PROJECT_DIR$/src/main/java/AndroidDetector/IOClass.java" />
         <option value="$PROJECT_DIR$/src/main/java/UTIL/TesteGISTs.java" />
         <option value="$PROJECT_DIR$/src/main/java/metric/WMC.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Main.java" />
         <option value="$PROJECT_DIR$/src/main/java/UTIL/Threshold.java" />
-        <option value="$PROJECT_DIR$/src/main/java/UTIL/CLOC.java" />
-        <option value="$PROJECT_DIR$/src/main/java/AndroidDetector/ImportantSmells.java" />
         <option value="$PROJECT_DIR$/src/main/java/Test.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/DropboxUpload.java" />
         <option value="$PROJECT_DIR$/src/main/java/Test2.java" />
         <option value="$PROJECT_DIR$/src/main/java/AndroidDetector/ImportantSmells2.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Main.java" />
+        <option value="$PROJECT_DIR$/src/main/java/UTIL/CLOC.java" />
+        <option value="$PROJECT_DIR$/src/main/java/AndroidDetector/LoadFiles.java" />
+        <option value="$PROJECT_DIR$/src/main/java/MainOracle.java" />
+        <option value="$PROJECT_DIR$/src/main/java/AndroidDetector/ImportantSmells.java" />
+        <option value="$PROJECT_DIR$/src/main/java/AndroidDetector/AndroidLayoutSmells.java" />
+        <option value="$PROJECT_DIR$/src/main/java/AndroidDetector/IOClass.java" />
+        <option value="$PROJECT_DIR$/src/main/java/UTIL/Constants.java" />
+        <option value="$PROJECT_DIR$/src/main/java/AndroidDetector/OutputSmells.java" />
+        <option value="$PROJECT_DIR$/src/main/java/AndroidDetector/AndroidJavaCodeSmells.java" />
       </list>
     </option>
   </component>
@@ -240,17 +141,18 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="y" value="23" />
-    <option name="width" value="1280" />
-    <option name="height" value="732" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1382" />
+    <option name="height" value="784" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -295,27 +197,20 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="metric" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="AndroidUIDetector" type="b2602c69:ProjectViewProjectNode" />
-              <item name="AndroidUIDetector" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="UTIL" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552485242214" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1559915802674" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
@@ -409,6 +304,7 @@
       </method>
     </configuration>
     <configuration default="true" type="TestNG">
+      <option name="TEST_OBJECT" value="CLASS" />
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
       <properties />
       <listeners />
@@ -478,17 +374,24 @@
       <workItem from="1551897654743" duration="607000" />
       <workItem from="1551898893129" duration="15969000" />
       <workItem from="1552397028290" duration="5392000" />
+      <workItem from="1555433694544" duration="586000" />
+      <workItem from="1556211582492" duration="226000" />
+      <workItem from="1556556639971" duration="585000" />
+      <workItem from="1556894696051" duration="206000" />
+      <workItem from="1559569764411" duration="2517000" />
+      <workItem from="1562114595732" duration="2027000" />
+      <workItem from="1563233227406" duration="7669000" />
+      <workItem from="1563292819110" duration="3812000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="153874000" />
+    <option name="totallyTimeSpent" value="171502000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1280" height="732" extended-state="6" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17932148" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19894099" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="3" />
@@ -497,7 +400,7 @@
       <window_info id="Image Layers" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32761312" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.2109375" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.2911917" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -505,7 +408,7 @@
       <window_info anchor="bottom" id="Tool Output" order="7" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
       <window_info anchor="bottom" id="ANTLR Preview" order="9" />
-      <window_info anchor="bottom" id="Messages" order="10" weight="0.31917098" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.31914893" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.2" />
       <window_info anchor="bottom" id="Version Control" order="12" weight="0.32894737" />
       <window_info anchor="bottom" id="Docker" order="13" show_stripe_button="false" />
@@ -530,250 +433,102 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/AndroidDetector/SmellsAndroidUiApp.java</url>
-          <line>249</line>
-          <properties />
-          <option name="timeStamp" value="70" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/UTIL/Threshold.java</url>
-          <line>735</line>
+          <line>734</line>
           <properties />
           <option name="timeStamp" value="71" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/UTIL/Threshold.java</url>
-          <line>533</line>
+          <line>532</line>
           <properties />
           <option name="timeStamp" value="104" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/UTIL/Threshold.java</url>
-          <line>480</line>
+          <line>479</line>
           <properties />
           <option name="timeStamp" value="106" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/UTIL/Threshold.java</url>
-          <line>491</line>
+          <line>490</line>
           <properties />
           <option name="timeStamp" value="108" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/UTIL/TesteGISTs.java</url>
-          <line>47</line>
+          <line>43</line>
           <properties />
           <option name="timeStamp" value="109" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/UTIL/TesteGISTs.java</url>
-          <line>31</line>
+          <line>27</line>
           <properties />
           <option name="timeStamp" value="110" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/UTIL/TesteGISTs.java</url>
-          <line>72</line>
+          <line>68</line>
           <properties />
           <option name="timeStamp" value="111" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/UTIL/Threshold.java</url>
-          <line>367</line>
+          <line>366</line>
           <properties />
           <option name="timeStamp" value="122" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/AndroidDetector/ImportantSmells.java</url>
-          <line>2113</line>
-          <properties />
-          <option name="timeStamp" value="129" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/UTIL/Threshold.java</url>
-          <line>723</line>
+          <line>722</line>
           <properties />
           <option name="timeStamp" value="137" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/AndroidDetector/ImportantSmells.java</url>
-          <line>3044</line>
-          <properties />
-          <option name="timeStamp" value="139" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/AndroidDetector/ImportantSmells.java</url>
-          <line>3016</line>
-          <properties />
-          <option name="timeStamp" value="143" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/UTIL/CLOC.java</url>
-          <line>28</line>
-          <properties />
-          <option name="timeStamp" value="145" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/AndroidDetector/ImportantSmells.java</url>
-          <line>373</line>
-          <properties />
-          <option name="timeStamp" value="148" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/AndroidDetector/ImportantSmells.java</url>
-          <line>346</line>
-          <properties />
-          <option name="timeStamp" value="149" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/AndroidDetector/ImportantSmells.java</url>
-          <line>618</line>
-          <properties />
-          <option name="timeStamp" value="150" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/AndroidDetector/ImportantSmells.java</url>
-          <line>647</line>
-          <properties />
-          <option name="timeStamp" value="151" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/AndroidDetector/ImportantSmells.java</url>
-          <line>664</line>
-          <properties />
-          <option name="timeStamp" value="153" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/AndroidDetector/ImportantSmells.java</url>
-          <line>677</line>
-          <properties />
-          <option name="timeStamp" value="154" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/AndroidDetector/ImportantSmells.java</url>
-          <line>2022</line>
-          <properties />
-          <option name="timeStamp" value="155" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/AndroidDetector/ImportantSmells.java</url>
-          <line>2033</line>
-          <properties />
-          <option name="timeStamp" value="156" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/AndroidDetector/ImportantSmells.java</url>
-          <line>2043</line>
-          <properties />
-          <option name="timeStamp" value="157" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/AndroidDetector/ImportantSmells.java</url>
-          <line>1803</line>
-          <properties />
-          <option name="timeStamp" value="158" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/AndroidDetector/ImportantSmells.java</url>
-          <line>1813</line>
-          <properties />
-          <option name="timeStamp" value="159" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/AndroidDetector/ImportantSmells.java</url>
-          <line>1824</line>
-          <properties />
-          <option name="timeStamp" value="161" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/AndroidDetector/ImportantSmells.java</url>
-          <line>155</line>
-          <properties />
-          <option name="timeStamp" value="172" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/AndroidDetector/ImportantSmells.java</url>
-          <line>175</line>
-          <properties />
-          <option name="timeStamp" value="173" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/AndroidDetector/ImportantSmells.java</url>
-          <line>193</line>
-          <properties />
-          <option name="timeStamp" value="174" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/AndroidDetector/ImportantSmells.java</url>
-          <line>207</line>
-          <properties />
-          <option name="timeStamp" value="175" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/AndroidDetector/ImportantSmells.java</url>
-          <line>135</line>
-          <properties />
-          <option name="timeStamp" value="176" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/AndroidDetector/ImportantSmells.java</url>
-          <line>2696</line>
-          <properties />
-          <option name="timeStamp" value="178" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/AndroidDetector/ImportantSmells.java</url>
-          <line>2711</line>
-          <properties />
-          <option name="timeStamp" value="179" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/AndroidDetector/ImportantSmells.java</url>
-          <line>2722</line>
-          <properties />
-          <option name="timeStamp" value="180" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/AndroidDetector/ImportantSmells.java</url>
-          <line>2734</line>
-          <properties />
-          <option name="timeStamp" value="181" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/Test.java</url>
-          <line>108</line>
+          <line>106</line>
           <properties />
           <option name="timeStamp" value="183" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/Test2.java</url>
-          <line>266</line>
+          <line>263</line>
           <properties />
           <option name="timeStamp" value="185" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/Test2.java</url>
-          <line>259</line>
+          <line>256</line>
           <properties />
           <option name="timeStamp" value="187" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/Test2.java</url>
-          <line>87</line>
+          <line>84</line>
           <properties />
           <option name="timeStamp" value="188" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/Test2.java</url>
-          <line>14</line>
+          <line>11</line>
           <properties />
           <option name="timeStamp" value="190" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/Test2.java</url>
-          <line>57</line>
+          <line>54</line>
           <properties />
           <option name="timeStamp" value="192" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/AndroidDetector/AndroidLayoutSmells.java</url>
+          <line>29</line>
+          <properties class="AndroidDetector.AndroidLayoutSmells" method="DeepNestedLayout">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="194" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -789,166 +544,28 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/DetectUI/FrmDetectorInterface.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/DetectUI/FrmDetectorInterface.form">
-      <provider selected="true" editor-type-id="ui-designer" />
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/jdom/jdom/2.0.2/jdom-2.0.2.jar!/org/jdom2/output/support/SAXTarget.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="74" column="63" selection-start-line="74" selection-start-column="52" selection-end-line="74" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/jdom/jdom/2.0.2/jdom-2.0.2.jar!/org/jdom2/input/SAXBuilder.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1032">
-          <caret line="134" lean-forward="true" selection-start-line="134" selection-end-line="134" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/github/javaparser/javaparser-core/3.6.9/javaparser-core-3.6.9.jar!/com/github/javaparser/StringProvider.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="17" selection-start-line="17" selection-end-line="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/github/javaparser/javaparser-core/3.6.9/javaparser-core-3.6.9.jar!/com/github/javaparser/utils/Utils.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="43" selection-start-line="43" selection-end-line="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/github/javaparser/javaparser-core/3.6.9/javaparser-core-3.6.9.jar!/com/github/javaparser/GeneratedJavaParserBase.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="42" selection-start-line="42" selection-end-line="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/github/javaparser/javaparser-core/3.6.9/javaparser-core-3.6.9.jar!/com/github/javaparser/SimpleCharStream.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="174">
-          <caret line="226" selection-start-line="226" selection-end-line="226" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/github/javaparser/javaparser-core/3.6.9/javaparser-core-3.6.9.jar!/com/github/javaparser/GeneratedJavaParserTokenManager.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="1255" selection-start-line="1255" selection-end-line="1255" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/github/javaparser/javaparser-core/3.6.9/javaparser-core-3.6.9.jar!/com/github/javaparser/GeneratedJavaParser.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="13084" selection-start-line="13084" selection-end-line="13084" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/github/javaparser/javaparser-core/3.6.9/javaparser-core-3.6.9.jar!/com/github/javaparser/JavaParser.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="174">
-          <caret line="160" selection-start-line="160" selection-end-line="160" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/jdom/jdom/2.0.2/jdom-2.0.2.jar!/org/jdom2/input/SAXBuilder.class" />
+    <entry file="jar://$MAVEN_REPOSITORY$/com/github/javaparser/javaparser-core/3.6.9/javaparser-core-3.6.9.jar!/com/github/javaparser/StringProvider.class" />
+    <entry file="jar://$MAVEN_REPOSITORY$/com/github/javaparser/javaparser-core/3.6.9/javaparser-core-3.6.9.jar!/com/github/javaparser/utils/Utils.class" />
+    <entry file="jar://$MAVEN_REPOSITORY$/com/github/javaparser/javaparser-core/3.6.9/javaparser-core-3.6.9.jar!/com/github/javaparser/GeneratedJavaParserBase.class" />
+    <entry file="jar://$MAVEN_REPOSITORY$/com/github/javaparser/javaparser-core/3.6.9/javaparser-core-3.6.9.jar!/com/github/javaparser/SimpleCharStream.class" />
+    <entry file="jar://$MAVEN_REPOSITORY$/com/github/javaparser/javaparser-core/3.6.9/javaparser-core-3.6.9.jar!/com/github/javaparser/GeneratedJavaParserTokenManager.class" />
+    <entry file="jar://$MAVEN_REPOSITORY$/com/github/javaparser/javaparser-core/3.6.9/javaparser-core-3.6.9.jar!/com/github/javaparser/GeneratedJavaParser.class" />
+    <entry file="jar://$MAVEN_REPOSITORY$/com/github/javaparser/javaparser-core/3.6.9/javaparser-core-3.6.9.jar!/com/github/javaparser/JavaParser.class" />
     <entry file="file://$PROJECT_DIR$/src/main/java/AndroidDetector/teste.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/JavaParser/ParserProject.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="26" selection-start-line="2" selection-start-column="26" selection-end-line="2" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files (x86)/Java/jdk1.8.0_152/src.zip!/java/util/Scanner.java" />
-    <entry file="jar://$MAVEN_REPOSITORY$/com/github/javaparser/javaparser-core/3.6.9/javaparser-core-3.6.9.jar!/com/github/javaparser/ast/body/FieldDeclaration.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="225" selection-start-line="225" selection-end-line="225" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/github/javaparser/javaparser-core/3.6.9/javaparser-core-3.6.9.jar!/com/github/javaparser/Providers.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="44" selection-start-line="44" selection-end-line="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/jdom/jdom/2.0.2/jdom-2.0.2.jar!/org/jdom2/ContentList.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="145">
-          <caret line="224" selection-start-line="224" selection-end-line="224" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/jdom/jdom/2.0.2/jdom-2.0.2.jar!/org/jdom2/Document.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="111">
-          <caret line="78" selection-start-line="78" selection-end-line="78" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/github/javaparser/javaparser-core/3.6.9/javaparser-core-3.6.9.jar!/com/github/javaparser/ast/body/FieldDeclaration.class" />
+    <entry file="jar://$MAVEN_REPOSITORY$/com/github/javaparser/javaparser-core/3.6.9/javaparser-core-3.6.9.jar!/com/github/javaparser/Providers.class" />
+    <entry file="jar://$MAVEN_REPOSITORY$/org/jdom/jdom/2.0.2/jdom-2.0.2.jar!/org/jdom2/ContentList.class" />
+    <entry file="jar://$MAVEN_REPOSITORY$/org/jdom/jdom/2.0.2/jdom-2.0.2.jar!/org/jdom2/Document.class" />
     <entry file="file://$PROJECT_DIR$/src/main/java/DetectUI/DetectorUI.form">
       <provider selected="true" editor-type-id="ui-designer" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/AndroidDetector/SampleOfXmlLocator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="23" column="42" selection-start-line="23" selection-start-column="42" selection-end-line="23" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files (x86)/Java/jdk1.8.0_152/src.zip!/java/util/function/Consumer.java" />
-    <entry file="jar://$MAVEN_REPOSITORY$/com/github/javaparser/javaparser-core/3.6.9/javaparser-core-3.6.9.jar!/com/github/javaparser/ast/body/TypeDeclaration.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="68" selection-start-line="68" selection-end-line="68" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/github/javaparser/javaparser-core/3.6.9/javaparser-core-3.6.9.jar!/com/github/javaparser/ast/body/TypeDeclaration.class" />
     <entry file="jar://C:/Program Files (x86)/Java/jdk1.8.0_152/src.zip!/java/util/Collection.java" />
-    <entry file="jar://$MAVEN_REPOSITORY$/com/github/javaparser/javaparser-core/3.6.9/javaparser-core-3.6.9.jar!/com/github/javaparser/ast/nodeTypes/NodeWithMembers.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="115">
-          <caret line="171" selection-start-line="171" selection-end-line="171" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/AndroidDetector/SmellsAndroidQuality.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="33" selection-start-line="2" selection-start-column="33" selection-end-line="2" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/AndroidDetector/SmellsAndroidUiApp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="61" column="51" selection-start-line="61" selection-start-column="4" selection-end-line="61" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/AndroidDetector/OutputSmells.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="56" column="52" selection-start-line="56" selection-start-column="22" selection-end-line="56" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_101.jdk/Contents/Home/src.zip!/java/util/List.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="492" column="9" selection-start-line="492" selection-start-column="9" selection-end-line="492" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/github/javaparser/javaparser-core/3.6.9/javaparser-core-3.6.9.jar!/com/github/javaparser/ast/nodeTypes/NodeWithMembers.class" />
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_101.jdk/Contents/Home/src.zip!/java/util/List.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/AndroidDetector/SmellImageNotFound.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/DetectUI/DetectorUI.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -957,61 +574,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/github/javaparser/javaparser-core/3.6.9/javaparser-core-3.6.9.jar!/com/github/javaparser/ast/body/CallableDeclaration.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="110" column="40" lean-forward="true" selection-start-line="110" selection-start-column="40" selection-end-line="110" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/UTIL/CLOC.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="9" column="84" selection-start-line="9" selection-start-column="43" selection-end-line="9" selection-end-column="84" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/UTIL/ApiReader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/github/javaparser/javaparser-core/3.6.9/javaparser-core-3.6.9.jar!/com/github/javaparser/ast/NodeList.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="222" selection-start-line="222" selection-end-line="222" />
-          <folding>
-            <element signature="e#6304#6305#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resource/api.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="313">
-          <caret line="54" column="35" lean-forward="true" selection-start-line="54" selection-start-column="35" selection-end-line="54" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/github/javaparser/javaparser-core/3.6.9/javaparser-core-3.6.9.jar!/com/github/javaparser/ast/body/CallableDeclaration.class" />
+    <entry file="jar://$MAVEN_REPOSITORY$/com/github/javaparser/javaparser-core/3.6.9/javaparser-core-3.6.9.jar!/com/github/javaparser/ast/NodeList.class" />
     <entry file="file://$PROJECT_DIR$/src/main/java/UTIL/ReusoStringData.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
           <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/UTIL/Threshold.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="11085">
-          <caret line="757" selection-start-line="757" selection-end-line="757" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1025,26 +593,25 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Test.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/com/github/javaparser/javaparser-core/3.6.9/javaparser-core-3.6.9.jar!/com/github/javaparser/ast/Node.class" />
+    <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="24" column="40" selection-start-line="24" selection-start-column="40" selection-end-line="24" selection-end-column="40" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="529">
+          <caret line="41" selection-start-line="41" selection-end-line="41" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
+    <entry file="file://$PROJECT_DIR$/resource/api.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="555">
-          <caret line="39" column="54" selection-start-line="39" selection-start-column="54" selection-end-line="39" selection-end-column="54" />
+        <state relative-caret-position="529">
+          <caret line="54" column="35" selection-start-line="54" selection-start-column="35" selection-end-line="54" selection-end-column="35" />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/JavaParser/ParserProject.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/metric/WMC.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
+        <state relative-caret-position="17">
           <caret line="15" column="17" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1054,19 +621,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/AndroidDetector/ImportantSmells.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45510">
-          <caret line="3062" column="5" selection-start-line="3001" selection-start-column="4" selection-end-line="3062" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/DropboxUpload.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="975">
+        <state relative-caret-position="1258">
           <caret line="74" column="81" selection-start-line="74" selection-start-column="81" selection-end-line="74" selection-end-column="81" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1074,41 +631,197 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
+    <entry file="file://$PROJECT_DIR$/src/main/java/Test.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
-          <caret line="41" selection-start-line="41" selection-end-line="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/AndroidDetector/IOClass.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="16" column="31" selection-start-line="16" selection-start-column="31" selection-end-line="16" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/github/javaparser/javaparser-core/3.6.9/javaparser-core-3.6.9.jar!/com/github/javaparser/ast/Node.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6195">
-          <caret line="503" selection-start-line="503" selection-end-line="503" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/AndroidDetector/ImportantSmells2.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="151">
-          <caret line="2104" column="93" selection-start-line="2104" selection-start-column="93" selection-end-line="2104" selection-end-column="93" />
+        <state relative-caret-position="3978">
+          <caret line="234" column="31" selection-start-line="234" selection-start-column="31" selection-end-line="234" selection-end-column="31" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="629">
+          <caret line="39" column="100" selection-start-line="39" selection-start-column="100" selection-end-line="39" selection-end-column="100" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Test2.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="402">
-          <caret line="308" column="81" lean-forward="true" selection-start-line="308" selection-start-column="81" selection-end-line="308" selection-end-column="81" />
+        <state relative-caret-position="4488">
+          <caret line="267" column="79" selection-start-line="267" selection-start-column="79" selection-end-line="267" selection-end-column="79" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/MainOracle.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="646">
+          <caret line="871" column="44" selection-start-line="871" selection-start-column="44" selection-end-line="871" selection-end-column="44" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#main#0;class#MainOracle#0" />
+            <element signature="method#BrainUIComponentOraculo#0;class#MainOracle#0" />
+            <element signature="method#FoolAdapterOraculo#0;class#MainOracle#0" />
+            <element signature="method#FlexAdapterOraculo#0;class#MainOracle#0" />
+            <element signature="method#CoupledUIComponentOraculo#0;class#MainOracle#0" />
+            <element signature="method#SuspiciousBehaviorOraculo#0;class#MainOracle#0" />
+            <element signature="method#CompUIIOOraculo#0;class#MainOracle#0" />
+            <element signature="method#NotFragmentOraculo#0;class#MainOracle#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/AndroidDetector/ImportantSmells2.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1921">
+          <caret line="30" column="53" selection-start-line="30" selection-start-column="53" selection-end-line="30" selection-end-column="53" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/AndroidDetector/AndroidLayoutSmells.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="423">
+          <caret line="656" column="1" selection-start-line="656" selection-start-column="1" selection-end-line="656" selection-end-column="1" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#DeepNestedLayout#0;class#AndroidLayoutSmells#0" />
+            <element signature="method#DuplicateStyleAttributes#0;class#AndroidLayoutSmells#0" />
+            <element signature="method#GodStyleResource#0;class#AndroidLayoutSmells#0" />
+            <element signature="method#HiddenListener#0;class#AndroidLayoutSmells#0" />
+            <element signature="method#magicResource#0;class#AndroidLayoutSmells#0" />
+            <element signature="method#godStringResource#0;class#AndroidLayoutSmells#0" />
+            <element signature="method#inappropriateStringReuse#0;class#AndroidLayoutSmells#0" />
+            <element signature="method#NotFoundImage#0;class#AndroidLayoutSmells#0" />
+            <element signature="method#recursiveChildrenMagic#0;class#AndroidLayoutSmells#0" />
+            <element signature="method#recursiveChildrenHideListener#0;class#AndroidLayoutSmells#0" />
+            <element signature="method#recursiveChildrenElement#0;class#AndroidLayoutSmells#0" />
+            <element signature="method#ObtemImagensList#0;class#AndroidLayoutSmells#0" />
+            <element signature="method#recursiveChildrenReusoInadequadoDeString#0;class#AndroidLayoutSmells#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/AndroidDetector/ImportantSmells.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="782">
+          <caret line="46" column="44" selection-start-line="46" selection-start-column="44" selection-end-line="46" selection-end-column="44" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/AndroidDetector/SampleOfXmlLocator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="23" column="42" selection-start-line="23" selection-start-column="42" selection-end-line="23" selection-end-column="42" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../ImportantSmells2.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="62" column="12" lean-forward="true" selection-start-line="62" selection-start-column="12" selection-end-line="62" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/AndroidDetector/IOClass.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="40" column="38" lean-forward="true" selection-start-line="40" selection-start-column="38" selection-end-line="40" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/UTIL/Constants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="40" selection-start-line="5" selection-start-column="26" selection-end-line="5" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/AndroidDetector/SmellsAndroidQuality.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="33" selection-start-line="2" selection-start-column="33" selection-end-line="2" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/AndroidDetector/SmellsAndroidUiApp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4238">
+          <caret line="65" column="47" lean-forward="true" selection-start-line="65" selection-start-column="47" selection-end-line="65" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/UTIL/CLOC.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="21" column="9" lean-forward="true" selection-start-line="21" selection-start-column="9" selection-end-line="21" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/AndroidDetector/OutputSmells.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-416">
+          <caret line="2" column="28" selection-start-line="2" selection-start-column="28" selection-end-line="2" selection-end-column="28" />
+          <folding>
+            <element signature="e#892#893#0" expanded="true" />
+            <element signature="e#930#931#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/AndroidDetector/LoadFiles.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-127">
+          <caret line="16" selection-start-line="16" selection-end-line="16" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/AndroidDetector/AndroidJavaCodeSmells.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="233">
+          <caret line="35" column="39" lean-forward="true" selection-start-line="35" selection-start-column="39" selection-end-line="35" selection-end-column="39" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#SuspiciousBehavior#0;class#AndroidJavaCodeSmells#0" />
+            <element signature="method#FlexAdapter#0;class#AndroidJavaCodeSmells#0" />
+            <element signature="method#CompUIIO#0;class#AndroidJavaCodeSmells#0" />
+            <element signature="method#NotFragment#0;class#AndroidJavaCodeSmells#0" />
+            <element signature="method#ExcessiveFragment#0;class#AndroidJavaCodeSmells#0" />
+            <element signature="method#FoolAdapter#0;class#AndroidJavaCodeSmells#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/UTIL/ApiReader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/UTIL/Threshold.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="12835">
+          <caret line="757" selection-start-line="757" selection-end-line="757" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

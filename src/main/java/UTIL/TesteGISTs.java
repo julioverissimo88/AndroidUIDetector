@@ -1,7 +1,6 @@
 package UTIL;
 
 import AndroidDetector.IOClass;
-import AndroidDetector.ImportantSmells;
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.NodeList;
@@ -14,9 +13,6 @@ import com.github.javaparser.ast.stmt.Statement;
 import com.github.javaparser.ast.stmt.SwitchEntryStmt;
 
 import java.io.File;
-import java.io.FileWriter;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class TesteGISTs {
 
