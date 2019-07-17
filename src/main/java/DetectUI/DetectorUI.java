@@ -5,6 +5,8 @@
  */
 package DetectUI;
 
+import AndroidDetector.LoadFiles;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.OutputStream;
@@ -14,7 +16,6 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
- *
  * @author julio
  */
 public class DetectorUI extends javax.swing.JFrame {
@@ -110,126 +111,125 @@ public class DetectorUI extends javax.swing.JFrame {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtCaminhoApp)
-                    .addComponent(txtOutput))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBtnRunAnalise)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jCheckSuspiciousBehavior)
-                    .addComponent(jCheckFlexAdapter)
-                    .addComponent(jCheckCoupledUI))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jCheckGodStyleResource)
-                    .addComponent(jCheckDeepNestedLayout)
-                    .addComponent(jCheckDuplicateStyle))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jCheckBrainUIComponent)
-                    .addComponent(jCheckHideListener)
-                    .addComponent(jCheckMagicResource))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jCheckBadStringResource)
-                    .addComponent(jCheckReusodeString)
-                    .addComponent(jCheckNotFoundImage))
-                .addGap(40, 40, 40)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jCheckNotFragment)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jCheckCompUIIO)
-                            .addComponent(jCheckExcessiveUseFragments))
-                        .addGap(0, 35, Short.MAX_VALUE)))
-                .addGap(48, 48, 48))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jScrollPane1))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txtCaminhoApp)
+                                        .addComponent(txtOutput))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jBtnRunAnalise)
+                                .addContainerGap())
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jCheckSuspiciousBehavior)
+                                        .addComponent(jCheckFlexAdapter)
+                                        .addComponent(jCheckCoupledUI))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jCheckGodStyleResource)
+                                        .addComponent(jCheckDeepNestedLayout)
+                                        .addComponent(jCheckDuplicateStyle))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jCheckBrainUIComponent)
+                                        .addComponent(jCheckHideListener)
+                                        .addComponent(jCheckMagicResource))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jCheckBadStringResource)
+                                        .addComponent(jCheckReusodeString)
+                                        .addComponent(jCheckNotFoundImage))
+                                .addGap(40, 40, 40)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jCheckNotFragment)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(jCheckCompUIIO)
+                                                        .addComponent(jCheckExcessiveUseFragments))
+                                                .addGap(0, 35, Short.MAX_VALUE)))
+                                .addGap(48, 48, 48))
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(jScrollPane1))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(77, 77, 77)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtCaminhoApp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jBtnRunAnalise, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(3, 3, 3)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtOutput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jCheckCoupledUI)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCheckSuspiciousBehavior)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCheckFlexAdapter))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jCheckGodStyleResource)
-                            .addComponent(jCheckBrainUIComponent))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jCheckDeepNestedLayout)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(77, 77, 77)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(txtCaminhoApp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(jLabel1)))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addContainerGap()
+                                                .addComponent(jBtnRunAnalise, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(3, 3, 3)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(txtOutput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel2))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jCheckCoupledUI)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jCheckSuspiciousBehavior)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jCheckFlexAdapter))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(jCheckGodStyleResource)
+                                                        .addComponent(jCheckBrainUIComponent))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addComponent(jCheckDeepNestedLayout)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                .addComponent(jCheckDuplicateStyle))
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addComponent(jCheckHideListener)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                .addComponent(jCheckMagicResource))))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(jCheckBadStringResource)
+                                                        .addComponent(jCheckCompUIIO))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(jCheckReusodeString)
+                                                        .addComponent(jCheckNotFragment))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                        .addComponent(jCheckNotFoundImage)
+                                                        .addComponent(jCheckExcessiveUseFragments))))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jCheckDuplicateStyle))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jCheckHideListener)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jCheckMagicResource))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jCheckBadStringResource)
-                            .addComponent(jCheckCompUIIO))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jCheckReusodeString)
-                            .addComponent(jCheckNotFragment))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jCheckNotFoundImage)
-                            .addComponent(jCheckExcessiveUseFragments))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
-                .addContainerGap())
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
+                                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-      
-    
+
     private void jBtnRunAnaliseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnRunAnaliseActionPerformed
-        try{         
+        try {
             PrintStream ps = new PrintStream(
-                new OutputStream() {
-                    public void write(int c){
-                        jTxtOutput.setText(jTxtOutput.getText() + (char) c);
+                    new OutputStream() {
+                        public void write(int c) {
+                            jTxtOutput.setText(jTxtOutput.getText() + (char) c);
+                        }
                     }
-                }
             );
-            
-            System.setOut(ps);            
-            
-            if(txtCaminhoApp.getText() != ""){
+
+            System.setOut(ps);
+
+            if (txtCaminhoApp.getText() != "") {
                 long inicio = System.currentTimeMillis();
                 System.out.println(new SimpleDateFormat("HH:mm:ss").format(new Date(inicio)));
 
@@ -245,7 +245,7 @@ public class DetectorUI extends javax.swing.JFrame {
                 File file = new File("C:\\Users\\julio\\Desktop\\Repositorio01\\Repositorio01");
                 File afile[] = file.listFiles();
 
-                for(int j = 0; j< afile.length; j++){
+                for (int j = 0; j < afile.length; j++) {
                     /*
                     if(jCheckCoupledUI.isSelected()){
                         AndroidDetector.ImportantSmells.CoupledUIComponent(txtCaminhoApp.getText());
@@ -308,7 +308,7 @@ public class DetectorUI extends javax.swing.JFrame {
                     }
                     */
                     File f = new File(afile[j].toString());
-                    ImportantSmells.carregaArquivosXMLAnalise(f);
+                    LoadFiles.carregaArquivosXMLAnalise(f);
 
 
                     System.out.println();
@@ -320,64 +320,61 @@ public class DetectorUI extends javax.swing.JFrame {
 
 
                     String app = f.getName();
-                    long totalDeepNested = 0; //AndroidDetector.ImportantSmells.DeepNestedLayout(caminho, 4);
-                    long totalDuplicateStyleAttributes = 0; // AndroidDetector.ImportantSmells.DuplicateStyleAttributes(caminho);
-                    long totalGodStyleResource = 0; //AndroidDetector.ImportantSmells.GodStyleResource(caminho,11);
-                    long totalHideListener = 0; //AndroidDetector.ImportantSmells.HiddenListener(caminho)
-                    long totalmagicResource = 0; //AndroidDetector.ImportantSmells.magicResource(caminho);
-                    long totalBadStringResource = 0; //AndroidDetector.ImportantSmells.godStringResource(caminho);
-                    long totalreusoInadequadoDeString = AndroidDetector.ImportantSmells.inappropriateStringReuse(caminho);
-                    long totalNotFoundImage = AndroidDetector.ImportantSmells.NotFoundImage(caminho);
+                    long totalDeepNested = AndroidDetector.AndroidLayoutSmells.DeepNestedLayout(caminho, 4);
+                    long totalDuplicateStyleAttributes = AndroidDetector.AndroidLayoutSmells.DuplicateStyleAttributes(caminho);
+                    long totalGodStyleResource = AndroidDetector.AndroidLayoutSmells.GodStyleResource(caminho, 11);
+                    long totalHideListener = AndroidDetector.AndroidLayoutSmells.HiddenListener(caminho)
+                    long totalmagicResource = AndroidDetector.AndroidLayoutSmells.magicResource(caminho);
+                    long totalBadStringResource = AndroidDetector.AndroidLayoutSmells.godStringResource(caminho);
+                    long totalreusoInadequadoDeString = AndroidDetector.AndroidLayoutSmells.inappropriateStringReuse(caminho);
+                    long totalNotFoundImage = AndroidDetector.AndroidLayoutSmells.NotFoundImage(caminho);
 
                     //análises de código java
-                    ImportantSmells.carregaArquivosJAVAAnalise(f);
+                    LoadFiles.carregaArquivosJAVAAnalise(f);
 
-                    long totalCoupledUIComponent = AndroidDetector.ImportantSmells.CoupledUIComponent(caminho);
-                    long totalSuspiciousBehavior = AndroidDetector.ImportantSmells.SuspiciousBehavior(caminho);
-                    long totalFlexAdapter = AndroidDetector.ImportantSmells.FlexAdapter(caminho);
-                    long totalBrainUIComponent = AndroidDetector.ImportantSmells.BrainUIComponent(caminho);
-                    long totalCompUIIO = AndroidDetector.ImportantSmells.CompUIIO(caminho);
-                    long totalNotFragment = AndroidDetector.ImportantSmells.NotFragment(caminho);
-                    long totalExcessiveFragment = AndroidDetector.ImportantSmells.ExcessiveFragment(caminho,10);
-                    
+                    long totalCoupledUIComponent = AndroidDetector.AndroidJavaCodeSmells.CoupledUIComponent(caminho);
+                    long totalSuspiciousBehavior = AndroidDetector.AndroidJavaCodeSmells.SuspiciousBehavior(caminho);
+                    long totalFlexAdapter = AndroidDetector.AndroidJavaCodeSmells.FlexAdapter(caminho);
+                    long totalBrainUIComponent = AndroidDetector.AndroidJavaCodeSmells.BrainUIComponent(caminho);
+                    long totalCompUIIO = AndroidDetector.AndroidJavaCodeSmells.CompUIIO(caminho);
+                    long totalNotFragment = AndroidDetector.AndroidJavaCodeSmells.NotFragment(caminho);
+                    long totalExcessiveFragment = AndroidDetector.AndroidJavaCodeSmells.ExcessiveFragment(caminho, 10);
+
                     writer.append(
-                        app + ";" +
-                        totalDeepNested + ";" +
-                        totalDuplicateStyleAttributes  + ";" +
-                        totalGodStyleResource + ";" +
-                        totalHideListener + ";" +
-                        totalmagicResource + ";" +
-                        totalBadStringResource + ";" +
-                        totalreusoInadequadoDeString + ";" +
-                        totalNotFoundImage + ";" +
-                        totalCoupledUIComponent + ";" +
-                        totalSuspiciousBehavior + ";" +
-                        totalFlexAdapter + ";" +
-                        totalBrainUIComponent + ";" +
-                        totalCompUIIO + ";" +
-                        totalNotFragment + ";" +
-                        totalExcessiveFragment + ";"
+                            app + ";" +
+                                    totalDeepNested + ";" +
+                                    totalDuplicateStyleAttributes + ";" +
+                                    totalGodStyleResource + ";" +
+                                    totalHideListener + ";" +
+                                    totalmagicResource + ";" +
+                                    totalBadStringResource + ";" +
+                                    totalreusoInadequadoDeString + ";" +
+                                    totalNotFoundImage + ";" +
+                                    totalCoupledUIComponent + ";" +
+                                    totalSuspiciousBehavior + ";" +
+                                    totalFlexAdapter + ";" +
+                                    totalBrainUIComponent + ";" +
+                                    totalCompUIIO + ";" +
+                                    totalNotFragment + ";" +
+                                    totalExcessiveFragment + ";"
                     );
                     writer.append("\n");
                 }
-                
+
                 writer.flush();
                 writer.close();
 
-                long fim  = System.currentTimeMillis();
-                System.out.println( new SimpleDateFormat("HH:mm:ss").format(new Date(inicio - fim)));
-                
+                long fim = System.currentTimeMillis();
+                System.out.println(new SimpleDateFormat("HH:mm:ss").format(new Date(inicio - fim)));
+
                 JOptionPane.showMessageDialog(rootPane, "Analise Conclu�da resultados salvos em: " + txtOutput.getText());
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Informe Aplicativo para a an�lise");
             }
-            else{
-                    JOptionPane.showMessageDialog(rootPane, "Informe Aplicativo para a an�lise");                
-            }
-        }
-        catch(Exception ex){
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(rootPane, ex.getMessage());
-        }
-        finally{
-            
+        } finally {
+
         }
     }//GEN-LAST:event_jBtnRunAnaliseActionPerformed
 
@@ -388,7 +385,7 @@ public class DetectorUI extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

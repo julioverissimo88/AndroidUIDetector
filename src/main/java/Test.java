@@ -12,7 +12,6 @@ public class Test {
             System.out.println(new SimpleDateFormat("HH:mm:ss").format(new Date(inicio)));
 
 
-
 //            File fileCsv = new File("/Users/rafaeldurelli/Desktop/Analise/AnaliseFinalDURELLI.csv");
             File fileCsv = new File("/Users/rafaeldurelli/Desktop/Repositorio-TESTE/AnaliseFinalREPOSITORIO2.csv");
 
@@ -62,14 +61,15 @@ public class Test {
             File file = new File("/Users/rafaeldurelli/Desktop/Repositorio-TESTE");
             File afile[] = file.listFiles();
 
-            for(int j = 0; j< afile.length; j++) {
+            for (int j = 0; j < afile.length; j++) {
                 File f = new File(afile[j].toString());
 
                 //Getting all files to apply resource smells
                 ImportantSmells.carregaArquivosXMLAnalise(f);
 
                 System.out.println("*******************************************");
-                System.out.println();	                System.out.println("Analisando aplicativo " + f.getName() + " "+  j + "/" + afile.length);
+                System.out.println();
+                System.out.println("Analisando aplicativo " + f.getName() + " " + j + "/" + afile.length);
 
                 System.out.println();
                 System.out.println();
@@ -87,7 +87,7 @@ public class Test {
                 long totalArquivosDeepNested = ImportantSmells.contadorArquivosAnalisados;
                 long totalDuplicateStyleAttributes = AndroidDetector.ImportantSmells.DuplicateStyleAttributes(caminho);
                 long totalArquivosDuplicateStyleAttributes = ImportantSmells.contadorArquivosAnalisados;
-                long totalGodStyleResource = AndroidDetector.ImportantSmells.GodStyleResource(caminho,11);
+                long totalGodStyleResource = AndroidDetector.ImportantSmells.GodStyleResource(caminho, 11);
                 long totalArquivosGodStyleResource = ImportantSmells.contadorArquivosAnalisados;
                 long totalHideListener = AndroidDetector.ImportantSmells.HiddenListener(caminho);
                 long totalArquivosHideListener = ImportantSmells.contadorArquivosAnalisados;
@@ -103,7 +103,7 @@ public class Test {
                 //analise de codigo JAVA
                 ImportantSmells.carregaArquivosJAVAAnalise(f);
 
-                for (File fileJava: ImportantSmells.ListArquivosAnaliseJava) {
+                for (File fileJava : ImportantSmells.ListArquivosAnaliseJava) {
                     System.out.println(fileJava.getAbsolutePath());
                 }
 
@@ -121,14 +121,14 @@ public class Test {
                 long totalArquivosCompUIIO = ImportantSmells.contadorArquivosAnalisados;
                 long totalNotFragment = AndroidDetector.ImportantSmells.NotFragment(caminho);
                 long totalArquivosNotFragment = ImportantSmells.contadorArquivosAnalisados;
-                long totalExcessiveFragment = AndroidDetector.ImportantSmells.ExcessiveFragment(caminho,10);
+                long totalExcessiveFragment = AndroidDetector.ImportantSmells.ExcessiveFragment(caminho, 10);
                 long totalArquivosExcessiveFragment = ImportantSmells.contadorArquivosAnalisados;
 
                 writer.append(
                         app + ";" +
                                 totalDeepNested + ";" +
                                 totalArquivosDeepNested + ";" +
-                                totalDuplicateStyleAttributes  + ";" +
+                                totalDuplicateStyleAttributes + ";" +
                                 totalArquivosDuplicateStyleAttributes + ";" +
                                 totalGodStyleResource + ";" +
                                 totalArquivosGodStyleResource + ";" +
@@ -213,7 +213,6 @@ public class Test {
 //                );
 
 
-
                 writer.append("\n");
                 writer.flush();
             }
@@ -221,16 +220,15 @@ public class Test {
             writer.flush();
             writer.close();
 
-            long fim  = System.currentTimeMillis();
-            System.out.println( new SimpleDateFormat("HH:mm:ss").format(new Date(inicio - fim)));     
-        }
-        catch(Exception ex){
+            long fim = System.currentTimeMillis();
+            System.out.println(new SimpleDateFormat("HH:mm:ss").format(new Date(inicio - fim)));
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
 
 
-    private static long calCLOC(String appPath) throws IOException, InterruptedException{
+    private static long calCLOC(String appPath) throws IOException, InterruptedException {
         String command = "cloc " + appPath;
 
         long CLOC = 0;
@@ -242,17 +240,17 @@ public class Test {
                 new BufferedReader(new InputStreamReader(proc.getInputStream()));
 
         String line = "";
-        while((line = reader.readLine()) != null) {
+        while ((line = reader.readLine()) != null) {
 
             System.out.print(line + "\n");
 
-            if (line.contains("SUM:")){
+            if (line.contains("SUM:")) {
 
                 String[] array = line.split(" ");
 
-                CLOC = new Long(array[array.length-1]);
+                CLOC = new Long(array[array.length - 1]);
 
-                System.out.print("Tamanho do projeto é " + array[array.length-1] + "\n");
+                System.out.print("Tamanho do projeto é " + array[array.length - 1] + "\n");
             }
 
         }

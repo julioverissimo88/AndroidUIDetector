@@ -11,7 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.io.File;
 import java.io.FileNotFoundException;
 
-public class WMC{
+public class WMC {
 
     private int cc = 0;
     private File fileToIdentifyTheWMC;
@@ -23,12 +23,12 @@ public class WMC{
     }
 
     public WMC(CompilationUnit cUnit) {
-        this.cUnit= cUnit;
+        this.cUnit = cUnit;
     }
 
     public void run() {
         try {
-            if (this.fileToIdentifyTheWMC!=null) {
+            if (this.fileToIdentifyTheWMC != null) {
                 this.cUnit = JavaParser.parse(this.fileToIdentifyTheWMC);
             }
             this.visitMethodDeclaration(this.cUnit);

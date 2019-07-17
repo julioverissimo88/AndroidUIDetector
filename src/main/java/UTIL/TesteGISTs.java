@@ -20,27 +20,16 @@ public class TesteGISTs {
 
     public static void main(String[] args) {
         try {
-
-
             File file = new File("/Users/rafaeldurelli/Desktop/Gist/code3.java");
-
-
-               BrainUIComponent(file.toString());
-
-            }
-
-        catch(Exception ex){
+            BrainUIComponent(file.toString());
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
 
-
-
     public static void BrainUIComponent(String pathApp) {
         try {
             try {
-
-
                 File f = new File(pathApp);
                 CompilationUnit cUnit = JavaParser.parse(f);
 
@@ -65,7 +54,7 @@ public class TesteGISTs {
                                     totalSmells++;
                                 });
 
-                                membro.findAll(Statement.class).forEach(item ->{
+                                membro.findAll(Statement.class).forEach(item -> {
 //                                    System.out.println(item);
 
                                     ///arrumar aqui..
@@ -130,7 +119,7 @@ public class TesteGISTs {
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
-        }catch (Exception ex){
+        } catch (Exception ex) {
         }
     }
 }

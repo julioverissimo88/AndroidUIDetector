@@ -1,11 +1,13 @@
 package AndroidDetector;
 
 import com.google.gson.Gson;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.List;
+
 import static UTIL.Constants.PATH_SAVE_JSON;
 
 public class OutputSmells {
@@ -46,8 +48,8 @@ public class OutputSmells {
         this.arquivo = arquivo;
     }
 
-    public void saveJson(List<?> smells, String file){
-        try{
+    public void saveJson(List<?> smells, String file) {
+        try {
             File diretorio = new File(PATH_SAVE_JSON);
             diretorio.mkdir();
             Gson gson = new Gson();
@@ -58,8 +60,7 @@ public class OutputSmells {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
-        catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }

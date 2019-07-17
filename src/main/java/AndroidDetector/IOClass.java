@@ -12,9 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class IOClass {
-    private static  List<String> listIO = new ArrayList<String>();
+    private static List<String> listIO = new ArrayList<String>();
 
-    public static List<String> getIOClass(){
+    public static List<String> getIOClass() {
         listIO.add("PFASQLiteHelper");
         listIO.add("SQLite");
         listIO.add("File");
@@ -30,14 +30,14 @@ public class IOClass {
         return listIO;
     }
 
-    public static void loadJSONAPI () {
+    public static void loadJSONAPI() {
         Gson gson = new Gson();
         try {
             File file = new File("./resource/api.json");
             JsonReader reader = new JsonReader(new FileReader(file));
             ApiReader[] data = (ApiReader[]) gson.fromJson(reader, ApiReader[].class);
 
-            for (int i = 0; i < data.length ; i++) {
+            for (int i = 0; i < data.length; i++) {
                 listIO.addAll(data[i].getClassesInterfacesExceptionsEnum());
             }
         } catch (FileNotFoundException e) {

@@ -1,9 +1,10 @@
 import org.jdom2.JDOMException;
+
 import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
-    
+
     public static void main(String[] args) throws Exception, IOException, JDOMException {
         System.out.println("Detector AndroidSmells 1.0 -  UFLA");
         System.out.println("Autores: Julio Verissimo, Rafael Durelli, Matheus Antônio Flausino");
@@ -17,7 +18,7 @@ public class Main {
         System.out.println("Deseja Analisar Xml ou Java (1 - XML, 2 - Java)");
         xmlOrjava = sc.nextInt();
 
-        sc =  new Scanner(System.in);
+        sc = new Scanner(System.in);
         System.out.println("Informe a pasta dos arquivos");
         caminho = sc.nextLine();
 
@@ -26,7 +27,7 @@ public class Main {
                 if (xmlOrjava == 1) { //Smells XML                                    
                     AndroidDetector.AndroidLayoutSmells.DeepNestedLayout(caminho, 3);       //Layout Profundamente Aninhado
                     AndroidDetector.AndroidLayoutSmells.DuplicateStyleAttributes(caminho);          //Atributo de Estilo repetido
-                    AndroidDetector.AndroidLayoutSmells.GodStyleResource(caminho,5);    //Longo Recurso de Estilo
+                    AndroidDetector.AndroidLayoutSmells.GodStyleResource(caminho, 5);    //Longo Recurso de Estilo
                     AndroidDetector.AndroidLayoutSmells.HiddenListener(caminho);                 //Listener Escondido
                     AndroidDetector.AndroidLayoutSmells.magicResource(caminho);               //Recurso Mágico
                     AndroidDetector.AndroidLayoutSmells.godStringResource(caminho);          //Recurso de String Bagunçado
@@ -41,12 +42,11 @@ public class Main {
                     AndroidDetector.AndroidJavaCodeSmells.BrainUIComponent(caminho);     //Componente de Ui Cerebro
                     AndroidDetector.AndroidJavaCodeSmells.CompUIIO(caminho);            //Componente de UI fazendo IO
                     AndroidDetector.AndroidJavaCodeSmells.NotFragment(caminho);        //Não Uso de Fragments
-                    AndroidDetector.AndroidJavaCodeSmells.ExcessiveFragment(caminho,5);
+                    AndroidDetector.AndroidJavaCodeSmells.ExcessiveFragment(caminho, 5);
                 }
             }
-        }
-        catch(Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
-        }        
+        }
     }
 }

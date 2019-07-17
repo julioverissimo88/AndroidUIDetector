@@ -10,8 +10,7 @@ import com.dropbox.core.v2.users.FullAccount;
 import java.io.*;
 import java.util.Locale;
 
-public class DropboxUpload
-{
+public class DropboxUpload {
 
     private static final String ACCESS_TOKEN = "7DaP5h2Y6YAAAAAAAABVWQUn-ZRhL1Kc2rNt686l2uA3mDPk1rkp3YefWy8hXMVa";
 
@@ -46,8 +45,7 @@ public class DropboxUpload
     }
 
 
-
-    public static void uploadToDropbox(String path, String csvFileName) throws DbxException, IOException{
+    public static void uploadToDropbox(String path, String csvFileName) throws DbxException, IOException {
 
         DbxRequestConfig config = new DbxRequestConfig("dropbox/java-tutorial", "en_US");
         DbxClientV2 client = new DbxClientV2(config, ACCESS_TOKEN);
@@ -72,7 +70,7 @@ public class DropboxUpload
 
         // Upload "test.txt" to Dropbox
         try (InputStream in = new FileInputStream(path)) {
-            FileMetadata metadata = client.files().uploadBuilder("/"+csvFileName)
+            FileMetadata metadata = client.files().uploadBuilder("/" + csvFileName)
                     .uploadAndFinish(in);
         }
 

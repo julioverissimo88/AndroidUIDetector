@@ -17,18 +17,18 @@ import java.util.List;
 
 public class MainOracle {
     public static int contadorArquivosAnalisados = 0;
-    public static  Boolean classeValida = true;
-    public static List<File> ListArquivosAnaliseJava =  new ArrayList<File>();
+    public static Boolean classeValida = true;
+    public static List<File> ListArquivosAnaliseJava = new ArrayList<File>();
     public static final String JAVA = ".java";
     public static final String XML = ".xml";
-    private static OutputSmells JsonOut = new  OutputSmells();
+    private static OutputSmells JsonOut = new OutputSmells();
     private static List<OutputSmells> ListJsonSmell = new ArrayList<OutputSmells>();
-    private  static List<OutputSmells> ListSmells = new ArrayList<OutputSmells>();
+    private static List<OutputSmells> ListSmells = new ArrayList<OutputSmells>();
     private static long totalSmells = 0;
     private static long contadorDurelli = 0;
     private static int contadorFieldStatic = 0;
 
-    public static void main(String...args) throws FileNotFoundException {
+    public static void main(String... args) throws FileNotFoundException {
         BrainUIComponentOraculo();
         CoupledUIComponentOraculo();
         SuspiciousBehaviorOraculo();
@@ -611,7 +611,7 @@ public class MainOracle {
                     "}");
 
             cUnit.findAll(ClassOrInterfaceDeclaration.class).forEach(classe -> {
-                if (classe.getExtendedTypes().size()>0) {
+                if (classe.getExtendedTypes().size() > 0) {
                     if (classe.getExtendedTypes().get(0).toString().contains("Activity") || classe.getExtendedTypes().get(0).toString().contains("Fragment") || classe.getExtendedTypes().get(0).toString().contains("Adapter")) {
                         //Contados de arquivos analisados
                         contadorArquivosAnalisados = contadorArquivosAnalisados + 1;
@@ -666,7 +666,6 @@ public class MainOracle {
                                 MainOracle.contadorFieldStatic++;
                             }
                         });
-
 
 
                         //Static Fields
@@ -744,10 +743,9 @@ public class MainOracle {
 
             System.out.println("quantidade identificada " + totalSmells);
 
-            JsonOut.saveJson(ListJsonSmell,"BrainUIComponent.json");
+            JsonOut.saveJson(ListJsonSmell, "BrainUIComponent.json");
 
-        }
-        catch(Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
 
@@ -755,7 +753,7 @@ public class MainOracle {
     }
 
     //Adapter consumista
-    public static long FoolAdapterOraculo(){
+    public static long FoolAdapterOraculo() {
         try {
             contadorArquivosAnalisados = 0;
             ListSmells.clear();
@@ -767,7 +765,7 @@ public class MainOracle {
             System.out.println(ListArquivosAnaliseJava);
 
             for (int cont = 0; cont < ListArquivosAnaliseJava.toArray().length; cont++) {
-                try{
+                try {
                     System.out.println("Arquivo analisado:" + ListArquivosAnaliseJava.toArray()[cont]);
                     System.out.println("---------------------------------------------------------------------------------------");
                     String arquivo = ListArquivosAnaliseJava.toArray()[cont].toString();
@@ -795,7 +793,7 @@ public class MainOracle {
                             if (implementacao.getName().getIdentifier().contains("Adapter")) {
 
                                 //Contados de arquivos analisados
-                                contadorArquivosAnalisados = contadorArquivosAnalisados +1;
+                                contadorArquivosAnalisados = contadorArquivosAnalisados + 1;
 
                                 //Se chegou at� aqui, temos certeza de que � um adapter.
                                 //Se a classe que extende do BaseAdapter tiver algum m�todo que n�o seja sobrescrever um m�todo de interface, � um FlexAdapter.
@@ -822,7 +820,7 @@ public class MainOracle {
                                                 if (statement.isExpressionStmt()) {
                                                     //Se em alguma dessas express�es tiver o texto findViewById
                                                     //Quer dizer que o ViewHolder n�o est� sendo utilizado, o que caracteriza o smell
-                                                    if(statement.toString().contains("findViewById(")) {
+                                                    if (statement.toString().contains("findViewById(")) {
                                                         isFoolAdapter = true;
                                                         JsonOut.setTipoSmell("JAVA");
                                                         JsonOut.setLinha(statement.getRange().get().begin.toString());
@@ -832,7 +830,7 @@ public class MainOracle {
                                                     }
 
                                                     //Se ele infla um Layout em toda chamada ao getView, isso tamb�m caracteriza o smell
-                                                    if(statement.toString().contains("inflater")) {
+                                                    if (statement.toString().contains("inflater")) {
                                                         isFoolAdapter = true;
                                                         JsonOut.setTipoSmell("JAVA");
                                                         JsonOut.setLinha(statement.getRange().get().begin.toString());
@@ -852,18 +850,16 @@ public class MainOracle {
                             System.out.println("Fool Adapter detectado na classe " + classe.getName().getIdentifier());
                         }
                     }
-                }
-                catch(Exception ex){
+                } catch (Exception ex) {
                     ex.printStackTrace();
                 }
             }
 
-            System.out.println("Total de FOOL adapter identificado "+ totalSmells);
+            System.out.println("Total de FOOL adapter identificado " + totalSmells);
 
-            JsonOut.saveJson(ListJsonSmell,"FoolAdapter.json");
+            JsonOut.saveJson(ListJsonSmell, "FoolAdapter.json");
             return totalSmells;
-        }
-        catch(Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
             return totalSmells;
         }
@@ -971,7 +967,7 @@ public class MainOracle {
 
 
             }
-        }catch(Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
 
@@ -1085,7 +1081,7 @@ public class MainOracle {
 
             System.out.println("Total de smells couple identificado " + totalSmells);
         }
-        JsonOut.saveJson(ListJsonSmell,"CoupledUIComponent.json");
+        JsonOut.saveJson(ListJsonSmell, "CoupledUIComponent.json");
         return totalSmells;
     }
 
@@ -1096,7 +1092,7 @@ public class MainOracle {
         totalSmells = 0;
         //listar(new File(pathApp),JAVA);
 
-       LoadFiles.carregaArquivosJAVAAnalise(new File("/Users/rafaeldurelli/Desktop/Repositorio-TESTE/opentasks"));
+        LoadFiles.carregaArquivosJAVAAnalise(new File("/Users/rafaeldurelli/Desktop/Repositorio-TESTE/opentasks"));
 
         System.out.println(ListArquivosAnaliseJava);
 
@@ -1123,7 +1119,7 @@ public class MainOracle {
                             if (implementacao.getName().getIdentifier().contains("BaseActivity") || implementacao.getName().getIdentifier().contains("Activity") || implementacao.getName().getIdentifier().contains("Fragments") || implementacao.getName().getIdentifier().contains("BaseAdapter") || implementacao.getName().getIdentifier().endsWith("Listener")) {
                                 classeValida = true;
                                 //Contador de arquivos analisados
-                                contadorArquivosAnalisados = contadorArquivosAnalisados +1;
+                                contadorArquivosAnalisados = contadorArquivosAnalisados + 1;
                                 classe.getImplementedTypes().forEach(item -> {
                                     //System.out.println(item.getNameAsString());
                                     if (item.getName().toString().contains("Listener")) {
@@ -1198,20 +1194,19 @@ public class MainOracle {
                         });
                     }
                 }
-            }
-            catch(Exception ex){
+            } catch (Exception ex) {
                 ex.printStackTrace();
             }
         }
 
         System.out.println("quantidade de smells identificados " + totalSmells);
 
-        JsonOut.saveJson(ListJsonSmell,"SuspiciousBehavior.json");
+        JsonOut.saveJson(ListJsonSmell, "SuspiciousBehavior.json");
         return totalSmells;
     }
 
     //Componente de UI Fazendo IO
-    public static long CompUIIOOraculo(){
+    public static long CompUIIOOraculo() {
         try {
 
             contadorArquivosAnalisados = 0;
@@ -1225,8 +1220,7 @@ public class MainOracle {
             //listar(new File(pathApp),JAVA);
 
             for (int cont = 0; cont < ListArquivosAnaliseJava.toArray().length; cont++) {
-                try
-                {
+                try {
                     System.out.println("Arquivo analisado:" + ListArquivosAnaliseJava.toArray()[cont]);
                     String nomeArquivo = ListArquivosAnaliseJava.toArray()[cont].toString();
                     System.out.println("---------------------------------------------------------------------------------------");
@@ -1235,12 +1229,12 @@ public class MainOracle {
                     CompilationUnit cUnit = JavaParser.parse(f);
 
                     cUnit.findAll(ClassOrInterfaceDeclaration.class).forEach(classe -> {
-                        if (classe.getExtendedTypes().size() > 0){
+                        if (classe.getExtendedTypes().size() > 0) {
                             if (classe.getExtendedTypes().get(0).toString().contains("Activity") || classe.getExtendedTypes().get(0).toString().contains("Fragment")
                                     || classe.getExtendedTypes().get(0).toString().contains("Adapter")) {
 
                                 //Contados de arquivos analisados
-                                contadorArquivosAnalisados = contadorArquivosAnalisados +1;
+                                contadorArquivosAnalisados = contadorArquivosAnalisados + 1;
 
                                 //Procura Libs IO no TIPO  em declaração de campos
                                 classe.getFields().forEach(campos -> {
@@ -1278,12 +1272,11 @@ public class MainOracle {
                                         String method = metodo.getNameAsString();
 
 
-
                                         //Procura Libs de IO no TIPO em retorno  de Métodos
                                         if (metodo.getType().toString().contains(item)) {
                                             System.out.println(metodo.getType().toString());
 
-                                            if (contadorDurelli == 0){
+                                            if (contadorDurelli == 0) {
 
                                                 System.out.println("UI IO Component detectado na classe " + classe.getName() + " (Acesso a banco de dados) no retorno do método " + metodo.getRange().get().begin);
                                                 System.out.println("---------------------------------------------------------------------------------------");
@@ -1312,7 +1305,6 @@ public class MainOracle {
                                         }
 
 
-
                                         //Procura Libs IO no TIPO  em declaração de campos
                                         metodo.findAll(FieldDeclaration.class).forEach(campos -> {
                                             if (campos.getElementType().toString().contains(item)) {
@@ -1327,19 +1319,18 @@ public class MainOracle {
                                         });
                                     });
                                 });
-                            }}
+                            }
+                        }
                     });
-                }
-                catch(Exception ex){
+                } catch (Exception ex) {
                     ex.printStackTrace();
                 }
             }
 
-            JsonOut.saveJson(ListJsonSmell,"UIIOComponent.json");
+            JsonOut.saveJson(ListJsonSmell, "UIIOComponent.json");
 
 
-        }
-        catch(Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
 
@@ -1349,8 +1340,8 @@ public class MainOracle {
     }
 
     //No uso de fragment
-    public static long NotFragmentOraculo(){
-        try{
+    public static long NotFragmentOraculo() {
+        try {
             contadorArquivosAnalisados = 0;
 
             //arquivosAnalise.clear();
@@ -1365,7 +1356,7 @@ public class MainOracle {
             for (int cont = 0; cont < ListArquivosAnaliseJava.toArray().length; cont++) {
 
                 //Contados de arquivos analisados
-                contadorArquivosAnalisados = contadorArquivosAnalisados +1;
+                contadorArquivosAnalisados = contadorArquivosAnalisados + 1;
 
                 try {
                     System.out.println("Arquivo analisado:" + ListArquivosAnaliseJava.toArray()[cont]);
@@ -1408,12 +1399,11 @@ public class MainOracle {
                     ViewsAndroid.add("RemoteViews");
 
 
-
                     //Não existir fragmentos na aplicação
 
                     // Uso de Views(EditText, Spinner, ou Outras Views Diretamente pela activity)
                     cUnit.findAll(ClassOrInterfaceDeclaration.class).forEach(classe -> {
-                        if (classe.getExtendedTypes().size()>0){
+                        if (classe.getExtendedTypes().size() > 0) {
                             if (classe.getExtendedTypes().get(0).toString().contains("Activity")) {
                                 NodeList<BodyDeclaration<?>> membros = classe.getMembers();
 
@@ -1473,19 +1463,17 @@ public class MainOracle {
                             }
                         }
                     });
-                }
-                catch (Exception ex){
+                } catch (Exception ex) {
                     ex.printStackTrace();
                 }
             }
 
             System.out.println("Total de smells identificados " + totalSmells);
 
-            JsonOut.saveJson(ListJsonSmell,"NotFragment.json");
+            JsonOut.saveJson(ListJsonSmell, "NotFragment.json");
 
 
-        }
-        catch(Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
 

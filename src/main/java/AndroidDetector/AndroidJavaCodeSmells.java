@@ -11,6 +11,7 @@ import com.github.javaparser.ast.stmt.Statement;
 import com.github.javaparser.ast.stmt.SwitchEntryStmt;
 import com.github.javaparser.ast.type.ClassOrInterfaceType;
 import metric.WMC;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -20,13 +21,13 @@ import java.util.List;
 public class AndroidJavaCodeSmells {
     //region [Var Declaration]
     public static int contadorArquivosAnalisados = 0;
-    public static  Boolean classeValida = true;
-    public static List<File> ListArquivosAnaliseJava =  new ArrayList<File>();
+    public static Boolean classeValida = true;
+    public static List<File> ListArquivosAnaliseJava = new ArrayList<File>();
     public static final String JAVA = ".java";
     public static final String XML = ".xml";
-    private static OutputSmells JsonOut = new  OutputSmells();
+    private static OutputSmells JsonOut = new OutputSmells();
     private static List<OutputSmells> ListJsonSmell = new ArrayList<OutputSmells>();
-    private  static List<OutputSmells> ListSmells = new ArrayList<OutputSmells>();
+    private static List<OutputSmells> ListSmells = new ArrayList<OutputSmells>();
     private static long totalSmells = 0;
     private static int contadorFieldStatic = 0;
     //endregion
@@ -43,7 +44,7 @@ public class AndroidJavaCodeSmells {
             try {
                 classeValida = true;
                 String nomeArquivo = ListArquivosAnaliseJava.toArray()[cont].toString();
-                System.out.println("Arquivo analisado:" + ListArquivosAnaliseJava.toArray()[cont]);
+                System.out.println(" Arquivo analisado:" + ListArquivosAnaliseJava.toArray()[cont]);
 
                 System.out.println("---------------------------------------------------------------------------------------");
 
@@ -63,7 +64,7 @@ public class AndroidJavaCodeSmells {
                             if (implementacao.getName().getIdentifier().contains("Fragment") || implementacao.getName().getIdentifier().contains("Adapter") || implementacao.getName().getIdentifier().contains("Activity")) {
 
                                 //Contados de arquivos analisados
-                                contadorArquivosAnalisados = contadorArquivosAnalisados +1;
+                                contadorArquivosAnalisados = contadorArquivosAnalisados + 1;
 
                                 classe.getFields().forEach(item -> {
                                     //System.out.println(item.getElementType().toString());
@@ -134,13 +135,12 @@ public class AndroidJavaCodeSmells {
                         }
                     }
                 }
-            }
-            catch(Exception ex){
+            } catch (Exception ex) {
                 ex.printStackTrace();
             }
         }
 
-        JsonOut.saveJson(ListJsonSmell,"CoupledUIComponent.json");
+        JsonOut.saveJson(ListJsonSmell, "CoupledUIComponent.json");
         return totalSmells;
     }
 
@@ -174,7 +174,7 @@ public class AndroidJavaCodeSmells {
                             if (implementacao.getName().getIdentifier().contains("BaseActivity") || implementacao.getName().getIdentifier().contains("Activity") || implementacao.getName().getIdentifier().contains("Fragments") || implementacao.getName().getIdentifier().contains("BaseAdapter") || implementacao.getName().getIdentifier().endsWith("Listener")) {
                                 classeValida = true;
                                 //Contador de arquivos analisados
-                                contadorArquivosAnalisados = contadorArquivosAnalisados +1;
+                                contadorArquivosAnalisados = contadorArquivosAnalisados + 1;
                                 classe.getImplementedTypes().forEach(item -> {
                                     //System.out.println(item.getNameAsString());
                                     if (item.getName().toString().contains("Listener")) {
@@ -249,13 +249,12 @@ public class AndroidJavaCodeSmells {
                         });
                     }
                 }
-            }
-            catch(Exception ex){
+            } catch (Exception ex) {
                 ex.printStackTrace();
             }
         }
 
-        JsonOut.saveJson(ListJsonSmell,"SuspiciousBehavior.json");
+        JsonOut.saveJson(ListJsonSmell, "SuspiciousBehavior.json");
         return totalSmells;
     }
 
@@ -296,7 +295,7 @@ public class AndroidJavaCodeSmells {
                             if (implementacao.getName().getIdentifier().contains("Adapter")) {
 
                                 //Contados de arquivos analisados
-                                contadorArquivosAnalisados = contadorArquivosAnalisados +1;
+                                contadorArquivosAnalisados = contadorArquivosAnalisados + 1;
 
                                 WMC wmc = new WMC(compilationunit);
                                 wmc.run();
@@ -341,15 +340,13 @@ public class AndroidJavaCodeSmells {
                             }
                         }
                     }
-                }
-                catch(Exception ex){
+                } catch (Exception ex) {
                     ex.printStackTrace();
                 }
             }
 
-            JsonOut.saveJson(ListJsonSmell,"FlexAdapter.json");
-        }
-        catch(Exception ex){
+            JsonOut.saveJson(ListJsonSmell, "FlexAdapter.json");
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
 
@@ -377,7 +374,7 @@ public class AndroidJavaCodeSmells {
 
                     cUnit.findAll(ClassOrInterfaceDeclaration.class).forEach(classe -> {
 
-                        if (classe.getExtendedTypes().size()>0) {
+                        if (classe.getExtendedTypes().size() > 0) {
                             if (classe.getExtendedTypes().get(0).toString().contains("Activity") || classe.getExtendedTypes().get(0).toString().contains("Fragment") || classe.getExtendedTypes().get(0).toString().contains("Adapter")) {
 
                                 //Contados de arquivos analisados
@@ -505,16 +502,14 @@ public class AndroidJavaCodeSmells {
                             }
                         }
                     });
-                }
-                catch(Exception ex){
+                } catch (Exception ex) {
                     ex.printStackTrace();
                 }
             }
 
-            JsonOut.saveJson(ListJsonSmell,"BrainUIComponent.json");
+            JsonOut.saveJson(ListJsonSmell, "BrainUIComponent.json");
 
-        }
-        catch(Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
 
@@ -522,7 +517,7 @@ public class AndroidJavaCodeSmells {
     }
 
     //Componente de UI Fazendo IO
-    public static long CompUIIO(String pathApp){
+    public static long CompUIIO(String pathApp) {
         try {
 
             contadorArquivosAnalisados = 0;
@@ -532,8 +527,7 @@ public class AndroidJavaCodeSmells {
             //listar(new File(pathApp),JAVA);
 
             for (int cont = 0; cont < ListArquivosAnaliseJava.toArray().length; cont++) {
-                try
-                {
+                try {
                     System.out.println("Arquivo analisado:" + ListArquivosAnaliseJava.toArray()[cont]);
                     String nomeArquivo = ListArquivosAnaliseJava.toArray()[cont].toString();
                     System.out.println("---------------------------------------------------------------------------------------");
@@ -542,12 +536,12 @@ public class AndroidJavaCodeSmells {
                     CompilationUnit cUnit = JavaParser.parse(f);
 
                     cUnit.findAll(ClassOrInterfaceDeclaration.class).forEach(classe -> {
-                        if (classe.getExtendedTypes().size() > 0){
+                        if (classe.getExtendedTypes().size() > 0) {
                             if (classe.getExtendedTypes().get(0).toString().contains("Activity") || classe.getExtendedTypes().get(0).toString().contains("Fragment")
                                     || classe.getExtendedTypes().get(0).toString().contains("Adapter")) {
 
                                 //Contados de arquivos analisados
-                                contadorArquivosAnalisados = contadorArquivosAnalisados +1;
+                                contadorArquivosAnalisados = contadorArquivosAnalisados + 1;
 
                                 //Procura Libs IO no TIPO  em declaração de campos
                                 classe.getFields().forEach(campos -> {
@@ -601,19 +595,18 @@ public class AndroidJavaCodeSmells {
                                         });
                                     });
                                 });
-                            }}
+                            }
+                        }
                     });
-                }
-                catch(Exception ex){
+                } catch (Exception ex) {
                     ex.printStackTrace();
                 }
             }
 
-            JsonOut.saveJson(ListJsonSmell,"UIIOComponent.json");
+            JsonOut.saveJson(ListJsonSmell, "UIIOComponent.json");
 
 
-        }
-        catch(Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
 
@@ -621,8 +614,8 @@ public class AndroidJavaCodeSmells {
     }
 
     //No uso de fragment
-    public static long NotFragment(String pathApp){
-        try{
+    public static long NotFragment(String pathApp) {
+        try {
             contadorArquivosAnalisados = 0;
 
             //arquivosAnalise.clear();
@@ -634,7 +627,7 @@ public class AndroidJavaCodeSmells {
             for (int cont = 0; cont < ListArquivosAnaliseJava.toArray().length; cont++) {
 
                 //Contados de arquivos analisados
-                contadorArquivosAnalisados = contadorArquivosAnalisados +1;
+                contadorArquivosAnalisados = contadorArquivosAnalisados + 1;
 
                 try {
                     System.out.println("Arquivo analisado:" + ListArquivosAnaliseJava.toArray()[cont]);
@@ -653,7 +646,7 @@ public class AndroidJavaCodeSmells {
 
                     // Uso de Views(EditText, Spinner, ou Outras Views Diretamente pela activity)
                     cUnit.findAll(ClassOrInterfaceDeclaration.class).forEach(classe -> {
-                        if (classe.getExtendedTypes().size()>0){
+                        if (classe.getExtendedTypes().size() > 0) {
                             if (classe.getExtendedTypes().get(0).toString().contains("Activity")) {
                                 NodeList<BodyDeclaration<?>> membros = classe.getMembers();
 
@@ -713,17 +706,15 @@ public class AndroidJavaCodeSmells {
                             }
                         }
                     });
-                }
-                catch (Exception ex){
+                } catch (Exception ex) {
                     ex.printStackTrace();
                 }
             }
 
-            JsonOut.saveJson(ListJsonSmell,"NotFragment.json");
+            JsonOut.saveJson(ListJsonSmell, "NotFragment.json");
 
 
-        }
-        catch(Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
 
@@ -781,20 +772,19 @@ public class AndroidJavaCodeSmells {
                 }
 
 
-            }
-            catch (Exception ex){
+            } catch (Exception ex) {
                 ex.printStackTrace();
             }
 
         }
 
-        JsonOut.saveJson(ListJsonSmell,"ExcessiveFragment.json");
+        JsonOut.saveJson(ListJsonSmell, "ExcessiveFragment.json");
         return totalSmells;
 
     }
 
     //Adapter consumista
-    public static long FoolAdapter(String pathApp){
+    public static long FoolAdapter(String pathApp) {
         try {
             contadorArquivosAnalisados = 0;
             ListSmells.clear();
@@ -802,7 +792,7 @@ public class AndroidJavaCodeSmells {
             totalSmells = 0;
 
             for (int cont = 0; cont < ListArquivosAnaliseJava.toArray().length; cont++) {
-                try{
+                try {
                     System.out.println("Arquivo analisado:" + ListArquivosAnaliseJava.toArray()[cont]);
                     System.out.println("---------------------------------------------------------------------------------------");
                     String arquivo = ListArquivosAnaliseJava.toArray()[cont].toString();
@@ -830,7 +820,7 @@ public class AndroidJavaCodeSmells {
                             if (implementacao.getName().getIdentifier().contains("Adapter")) {
 
                                 //Contados de arquivos analisados
-                                contadorArquivosAnalisados = contadorArquivosAnalisados +1;
+                                contadorArquivosAnalisados = contadorArquivosAnalisados + 1;
 
                                 //Se chegou at� aqui, temos certeza de que � um adapter.
                                 //Se a classe que extende do BaseAdapter tiver algum m�todo que n�o seja sobrescrever um m�todo de interface, � um FlexAdapter.
@@ -857,7 +847,7 @@ public class AndroidJavaCodeSmells {
                                                 if (statement.isExpressionStmt()) {
                                                     //Se em alguma dessas express�es tiver o texto findViewById
                                                     //Quer dizer que o ViewHolder n�o est� sendo utilizado, o que caracteriza o smell
-                                                    if(statement.toString().contains("findViewById(")) {
+                                                    if (statement.toString().contains("findViewById(")) {
                                                         isFoolAdapter = true;
                                                         JsonOut.setTipoSmell("JAVA");
                                                         JsonOut.setLinha(statement.getRange().get().begin.toString());
@@ -867,7 +857,7 @@ public class AndroidJavaCodeSmells {
                                                     }
 
                                                     //Se ele infla um Layout em toda chamada ao getView, isso tamb�m caracteriza o smell
-                                                    if(statement.toString().contains("inflater")) {
+                                                    if (statement.toString().contains("inflater")) {
                                                         isFoolAdapter = true;
                                                         JsonOut.setTipoSmell("JAVA");
                                                         JsonOut.setLinha(statement.getRange().get().begin.toString());
@@ -887,23 +877,15 @@ public class AndroidJavaCodeSmells {
                             System.out.println("Fool Adapter detectado na classe " + classe.getName().getIdentifier());
                         }
                     }
-                }
-                catch(Exception ex){
+                } catch (Exception ex) {
                     ex.printStackTrace();
                 }
             }
-            JsonOut.saveJson(ListJsonSmell,"FoolAdapter.json");
+            JsonOut.saveJson(ListJsonSmell, "FoolAdapter.json");
             return totalSmells;
-        }
-        catch(Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
             return totalSmells;
         }
     }
-
-
-
-
-
-
 }

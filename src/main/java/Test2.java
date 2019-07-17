@@ -1,4 +1,6 @@
-import AndroidDetector.ImportantSmells2;
+import AndroidDetector.AndroidJavaCodeSmells;
+import AndroidDetector.AndroidLayoutSmells;
+import AndroidDetector.LoadFiles;
 import com.dropbox.core.DbxException;
 
 import java.io.*;
@@ -8,8 +10,7 @@ public class Test2 {
 
 
     public static void main(String[] args) {
-
-        File fileCsv=null;
+        File fileCsv = null;
         String nameCSV = "AnalisePrecisonRecall3Apps.csv";
 
         //            File file = new File("/Volumes/MyPassport/Repository/Repositorio03");
@@ -48,20 +49,17 @@ public class Test2 {
             writer.append("\n");
 
 
-
-
-            for(int j = 0; j< afile.length; j++) {
+            for (int j = 0; j < afile.length; j++) {
 
                 if (afile[j].toString().contains(".DS_Store")) {
                     continue;
                 }
 
 
-
                 File f = new File(afile[j].toString());
 
                 //Getting all files to apply resource smells
-                ImportantSmells2.carregaArquivosXMLAnalise(f);
+                LoadFiles.carregaArquivosXMLAnalise(f);
                 //alterar aqqui depois
 
                 System.out.println("*******************************************");
@@ -80,11 +78,11 @@ public class Test2 {
                 //analise de codigo XML
                 String app = f.getName();
 
-                for (File fileXML : ImportantSmells2.ListArquivosAnaliseXML) {
+                for (File fileXML : LoadFiles.ListArquivosAnaliseXML) {
 
                     System.out.println(fileXML);
 
-                    long totalDeepNested = ImportantSmells2.DeepNestedLayout(fileXML, 4);
+                    long totalDeepNested = AndroidLayoutSmells.DeepNestedLayout(fileXML, 4);
 
                     if (totalDeepNested != 0) {
                         totalDeepNested = 1;
@@ -94,7 +92,7 @@ public class Test2 {
 
 
 //                long totalArquivosDeepNested = ImportantSmells2.contadorArquivosAnalisados;
-                    long totalDuplicateStyleAttributes = ImportantSmells2.DuplicateStyleAttributes(fileXML);
+                    long totalDuplicateStyleAttributes = AndroidLayoutSmells.DuplicateStyleAttributes(fileXML);
 
                     if (totalDuplicateStyleAttributes != 0) {
                         totalDuplicateStyleAttributes = 1;
@@ -103,7 +101,7 @@ public class Test2 {
                     }
 
 //                long totalArquivosDuplicateStyleAttributes = ImportantSmells2.contadorArquivosAnalisados;
-                    long totalGodStyleResource = ImportantSmells2.GodStyleResource(fileXML, 11);
+                    long totalGodStyleResource = AndroidLayoutSmells.GodStyleResource(fileXML, 11);
 
                     if (totalGodStyleResource != 0) {
                         totalGodStyleResource = 1;
@@ -112,7 +110,7 @@ public class Test2 {
                     }
 
 //                long totalArquivosGodStyleResource = ImportantSmells2.contadorArquivosAnalisados;
-                    long totalHideListener = ImportantSmells2.HiddenListener(fileXML);
+                    long totalHideListener = AndroidLayoutSmells.HiddenListener(fileXML);
 
                     if (totalHideListener != 0) {
                         totalHideListener = 1;
@@ -121,7 +119,7 @@ public class Test2 {
                     }
 
 //                long totalArquivosHideListener = ImportantSmells2.contadorArquivosAnalisados;
-                    long totalmagicResource = ImportantSmells2.magicResource(fileXML);
+                    long totalmagicResource = AndroidLayoutSmells.magicResource(fileXML);
 
                     if (totalmagicResource != 0) {
                         totalmagicResource = 1;
@@ -130,7 +128,7 @@ public class Test2 {
                     }
 
 //                long totalArquivosmagicResource = ImportantSmells2.contadorArquivosAnalisados;
-                    long totalBadStringResource = ImportantSmells2.godStringResource(fileXML);
+                    long totalBadStringResource = AndroidLayoutSmells.godStringResource(fileXML);
 
                     if (totalBadStringResource != 0) {
                         totalBadStringResource = 1;
@@ -139,7 +137,7 @@ public class Test2 {
                     }
 
 //                long totalArquivosBadStringResource = ImportantSmells2.contadorArquivosAnalisados;
-                    long totalreusoInadequadoDeString = ImportantSmells2.inappropriateStringReuse(fileXML);
+                    long totalreusoInadequadoDeString = AndroidLayoutSmells.inappropriateStringReuse(fileXML);
 
                     if (totalreusoInadequadoDeString != 0) {
                         totalreusoInadequadoDeString = 1;
@@ -194,7 +192,7 @@ public class Test2 {
 
                 }
 
-                long totalNotFoundImage = ImportantSmells2.NotFoundImage(caminho);
+                long totalNotFoundImage = AndroidLayoutSmells.NotFoundImage(caminho);
 
                 if (totalNotFoundImage != 0) {
                     totalNotFoundImage = 1;
@@ -243,15 +241,13 @@ public class Test2 {
                 writer.flush();
 
 
-
-
                 //analise de codigo JAVA
-                ImportantSmells2.carregaArquivosJAVAAnalise(f);
+                LoadFiles.carregaArquivosJAVAAnalise(f);
 
-                for (File fileJava : ImportantSmells2.ListArquivosAnaliseJava) {
+                for (File fileJava : LoadFiles.ListArquivosAnaliseJava) {
 //                    System.out.println(fileJava.getAbsolutePath());
 
-                    long totalCoupledUIComponent = ImportantSmells2.CoupledUIComponent(fileJava);
+                    long totalCoupledUIComponent = AndroidJavaCodeSmells.CoupledUIComponent(fileJava);
 
 
                     if (totalCoupledUIComponent != 0) {
@@ -264,8 +260,7 @@ public class Test2 {
 //                    long totalArquivosCoupledUIComponent = ImportantSmells2.contadorArquivosAnalisados;
 
 
-
-                    long totalSuspiciousBehavior = ImportantSmells2.SuspiciousBehavior(fileJava);
+                    long totalSuspiciousBehavior = AndroidJavaCodeSmells.SuspiciousBehavior(fileJava);
 
                     if (totalSuspiciousBehavior != 0) {
                         totalSuspiciousBehavior = 1;
@@ -274,7 +269,7 @@ public class Test2 {
                     }
 
 //                    long totalArquivosSuspiciousBehavior = ImportantSmells2.contadorArquivosAnalisados;
-                    long totalBrainUIComponent = ImportantSmells2.BrainUIComponent(fileJava);
+                    long totalBrainUIComponent = AndroidJavaCodeSmells.BrainUIComponent(fileJava);
 
                     if (totalBrainUIComponent != 0) {
                         totalBrainUIComponent = 1;
@@ -283,9 +278,8 @@ public class Test2 {
                     }
 
 
-
 //                    long totalArquivosBrainUIComponent = ImportantSmells2.contadorArquivosAnalisados;
-                    long totalFlexAdapter = ImportantSmells2.FlexAdapter(fileJava);
+                    long totalFlexAdapter = AndroidJavaCodeSmells.FlexAdapter(fileJava);
 
                     if (totalFlexAdapter != 0) {
                         totalFlexAdapter = 1;
@@ -294,7 +288,7 @@ public class Test2 {
                     }
 
 //                    long totalArquivosFlexAdapter = ImportantSmells2.contadorArquivosAnalisados;
-                    long totalFoolAdapter = ImportantSmells2.FoolAdapter(fileJava);
+                    long totalFoolAdapter = AndroidJavaCodeSmells.FoolAdapter(fileJava);
 
 
                     if (totalFoolAdapter != 0) {
@@ -304,7 +298,7 @@ public class Test2 {
                     }
 
 //                    long totalArquivosFoolAdapter = ImportantSmells2.contadorArquivosAnalisados;
-                    long totalCompUIIO = ImportantSmells2.CompUIIO(fileJava);
+                    long totalCompUIIO = AndroidJavaCodeSmells.CompUIIO(fileJava);
 
 
                     if (totalCompUIIO != 0) {
@@ -312,9 +306,6 @@ public class Test2 {
                     } else {
                         totalCompUIIO = 0;
                     }
-
-
-
 
 
 //                    long totalArquivosExcessiveFragment = ImportantSmells2.contadorArquivosAnalisados;
@@ -423,14 +414,13 @@ public class Test2 {
                 }
 
                 //                    long totalArquivosNotFragment = ImportantSmells2.contadorArquivosAnalisados;
-                long totalExcessiveFragment = ImportantSmells2.ExcessiveFragmentApp( 10);
+                long totalExcessiveFragment = ImportantSmells2.ExcessiveFragmentApp(10);
 
                 if (totalExcessiveFragment != 0) {
                     totalExcessiveFragment = 1;
                 } else {
                     totalExcessiveFragment = 0;
                 }
-
 
 
                 writer.append(
@@ -472,26 +462,22 @@ public class Test2 {
                 );
 
 
-
             }
             writer.append("\n");
-                writer.flush();
-                writer.close();
+            writer.flush();
+            writer.close();
 
 //                long fim = System.currentTimeMillis();
 //                System.out.println(new SimpleDateFormat("HH:mm:ss").format(new Date(inicio - fim)));
 
-        }
-        catch(Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
 
         try {
 
 
-
             DropboxUpload.uploadToDropbox(fileCsv.getAbsolutePath(), nameCSV);
-
 
 
         } catch (DbxException e) {
@@ -503,33 +489,22 @@ public class Test2 {
     }
 
 
-    private static long calCLOC(String appPath) throws IOException, InterruptedException{
+    private static long calCLOC(String appPath) throws IOException, InterruptedException {
         String command = "cloc " + appPath;
-
         long CLOC = 0;
         Process proc = Runtime.getRuntime().exec(command);
-
         // Read the output
-
         BufferedReader reader =
                 new BufferedReader(new InputStreamReader(proc.getInputStream()));
-
         String line = "";
-        while((line = reader.readLine()) != null) {
-
+        while ((line = reader.readLine()) != null) {
             System.out.print(line + "\n");
-
-            if (line.contains("SUM:")){
-
+            if (line.contains("SUM:")) {
                 String[] array = line.split(" ");
-
-                CLOC = new Long(array[array.length-1]);
-
-                System.out.print("Tamanho do projeto é " + array[array.length-1] + "\n");
+                CLOC = new Long(array[array.length - 1]);
+                System.out.print("Tamanho do projeto é " + array[array.length - 1] + "\n");
             }
-
         }
-
         proc.waitFor();
         return CLOC;
 

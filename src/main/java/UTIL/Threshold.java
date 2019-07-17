@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Threshold {
-    public static List<File> arquivosAnalise =  new ArrayList<File>();
+    public static List<File> arquivosAnalise = new ArrayList<File>();
     public static final String JAVA = ".java";
     public static final String XML = ".xml";
     private static SAXBuilder sb = new SAXBuilder();
@@ -29,7 +29,7 @@ public class Threshold {
     private static List<ReusoStringData> listaDeepNested = new ArrayList<ReusoStringData>();
 
 
-    public static List<File> ListArquivosAnaliseJava =  new ArrayList<File>();
+    public static List<File> ListArquivosAnaliseJava = new ArrayList<File>();
 
     private static long quantidadeIF = 0;
     private static long quantidadeWMC = 0;
@@ -44,18 +44,18 @@ public class Threshold {
     private static long libsIOnoTIPOemDeclaracaoDeCampos = 0;
     private static long libsIONoTipoemDeclaracaoNosParametrosDeMetodo = 0;
     private static long libsIONoTipoRetornoDeMetodo = 0;
-    private static long libsIOnoTIPODeclaracaoDECAMPOS = 0 ;
+    private static long libsIOnoTIPODeclaracaoDECAMPOS = 0;
 
 
-    public static void carregaArquivosJAVAAnalise(File directory){
+    public static void carregaArquivosJAVAAnalise(File directory) {
         arquivosAnalise.clear();
-        listar(directory,JAVA);
+        listar(directory, JAVA);
         ListArquivosAnaliseJava = arquivosAnalise;
     }
 
 
-    public static void listar(File directory,String tipo) {
-        if(directory.isDirectory()) {
+    public static void listar(File directory, String tipo) {
+        if (directory.isDirectory()) {
             //System.out.println(directory.getPath());
 
             String[] myFiles = directory.list(new FilenameFilter() {
@@ -64,14 +64,14 @@ public class Threshold {
                 }
             });
 
-            for(int i = 0; i < myFiles.length; i++){
+            for (int i = 0; i < myFiles.length; i++) {
                 arquivosAnalise.add(new File(directory.getPath() + File.separator + myFiles[i].toString()));
             }
 
             String[] subDirectory = directory.list();
-            if(subDirectory != null) {
-                for(String dir : subDirectory){
-                    listar(new File(directory + File.separator  + dir),tipo);
+            if (subDirectory != null) {
+                for (String dir : subDirectory) {
+                    listar(new File(directory + File.separator + dir), tipo);
                 }
             }
         }
@@ -80,7 +80,7 @@ public class Threshold {
     public static void DeepNestedLayout(String pathApp) {
         try {
             arquivosAnalise.clear();
-            listar(new File(pathApp),XML);
+            listar(new File(pathApp), XML);
 
             System.out.println("arquivo" + ";" + "Níveis");
 
@@ -107,8 +107,7 @@ public class Threshold {
                         //System.out.println("---------------------------------------------------------------------------------------");
 
                     }
-                }
-                catch(Exception ex){
+                } catch (Exception ex) {
 
                 }
             }
@@ -121,7 +120,7 @@ public class Threshold {
             writer.append("arquivo" + ";" + "Qtd Níveis");
             writer.append("\n");
 
-            for(ReusoStringData item: listaDeepNested) {
+            for (ReusoStringData item : listaDeepNested) {
                 writer.append(item.arquivo + ";" + item.strString + ";");
                 writer.append("\n");
 
@@ -129,7 +128,6 @@ public class Threshold {
 
             writer.flush();
             writer.close();
-
 
 
         } catch (Exception ex) {
@@ -156,8 +154,7 @@ public class Threshold {
                     listaDeepNested.add(data);
                     qtdSubelementos = 0;
                 }
-            }
-            catch(Exception ex){
+            } catch (Exception ex) {
 
             }
         }
@@ -352,7 +349,7 @@ public class Threshold {
 //    }
 
 
-    public static void comptThresholdWMC (String pathApp, FileWriter writer, String app) {
+    public static void comptThresholdWMC(String pathApp, FileWriter writer, String app) {
         try {
 
             for (int cont = 0; cont < ListArquivosAnaliseJava.toArray().length; cont++) {
@@ -374,7 +371,7 @@ public class Threshold {
 
                     writer.append(
                             app + "," +
-                                    quantidadeWMC+",");
+                                    quantidadeWMC + ",");
 
                     writer.append("\n");
                     writer.flush();
@@ -384,13 +381,13 @@ public class Threshold {
                     ex.printStackTrace();
                 }
             }
-        }catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
 
 
-    public static void comptThresholdSTaticField (String pathApp, FileWriter writer, String app) {
+    public static void comptThresholdSTaticField(String pathApp, FileWriter writer, String app) {
         try {
 
             for (int cont = 0; cont < ListArquivosAnaliseJava.toArray().length; cont++) {
@@ -406,22 +403,24 @@ public class Threshold {
                     CompilationUnit cUnit = JavaParser.parse(f);
 
                     cUnit.findAll(ClassOrInterfaceDeclaration.class).forEach(classe -> {
-                        if (classe.getExtendedTypes().size()>0) {
-                        if (classe.getExtendedTypes().get(0).toString().contains("Activity") || classe.getExtendedTypes().get(0).toString().contains("Fragment") || classe.getExtendedTypes().get(0).toString().contains("Adapter")) {
+                        if (classe.getExtendedTypes().size() > 0) {
+                            if (classe.getExtendedTypes().get(0).toString().contains("Activity") || classe.getExtendedTypes().get(0).toString().contains("Fragment") || classe.getExtendedTypes().get(0).toString().contains("Adapter")) {
 
-                            //Aqui conta para verificar o threshold de fieldstatic ... mas tem que pensar nisso.
-                            quantidadeFieldStatic = 0;
-                            classe.getFields().forEach(item -> {
-                                if (item.isFieldDeclaration() && item.isStatic()) {
-                                    quantidadeFieldStatic++;
-                                }
-                            });
-                        }}});
+                                //Aqui conta para verificar o threshold de fieldstatic ... mas tem que pensar nisso.
+                                quantidadeFieldStatic = 0;
+                                classe.getFields().forEach(item -> {
+                                    if (item.isFieldDeclaration() && item.isStatic()) {
+                                        quantidadeFieldStatic++;
+                                    }
+                                });
+                            }
+                        }
+                    });
 
 
                     writer.append(
                             app + "," +
-                                    quantidadeFieldStatic+",");
+                                    quantidadeFieldStatic + ",");
 
                     writer.append("\n");
                     writer.flush();
@@ -431,14 +430,14 @@ public class Threshold {
                     ex.printStackTrace();
                 }
             }
-        }catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
 
 
     //Componente de UI Fazendo IO
-    public static void CompUIIOTHRESHOLD(String pathApp, FileWriter writer, String app){
+    public static void CompUIIOTHRESHOLD(String pathApp, FileWriter writer, String app) {
 
         try {
 
@@ -447,10 +446,9 @@ public class Threshold {
                 libsIOnoTIPOemDeclaracaoDeCampos = 0;
                 libsIONoTipoemDeclaracaoNosParametrosDeMetodo = 0;
                 libsIONoTipoRetornoDeMetodo = 0;
-                libsIOnoTIPODeclaracaoDECAMPOS = 0 ;
+                libsIOnoTIPODeclaracaoDECAMPOS = 0;
 
-                try
-                {
+                try {
                     System.out.println("Arquivo analisado:" + ListArquivosAnaliseJava.toArray()[cont]);
                     String nomeArquivo = ListArquivosAnaliseJava.toArray()[cont].toString();
                     System.out.println("---------------------------------------------------------------------------------------");
@@ -460,51 +458,50 @@ public class Threshold {
 
                     cUnit.findAll(ClassOrInterfaceDeclaration.class).forEach(classe -> {
 
-                        if(classe.getExtendedTypes().size()>0){
+                        if (classe.getExtendedTypes().size() > 0) {
 
-                        if (classe.getExtendedTypes().get(0).toString().contains("Activity") || classe.getExtendedTypes().get(0).toString().contains("Fragment") || classe.getExtendedTypes().get(0).toString().contains("Adapter")) {
+                            if (classe.getExtendedTypes().get(0).toString().contains("Activity") || classe.getExtendedTypes().get(0).toString().contains("Fragment") || classe.getExtendedTypes().get(0).toString().contains("Adapter")) {
 
-                            //Procura Libs IO no TIPO  em declaração de campos
-                            classe.getFields().forEach(campos -> {
-                                if (IOClass.getIOClass().contains(campos.getElementType().toString())) {
-                                    libsIOnoTIPOemDeclaracaoDeCampos++;
+                                //Procura Libs IO no TIPO  em declaração de campos
+                                classe.getFields().forEach(campos -> {
+                                    if (IOClass.getIOClass().contains(campos.getElementType().toString())) {
+                                        libsIOnoTIPOemDeclaracaoDeCampos++;
 
-                                }
-                            });
-
-                            //Procura Libs de IO no TIPO em declaração  de Métodos
-                            classe.findAll(MethodDeclaration.class).forEach(metodo -> {
-                                IOClass.getIOClass().forEach(item -> {
-                                    //Procura Libs de IO no TIPO em declaração  nos Parametros de  Métodos
-                                    if (metodo.getParameters().contains(item)) {
-                                        libsIONoTipoemDeclaracaoNosParametrosDeMetodo++;
                                     }
+                                });
 
-                                    //Procura Libs de IO no TIPO em retorno  de Métodos
-                                    if (metodo.getType().toString().contains(item)) {
-                                        libsIONoTipoRetornoDeMetodo++;
-                                    }
-
-                                    //Procura Libs IO no TIPO  em declaração de campos
-                                    metodo.findAll(FieldDeclaration.class).forEach(campos -> {
-                                        if (campos.getElementType().toString().contains(item)) {
-                                            libsIOnoTIPODeclaracaoDECAMPOS++;
+                                //Procura Libs de IO no TIPO em declaração  de Métodos
+                                classe.findAll(MethodDeclaration.class).forEach(metodo -> {
+                                    IOClass.getIOClass().forEach(item -> {
+                                        //Procura Libs de IO no TIPO em declaração  nos Parametros de  Métodos
+                                        if (metodo.getParameters().contains(item)) {
+                                            libsIONoTipoemDeclaracaoNosParametrosDeMetodo++;
                                         }
+
+                                        //Procura Libs de IO no TIPO em retorno  de Métodos
+                                        if (metodo.getType().toString().contains(item)) {
+                                            libsIONoTipoRetornoDeMetodo++;
+                                        }
+
+                                        //Procura Libs IO no TIPO  em declaração de campos
+                                        metodo.findAll(FieldDeclaration.class).forEach(campos -> {
+                                            if (campos.getElementType().toString().contains(item)) {
+                                                libsIOnoTIPODeclaracaoDECAMPOS++;
+                                            }
+                                        });
                                     });
                                 });
-                            });
-                        }
+                            }
                         }
                     });
-                }
-                catch(Exception ex){
+                } catch (Exception ex) {
                     ex.printStackTrace();
                 }
 
                 writer.append(
                         app + "," +
                                 libsIOnoTIPOemDeclaracaoDeCampos + "," +
-                                libsIONoTipoemDeclaracaoNosParametrosDeMetodo  + "," +
+                                libsIONoTipoemDeclaracaoNosParametrosDeMetodo + "," +
                                 libsIONoTipoRetornoDeMetodo + "," +
                                 libsIOnoTIPODeclaracaoDECAMPOS + ",");
 
@@ -514,9 +511,7 @@ public class Threshold {
             }
 
 
-
-        }
-        catch(Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
@@ -556,9 +551,9 @@ public class Threshold {
                                 //Verifica se o membro é um método
                                 if (membro.isMethodDeclaration()) {
 
-                                    quantidadeIF =  membro.findAll(IfStmt.class).size();
+                                    quantidadeIF = membro.findAll(IfStmt.class).size();
 
-                                    quantidadeSWIFT =  membro.findAll(SwitchEntryStmt.class).size();
+                                    quantidadeSWIFT = membro.findAll(SwitchEntryStmt.class).size();
                                 }
                             }
 
@@ -610,18 +605,15 @@ public class Threshold {
 
                         }
                     });
-                }
-                catch(Exception ex){
+                } catch (Exception ex) {
                     ex.printStackTrace();
                 }
-
 
 
             }
 
 
-        }
-        catch(Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
 
@@ -632,7 +624,7 @@ public class Threshold {
     public static void GodStyleResource(String pathApp) {
         try {
             arquivosAnalise.clear();
-            listar(new File(pathApp),XML);
+            listar(new File(pathApp), XML);
 
             int qtdFilesStyle = 0;
             System.out.println("arquivo" + ";" + "Qtd Stilos");
@@ -657,8 +649,7 @@ public class Threshold {
                             System.out.println(arquivo_analisado + ";" + d.getRootElement().getChildren().size());
                         }
                     }
-                }
-                catch(Exception ex){
+                } catch (Exception ex) {
 
                 }
             }
@@ -671,7 +662,7 @@ public class Threshold {
             writer.append("arquivo" + ";" + "Qtd Stilos");
             writer.append("\n");
 
-            for(ReusoStringData item: lista) {
+            for (ReusoStringData item : lista) {
                 writer.append(item.arquivo + ";" + item.strString + ";");
                 writer.append("\n");
 
@@ -695,11 +686,11 @@ public class Threshold {
         File file = new File(pathApp);
         File afile[] = file.listFiles();
 
-        for(int j = 0; j< afile.length; j++){
+        for (int j = 0; j < afile.length; j++) {
             //System.out.println(afile[j]);
             arquivosAnalise.clear();
 
-            listar(new File(afile[j].toString()),JAVA);
+            listar(new File(afile[j].toString()), JAVA);
 
             for (int cont = 0; cont < arquivosAnalise.toArray().length; cont++) {
                 try {
@@ -727,8 +718,7 @@ public class Threshold {
                         }
                     }
 
-                }
-                catch(Exception ex){
+                } catch (Exception ex) {
 
                 }
             }
@@ -744,8 +734,6 @@ public class Threshold {
         }
 
 
-
-
         File fileCsv = new File("/Users/rafaeldurelli/Desktop/Analise/ThresholdExcessiveFragment.csv");
 
 
@@ -755,7 +743,7 @@ public class Threshold {
         writer.append("arquivo" + ";" + "Qtd Fragment");
         writer.append("\n");
 
-        for(ReusoStringData item: listaExcessiveFragment) {
+        for (ReusoStringData item : listaExcessiveFragment) {
             writer.append(item.arquivo + ";" + item.strString + ";");
             writer.append("\n");
 
@@ -766,11 +754,6 @@ public class Threshold {
 
 
     }
-
-
-
-
-
 
 
 }

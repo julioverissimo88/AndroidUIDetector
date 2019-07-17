@@ -9,28 +9,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LoadFiles {
-    public static List<File> ListArquivosAnaliseXML =  new ArrayList<File>();
-    public static List<File> ListArquivosAnaliseJava =  new ArrayList<File>();
-    public static List<File> arquivosAnalise =  new ArrayList<File>();
+    public static List<File> ListArquivosAnaliseXML = new ArrayList<File>();
+    public static List<File> ListArquivosAnaliseJava = new ArrayList<File>();
+    public static List<File> arquivosAnalise = new ArrayList<File>();
     public static final String JAVA = ".java";
     public static final String XML = ".xml";
 
 
     //--> Listagem de Arquivos
-    public static void carregaArquivosXMLAnalise(File directory){
+    public static void carregaArquivosXMLAnalise(File directory) {
         arquivosAnalise.clear();
-        listar(directory,XML);
+        listar(directory, XML);
         ListArquivosAnaliseXML = arquivosAnalise;
     }
 
-    public static void carregaArquivosJAVAAnalise(File directory){
+    public static void carregaArquivosJAVAAnalise(File directory) {
         arquivosAnalise.clear();
-        listar(directory,JAVA);
+        listar(directory, JAVA);
         ListArquivosAnaliseJava = arquivosAnalise;
     }
 
-    public static void listar(File directory,String tipo) {
-        if(directory.isDirectory()) {
+    public static void listar(File directory, String tipo) {
+        if (directory.isDirectory()) {
             //System.out.println(directory.getPath());
 
             String[] myFiles = directory.list(new FilenameFilter() {
@@ -39,14 +39,14 @@ public class LoadFiles {
                 }
             });
 
-            for(int i = 0; i < myFiles.length; i++){
+            for (int i = 0; i < myFiles.length; i++) {
                 arquivosAnalise.add(new File(directory.getPath() + "" + File.separator + "" + myFiles[i].toString()));
             }
 
             String[] subDirectory = directory.list();
-            if(subDirectory != null) {
-                for(String dir : subDirectory){
-                    listar(new File(directory + File.separator  + dir),tipo);
+            if (subDirectory != null) {
+                for (String dir : subDirectory) {
+                    listar(new File(directory + File.separator + dir), tipo);
                 }
             }
         }
