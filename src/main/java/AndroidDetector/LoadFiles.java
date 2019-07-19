@@ -1,31 +1,27 @@
 package AndroidDetector;
 
-import UTIL.ReusoStringData;
-import org.jdom2.input.SAXBuilder;
-
 import java.io.File;
 import java.io.FilenameFilter;
 import java.util.ArrayList;
 import java.util.List;
 
+import static UTIL.Constants.*;
+
 public class LoadFiles {
     public static List<File> ListArquivosAnaliseXML = new ArrayList<File>();
     public static List<File> ListArquivosAnaliseJava = new ArrayList<File>();
     public static List<File> arquivosAnalise = new ArrayList<File>();
-    public static final String JAVA = ".java";
-    public static final String XML = ".xml";
-
 
     //--> Listagem de Arquivos
     public static void carregaArquivosXMLAnalise(File directory) {
         arquivosAnalise.clear();
-        listar(directory, XML);
+        listar(directory, XML_EXTENSION);
         ListArquivosAnaliseXML = arquivosAnalise;
     }
 
     public static void carregaArquivosJAVAAnalise(File directory) {
         arquivosAnalise.clear();
-        listar(directory, JAVA);
+        listar(directory, JAVA_EXTENSION);
         ListArquivosAnaliseJava = arquivosAnalise;
     }
 

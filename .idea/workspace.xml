@@ -2,22 +2,38 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ed645100-bb7d-4c48-a5f2-f9a4be63070e" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/AndroidDetector/CompilationUnitInstance.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/AndroidDetector/Visitors.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/AndroidDetector/AndroidJavaCodeSmells.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AndroidDetector/AndroidJavaCodeSmells.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AndroidDetector/AndroidLayoutSmells.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AndroidDetector/AndroidLayoutSmells.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AndroidDetector/IOClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AndroidDetector/IOClass.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/AndroidDetector/LoadFiles.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AndroidDetector/LoadFiles.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AndroidDetector/OutputSmells.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AndroidDetector/OutputSmells.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/DetectUI/DetectorUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DetectUI/DetectorUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DropboxUpload.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DropboxUpload.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MainOracle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MainOracle.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Test.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Test2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Test2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/UTIL/CLOC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UTIL/CLOC.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Test2.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/UTIL/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UTIL/Constants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/UTIL/TesteGISTs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UTIL/TesteGISTs.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/UTIL/Threshold.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UTIL/Threshold.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/metric/WMC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/metric/WMC.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/AndroidDetector/IOClass.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/AndroidDetector/ImportantSmells$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/AndroidDetector/ImportantSmells.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/AndroidDetector/ImportantSmells2$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/AndroidDetector/ImportantSmells2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/AndroidDetector/OutputSmells.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/AndroidDetector/SampleOfXmlLocator.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/AndroidDetector/SmellsAndroidQuality.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/AndroidDetector/SmellsAndroidUiApp.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/DetectUI/DetectorUI$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/DetectUI/DetectorUI$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/DetectUI/DetectorUI$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/DetectUI/DetectorUI.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/DropboxUpload.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/JavaParser/ParserProject.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Test.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Test2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/UTIL/CLOC.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/UTIL/TesteGISTs.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/UTIL/Threshold$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/UTIL/Threshold.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/metric/WMC.class" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -33,19 +49,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/AndroidDetector/CompilationUnitInstance.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="298">
-              <caret line="44" column="49" selection-start-line="44" selection-start-column="49" selection-end-line="44" selection-end-column="49" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Test2.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="332">
-              <caret line="506" column="9" selection-start-line="506" selection-start-column="9" selection-end-line="506" selection-end-column="9" />
+            <state relative-caret-position="153">
+              <caret line="15" column="58" selection-start-line="15" selection-start-column="47" selection-end-line="15" selection-end-column="58" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -53,13 +60,28 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/UTIL/CLOC.java">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/AndroidDetector/AndroidJavaCodeSmells.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="21" column="9" lean-forward="true" selection-start-line="21" selection-start-column="9" selection-end-line="21" selection-end-column="9" />
+            <state relative-caret-position="202">
+              <caret line="161" selection-start-line="161" selection-end-line="161" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="method#FlexAdapter#0;class#AndroidJavaCodeSmells#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/AndroidDetector/OutputSmells.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="195">
+              <caret line="38" column="16" selection-start-line="38" selection-start-column="16" selection-end-line="38" selection-end-column="16" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#766#767#0" expanded="true" />
+                <element signature="e#800#801#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -68,82 +90,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/UTIL/Constants.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" selection-start-line="9" selection-end-line="9" />
+            <state relative-caret-position="68">
+              <caret line="4" column="38" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="38" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/MainOracle.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="297">
-              <caret line="23" column="61" selection-start-line="23" selection-start-column="61" selection-end-line="23" selection-end-column="61" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#main#0;class#MainOracle#0" />
-                <element signature="method#BrainUIComponentOraculo#0;class#MainOracle#0" />
-                <element signature="method#FoolAdapterOraculo#0;class#MainOracle#0" />
-                <element signature="method#FlexAdapterOraculo#0;class#MainOracle#0" />
-                <element signature="method#CoupledUIComponentOraculo#0;class#MainOracle#0" />
-                <element signature="method#SuspiciousBehaviorOraculo#0;class#MainOracle#0" />
-                <element signature="method#CompUIIOOraculo#0;class#MainOracle#0" />
-                <element signature="method#NotFragmentOraculo#0;class#MainOracle#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Test.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="297">
-              <caret line="239" column="43" selection-start-line="239" selection-start-column="43" selection-end-line="239" selection-end-column="43" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/UTIL/ReusoStringData.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/AndroidDetector/LoadFiles.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="102">
-              <caret line="6" selection-start-line="6" selection-end-line="6" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/UTIL/TesteGISTs.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1263">
-              <caret line="31" column="17" selection-start-line="31" selection-start-column="17" selection-end-line="31" selection-end-column="17" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/UTIL/Threshold.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5091">
-              <caret line="659" column="33" selection-start-line="659" selection-start-column="33" selection-end-line="659" selection-end-column="33" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/DropboxUpload.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="298">
-              <caret line="73" column="41" selection-start-line="73" selection-start-column="41" selection-end-line="73" selection-end-column="41" />
+              <caret line="27" column="38" lean-forward="true" selection-start-line="27" selection-start-column="38" selection-end-line="27" selection-end-column="38" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -162,9 +119,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>brain</find>
-      <find>Brain</find>
-      <find>BrainUI</find>
       <find>threshold</find>
       <find>contadorArquivosAnalisados</find>
       <find>ImportantSmells</find>
@@ -192,6 +146,9 @@
       <find>FoolAdapter</find>
       <find>ExcessiveFragment</find>
       <find>JAVA</find>
+      <find>contains</find>
+      <find>findViewById</find>
+      <find>pathApp</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -216,21 +173,23 @@
         <option value="$PROJECT_DIR$/src/main/java/AndroidDetector/ImportantSmells2.java" />
         <option value="$PROJECT_DIR$/src/main/java/AndroidDetector/ImportantSmells.java" />
         <option value="$PROJECT_DIR$/src/main/java/AndroidDetector/AndroidLayoutSmells.java" />
-        <option value="$PROJECT_DIR$/src/main/java/AndroidDetector/AndroidJavaCodeSmells.java" />
         <option value="$PROJECT_DIR$/src/main/java/AndroidDetector/IOClass.java" />
-        <option value="$PROJECT_DIR$/src/main/java/AndroidDetector/LoadFiles.java" />
         <option value="$PROJECT_DIR$/src/main/java/AndroidDetector/OutputSmells.java" />
-        <option value="$PROJECT_DIR$/src/main/java/DetectUI/DetectorUI.java" />
         <option value="$PROJECT_DIR$/src/main/java/metric/WMC.java" />
         <option value="$PROJECT_DIR$/src/main/java/UTIL/CLOC.java" />
-        <option value="$PROJECT_DIR$/src/main/java/UTIL/Constants.java" />
         <option value="$PROJECT_DIR$/src/main/java/UTIL/TesteGISTs.java" />
         <option value="$PROJECT_DIR$/src/main/java/UTIL/Threshold.java" />
         <option value="$PROJECT_DIR$/src/main/java/DropboxUpload.java" />
         <option value="$PROJECT_DIR$/src/main/java/Main.java" />
         <option value="$PROJECT_DIR$/src/main/java/MainOracle.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Test.java" />
         <option value="$PROJECT_DIR$/src/main/java/Test2.java" />
+        <option value="$PROJECT_DIR$/src/main/java/DetectUI/DetectorUI.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Test.java" />
+        <option value="$PROJECT_DIR$/src/main/java/AndroidDetector/Visitors.java" />
+        <option value="$PROJECT_DIR$/src/main/java/AndroidDetector/CompilationUnitInstance.java" />
+        <option value="$PROJECT_DIR$/src/main/java/UTIL/Constants.java" />
+        <option value="$PROJECT_DIR$/src/main/java/AndroidDetector/LoadFiles.java" />
+        <option value="$PROJECT_DIR$/src/main/java/AndroidDetector/AndroidJavaCodeSmells.java" />
       </list>
     </option>
   </component>
@@ -316,14 +275,6 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="metric" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="AndroidUIDetector" type="b2602c69:ProjectViewProjectNode" />
-              <item name="AndroidUIDetector" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="UTIL" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -358,20 +309,20 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Test2">
+  <component name="RunManager" selected="Application.DetectorUI">
     <configuration default="true" type="Applet">
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CLOC" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="UTIL.CLOC" />
+    <configuration name="DetectorUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="DetectUI.DetectorUI" />
       <module name="Detector" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="UTIL.*" />
+          <option name="PATTERN" value="DetectUI.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -450,18 +401,18 @@
     </configuration>
     <list>
       <item itemvalue="Application.Test" />
-      <item itemvalue="Application.CLOC" />
       <item itemvalue="Application.ImportantSmells" />
       <item itemvalue="Application.Test2" />
       <item itemvalue="Application.DropboxUpload" />
+      <item itemvalue="Application.DetectorUI" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.DetectorUI" />
         <item itemvalue="Application.Test2" />
         <item itemvalue="Application.DropboxUpload" />
         <item itemvalue="Application.Test" />
         <item itemvalue="Application.ImportantSmells" />
-        <item itemvalue="Application.CLOC" />
       </list>
     </recent_temporary>
   </component>
@@ -508,12 +459,12 @@
       <workItem from="1559569764411" duration="2517000" />
       <workItem from="1562114595732" duration="2027000" />
       <workItem from="1563233227406" duration="7669000" />
-      <workItem from="1563292819110" duration="4726000" />
+      <workItem from="1563292819110" duration="16291000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="172416000" />
+    <option name="totallyTimeSpent" value="183981000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -616,39 +567,9 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/Test.java</url>
-          <line>106</line>
+          <line>103</line>
           <properties />
           <option name="timeStamp" value="183" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/Test2.java</url>
-          <line>259</line>
-          <properties />
-          <option name="timeStamp" value="185" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/Test2.java</url>
-          <line>252</line>
-          <properties />
-          <option name="timeStamp" value="187" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/Test2.java</url>
-          <line>82</line>
-          <properties />
-          <option name="timeStamp" value="188" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/Test2.java</url>
-          <line>12</line>
-          <properties />
-          <option name="timeStamp" value="190" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/Test2.java</url>
-          <line>53</line>
-          <properties />
-          <option name="timeStamp" value="192" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/AndroidDetector/AndroidLayoutSmells.java</url>
@@ -672,12 +593,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$MAVEN_REPOSITORY$/org/jdom/jdom/2.0.2/jdom-2.0.2.jar!/org/jdom2/input/SAXBuilder.class" />
-    <entry file="jar://$MAVEN_REPOSITORY$/com/github/javaparser/javaparser-core/3.6.9/javaparser-core-3.6.9.jar!/com/github/javaparser/StringProvider.class" />
-    <entry file="jar://$MAVEN_REPOSITORY$/com/github/javaparser/javaparser-core/3.6.9/javaparser-core-3.6.9.jar!/com/github/javaparser/utils/Utils.class" />
-    <entry file="jar://$MAVEN_REPOSITORY$/com/github/javaparser/javaparser-core/3.6.9/javaparser-core-3.6.9.jar!/com/github/javaparser/GeneratedJavaParserBase.class" />
-    <entry file="jar://$MAVEN_REPOSITORY$/com/github/javaparser/javaparser-core/3.6.9/javaparser-core-3.6.9.jar!/com/github/javaparser/SimpleCharStream.class" />
-    <entry file="jar://$MAVEN_REPOSITORY$/com/github/javaparser/javaparser-core/3.6.9/javaparser-core-3.6.9.jar!/com/github/javaparser/GeneratedJavaParserTokenManager.class" />
     <entry file="jar://$MAVEN_REPOSITORY$/com/github/javaparser/javaparser-core/3.6.9/javaparser-core-3.6.9.jar!/com/github/javaparser/GeneratedJavaParser.class" />
     <entry file="jar://$MAVEN_REPOSITORY$/com/github/javaparser/javaparser-core/3.6.9/javaparser-core-3.6.9.jar!/com/github/javaparser/JavaParser.class" />
     <entry file="file://$PROJECT_DIR$/src/main/java/AndroidDetector/teste.java" />
@@ -697,7 +612,6 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/AndroidDetector/SmellImageNotFound.java" />
     <entry file="jar://$MAVEN_REPOSITORY$/com/github/javaparser/javaparser-core/3.6.9/javaparser-core-3.6.9.jar!/com/github/javaparser/ast/body/CallableDeclaration.class" />
     <entry file="jar://$MAVEN_REPOSITORY$/com/github/javaparser/javaparser-core/3.6.9/javaparser-core-3.6.9.jar!/com/github/javaparser/ast/NodeList.class" />
-    <entry file="jar://$MAVEN_REPOSITORY$/com/github/javaparser/javaparser-core/3.6.9/javaparser-core-3.6.9.jar!/com/github/javaparser/ast/Node.class" />
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="529">
@@ -787,53 +701,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/AndroidDetector/AndroidJavaCodeSmells.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="512" column="33" selection-start-line="512" selection-start-column="33" selection-end-line="512" selection-end-column="33" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#SuspiciousBehavior#0;class#AndroidJavaCodeSmells#0" />
-            <element signature="method#FlexAdapter#0;class#AndroidJavaCodeSmells#0" />
-            <element signature="method#CompUIIO#0;class#AndroidJavaCodeSmells#0" />
-            <element signature="method#NotFragment#0;class#AndroidJavaCodeSmells#0" />
-            <element signature="method#ExcessiveFragment#0;class#AndroidJavaCodeSmells#0" />
-            <element signature="method#FoolAdapter#0;class#AndroidJavaCodeSmells#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/AndroidDetector/IOClass.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="178">
           <caret line="29" column="22" selection-start-line="29" selection-start-column="22" selection-end-line="29" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/AndroidDetector/LoadFiles.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="29" column="5" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/AndroidDetector/OutputSmells.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="15" column="26" selection-start-line="15" selection-start-column="26" selection-end-line="15" selection-end-column="26" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/DetectUI/DetectorUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-940">
-          <caret line="340" column="87" selection-start-line="340" selection-start-column="87" selection-end-line="340" selection-end-column="87" />
         </state>
       </provider>
     </entry>
@@ -849,50 +720,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/UTIL/ApiReader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" selection-start-line="5" selection-end-line="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/UTIL/CLOC.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="21" column="9" lean-forward="true" selection-start-line="21" selection-start-column="9" selection-end-line="21" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/UTIL/Constants.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" selection-start-line="9" selection-end-line="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/UTIL/ReusoStringData.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" selection-start-line="6" selection-end-line="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/UTIL/TesteGISTs.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1263">
-          <caret line="31" column="17" selection-start-line="31" selection-start-column="17" selection-end-line="31" selection-end-column="17" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/UTIL/Threshold.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5091">
+        <state relative-caret-position="8763">
           <caret line="659" column="33" selection-start-line="659" selection-start-column="33" selection-end-line="659" selection-end-column="33" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -900,19 +730,33 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/DropboxUpload.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/UTIL/TesteGISTs.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="298">
-          <caret line="73" column="41" selection-start-line="73" selection-start-column="41" selection-end-line="73" selection-end-column="41" />
+        <state relative-caret-position="-1249">
+          <caret line="31" column="17" selection-start-line="31" selection-start-column="17" selection-end-line="31" selection-end-column="17" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/UTIL/ReusoStringData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/UTIL/ApiReader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="298">
+        <state relative-caret-position="348">
           <caret line="44" column="49" selection-start-line="44" selection-start-column="49" selection-end-line="44" selection-end-column="49" />
         </state>
       </provider>
@@ -935,22 +779,156 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Test.java">
+    <entry file="file://$PROJECT_DIR$/../../SmellsAndroidUiApp.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="239" column="43" selection-start-line="239" selection-start-column="43" selection-end-line="239" selection-end-column="43" />
+        <state relative-caret-position="-5520" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../Nova pasta/AndroidUIDetector 3.old/AndroidUIDetector/src/main/java/UTIL/Threshold.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3621" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../Nova pasta/AndroidUIDetector 3.old/AndroidUIDetector/src/main/java/DropboxUpload.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-134" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../Nova pasta/AndroidUIDetector 3.old/AndroidUIDetector/src/main/java/metric/WMC.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1870">
+          <caret line="123" column="5" lean-forward="true" selection-start-line="50" selection-start-column="4" selection-end-line="123" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/DropboxUpload.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1241">
+          <caret line="73" column="41" selection-start-line="73" selection-start-column="41" selection-end-line="73" selection-end-column="41" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/DetectUI/DetectorUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="113">
+          <caret line="325" column="105" selection-start-line="325" selection-start-column="105" selection-end-line="325" selection-end-column="105" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Test2.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="332">
-          <caret line="506" column="9" selection-start-line="506" selection-start-column="9" selection-end-line="506" selection-end-column="9" />
+        <state relative-caret-position="-4029">
+          <caret line="249" column="97" lean-forward="true" selection-start-line="249" selection-start-column="97" selection-end-line="249" selection-end-column="97" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/UTIL/CLOC.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="21" column="9" selection-start-line="21" selection-start-column="9" selection-end-line="21" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Test.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-186">
+          <caret line="58" column="18" selection-start-line="58" selection-start-column="18" selection-end-line="58" selection-end-column="18" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/github/javaparser/javaparser-core/3.6.9/javaparser-core-3.6.9.jar!/com/github/javaparser/ast/Node.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="113">
+          <caret line="500" column="36" selection-start-line="500" selection-start-column="36" selection-end-line="500" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/AndroidDetector/Visitors.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="19" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#424#425#0" expanded="true" />
+            <element signature="e#487#488#0" expanded="true" />
+            <element signature="e#548#549#0" expanded="true" />
+            <element signature="e#605#606#0" expanded="true" />
+            <element signature="e#675#676#0" expanded="true" />
+            <element signature="e#736#737#0" expanded="true" />
+            <element signature="e#796#797#0" expanded="true" />
+            <element signature="e#848#849#0" expanded="true" />
+            <element signature="e#911#912#0" expanded="true" />
+            <element signature="e#966#967#0" expanded="true" />
+            <element signature="e#1030#1031#0" expanded="true" />
+            <element signature="e#1086#1087#0" expanded="true" />
+            <element signature="e#1155#1156#0" expanded="true" />
+            <element signature="e#1214#1215#0" expanded="true" />
+            <element signature="e#1286#1287#0" expanded="true" />
+            <element signature="e#1343#1344#0" expanded="true" />
+            <element signature="e#1403#1404#0" expanded="true" />
+            <element signature="e#1455#1456#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/AndroidDetector/CompilationUnitInstance.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="15" column="58" selection-start-line="15" selection-start-column="47" selection-end-line="15" selection-end-column="58" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/UTIL/Constants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="38" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/AndroidDetector/LoadFiles.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="27" column="38" lean-forward="true" selection-start-line="27" selection-start-column="38" selection-end-line="27" selection-end-column="38" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/AndroidDetector/OutputSmells.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="38" column="16" selection-start-line="38" selection-start-column="16" selection-end-line="38" selection-end-column="16" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#766#767#0" expanded="true" />
+            <element signature="e#800#801#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/AndroidDetector/AndroidJavaCodeSmells.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="202">
+          <caret line="161" selection-start-line="161" selection-end-line="161" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#FlexAdapter#0;class#AndroidJavaCodeSmells#0" />
           </folding>
         </state>
       </provider>

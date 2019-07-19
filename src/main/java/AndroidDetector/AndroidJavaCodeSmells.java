@@ -1,5 +1,6 @@
 package AndroidDetector;
 
+import UTIL.Constants;
 import UTIL.ReusoStringData;
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ast.CompilationUnit;
@@ -18,6 +19,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static UTIL.Constants.*;
+
 public class AndroidJavaCodeSmells {
     //region [Var Declaration]
     public static int contadorArquivosAnalisados = 0;
@@ -31,6 +34,15 @@ public class AndroidJavaCodeSmells {
     private static long totalSmells = 0;
     private static int contadorFieldStatic = 0;
     //endregion
+
+    private static void printAndCountSmels(String msg, String linha, String Type, String file) {
+        System.out.println(msg);
+        JsonOut.setTipoSmell(Type);
+        JsonOut.setArquivo(file);
+        JsonOut.setLinha(linha);
+        ListJsonSmell.add(JsonOut);
+        totalSmells++;
+    }
 
     //Componente de UI Acoplado
     public static long CoupledUIComponent(String pathApp) throws FileNotFoundException {
@@ -61,76 +73,44 @@ public class AndroidJavaCodeSmells {
                     NodeList<ClassOrInterfaceType> implementacoes = classe.getExtendedTypes();
                     if (implementacoes.size() != 0) {
                         for (ClassOrInterfaceType implementacao : implementacoes) {
-                            if (implementacao.getName().getIdentifier().contains("Fragment") || implementacao.getName().getIdentifier().contains("Adapter") || implementacao.getName().getIdentifier().contains("Activity")) {
+                            if (implementacao.getName().getIdentifier().contains(FRAGMENT) || implementacao.getName().getIdentifier().contains(ADAPTER) || implementacao.getName().getIdentifier().contains(ACTIVITY)) {
 
-                                //Contados de arquivos analisados
+                                //Contador de arquivos analisados
                                 contadorArquivosAnalisados = contadorArquivosAnalisados + 1;
 
                                 classe.getFields().forEach(item -> {
                                     //System.out.println(item.getElementType().toString());
-                                    if ((item.getElementType().toString().contains("Activity") || item.getElementType().toString().contains("Fragment"))) {
-                                        System.out.println("Componente de UI Acoplado " + item.getElementType().toString() + item.getRange());
-                                        JsonOut.setTipoSmell("JAVA");
-                                        JsonOut.setArquivo(nomeArquivo);
-                                        ListJsonSmell.add(JsonOut);
-                                        totalSmells++;
-
+                                    if ((item.getElementType().toString().contains(ACTIVITY) || item.getElementType().toString().contains(FRAGMENT))) {
+                                        printAndCountSmels("Componente de UI Acoplado " + item.getElementType().toString() + item.getRange(), item.getRange().toString(), Constants.JAVA, nomeArquivo);
                                     }
                                 });
 
                                 classe.findAll(ConstructorDeclaration.class).forEach(metodo -> {
                                     metodo.getParameters().forEach(item -> {
-                                        if (item.getType().toString().contains("Activity") || item.getType().toString().contains("Fragment")) {
-                                            System.out.println("Componente de UI Acoplado  " + classe.getName() + " " + metodo.getRange().get().begin);
-                                            System.out.println("---------------------------------------------------------------------------------------");
-                                            JsonOut.setTipoSmell("JAVA");
-                                            JsonOut.setLinha(metodo.getRange().get().begin.toString());
-                                            JsonOut.setArquivo(nomeArquivo);
-                                            ListJsonSmell.add(JsonOut);
-                                            totalSmells++;
+                                        if (item.getType().toString().contains(ACTIVITY) || item.getType().toString().contains(FRAGMENT)) {
+                                            printAndCountSmels("Componente de UI Acoplado  " + classe.getName() + " " + metodo.getRange().get().begin, item.getRange().toString(), Constants.JAVA, nomeArquivo);
                                         }
                                     });
                                 });
 
                                 classe.findAll(MethodDeclaration.class).forEach(metodo -> {
-
                                     //Procura Libs de IO no TIPO em declaração  nos Parametros de  Métodos
-                                    if (metodo.getParameters().contains("Activity") || metodo.getParameters().contains("Fragment")) {
-                                        System.out.println("Componente de UI Acoplado  " + classe.getName() + " " + metodo.getRange().get().begin);
-                                        System.out.println("---------------------------------------------------------------------------------------");
-                                        JsonOut.setTipoSmell("JAVA");
-                                        JsonOut.setLinha(metodo.getRange().get().begin.toString());
-                                        JsonOut.setArquivo(nomeArquivo);
-                                        ListJsonSmell.add(JsonOut);
-                                        totalSmells++;
+                                    if (metodo.getParameters().contains(ACTIVITY) || metodo.getParameters().contains(FRAGMENT)) {
+                                        printAndCountSmels("Componente de UI Acoplado  " + classe.getName() + " " + metodo.getRange().get().begin, metodo.getRange().get().begin.toString(), Constants.JAVA, nomeArquivo);
                                     }
 
                                     //Procura Libs de IO no TIPO em retorno  de Métodos
-                                    if (metodo.getType().toString().contains("Activity") || metodo.getType().toString().contains("Fragment")) {
-                                        System.out.println("Componente de UI Acoplado  " + classe.getName() + " " + metodo.getRange().get().begin);
-                                        System.out.println("---------------------------------------------------------------------------------------");
-                                        JsonOut.setTipoSmell("JAVA");
-                                        JsonOut.setLinha(metodo.getRange().get().begin.toString());
-                                        JsonOut.setArquivo(nomeArquivo);
-                                        ListJsonSmell.add(JsonOut);
-                                        totalSmells++;
+                                    if (metodo.getType().toString().contains(ACTIVITY) || metodo.getType().toString().contains(FRAGMENT)) {
+                                        printAndCountSmels("Componente de UI Acoplado  " + classe.getName() + " " + metodo.getRange().get().begin, metodo.getRange().get().begin.toString(), Constants.JAVA, nomeArquivo);
                                     }
 
                                     //Procura Libs IO no TIPO  em declaração de campos
                                     metodo.findAll(FieldDeclaration.class).forEach(campos -> {
-                                        if (campos.getElementType().toString().contains("Activity") || campos.getElementType().toString().contains("Fragment")) {
-                                            System.out.println("Componente de UI Acoplado  " + classe.getName() + ") " + campos.getRange().get().begin);
-                                            System.out.println("---------------------------------------------------------------------------------------");
-                                            JsonOut.setTipoSmell("JAVA");
-                                            JsonOut.setLinha(campos.getRange().get().begin.toString());
-                                            JsonOut.setArquivo(nomeArquivo);
-                                            ListJsonSmell.add(JsonOut);
-                                            totalSmells++;
+                                        if (campos.getElementType().toString().contains(ACTIVITY) || campos.getElementType().toString().contains(FRAGMENT)) {
+                                            printAndCountSmels("Componente de UI Acoplado  " + classe.getName() + ") " + campos.getRange().get().begin, metodo.getRange().get().begin.toString(), Constants.JAVA, nomeArquivo);
                                         }
                                     });
-
                                 });
-
                             }
                         }
                     }
@@ -171,21 +151,15 @@ public class AndroidJavaCodeSmells {
                     NodeList<ClassOrInterfaceType> implementacoes = classe.getExtendedTypes();
                     if (implementacoes.size() != 0) {
                         for (ClassOrInterfaceType implementacao : implementacoes) {
-                            if (implementacao.getName().getIdentifier().contains("BaseActivity") || implementacao.getName().getIdentifier().contains("Activity") || implementacao.getName().getIdentifier().contains("Fragments") || implementacao.getName().getIdentifier().contains("BaseAdapter") || implementacao.getName().getIdentifier().endsWith("Listener")) {
+                            if (implementacao.getName().getIdentifier().contains(BASEACTIVITY) || implementacao.getName().getIdentifier().contains(ACTIVITY) || implementacao.getName().getIdentifier().contains(FRAGMENT) || implementacao.getName().getIdentifier().contains(BASEADAPTER) || implementacao.getName().getIdentifier().endsWith(LISTENER)) {
                                 classeValida = true;
                                 //Contador de arquivos analisados
                                 contadorArquivosAnalisados = contadorArquivosAnalisados + 1;
                                 classe.getImplementedTypes().forEach(item -> {
                                     //System.out.println(item.getNameAsString());
-                                    if (item.getName().toString().contains("Listener")) {
-                                        System.out.println("Comportamento suspeito detectado  - " + item.getRange());
-                                        JsonOut.setTipoSmell("JAVA");
-                                        JsonOut.setLinha(item.getRange().get().begin.toString());
-                                        JsonOut.setArquivo(nomeArquivo);
-                                        ListJsonSmell.add(JsonOut);
-                                        totalSmells++;
+                                    if (item.getName().toString().contains(LISTENER)) {
+                                        printAndCountSmels("Comportamento suspeito detectado  - " + item.getRange(), item.getRange().get().begin.toString(), Constants.JAVA, nomeArquivo);
                                     }
-
                                 });
                             }
                         }
@@ -223,7 +197,7 @@ public class AndroidJavaCodeSmells {
                                 //Print the field's class typr
                                 //System.out.println(variable.getType());
 
-                                if (variable.getType().toString().contains("Listener")) {
+                                if (variable.getType().toString().contains(LISTENER)) {
                                     System.out.println("Comportamento suspeito detectado  - " + variable.getType() + " - " + variable.getRange().get().begin);
                                     JsonOut.setTipoSmell("JAVA");
                                     JsonOut.setLinha(variable.getRange().get().begin.toString());
@@ -375,7 +349,7 @@ public class AndroidJavaCodeSmells {
                     cUnit.findAll(ClassOrInterfaceDeclaration.class).forEach(classe -> {
 
                         if (classe.getExtendedTypes().size() > 0) {
-                            if (classe.getExtendedTypes().get(0).toString().contains("Activity") || classe.getExtendedTypes().get(0).toString().contains("Fragment") || classe.getExtendedTypes().get(0).toString().contains("Adapter")) {
+                            if (classe.getExtendedTypes().get(0).toString().contains(ACTIVITY) || classe.getExtendedTypes().get(0).toString().contains(FRAGMENT) || classe.getExtendedTypes().get(0).toString().contains(ADAPTER)) {
 
                                 //Contados de arquivos analisados
                                 contadorArquivosAnalisados = contadorArquivosAnalisados + 1;
@@ -537,8 +511,8 @@ public class AndroidJavaCodeSmells {
 
                     cUnit.findAll(ClassOrInterfaceDeclaration.class).forEach(classe -> {
                         if (classe.getExtendedTypes().size() > 0) {
-                            if (classe.getExtendedTypes().get(0).toString().contains("Activity") || classe.getExtendedTypes().get(0).toString().contains("Fragment")
-                                    || classe.getExtendedTypes().get(0).toString().contains("Adapter")) {
+                            if (classe.getExtendedTypes().get(0).toString().contains(ACTIVITY) || classe.getExtendedTypes().get(0).toString().contains(FRAGMENT)
+                                    || classe.getExtendedTypes().get(0).toString().contains(ADAPTER)) {
 
                                 //Contados de arquivos analisados
                                 contadorArquivosAnalisados = contadorArquivosAnalisados + 1;
@@ -647,7 +621,7 @@ public class AndroidJavaCodeSmells {
                     // Uso de Views(EditText, Spinner, ou Outras Views Diretamente pela activity)
                     cUnit.findAll(ClassOrInterfaceDeclaration.class).forEach(classe -> {
                         if (classe.getExtendedTypes().size() > 0) {
-                            if (classe.getExtendedTypes().get(0).toString().contains("Activity")) {
+                            if (classe.getExtendedTypes().get(0).toString().contains(ACTIVITY)) {
                                 NodeList<BodyDeclaration<?>> membros = classe.getMembers();
 
                                 //Procura ViewsAndroid no TIPO  em declaração de campos
@@ -723,13 +697,10 @@ public class AndroidJavaCodeSmells {
 
     //Uso excessivo de Fragments
     public static long ExcessiveFragment(String pathApp, long threshold) throws IOException {
-
         contadorArquivosAnalisados = 0;
-
         //arquivosAnalise.clear();
         ListSmells.clear();
         totalSmells = 0;
-
 //        listar(new File(pathApp),JAVA);
         long totalFragments = 0;
         List<ReusoStringData> listaExcessiveFragment = new ArrayList<ReusoStringData>();
@@ -755,7 +726,7 @@ public class AndroidJavaCodeSmells {
                     NodeList<ClassOrInterfaceType> implementacoes = classe.getExtendedTypes();
                     if (implementacoes.size() != 0) {
                         for (ClassOrInterfaceType implementacao : implementacoes) {
-                            if (implementacao.getName().getIdentifier().contains("Fragment")) {
+                            if (implementacao.getName().getIdentifier().contains(FRAGMENT)) {
                                 totalFragments = totalFragments + 1;
                                 System.err.println("É um fragmento sim" + classe.getName().getIdentifier());
                             }
@@ -770,12 +741,9 @@ public class AndroidJavaCodeSmells {
                     ListJsonSmell.add(JsonOut);
                     totalSmells++;
                 }
-
-
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
-
         }
 
         JsonOut.saveJson(ListJsonSmell, "ExcessiveFragment.json");
@@ -817,7 +785,7 @@ public class AndroidJavaCodeSmells {
                         NodeList<ClassOrInterfaceType> implementacoes = classe.getExtendedTypes();
                         for (ClassOrInterfaceType implementacao : implementacoes) {
                             //eu: Durelli alterei para verificar se contem problema aqui
-                            if (implementacao.getName().getIdentifier().contains("Adapter")) {
+                            if (implementacao.getName().getIdentifier().contains(ADAPTER)) {
 
                                 //Contados de arquivos analisados
                                 contadorArquivosAnalisados = contadorArquivosAnalisados + 1;
@@ -826,19 +794,19 @@ public class AndroidJavaCodeSmells {
                                 //Se a classe que extende do BaseAdapter tiver algum m�todo que n�o seja sobrescrever um m�todo de interface, � um FlexAdapter.
                                 //Pegamos todos os membros da classe
                                 NodeList<BodyDeclaration<?>> membros = classe.getMembers();
-                                //Verifica se o membro � um m�todo
+                                //Verifica se o membro é um método
                                 for (BodyDeclaration<?> membro : membros)
                                     if (membro.isMethodDeclaration()) {
                                         MethodDeclaration metodo = (MethodDeclaration) membro;
-                                        //Verifica se este m�todo chama getView
-                                        if (metodo.getName().getIdentifier().equals("getView")) {
+                                        //Verifica se este método chama getView
+                                        if (metodo.getName().getIdentifier().equals(GETVIEW)) {
 
                                             //Pega o parametro do tipo View e armazena o nome dele
                                             //Pode ser �til para verificar por findViewById dentro de la�os
                                             Parameter viewParameter = metodo.getParameter(1);
                                             String nomeParametroView = viewParameter.getName().getIdentifier();
 
-                                            //Pega o bloco de declara��es dentro m�todo getView
+                                            //Pega o bloco de declara��es dentro método getView
                                             BlockStmt body = metodo.getBody().get();
                                             NodeList<Statement> statements = body.getStatements();
 
@@ -847,7 +815,7 @@ public class AndroidJavaCodeSmells {
                                                 if (statement.isExpressionStmt()) {
                                                     //Se em alguma dessas express�es tiver o texto findViewById
                                                     //Quer dizer que o ViewHolder n�o est� sendo utilizado, o que caracteriza o smell
-                                                    if (statement.toString().contains("findViewById(")) {
+                                                    if (statement.toString().contains(FINDVIEWBYID)) {
                                                         isFoolAdapter = true;
                                                         JsonOut.setTipoSmell("JAVA");
                                                         JsonOut.setLinha(statement.getRange().get().begin.toString());
@@ -857,7 +825,7 @@ public class AndroidJavaCodeSmells {
                                                     }
 
                                                     //Se ele infla um Layout em toda chamada ao getView, isso tamb�m caracteriza o smell
-                                                    if (statement.toString().contains("inflater")) {
+                                                    if (statement.toString().contains(INFLATER)) {
                                                         isFoolAdapter = true;
                                                         JsonOut.setTipoSmell("JAVA");
                                                         JsonOut.setLinha(statement.getRange().get().begin.toString());

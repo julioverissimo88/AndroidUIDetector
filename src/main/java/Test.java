@@ -1,19 +1,20 @@
+import AndroidDetector.AndroidJavaCodeSmells;
+import AndroidDetector.LoadFiles;
+
 import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import static UTIL.Constants.PATH_SAVE_OUTPUT;
+
 
 public class Test {
-
-
     public static void main(String[] args) {
         try {
             long inicio = System.currentTimeMillis();
             System.out.println(new SimpleDateFormat("HH:mm:ss").format(new Date(inicio)));
 
-
-//            File fileCsv = new File("/Users/rafaeldurelli/Desktop/Analise/AnaliseFinalDURELLI.csv");
-            File fileCsv = new File("/Users/rafaeldurelli/Desktop/Repositorio-TESTE/AnaliseFinalREPOSITORIO2.csv");
+            File fileCsv = new File(PATH_SAVE_OUTPUT + "AnaliseFinalREPOSITORIO2.csv");
 
             // creates the file
             fileCsv.createNewFile();
@@ -55,9 +56,6 @@ public class Test {
                             "CLOC"
             );
             writer.append("\n");
-
-
-//            File file = new File("/Volumes/MyPassport/Repository/Repositorio03");
             File file = new File("/Users/rafaeldurelli/Desktop/Repositorio-TESTE");
             File afile[] = file.listFiles();
 
@@ -65,7 +63,7 @@ public class Test {
                 File f = new File(afile[j].toString());
 
                 //Getting all files to apply resource smells
-                ImportantSmells.carregaArquivosXMLAnalise(f);
+                LoadFiles.carregaArquivosXMLAnalise(f);
 
                 System.out.println("*******************************************");
                 System.out.println();
@@ -80,49 +78,48 @@ public class Test {
 
                 long CLOC = calCLOC(f.getAbsolutePath());
 
-
                 //analise de codigo XML
                 String app = f.getName();
-                long totalDeepNested = AndroidDetector.ImportantSmells.DeepNestedLayout(caminho, 4);
-                long totalArquivosDeepNested = ImportantSmells.contadorArquivosAnalisados;
-                long totalDuplicateStyleAttributes = AndroidDetector.ImportantSmells.DuplicateStyleAttributes(caminho);
-                long totalArquivosDuplicateStyleAttributes = ImportantSmells.contadorArquivosAnalisados;
-                long totalGodStyleResource = AndroidDetector.ImportantSmells.GodStyleResource(caminho, 11);
-                long totalArquivosGodStyleResource = ImportantSmells.contadorArquivosAnalisados;
-                long totalHideListener = AndroidDetector.ImportantSmells.HiddenListener(caminho);
-                long totalArquivosHideListener = ImportantSmells.contadorArquivosAnalisados;
-                long totalmagicResource = AndroidDetector.ImportantSmells.magicResource(caminho);
-                long totalArquivosmagicResource = ImportantSmells.contadorArquivosAnalisados;
-                long totalBadStringResource = AndroidDetector.ImportantSmells.godStringResource(caminho);
-                long totalArquivosBadStringResource = ImportantSmells.contadorArquivosAnalisados;
-                long totalreusoInadequadoDeString = AndroidDetector.ImportantSmells.inappropriateStringReuse(caminho);
-                long totalArquivosreusoInadequadoDeString = ImportantSmells.contadorArquivosAnalisados;
-                long totalNotFoundImage = AndroidDetector.ImportantSmells.NotFoundImage(caminho);
-                long totalArquivosNotFoundImage = ImportantSmells.contadorArquivosAnalisados;
+                long totalDeepNested = AndroidDetector.AndroidLayoutSmells.DeepNestedLayout(caminho, 4);
+                long totalArquivosDeepNested = AndroidDetector.AndroidLayoutSmells.contadorArquivosAnalisados;
+                long totalDuplicateStyleAttributes = AndroidDetector.AndroidLayoutSmells.DuplicateStyleAttributes(caminho);
+                long totalArquivosDuplicateStyleAttributes = AndroidDetector.AndroidLayoutSmells.contadorArquivosAnalisados;
+                long totalGodStyleResource = AndroidDetector.AndroidLayoutSmells.GodStyleResource(caminho, 11);
+                long totalArquivosGodStyleResource = AndroidDetector.AndroidLayoutSmells.contadorArquivosAnalisados;
+                long totalHideListener = AndroidDetector.AndroidLayoutSmells.HiddenListener(caminho);
+                long totalArquivosHideListener = AndroidDetector.AndroidLayoutSmells.contadorArquivosAnalisados;
+                long totalmagicResource = AndroidDetector.AndroidLayoutSmells.magicResource(caminho);
+                long totalArquivosmagicResource = AndroidDetector.AndroidLayoutSmells.contadorArquivosAnalisados;
+                long totalBadStringResource = AndroidDetector.AndroidLayoutSmells.godStringResource(caminho);
+                long totalArquivosBadStringResource = AndroidDetector.AndroidLayoutSmells.contadorArquivosAnalisados;
+                long totalreusoInadequadoDeString = AndroidDetector.AndroidLayoutSmells.inappropriateStringReuse(caminho);
+                long totalArquivosreusoInadequadoDeString = AndroidDetector.AndroidLayoutSmells.contadorArquivosAnalisados;
+                long totalNotFoundImage = AndroidDetector.AndroidLayoutSmells.NotFoundImage(caminho);
+                long totalArquivosNotFoundImage = AndroidDetector.AndroidLayoutSmells.contadorArquivosAnalisados;
 
                 //analise de codigo JAVA
-                ImportantSmells.carregaArquivosJAVAAnalise(f);
+                LoadFiles.carregaArquivosJAVAAnalise(f);
 
-                for (File fileJava : ImportantSmells.ListArquivosAnaliseJava) {
+                for (File fileJava : AndroidDetector.AndroidJavaCodeSmells.ListArquivosAnaliseJava) {
                     System.out.println(fileJava.getAbsolutePath());
                 }
 
-                long totalCoupledUIComponent = AndroidDetector.ImportantSmells.CoupledUIComponent(caminho);
-                long totalArquivosCoupledUIComponent = ImportantSmells.contadorArquivosAnalisados;
-                long totalSuspiciousBehavior = AndroidDetector.ImportantSmells.SuspiciousBehavior(caminho);
-                long totalArquivosSuspiciousBehavior = ImportantSmells.contadorArquivosAnalisados;
-                long totalBrainUIComponent = ImportantSmells.BrainUIComponent(caminho);
-                long totalArquivosBrainUIComponent = ImportantSmells.contadorArquivosAnalisados;
-                long totalFlexAdapter = AndroidDetector.ImportantSmells.FlexAdapter(caminho);
-                long totalArquivosFlexAdapter = ImportantSmells.contadorArquivosAnalisados;
-                long totalFoolAdapter = AndroidDetector.ImportantSmells.FoolAdapter(caminho);
-                long totalArquivosFoolAdapter = ImportantSmells.contadorArquivosAnalisados;
-                long totalCompUIIO = AndroidDetector.ImportantSmells.CompUIIO(caminho);
-                long totalArquivosCompUIIO = ImportantSmells.contadorArquivosAnalisados;
-                long totalNotFragment = AndroidDetector.ImportantSmells.NotFragment(caminho);
-                long totalArquivosNotFragment = ImportantSmells.contadorArquivosAnalisados;
-                long totalExcessiveFragment = AndroidDetector.ImportantSmells.ExcessiveFragment(caminho, 10);
-                long totalArquivosExcessiveFragment = ImportantSmells.contadorArquivosAnalisados;
+                long totalCoupledUIComponent = AndroidDetector.AndroidJavaCodeSmells.CoupledUIComponent(caminho);
+                long totalArquivosCoupledUIComponent = AndroidDetector.AndroidJavaCodeSmells.contadorArquivosAnalisados;
+                long totalSuspiciousBehavior = AndroidDetector.AndroidJavaCodeSmells.SuspiciousBehavior(caminho);
+                long totalArquivosSuspiciousBehavior = AndroidDetector.AndroidJavaCodeSmells.contadorArquivosAnalisados;
+                long totalBrainUIComponent = AndroidJavaCodeSmells.BrainUIComponent(caminho);
+                long totalArquivosBrainUIComponent = AndroidDetector.AndroidJavaCodeSmells.contadorArquivosAnalisados;
+                long totalFlexAdapter = AndroidDetector.AndroidJavaCodeSmells.FlexAdapter(caminho);
+                long totalArquivosFlexAdapter = AndroidDetector.AndroidJavaCodeSmells.contadorArquivosAnalisados;
+                long totalFoolAdapter = AndroidDetector.AndroidJavaCodeSmells.FoolAdapter(caminho);
+                long totalArquivosFoolAdapter = AndroidDetector.AndroidJavaCodeSmells.contadorArquivosAnalisados;
+                long totalCompUIIO = AndroidDetector.AndroidJavaCodeSmells.CompUIIO(caminho);
+                long totalArquivosCompUIIO = AndroidDetector.AndroidJavaCodeSmells.contadorArquivosAnalisados;
+                long totalNotFragment = AndroidDetector.AndroidJavaCodeSmells.NotFragment(caminho);
+                long totalArquivosNotFragment = AndroidDetector.AndroidJavaCodeSmells.contadorArquivosAnalisados;
+                long totalExcessiveFragment = AndroidDetector.AndroidJavaCodeSmells.ExcessiveFragment(caminho, 10);
+                long totalArquivosExcessiveFragment = AndroidDetector.AndroidJavaCodeSmells.contadorArquivosAnalisados;
 
                 writer.append(
                         app + ";" +
@@ -230,33 +227,23 @@ public class Test {
 
     private static long calCLOC(String appPath) throws IOException, InterruptedException {
         String command = "cloc " + appPath;
-
         long CLOC = 0;
         Process proc = Runtime.getRuntime().exec(command);
 
         // Read the output
-
-        BufferedReader reader =
-                new BufferedReader(new InputStreamReader(proc.getInputStream()));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(proc.getInputStream()));
 
         String line = "";
         while ((line = reader.readLine()) != null) {
-
             System.out.print(line + "\n");
-
             if (line.contains("SUM:")) {
-
                 String[] array = line.split(" ");
-
                 CLOC = new Long(array[array.length - 1]);
-
                 System.out.print("Tamanho do projeto é " + array[array.length - 1] + "\n");
             }
-
         }
 
         proc.waitFor();
         return CLOC;
-
     }
 }

@@ -323,7 +323,7 @@ public class DetectorUI extends javax.swing.JFrame {
                     long totalDeepNested = AndroidDetector.AndroidLayoutSmells.DeepNestedLayout(caminho, 4);
                     long totalDuplicateStyleAttributes = AndroidDetector.AndroidLayoutSmells.DuplicateStyleAttributes(caminho);
                     long totalGodStyleResource = AndroidDetector.AndroidLayoutSmells.GodStyleResource(caminho, 11);
-                    long totalHideListener = AndroidDetector.AndroidLayoutSmells.HiddenListener(caminho)
+                    long totalHideListener = AndroidDetector.AndroidLayoutSmells.HiddenListener(caminho);
                     long totalmagicResource = AndroidDetector.AndroidLayoutSmells.magicResource(caminho);
                     long totalBadStringResource = AndroidDetector.AndroidLayoutSmells.godStringResource(caminho);
                     long totalreusoInadequadoDeString = AndroidDetector.AndroidLayoutSmells.inappropriateStringReuse(caminho);
@@ -367,7 +367,7 @@ public class DetectorUI extends javax.swing.JFrame {
                 long fim = System.currentTimeMillis();
                 System.out.println(new SimpleDateFormat("HH:mm:ss").format(new Date(inicio - fim)));
 
-                JOptionPane.showMessageDialog(rootPane, "Analise Conclu�da resultados salvos em: " + txtOutput.getText());
+                JOptionPane.showMessageDialog(rootPane, "Analise Concluída resultados salvos em: " + txtOutput.getText());
             } else {
                 JOptionPane.showMessageDialog(rootPane, "Informe Aplicativo para a an�lise");
             }
