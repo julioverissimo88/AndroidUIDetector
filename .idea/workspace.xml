@@ -2,38 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ed645100-bb7d-4c48-a5f2-f9a4be63070e" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/AndroidDetector/CompilationUnitInstance.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/AndroidDetector/Visitors.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/AndroidDetector/AndroidJavaCodeSmells.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AndroidDetector/AndroidJavaCodeSmells.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AndroidDetector/LoadFiles.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AndroidDetector/LoadFiles.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DetectUI/DetectorUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DetectUI/DetectorUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Test.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Test2.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/UTIL/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UTIL/Constants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/AndroidDetector/IOClass.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/AndroidDetector/ImportantSmells$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/AndroidDetector/ImportantSmells.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/AndroidDetector/ImportantSmells2$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/AndroidDetector/ImportantSmells2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/AndroidDetector/OutputSmells.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/AndroidDetector/SampleOfXmlLocator.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/AndroidDetector/SmellsAndroidQuality.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/AndroidDetector/SmellsAndroidUiApp.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/DetectUI/DetectorUI$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/DetectUI/DetectorUI$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/DetectUI/DetectorUI$3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/DetectUI/DetectorUI.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/DropboxUpload.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/JavaParser/ParserProject.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Test.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Test2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/UTIL/CLOC.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/UTIL/TesteGISTs.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/UTIL/Threshold$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/UTIL/Threshold.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/metric/WMC.class" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -63,8 +33,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/AndroidDetector/AndroidJavaCodeSmells.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="202">
-              <caret line="161" selection-start-line="161" selection-end-line="161" />
+            <state relative-caret-position="242">
+              <caret line="566" selection-start-line="566" selection-end-line="566" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#FlexAdapter#0;class#AndroidJavaCodeSmells#0" />
@@ -459,12 +429,12 @@
       <workItem from="1559569764411" duration="2517000" />
       <workItem from="1562114595732" duration="2027000" />
       <workItem from="1563233227406" duration="7669000" />
-      <workItem from="1563292819110" duration="16291000" />
+      <workItem from="1563292819110" duration="18904000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="183981000" />
+    <option name="totallyTimeSpent" value="186594000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -924,8 +894,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/AndroidDetector/AndroidJavaCodeSmells.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="202">
-          <caret line="161" selection-start-line="161" selection-end-line="161" />
+        <state relative-caret-position="242">
+          <caret line="566" selection-start-line="566" selection-end-line="566" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#FlexAdapter#0;class#AndroidJavaCodeSmells#0" />

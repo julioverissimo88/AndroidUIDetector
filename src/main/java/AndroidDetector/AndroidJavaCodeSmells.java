@@ -11,6 +11,7 @@ import com.github.javaparser.ast.stmt.IfStmt;
 import com.github.javaparser.ast.stmt.Statement;
 import com.github.javaparser.ast.stmt.SwitchEntryStmt;
 import com.github.javaparser.ast.type.ClassOrInterfaceType;
+import com.sun.org.apache.xpath.internal.operations.VariableSafeAbsRef;
 import metric.WMC;
 
 import java.io.File;
@@ -181,12 +182,7 @@ public class AndroidJavaCodeSmells {
                             //System.out.println(item);
                             item.getChildNodes().forEach(sub -> {
                                 sub.findAll(MethodDeclaration.class).forEach(i -> {
-                                    System.out.println("Comportamento suspeito detectado  - " + i.getName() + " - " + i.getRange().get().begin);
-                                    JsonOut.setTipoSmell("JAVA");
-                                    JsonOut.setLinha(i.getRange().get().begin.toString());
-                                    JsonOut.setArquivo(nomeArquivo);
-                                    ListJsonSmell.add(JsonOut);
-                                    totalSmells++;
+                                    printAndCountSmels("Comportamento suspeito detectado  - " + i.getName() + " - " + i.getRange().get().begin, item.getRange().get().begin.toString(), Constants.JAVA, nomeArquivo);
                                 });
                             });
                         });
@@ -194,16 +190,8 @@ public class AndroidJavaCodeSmells {
 
                         member.toFieldDeclaration().ifPresent(field -> {
                             for (VariableDeclarator variable : field.getVariables()) {
-                                //Print the field's class typr
-                                //System.out.println(variable.getType());
-
                                 if (variable.getType().toString().contains(LISTENER)) {
-                                    System.out.println("Comportamento suspeito detectado  - " + variable.getType() + " - " + variable.getRange().get().begin);
-                                    JsonOut.setTipoSmell("JAVA");
-                                    JsonOut.setLinha(variable.getRange().get().begin.toString());
-                                    JsonOut.setArquivo(nomeArquivo);
-                                    ListJsonSmell.add(JsonOut);
-                                    totalSmells++;
+                                    printAndCountSmels("Comportamento suspeito detectado  - " + variable.getType() + " - " + variable.getRange().get().begin, variable.getRange().get().begin.toString(), Constants.JAVA, nomeArquivo);
                                 }
                                 //Print the field's name
                                 //System.out.println(variable.getName());
@@ -211,12 +199,7 @@ public class AndroidJavaCodeSmells {
 
                                 variable.getInitializer().ifPresent(initValue -> {
                                     if (initValue.isLambdaExpr()) {
-                                        System.out.println("Comportamento suspeito detectado  - " + initValue.getRange());
-                                        JsonOut.setTipoSmell("JAVA");
-                                        JsonOut.setLinha(initValue.getRange().get().begin.toString());
-                                        JsonOut.setArquivo(nomeArquivo);
-                                        ListJsonSmell.add(JsonOut);
-                                        totalSmells++;
+                                        printAndCountSmels("Comportamento suspeito detectado  - " + initValue.getRange(), initValue.getRange().get().begin.toString(), Constants.JAVA, nomeArquivo);
                                     }
                                 });
                             }
@@ -371,25 +354,12 @@ public class AndroidJavaCodeSmells {
                                 for (BodyDeclaration<?> membro : membros) {
                                     //Verifica se o membro é um método
                                     if (membro.isMethodDeclaration()) {
-
                                         membro.findAll(IfStmt.class).forEach(item -> {
-                                            System.out.println("Brain UI Component detectado na classe " + item.getRange().get().begin + " (lógica utilizando if detectada)");
-                                            System.out.println("---------------------------------------------------------------------------------------");
-                                            JsonOut.setTipoSmell("JAVA");
-                                            JsonOut.setLinha(item.getRange().get().begin.toString());
-                                            JsonOut.setArquivo(nomeArquivo);
-                                            ListJsonSmell.add(JsonOut);
-                                            totalSmells++;
+                                            printAndCountSmels("Brain UI Component detectado na classe " + item.getRange().get().begin + " (lógica utilizando if detectada)", item.getRange().get().begin.toString(), Constants.JAVA, nomeArquivo);
                                         });
 
                                         membro.findAll(SwitchEntryStmt.class).forEach(item -> {
-                                            System.out.println("Brain UI Component detectado na classe " + item.getRange().get().begin + " (lógica utilizando Switch/Case detectada)");
-                                            System.out.println("---------------------------------------------------------------------------------------");
-                                            JsonOut.setTipoSmell("JAVA");
-                                            JsonOut.setLinha(item.getRange().get().begin.toString());
-                                            JsonOut.setArquivo(nomeArquivo);
-                                            ListJsonSmell.add(JsonOut);
-                                            totalSmells++;
+                                            printAndCountSmels("Brain UI Component detectado na classe " + item.getRange().get().begin + " (lógica utilizando Switch/Case detectada)", item.getRange().get().begin.toString(), Constants.JAVA, nomeArquivo);
                                         });
                                     }
                                 }
@@ -408,13 +378,7 @@ public class AndroidJavaCodeSmells {
                                     //Static Fields
                                     classe.getFields().forEach(item -> {
                                         if (item.isFieldDeclaration() && item.isStatic()) {
-                                            System.out.println("Brain UI Component detectado na classe " + classe.getName() + " (Campo Static) " + item.getRange().get().begin);
-                                            System.out.println("---------------------------------------------------------------------------------------");
-                                            JsonOut.setTipoSmell("JAVA");
-                                            JsonOut.setLinha(item.getRange().get().begin.toString());
-                                            JsonOut.setArquivo(nomeArquivo);
-                                            ListJsonSmell.add(JsonOut);
-                                            totalSmells++;
+                                            printAndCountSmels("Brain UI Component detectado na classe " + classe.getName() + " (Campo Static) " + item.getRange().get().begin, item.getRange().get().begin.toString(), Constants.JAVA, nomeArquivo);
                                         }
                                     });
                                 }
@@ -422,13 +386,7 @@ public class AndroidJavaCodeSmells {
                                 //Procura Libs IO no TIPO  em declaração de campos
                                 classe.getFields().forEach(campos -> {
                                     if (IOClass.getIOClass().contains(campos.getElementType().toString())) {
-                                        System.out.println("Brain UI Component detectado na classe " + classe.getName() + " (Acesso a banco de dados) ATRIBUTOS DA CLASSE " + campos.getRange().get().begin);
-                                        System.out.println("---------------------------------------------------------------------------------------");
-                                        JsonOut.setTipoSmell("JAVA");
-                                        JsonOut.setLinha(campos.getRange().get().begin.toString());
-                                        JsonOut.setArquivo(nomeArquivo);
-                                        ListJsonSmell.add(JsonOut);
-                                        totalSmells++;
+                                        printAndCountSmels("Brain UI Component detectado na classe " + classe.getName() + " (Acesso a banco de dados) ATRIBUTOS DA CLASSE " + campos.getRange().get().begin, campos.getRange().get().begin.toString(), Constants.JAVA, nomeArquivo);
                                     }
                                 });
 
@@ -438,13 +396,7 @@ public class AndroidJavaCodeSmells {
                                         //Procura Libs de IO no TIPO em declaração  nos Parametros de  Métodos
                                         //COMO VAI PROCURAR AQUI ??
                                         if (metodo.getParameters().contains(item)) {
-                                            System.out.println("Brain UI Component detectado na classe " + classe.getName() + " (Acesso a banco de dados) nos parâmetros do método " + metodo.getRange().get().begin);
-                                            System.out.println("---------------------------------------------------------------------------------------");
-                                            JsonOut.setTipoSmell("JAVA");
-                                            JsonOut.setLinha(metodo.getRange().get().begin.toString());
-                                            JsonOut.setArquivo(nomeArquivo);
-                                            ListJsonSmell.add(JsonOut);
-                                            totalSmells++;
+                                            printAndCountSmels("Brain UI Component detectado na classe " + classe.getName() + " (Acesso a banco de dados) nos parâmetros do método " + metodo.getRange().get().begin, metodo.getRange().get().begin.toString(), Constants.JAVA, nomeArquivo);
                                         }
 
 //                                    //Procura Libs de IO no TIPO em retorno  de Métodos
@@ -461,13 +413,7 @@ public class AndroidJavaCodeSmells {
                                         //Procura Libs IO no TIPO  em declaração de campos
                                         metodo.findAll(FieldDeclaration.class).forEach(campos -> {
                                             if (campos.getElementType().toString().contains(item)) {
-                                                System.out.println("Brain UI Component detectado na classe " + classe.getName() + " (Acesso a banco de dados) FIELD Declaration " + campos.getRange().get().begin);
-                                                System.out.println("---------------------------------------------------------------------------------------");
-                                                JsonOut.setTipoSmell("JAVA");
-                                                JsonOut.setLinha(campos.getRange().get().begin.toString());
-                                                JsonOut.setArquivo(nomeArquivo);
-                                                ListJsonSmell.add(JsonOut);
-                                                totalSmells++;
+                                                printAndCountSmels("Brain UI Component detectado na classe " + classe.getName() + " (Acesso a banco de dados) FIELD Declaration " + campos.getRange().get().begin, campos.getRange().get().begin.toString(), Constants.JAVA, nomeArquivo);
                                             }
                                         });
 
@@ -520,13 +466,7 @@ public class AndroidJavaCodeSmells {
                                 //Procura Libs IO no TIPO  em declaração de campos
                                 classe.getFields().forEach(campos -> {
                                     if (IOClass.getIOClass().contains(campos.getElementType().toString())) {
-                                        System.out.println("UI IO Component detectado na classe " + classe.getName() + " (Acesso a banco de dados) " + campos.getRange().get().begin);
-                                        System.out.println("---------------------------------------------------------------------------------------");
-                                        JsonOut.setTipoSmell("JAVA");
-                                        JsonOut.setLinha(campos.getRange().get().begin.toString());
-                                        JsonOut.setArquivo(nomeArquivo);
-                                        ListJsonSmell.add(JsonOut);
-                                        totalSmells++;
+                                        printAndCountSmels("UI IO Component detectado na classe " + classe.getName() + " (Acesso a banco de dados) " + campos.getRange().get().begin, campos.getRange().get().begin.toString(), Constants.JAVA, nomeArquivo);
                                     }
                                 });
 
@@ -535,36 +475,18 @@ public class AndroidJavaCodeSmells {
                                     IOClass.getIOClass().forEach(item -> {
                                         //Procura Libs de IO no TIPO em declaração  nos Parametros de  Métodos
                                         if (metodo.getParameters().contains(item)) {
-                                            System.out.println("UI IO Component detectado na classe " + classe.getName() + " (Acesso a banco de dados) nos parâmetros do método " + metodo.getRange().get().begin);
-                                            System.out.println("---------------------------------------------------------------------------------------");
-                                            JsonOut.setTipoSmell("JAVA");
-                                            JsonOut.setLinha(metodo.getRange().get().begin.toString());
-                                            JsonOut.setArquivo(nomeArquivo);
-                                            ListJsonSmell.add(JsonOut);
-                                            totalSmells++;
+                                            printAndCountSmels("UI IO Component detectado na classe " + classe.getName() + " (Acesso a banco de dados) nos parâmetros do método " + metodo.getRange().get().begin, metodo.getRange().get().begin.toString(), Constants.JAVA, nomeArquivo);
                                         }
 
                                         //Procura Libs de IO no TIPO em retorno  de Métodos
                                         if (metodo.getType().toString().contains(item)) {
-                                            System.out.println("UI IO Component detectado na classe " + classe.getName() + " (Acesso a banco de dados) no retorno do método " + metodo.getRange().get().begin);
-                                            System.out.println("---------------------------------------------------------------------------------------");
-                                            JsonOut.setTipoSmell("JAVA");
-                                            JsonOut.setLinha(metodo.getRange().get().begin.toString());
-                                            JsonOut.setArquivo(nomeArquivo);
-                                            ListJsonSmell.add(JsonOut);
-                                            totalSmells++;
+                                            printAndCountSmels("UI IO Component detectado na classe " + classe.getName() + " (Acesso a banco de dados) no retorno do método " + metodo.getRange().get().begin, metodo.getRange().get().begin.toString(), Constants.JAVA, nomeArquivo);
                                         }
 
                                         //Procura Libs IO no TIPO  em declaração de campos
                                         metodo.findAll(FieldDeclaration.class).forEach(campos -> {
                                             if (campos.getElementType().toString().contains(item)) {
-                                                System.out.println("UI IO Component detectado na classe " + classe.getName() + " (Acesso a banco de dados) " + campos.getRange().get().begin);
-                                                System.out.println("---------------------------------------------------------------------------------------");
-                                                JsonOut.setTipoSmell("JAVA");
-                                                JsonOut.setLinha(campos.getRange().get().begin.toString());
-                                                JsonOut.setArquivo(nomeArquivo);
-                                                ListJsonSmell.add(JsonOut);
-                                                totalSmells++;
+                                                printAndCountSmels("UI IO Component detectado na classe " + classe.getName() + " (Acesso a banco de dados) " + campos.getRange().get().begin, metodo.getRange().get().begin.toString(), Constants.JAVA, nomeArquivo);
                                             }
                                         });
                                     });
@@ -627,13 +549,7 @@ public class AndroidJavaCodeSmells {
                                 //Procura ViewsAndroid no TIPO  em declaração de campos
                                 classe.getFields().forEach(campos -> {
                                     if (ViewsAndroid.contains(campos.getElementType().toString())) {
-                                        System.out.println("Não Uso de Fragments detectado na classe " + classe.getName() + " () " + campos.getRange().get().begin);
-                                        System.out.println("---------------------------------------------------------------------------------------");
-                                        JsonOut.setTipoSmell("JAVA");
-                                        JsonOut.setLinha(campos.getRange().get().begin.toString());
-                                        JsonOut.setArquivo(nomeArquivo);
-                                        ListJsonSmell.add(JsonOut);
-                                        totalSmells++;
+                                        printAndCountSmels("Não Uso de Fragments detectado na classe " + classe.getName() + " () " + campos.getRange().get().begin, campos.getRange().get().begin.toString(), Constants.JAVA, nomeArquivo);
                                     }
                                 });
 
@@ -642,24 +558,12 @@ public class AndroidJavaCodeSmells {
                                     ViewsAndroid.forEach(item -> {
                                         //Procura Libs de IO no TIPO em declaração  nos Parametros de  Métodos
                                         if (metodo.getParameters().contains(item)) {
-                                            System.out.println("Não Uso de Fragments detectado na classe " + classe.getName() + " () nos parâmetros do método " + metodo.getRange().get().begin);
-                                            System.out.println("---------------------------------------------------------------------------------------");
-                                            JsonOut.setTipoSmell("JAVA");
-                                            JsonOut.setLinha(metodo.getRange().get().begin.toString());
-                                            JsonOut.setArquivo(nomeArquivo);
-                                            ListJsonSmell.add(JsonOut);
-                                            totalSmells++;
+                                            printAndCountSmels("Não Uso de Fragments detectado na classe " + classe.getName() + " () nos parâmetros do método " + metodo.getRange().get().begin, metodo.getRange().get().begin.toString(), Constants.JAVA, nomeArquivo);
                                         }
 
                                         //Procura ViewsAndroid no TIPO em retorno  de Métodos
                                         if (metodo.getType().toString().contains(item)) {
-                                            System.out.println("Não Uso de Fragments detectado na classe " + classe.getName() + " () no retorno do método " + metodo.getRange().get().begin);
-                                            System.out.println("---------------------------------------------------------------------------------------");
-                                            JsonOut.setTipoSmell("JAVA");
-                                            JsonOut.setLinha(metodo.getRange().get().begin.toString());
-                                            JsonOut.setArquivo(nomeArquivo);
-                                            ListJsonSmell.add(JsonOut);
-                                            totalSmells++;
+                                            printAndCountSmels("Não Uso de Fragments detectado na classe " + classe.getName() + " () no retorno do método " + metodo.getRange().get().begin, metodo.getRange().get().begin.toString(), Constants.JAVA, nomeArquivo);
                                         }
 
                                         //Procura ViewsAndroid no TIPO  em declaração de campos
