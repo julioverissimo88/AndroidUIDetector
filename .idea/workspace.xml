@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ed645100-bb7d-4c48-a5f2-f9a4be63070e" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/AndroidDetector/AndroidJavaCodeSmells.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AndroidDetector/AndroidJavaCodeSmells.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -33,8 +32,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/AndroidDetector/AndroidJavaCodeSmells.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="242">
-              <caret line="566" selection-start-line="566" selection-end-line="566" />
+            <state relative-caret-position="119">
+              <caret line="718" selection-start-line="718" selection-end-line="718" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#FlexAdapter#0;class#AndroidJavaCodeSmells#0" />
@@ -429,12 +428,12 @@
       <workItem from="1559569764411" duration="2517000" />
       <workItem from="1562114595732" duration="2027000" />
       <workItem from="1563233227406" duration="7669000" />
-      <workItem from="1563292819110" duration="18904000" />
+      <workItem from="1563292819110" duration="20994000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="186594000" />
+    <option name="totallyTimeSpent" value="188684000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -540,6 +539,12 @@
           <line>103</line>
           <properties />
           <option name="timeStamp" value="183" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/AndroidDetector/AndroidJavaCodeSmells.java</url>
+          <line>566</line>
+          <properties />
+          <option name="timeStamp" value="197" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/AndroidDetector/AndroidLayoutSmells.java</url>
@@ -894,8 +899,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/AndroidDetector/AndroidJavaCodeSmells.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="566" selection-start-line="566" selection-end-line="566" />
+        <state relative-caret-position="119">
+          <caret line="718" selection-start-line="718" selection-end-line="718" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#FlexAdapter#0;class#AndroidJavaCodeSmells#0" />

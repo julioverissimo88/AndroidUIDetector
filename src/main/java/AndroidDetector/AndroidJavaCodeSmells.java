@@ -569,16 +569,9 @@ public class AndroidJavaCodeSmells {
                                         //Procura ViewsAndroid no TIPO  em declaração de campos
                                         metodo.findAll(FieldDeclaration.class).forEach(campos -> {
                                             if (campos.getElementType().toString().contains(item)) {
-                                                System.out.println("Não Uso de Fragments detectado na classe " + classe.getName() + " () " + campos.getRange().get().begin);
-                                                System.out.println("---------------------------------------------------------------------------------------");
-                                                JsonOut.setTipoSmell("JAVA");
-                                                JsonOut.setLinha(campos.getRange().get().begin.toString());
-                                                JsonOut.setArquivo(nomeArquivo);
-                                                ListJsonSmell.add(JsonOut);
-                                                totalSmells++;
+                                                printAndCountSmels("Não Uso de Fragments detectado na classe " + classe.getName() + " () " + campos.getRange().get().begin, metodo.getRange().get().begin.toString(), Constants.JAVA, nomeArquivo);
                                             }
                                         });
-
                                     });
                                 });
                             }
@@ -632,18 +625,13 @@ public class AndroidJavaCodeSmells {
                         for (ClassOrInterfaceType implementacao : implementacoes) {
                             if (implementacao.getName().getIdentifier().contains(FRAGMENT)) {
                                 totalFragments = totalFragments + 1;
-                                System.err.println("É um fragmento sim" + classe.getName().getIdentifier());
                             }
                         }
                     }
                 }
 
                 if (totalFragments >= threshold) {
-                    System.out.println("Uso Excessivo de Fragment " + "(Mais de " + threshold + " Fragments no aplicativo)");
-                    JsonOut.setTipoSmell("XML");
-                    JsonOut.setArquivo("");
-                    ListJsonSmell.add(JsonOut);
-                    totalSmells++;
+                    printAndCountSmels("Uso Excessivo de Fragment " + "(Mais de " + threshold + " Fragments no aplicativo)", "", Constants.XML, "");
                 }
             } catch (Exception ex) {
                 ex.printStackTrace();
@@ -684,7 +672,7 @@ public class AndroidJavaCodeSmells {
                         //Como a classe vai ser analisada ainda, n�o cont�m smells por enquanto
                         Boolean isFoolAdapter = false;
 
-                        //Para ver se a classe � um Adapter, precisamos ver se ela extende de BaseAdapter
+                        //Para ver se a classe é um Adapter, precisamos ver se ela extende de BaseAdapter
                         //Pegamos todas as classes que ela implementa
                         NodeList<ClassOrInterfaceType> implementacoes = classe.getExtendedTypes();
                         for (ClassOrInterfaceType implementacao : implementacoes) {
@@ -694,8 +682,8 @@ public class AndroidJavaCodeSmells {
                                 //Contados de arquivos analisados
                                 contadorArquivosAnalisados = contadorArquivosAnalisados + 1;
 
-                                //Se chegou at� aqui, temos certeza de que � um adapter.
-                                //Se a classe que extende do BaseAdapter tiver algum m�todo que n�o seja sobrescrever um m�todo de interface, � um FlexAdapter.
+                                //Se chegou até aqui, temos certeza de que é um adapter.
+                                //Se a classe que extende do BaseAdapter tiver algum método que não seja sobrescrever um método de interface, é um FlexAdapter.
                                 //Pegamos todos os membros da classe
                                 NodeList<BodyDeclaration<?>> membros = classe.getMembers();
                                 //Verifica se o membro é um método
@@ -706,36 +694,28 @@ public class AndroidJavaCodeSmells {
                                         if (metodo.getName().getIdentifier().equals(GETVIEW)) {
 
                                             //Pega o parametro do tipo View e armazena o nome dele
-                                            //Pode ser �til para verificar por findViewById dentro de la�os
+                                            //Pode ser útil para verificar por findViewById dentro de laços
                                             Parameter viewParameter = metodo.getParameter(1);
                                             String nomeParametroView = viewParameter.getName().getIdentifier();
 
-                                            //Pega o bloco de declara��es dentro método getView
+                                            //Pega o bloco de declarações dentro método getView
                                             BlockStmt body = metodo.getBody().get();
                                             NodeList<Statement> statements = body.getStatements();
 
-                                            //Itera sobre as declara��es at� achar express�es
+                                            //Itera sobre as declarações até achar expressões
                                             for (Statement statement : statements) {
                                                 if (statement.isExpressionStmt()) {
-                                                    //Se em alguma dessas express�es tiver o texto findViewById
-                                                    //Quer dizer que o ViewHolder n�o est� sendo utilizado, o que caracteriza o smell
+                                                    //Se em alguma dessas expressões tiver o texto findViewById
+                                                    //Quer dizer que o ViewHolder não está sendo utilizado, o que caracteriza o smell
                                                     if (statement.toString().contains(FINDVIEWBYID)) {
                                                         isFoolAdapter = true;
-                                                        JsonOut.setTipoSmell("JAVA");
-                                                        JsonOut.setLinha(statement.getRange().get().begin.toString());
-                                                        JsonOut.setArquivo(arquivo);
-                                                        ListJsonSmell.add(JsonOut);
-                                                        totalSmells++;
+                                                        printAndCountSmels("Fool Adapter " + statement.getRange().get().begin, "", Constants.JAVA, ListArquivosAnaliseJava.toArray()[cont].toString());
                                                     }
 
                                                     //Se ele infla um Layout em toda chamada ao getView, isso tamb�m caracteriza o smell
                                                     if (statement.toString().contains(INFLATER)) {
                                                         isFoolAdapter = true;
-                                                        JsonOut.setTipoSmell("JAVA");
-                                                        JsonOut.setLinha(statement.getRange().get().begin.toString());
-                                                        JsonOut.setArquivo(arquivo);
-                                                        ListJsonSmell.add(JsonOut);
-                                                        totalSmells++;
+                                                        printAndCountSmels("Fool Adapter " + statement.getRange().get().begin, "", Constants.JAVA, ListArquivosAnaliseJava.toArray()[cont].toString());
                                                     }
                                                 }
                                             }
