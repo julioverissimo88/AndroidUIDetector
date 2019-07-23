@@ -1,6 +1,6 @@
-import AndroidDetector.IOClass;
-import AndroidDetector.LoadFiles;
-import AndroidDetector.OutputSmells;
+import br.com.AndroidDetector.IOClass;
+import br.com.AndroidDetector.LoadFiles;
+import br.com.AndroidDetector.OutputSmells;
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.ImportDeclaration;
@@ -8,7 +8,7 @@ import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.body.*;
 import com.github.javaparser.ast.stmt.*;
 import com.github.javaparser.ast.type.ClassOrInterfaceType;
-import metric.WMC;
+import br.com.metric.WMC;
 
 import java.io.File;
 import java.io.FileNotFoundException;
