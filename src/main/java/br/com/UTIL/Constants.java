@@ -6,8 +6,9 @@ public class Constants {
     public static String XML = "XML";
     public static String JAVA = "JAVA";
     public static String PATH_SAVE_JSON = "C:\\Detector\\";
-    public static String PATH_SAVE_OUTPUT = "/Users/rafaeldurelli/Desktop/Repositorio-TESTE/";
-    public static String ACTIVITY = "Activity+";
+    public static String PATH_SAVE_OUTPUT = "\"C:\\\\DetectorRepositories\\\\results";
+    public static String PATH_CLONE_REPOSITORY = "C:\\DetectorRepositories\\";
+    public static String ACTIVITY = "Activity";
     public static String BASEACTIVITY = "BaseActivity";
     public static String FRAGMENT = "Fragment";
     public static String LISTENER = "Listener";
@@ -16,6 +17,10 @@ public class Constants {
     public static String FINDVIEWBYID = "findViewById";
     public static String INFLATER = "inflater";
     public static String GETVIEW = "getView";
+
+    public static int THRESHOLD_DEEPNESTEDLAYOUT = 3;
+    public static int THRESHOLD_GODSTYLERESOURCE = 5;
+    public static int THRESHOLD_EXCESSIVEFRAGMENT = 5;
 
 
 

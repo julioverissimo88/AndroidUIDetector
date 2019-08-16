@@ -10,14 +10,14 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import static br.com.UTIL.Constants.PATH_CLONE_REPOSITORY;
+
 public class AndroidLayoutSmells {
     //region [Var Declaration]
     public static int contadorArquivosAnalisados = 0;
     private static long qtdSubelementos = 0;
     private static SAXBuilder sb = new SAXBuilder();
     public static List<File> ListArquivosAnaliseXML = new ArrayList<File>();
-    public static final String JAVA = ".java";
-    public static final String XML = ".xml";
     private static OutputSmells JsonOut = new OutputSmells();
     private static List<OutputSmells> ListJsonSmell = new ArrayList<OutputSmells>();
     private static List<OutputSmells> ListSmells = new ArrayList<OutputSmells>();
@@ -27,24 +27,22 @@ public class AndroidLayoutSmells {
     //enregion
 
     //Layout Profundamente Aninhado
-    public static long DeepNestedLayout(String pathApp, int threshold) {
+    public static List<OutputSmells> DeepNestedLayout(String pathApp, int threshold) {
         try {
             contadorArquivosAnalisados = 0;
 
-            //arquivosAnalise.clear();
+            File folder = new File(pathApp);
+            ListArquivosAnaliseXML = LoadFiles.carregaArquivosXMLAnalise(folder);
+            ListJsonSmell.clear();
             ListSmells.clear();
             totalSmells = 0;
 
-            //listar(new File(pathApp),XML);
-
             for (int cont = 0; cont < ListArquivosAnaliseXML.toArray().length; cont++) {
-
                 //Contados de arquivos analisados
                 contadorArquivosAnalisados = contadorArquivosAnalisados + 1;
 
-
                 try {
-                    System.out.println("Arquivo analisado:" + ListArquivosAnaliseXML.toArray()[cont]);
+                    System.out.println("Arquivo analisado: " + ListArquivosAnaliseXML.toArray()[cont]);
                     System.out.println("---------------------------------------------------------------------------------------");
 
                     File f = new File(ListArquivosAnaliseXML.toArray()[cont].toString());
@@ -59,8 +57,7 @@ public class AndroidLayoutSmells {
                         //BUSCAR ELEMENTOS FILHOS DA TAG
                         List elements = rootElmnt.getChildren();
 
-                        recursiveChildrenElement(elements, threshold);
-
+                        recursiveChildrenElement(elements, threshold, ListArquivosAnaliseXML.toArray()[cont].toString());
                         System.out.println("---------------------------------------------------------------------------------------");
 
                     }
@@ -75,19 +72,19 @@ public class AndroidLayoutSmells {
             ex.printStackTrace();
         }
 
-        return totalSmells;
+        return ListJsonSmell;
     }
 
     //Atributo de estilo duplicado
-    public static long DuplicateStyleAttributes(String pathApp) {
+    public static List<OutputSmells> DuplicateStyleAttributes(String pathApp) {
         try {
             contadorArquivosAnalisados = 0;
 
-            //arquivosAnalise.clear();
+            File folder = new File(pathApp);
+            ListArquivosAnaliseXML = LoadFiles.carregaArquivosXMLAnalise(folder);
+            ListJsonSmell.clear();
             ListSmells.clear();
             totalSmells = 0;
-
-            //listar(new File(pathApp),XML);
 
             for (int cont = 0; cont < ListArquivosAnaliseXML.toArray().length; cont++) {
                 //Contados de arquivos analisados
@@ -125,7 +122,9 @@ public class AndroidLayoutSmells {
                                                     if (atributo_atual.toString().equals(atributoInterno.toString()) && !listSmellsEcontradas.contains(atributo_atual.toString())) {
                                                         listSmellsEcontradas.add(atributo_atual.toString());
                                                         System.out.println("Duplicate Style Attributes " + atributoInterno.getName() + " - Considere colocar a formatação das propriedades em um recurso de estilo:");
+                                                        JsonOut = new OutputSmells();
                                                         JsonOut.setTipoSmell("XML");
+                                                        JsonOut.setLinha(atributoInterno.getName() + " " + atributoInterno.toString());
                                                         JsonOut.setArquivo(ListArquivosAnaliseXML.toArray()[cont].toString());
                                                         ListJsonSmell.add(JsonOut);
                                                         totalSmells++;
@@ -150,14 +149,15 @@ public class AndroidLayoutSmells {
             ex.printStackTrace();
         }
 
-        return totalSmells;
+        return ListJsonSmell;
     }
 
     //Longo Recurso de Estilo
-    public static long GodStyleResource(String pathApp, int threshold) {
+    public static List<OutputSmells> GodStyleResource(String pathApp, int threshold) {
         try {
-            contadorArquivosAnalisados = 0;
-            //arquivosAnalise.clear();
+            File folder = new File(pathApp);
+            ListArquivosAnaliseXML = LoadFiles.carregaArquivosXMLAnalise(folder);
+            ListJsonSmell.clear();
             ListSmells.clear();
             totalSmells = 0;
 
@@ -191,6 +191,7 @@ public class AndroidLayoutSmells {
                         //System.out.println("->"+arquivosAnalise.toArray()[cont].toString());
                         System.out.println("Longo recurso de Estilo detectado (existe apenas um arquivo para estilos no aplicativo que possui " + d.getRootElement().getChildren().size() + " estilos)");
                         System.out.println("---------------------------------------------------------------------------------------");
+                        JsonOut = new OutputSmells();
                         JsonOut.setTipoSmell("XML");
                         JsonOut.setArquivo(ListArquivosAnaliseXML.toArray()[cont].toString());
                         ListJsonSmell.add(JsonOut);
@@ -207,19 +208,19 @@ public class AndroidLayoutSmells {
             ex.printStackTrace();
         }
 
-        return totalSmells;
+        return ListJsonSmell;
     }
 
     //Listener Oculto
-    public static long HiddenListener(String pathApp) {
+    public static List<OutputSmells> HiddenListener(String pathApp) {
         try {
             contadorArquivosAnalisados = 0;
 
-            //arquivosAnalise.clear();
+            File folder = new File(pathApp);
+            ListArquivosAnaliseXML = LoadFiles.carregaArquivosXMLAnalise(folder);
+            ListJsonSmell.clear();
             ListSmells.clear();
             totalSmells = 0;
-
-            //listar(new File(pathApp),XML);
 
             for (int cont = 0; cont < ListArquivosAnaliseXML.toArray().length; cont++) {
 
@@ -267,19 +268,19 @@ public class AndroidLayoutSmells {
             ex.printStackTrace();
         }
 
-        return totalSmells;
+        return ListJsonSmell;
     }
 
     //Recurso Mágico
-    public static long magicResource(String pathApp) {
+    public static List<OutputSmells> magicResource(String pathApp) {
         try {
             contadorArquivosAnalisados = 0;
 
-            //arquivosAnalise.clear();
+            File folder = new File(pathApp);
+            ListArquivosAnaliseXML = LoadFiles.carregaArquivosXMLAnalise(folder);
+            ListJsonSmell.clear();
             ListSmells.clear();
             totalSmells = 0;
-
-            //listar(new File(pathApp),XML);
 
             for (int cont = 0; cont < ListArquivosAnaliseXML.toArray().length; cont++) {
                 //Contados de arquivos analisados
@@ -325,19 +326,19 @@ public class AndroidLayoutSmells {
             ex.printStackTrace();
         }
 
-        return totalSmells;
+        return ListJsonSmell;
     }
 
     //Recurso de String Bagunçado
-    public static long godStringResource(String pathApp) {
+    public static List<OutputSmells> godStringResource(String pathApp) {
         try {
             contadorArquivosAnalisados = 0;
 
-            //arquivosAnalise.clear();
+            File folder = new File(pathApp);
+            ListArquivosAnaliseXML = LoadFiles.carregaArquivosXMLAnalise(folder);
+            ListJsonSmell.clear();
             ListSmells.clear();
             totalSmells = 0;
-
-            //listar(new File(pathApp),XML);
 
             int qtdFilesString = 0;
 
@@ -364,6 +365,7 @@ public class AndroidLayoutSmells {
                         //System.out.println("->"+arquivosAnalise.toArray()[cont].toString());
                         System.out.println("Recurso de String Baguncado detectado (existe apenas um arquivo para strings no aplicativo  ");
                         System.out.println("---------------------------------------------------------------------------------------");
+                        JsonOut = new OutputSmells();
                         JsonOut.setTipoSmell("XML");
                         JsonOut.setArquivo(ListArquivosAnaliseXML.toArray()[cont].toString());
                         ListJsonSmell.add(JsonOut);
@@ -380,19 +382,19 @@ public class AndroidLayoutSmells {
             ex.printStackTrace();
         }
 
-        return totalSmells;
+        return ListJsonSmell;
     }
 
     //Reuso inadequado de string
-    public static long inappropriateStringReuse(String pathApp) {
+    public static List<OutputSmells> inappropriateStringReuse(String pathApp) {
         try {
             contadorArquivosAnalisados = 0;
 
-//            arquivosAnalise.clear();
+            File folder = new File(pathApp);
+            ListArquivosAnaliseXML = LoadFiles.carregaArquivosXMLAnalise(folder);
+            ListJsonSmell.clear();
             ListSmells.clear();
             totalSmells = 0;
-            textStringArquivo.clear();
-            //listar(new File(pathApp),XML);
 
             for (int cont = 0; cont < ListArquivosAnaliseXML.toArray().length; cont++) {
 
@@ -435,6 +437,7 @@ public class AndroidLayoutSmells {
                 textStringArquivo.forEach(itemTexto -> {
                     if ((linha.strString.equals(itemTexto.strString)) && (!linha.arquivo.equals(itemTexto.arquivo))) {
                         System.out.println("Reuso inadequado de String detectado " + itemTexto.strString + "(Arquivo " + linha.arquivo + " e " + itemTexto.arquivo + ")");
+                        JsonOut = new OutputSmells();
                         JsonOut.setTipoSmell("XML");
                         JsonOut.setArquivo(linha.arquivo.toString());
                         ListJsonSmell.add(JsonOut);
@@ -452,16 +455,18 @@ public class AndroidLayoutSmells {
             ex.printStackTrace();
         }
 
-        return totalSmells;
+        return ListJsonSmell;
     }
 
     //Imagem Faltante
-    public static long NotFoundImage(String pathApp) {
+    public static List<OutputSmells> NotFoundImage(String pathApp) {
         contadorArquivosAnalisados = 0;
 
         FilesIMG.clear();
-        totalSmells = 0;
+        File folder = new File(pathApp);
+        ListJsonSmell.clear();
         ListSmells.clear();
+        totalSmells = 0;
         ObtemImagensList(new File(pathApp));
 
         //Contados de arquivos analisados
@@ -479,13 +484,17 @@ public class AndroidLayoutSmells {
 
                         if (!arquivoImg.exists()) {
                             System.out.println("Imagem Faltante detectado " + arquivo.getName() + " para pasta " + item);
+                            JsonOut = new OutputSmells();
                             JsonOut.setTipoSmell("XML");
+                            JsonOut.setLinha("Imagem Faltante detectado " + arquivo.getName() + " para pasta " + item);
                             JsonOut.setArquivo(arquivoImg.toString());
                             ListJsonSmell.add(JsonOut);
                             totalSmells++;
                             //System.out.println(arquivoImg.length());
                         } else if ((arquivo.length() != arquivoImg.length())) {
                             System.out.println("Imagem Faltante detectado (Imagem existe porem a resolução é incompatível) " + arquivo.getName() + " para pasta " + item);
+                            JsonOut = new OutputSmells();
+                            JsonOut.setLinha("Imagem Faltante detectado (Imagem existe porem a resolução é incompatível) " + arquivo.getName() + " para pasta " + item);
                             JsonOut.setTipoSmell("XML");
                             JsonOut.setArquivo(arquivoImg.toString());
                             ListJsonSmell.add(JsonOut);
@@ -499,11 +508,10 @@ public class AndroidLayoutSmells {
         });
 
         JsonOut.saveJson(ListJsonSmell, "NotFoundImage.json");
-        return AndroidLayoutSmells.totalSmells;
+        return ListJsonSmell;
     }
 
     //region [Recursive Functions]
-
     private static void recursiveChildrenMagic(List elements) {
         for (int i = 0; i < elements.size(); i++) {
             try {
@@ -522,6 +530,7 @@ public class AndroidLayoutSmells {
                         if (item.getName() == "text") {
                             if (!item.getValue().matches("@.*/.*")) {
                                 System.out.println("Recurso Mágico " + el.getName() + " - text:" + item.getValue());
+                                JsonOut = new OutputSmells();
                                 JsonOut.setTipoSmell("XML");
                                 JsonOut.setArquivo("");
                                 ListJsonSmell.add(JsonOut);
@@ -552,6 +561,7 @@ public class AndroidLayoutSmells {
                     for (org.jdom2.Attribute item : listAttr) {
                         if (item.getName() == "onClick") {
                             System.out.println("Listener Escondido " + el.getName() + " - Onclick:" + item.getValue());
+                            JsonOut = new OutputSmells();
                             JsonOut.setTipoSmell("XML");
                             JsonOut.setArquivo("");
                             ListJsonSmell.add(JsonOut);
@@ -565,7 +575,7 @@ public class AndroidLayoutSmells {
         }
     }
 
-    private static void recursiveChildrenElement(List elements, int threshold) {
+    private static void recursiveChildrenElement(List elements, int threshold, String arquivo) {
         for (int i = 0; i < elements.size(); i++) {
             try {
 
@@ -574,12 +584,14 @@ public class AndroidLayoutSmells {
 
                 if (SubElements.size() > 0) {
                     qtdSubelementos = qtdSubelementos + 1;
-                    recursiveChildrenElement(SubElements, threshold);
+                    recursiveChildrenElement(SubElements, threshold, arquivo);
                 } else {
                     if (qtdSubelementos > threshold) {
                         System.out.println("Layout Profundamente Aninhado encontrado " + el.getName() + "(Mais de " + threshold + " níveis)");
+                        JsonOut = new OutputSmells();
                         JsonOut.setTipoSmell("XML");
-                        JsonOut.setArquivo("");
+                        JsonOut.setArquivo(arquivo.replace(PATH_CLONE_REPOSITORY, ""));
+                        JsonOut.setLinha(el.getName() + " " + el.toString());
                         ListJsonSmell.add(JsonOut);
                         totalSmells++;
                         break;

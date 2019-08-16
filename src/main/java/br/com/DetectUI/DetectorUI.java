@@ -322,25 +322,25 @@ public class DetectorUI extends javax.swing.JFrame {
 
 
                     String app = f.getName();
-                    long totalDeepNested = AndroidLayoutSmells.DeepNestedLayout(caminho, 4);
-                    long totalDuplicateStyleAttributes = AndroidLayoutSmells.DuplicateStyleAttributes(caminho);
-                    long totalGodStyleResource = AndroidLayoutSmells.GodStyleResource(caminho, 11);
-                    long totalHideListener = AndroidLayoutSmells.HiddenListener(caminho);
-                    long totalmagicResource = AndroidLayoutSmells.magicResource(caminho);
-                    long totalBadStringResource = AndroidLayoutSmells.godStringResource(caminho);
-                    long totalreusoInadequadoDeString = AndroidLayoutSmells.inappropriateStringReuse(caminho);
-                    long totalNotFoundImage = AndroidLayoutSmells.NotFoundImage(caminho);
+                    long totalDeepNested = AndroidLayoutSmells.DeepNestedLayout(caminho, 4).size();
+                    long totalDuplicateStyleAttributes = AndroidLayoutSmells.DuplicateStyleAttributes(caminho).size();
+                    long totalGodStyleResource = AndroidLayoutSmells.GodStyleResource(caminho, 11).size();
+                    long totalHideListener = AndroidLayoutSmells.HiddenListener(caminho).size();
+                    long totalmagicResource = AndroidLayoutSmells.magicResource(caminho).size();
+                    long totalBadStringResource = AndroidLayoutSmells.godStringResource(caminho).size();
+                    long totalreusoInadequadoDeString = AndroidLayoutSmells.inappropriateStringReuse(caminho).size();
+                    long totalNotFoundImage = AndroidLayoutSmells.NotFoundImage(caminho).size();
 
                     //análises de código java
                     LoadFiles.carregaArquivosJAVAAnalise(f);
 
-                    long totalCoupledUIComponent = AndroidJavaCodeSmells.CoupledUIComponent(caminho);
-                    long totalSuspiciousBehavior = AndroidJavaCodeSmells.SuspiciousBehavior(caminho);
-                    long totalFlexAdapter = AndroidJavaCodeSmells.FlexAdapter(caminho);
-                    long totalBrainUIComponent = AndroidJavaCodeSmells.BrainUIComponent(caminho);
-                    long totalCompUIIO = AndroidJavaCodeSmells.CompUIIO(caminho);
-                    long totalNotFragment = AndroidJavaCodeSmells.NotFragment(caminho);
-                    long totalExcessiveFragment = AndroidJavaCodeSmells.ExcessiveFragment(caminho, 10);
+                    long totalCoupledUIComponent = AndroidJavaCodeSmells.CoupledUIComponent(caminho).size();
+                    long totalSuspiciousBehavior = AndroidJavaCodeSmells.SuspiciousBehavior(caminho).size();
+                    long totalFlexAdapter = AndroidJavaCodeSmells.FlexAdapter(caminho).size();
+                    long totalBrainUIComponent = AndroidJavaCodeSmells.BrainUIComponent(caminho).size();
+                    long totalCompUIIO = AndroidJavaCodeSmells.CompUIIO(caminho).size();
+                    long totalNotFragment = AndroidJavaCodeSmells.NotFragment(caminho).size();
+                    long totalExcessiveFragment = AndroidJavaCodeSmells.ExcessiveFragment(caminho, 10).size();
 
                     writer.append(
                             app + ";" +

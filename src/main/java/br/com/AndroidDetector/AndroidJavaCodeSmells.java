@@ -37,6 +37,7 @@ public class AndroidJavaCodeSmells {
 
     private static void printAndCountSmels(String msg, String linha, String Type, String file) {
         System.out.println(msg);
+        JsonOut = new OutputSmells();
         JsonOut.setTipoSmell(Type);
         JsonOut.setArquivo(file);
         JsonOut.setLinha(linha);
@@ -45,12 +46,13 @@ public class AndroidJavaCodeSmells {
     }
 
     //Componente de UI Acoplado
-    public static long CoupledUIComponent(String pathApp) throws FileNotFoundException {
+    public static List<OutputSmells> CoupledUIComponent(String pathApp) throws FileNotFoundException {
         contadorArquivosAnalisados = 0;
+        File folder = new File(pathApp);
+        ListArquivosAnaliseJava = LoadFiles.carregaArquivosJAVAAnalise(folder);
+        ListJsonSmell.clear();
         ListSmells.clear();
-        //arquivosAnalise.clear();
         totalSmells = 0;
-        //listar(new File(pathApp),JAVA);
 
         for (int cont = 0; cont < ListArquivosAnaliseJava.toArray().length; cont++) {
             try {
@@ -81,7 +83,7 @@ public class AndroidJavaCodeSmells {
                                 classe.getFields().forEach(item -> {
                                     //System.out.println(item.getElementType().toString());
                                     if ((item.getElementType().toString().contains(ACTIVITY) || item.getElementType().toString().contains(FRAGMENT))) {
-                                        printAndCountSmels("Componente de UI Acoplado " + item.getElementType().toString() + item.getRange(), item.getRange().toString(), Constants.JAVA, nomeArquivo);
+                                        printAndCountSmels("Componente de UI Acoplado " + item.getElementType().toString() + item.getRange(), item.getRange().toString(), Constants.JAVA, nomeArquivo );
                                     }
                                 });
 
@@ -121,15 +123,17 @@ public class AndroidJavaCodeSmells {
         }
 
         JsonOut.saveJson(ListJsonSmell, "CoupledUIComponent.json");
-        return totalSmells;
+        return ListJsonSmell;
     }
 
     //Comportamento suspeito
-    public static long SuspiciousBehavior(String pathApp) throws FileNotFoundException {
+    public static List<OutputSmells> SuspiciousBehavior(String pathApp) throws FileNotFoundException {
         ListSmells.clear();
-        //arquivosAnalise.clear();
+        File folder = new File(pathApp);
+        ListArquivosAnaliseJava = LoadFiles.carregaArquivosJAVAAnalise(folder);
+        ListJsonSmell.clear();
+        ListSmells.clear();
         totalSmells = 0;
-        //listar(new File(pathApp),JAVA);
 
         for (int cont = 0; cont < ListArquivosAnaliseJava.toArray().length; cont++) {
             try {
@@ -211,20 +215,20 @@ public class AndroidJavaCodeSmells {
         }
 
         JsonOut.saveJson(ListJsonSmell, "SuspiciousBehavior.json");
-        return totalSmells;
+        return ListJsonSmell;
     }
 
     //Flex Adapter
-    public static long FlexAdapter(String pathApp) {
+    public static List<OutputSmells> FlexAdapter(String pathApp) {
         try {
 
             contadorArquivosAnalisados = 0;
 
+            File folder = new File(pathApp);
+            ListArquivosAnaliseJava = LoadFiles.carregaArquivosJAVAAnalise(folder);
+            ListJsonSmell.clear();
             ListSmells.clear();
-            //arquivosAnalise.clear();
             totalSmells = 0;
-
-            //listar(new File(pathApp),JAVA);
 
             for (int cont = 0; cont < ListArquivosAnaliseJava.toArray().length; cont++) {
                 try {
@@ -306,18 +310,18 @@ public class AndroidJavaCodeSmells {
             ex.printStackTrace();
         }
 
-        return totalSmells;
+        return ListJsonSmell;
     }
 
     //Componente de UI Cérebro
-    public static long BrainUIComponent(String pathApp) {
+    public static List<OutputSmells> BrainUIComponent(String pathApp) {
         try {
             contadorArquivosAnalisados = 0;
+            File folder = new File(pathApp);
+            ListArquivosAnaliseJava = LoadFiles.carregaArquivosJAVAAnalise(folder);
+            ListJsonSmell.clear();
             ListSmells.clear();
-            //arquivosAnalise.clear();
             totalSmells = 0;
-
-            //listar(new File(pathApp),JAVA);
 
             for (int cont = 0; cont < ListArquivosAnaliseJava.toArray().length; cont++) {
                 try {
@@ -432,17 +436,18 @@ public class AndroidJavaCodeSmells {
             ex.printStackTrace();
         }
 
-        return totalSmells;
+        return ListJsonSmell;
     }
 
     //Componente de UI Fazendo IO
-    public static long CompUIIO(String pathApp) {
+    public static List<OutputSmells> CompUIIO(String pathApp) {
         try {
             contadorArquivosAnalisados = 0;
-            //arquivosAnalise.clear();
+            File folder = new File(pathApp);
+            ListArquivosAnaliseJava = LoadFiles.carregaArquivosJAVAAnalise(folder);
+            ListJsonSmell.clear();
+            ListSmells.clear();
             totalSmells = 0;
-
-            //listar(new File(pathApp),JAVA);
 
             for (int cont = 0; cont < ListArquivosAnaliseJava.toArray().length; cont++) {
                 try {
@@ -504,19 +509,19 @@ public class AndroidJavaCodeSmells {
             ex.printStackTrace();
         }
 
-        return totalSmells;
+        return ListJsonSmell;
     }
 
     //No uso de fragment
-    public static long NotFragment(String pathApp) {
+    public static List<OutputSmells> NotFragment(String pathApp) {
         try {
             contadorArquivosAnalisados = 0;
 
-            //arquivosAnalise.clear();
+            File folder = new File(pathApp);
+            ListArquivosAnaliseJava = LoadFiles.carregaArquivosJAVAAnalise(folder);
+            ListJsonSmell.clear();
             ListSmells.clear();
             totalSmells = 0;
-
-            //listar(new File(pathApp),JAVA);
 
             for (int cont = 0; cont < ListArquivosAnaliseJava.toArray().length; cont++) {
 
@@ -587,16 +592,18 @@ public class AndroidJavaCodeSmells {
             ex.printStackTrace();
         }
 
-        return totalSmells;
+        return ListJsonSmell;
     }
 
     //Uso excessivo de Fragments
-    public static long ExcessiveFragment(String pathApp, long threshold) throws IOException {
+    public static List<OutputSmells> ExcessiveFragment(String pathApp, long threshold) throws IOException {
         contadorArquivosAnalisados = 0;
-        //arquivosAnalise.clear();
+        File folder = new File(pathApp);
+        ListArquivosAnaliseJava = LoadFiles.carregaArquivosJAVAAnalise(folder);
+        ListJsonSmell.clear();
         ListSmells.clear();
         totalSmells = 0;
-//        listar(new File(pathApp),JAVA);
+
         long totalFragments = 0;
         List<ReusoStringData> listaExcessiveFragment = new ArrayList<ReusoStringData>();
 
@@ -637,16 +644,18 @@ public class AndroidJavaCodeSmells {
         }
 
         JsonOut.saveJson(ListJsonSmell, "ExcessiveFragment.json");
-        return totalSmells;
+        return ListJsonSmell;
 
     }
 
     //Adapter consumista
-    public static long FoolAdapter(String pathApp) {
+    public static List<OutputSmells> FoolAdapter(String pathApp) {
         try {
             contadorArquivosAnalisados = 0;
+            File folder = new File(pathApp);
+            ListArquivosAnaliseJava = LoadFiles.carregaArquivosJAVAAnalise(folder);
+            ListJsonSmell.clear();
             ListSmells.clear();
-            //arquivosAnalise.clear();
             totalSmells = 0;
 
             for (int cont = 0; cont < ListArquivosAnaliseJava.toArray().length; cont++) {
@@ -732,10 +741,10 @@ public class AndroidJavaCodeSmells {
                 }
             }
             JsonOut.saveJson(ListJsonSmell, "FoolAdapter.json");
-            return totalSmells;
+            return ListJsonSmell;
         } catch (Exception ex) {
             ex.printStackTrace();
-            return totalSmells;
+            return ListJsonSmell;
         }
     }
 }

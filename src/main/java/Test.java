@@ -81,21 +81,21 @@ public class Test {
 
                 //analise de codigo XML
                 String app = f.getName();
-                long totalDeepNested = AndroidLayoutSmells.DeepNestedLayout(caminho, 4);
+                long totalDeepNested = AndroidLayoutSmells.DeepNestedLayout(caminho, 4).size();
                 long totalArquivosDeepNested = AndroidLayoutSmells.contadorArquivosAnalisados;
-                long totalDuplicateStyleAttributes = AndroidLayoutSmells.DuplicateStyleAttributes(caminho);
+                long totalDuplicateStyleAttributes = AndroidLayoutSmells.DuplicateStyleAttributes(caminho).size();
                 long totalArquivosDuplicateStyleAttributes = AndroidLayoutSmells.contadorArquivosAnalisados;
-                long totalGodStyleResource = AndroidLayoutSmells.GodStyleResource(caminho, 11);
+                long totalGodStyleResource = AndroidLayoutSmells.GodStyleResource(caminho, 11).size();
                 long totalArquivosGodStyleResource = AndroidLayoutSmells.contadorArquivosAnalisados;
-                long totalHideListener = AndroidLayoutSmells.HiddenListener(caminho);
+                long totalHideListener = AndroidLayoutSmells.HiddenListener(caminho).size();
                 long totalArquivosHideListener = AndroidLayoutSmells.contadorArquivosAnalisados;
-                long totalmagicResource = AndroidLayoutSmells.magicResource(caminho);
+                long totalmagicResource = AndroidLayoutSmells.magicResource(caminho).size();
                 long totalArquivosmagicResource = AndroidLayoutSmells.contadorArquivosAnalisados;
-                long totalBadStringResource = AndroidLayoutSmells.godStringResource(caminho);
+                long totalBadStringResource = AndroidLayoutSmells.godStringResource(caminho).size();
                 long totalArquivosBadStringResource = AndroidLayoutSmells.contadorArquivosAnalisados;
-                long totalreusoInadequadoDeString = AndroidLayoutSmells.inappropriateStringReuse(caminho);
+                long totalreusoInadequadoDeString = AndroidLayoutSmells.inappropriateStringReuse(caminho).size();
                 long totalArquivosreusoInadequadoDeString = AndroidLayoutSmells.contadorArquivosAnalisados;
-                long totalNotFoundImage = AndroidLayoutSmells.NotFoundImage(caminho);
+                long totalNotFoundImage = AndroidLayoutSmells.NotFoundImage(caminho).size();
                 long totalArquivosNotFoundImage = AndroidLayoutSmells.contadorArquivosAnalisados;
 
                 //analise de codigo JAVA
@@ -105,21 +105,21 @@ public class Test {
                     System.out.println(fileJava.getAbsolutePath());
                 }
 
-                long totalCoupledUIComponent = AndroidJavaCodeSmells.CoupledUIComponent(caminho);
+                long totalCoupledUIComponent = AndroidJavaCodeSmells.CoupledUIComponent(caminho).size();
                 long totalArquivosCoupledUIComponent = AndroidJavaCodeSmells.contadorArquivosAnalisados;
-                long totalSuspiciousBehavior = AndroidJavaCodeSmells.SuspiciousBehavior(caminho);
+                long totalSuspiciousBehavior = AndroidJavaCodeSmells.SuspiciousBehavior(caminho).size();
                 long totalArquivosSuspiciousBehavior = AndroidJavaCodeSmells.contadorArquivosAnalisados;
-                long totalBrainUIComponent = AndroidJavaCodeSmells.BrainUIComponent(caminho);
+                long totalBrainUIComponent = AndroidJavaCodeSmells.BrainUIComponent(caminho).size();
                 long totalArquivosBrainUIComponent = AndroidJavaCodeSmells.contadorArquivosAnalisados;
-                long totalFlexAdapter = AndroidJavaCodeSmells.FlexAdapter(caminho);
+                long totalFlexAdapter = AndroidJavaCodeSmells.FlexAdapter(caminho).size();
                 long totalArquivosFlexAdapter = AndroidJavaCodeSmells.contadorArquivosAnalisados;
-                long totalFoolAdapter = AndroidJavaCodeSmells.FoolAdapter(caminho);
+                long totalFoolAdapter = AndroidJavaCodeSmells.FoolAdapter(caminho).size();
                 long totalArquivosFoolAdapter = AndroidJavaCodeSmells.contadorArquivosAnalisados;
-                long totalCompUIIO = AndroidJavaCodeSmells.CompUIIO(caminho);
+                long totalCompUIIO = AndroidJavaCodeSmells.CompUIIO(caminho).size();
                 long totalArquivosCompUIIO = AndroidJavaCodeSmells.contadorArquivosAnalisados;
-                long totalNotFragment = AndroidJavaCodeSmells.NotFragment(caminho);
+                long totalNotFragment = AndroidJavaCodeSmells.NotFragment(caminho).size();
                 long totalArquivosNotFragment = AndroidJavaCodeSmells.contadorArquivosAnalisados;
-                long totalExcessiveFragment = AndroidJavaCodeSmells.ExcessiveFragment(caminho, 10);
+                long totalExcessiveFragment = AndroidJavaCodeSmells.ExcessiveFragment(caminho, 10).size();
                 long totalArquivosExcessiveFragment = AndroidJavaCodeSmells.contadorArquivosAnalisados;
 
                 writer.append(

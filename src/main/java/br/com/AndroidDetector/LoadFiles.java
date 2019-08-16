@@ -13,16 +13,20 @@ public class LoadFiles {
     public static List<File> arquivosAnalise = new ArrayList<File>();
 
     //--> Listagem de Arquivos
-    public static void carregaArquivosXMLAnalise(File directory) {
+    public static List<File> carregaArquivosXMLAnalise(File directory) {
         arquivosAnalise.clear();
         listar(directory, XML_EXTENSION);
         ListArquivosAnaliseXML = arquivosAnalise;
+        System.out.println("Total de arquivos " + arquivosAnalise.size());
+        return ListArquivosAnaliseXML;
     }
 
-    public static void carregaArquivosJAVAAnalise(File directory) {
+    public static List<File> carregaArquivosJAVAAnalise(File directory) {
         arquivosAnalise.clear();
         listar(directory, JAVA_EXTENSION);
         ListArquivosAnaliseJava = arquivosAnalise;
+        System.out.println("Total de arquivos " + arquivosAnalise.size());
+        return ListArquivosAnaliseJava;
     }
 
     public static void listar(File directory, String tipo) {
