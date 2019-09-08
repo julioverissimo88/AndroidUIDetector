@@ -1,6 +1,10 @@
 # General info
 
-AndroidDetector is a library/API written in Java that can detect Android smells .
+AndroidDetector is a library/API written in Java that can detect Android smells.
+
+Empirical study: An Empirical Catalog of Code Smells for the
+Presentation Layer of Android Apps
+
 
 Currently, it supports the detection of the following smels:
 
@@ -27,3 +31,5 @@ supported by **AndroidDetector 1.0**
 ## How to build Android Detector
 
 ## Contributors
+Julio Cesar Verissimo dos Santos
+Rafael Serapilha Durelli 
