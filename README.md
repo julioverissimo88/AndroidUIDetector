@@ -1,9 +1,10 @@
-General info
+# General info
+
 AndroidDetector is a library/API written in Java that can detect Android smells .
 
 Currently, it supports the detection of the following smelss:
 
-supported by AndroidDetector 1.0
+supported by **AndroidDetector 1.0**
 
 1. Magic Resource
 2. Deep Nested Layout
@@ -23,3 +24,6 @@ supported by AndroidDetector 1.0
 16. Hidden Listener
 17. Brain UI Component
 
+## How to build Android Detector
+
+## Contributors
