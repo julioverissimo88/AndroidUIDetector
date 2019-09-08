@@ -28,6 +28,21 @@ supported by **AndroidDetector 1.0**
 
 ## How to build Android Detector
 
+**DetectorUI**
+
+Grapic interface Java Swing
+
+**AndroidDetector**
+library/API Java
+
+**DetectorApi**
+Api Java Spring
+https://detector-api.herokuapp.com/
+
+**Example Front End in ReactJS consuming DetectorApi**
+https://app-detector.herokuapp.com/
+
+
 ## Contributors
 
 - [Julio Cesar Verissimo dos Santos ](https://github.com/julioverissimo88 "Julio Cesar Verissimo dos Santos ")
