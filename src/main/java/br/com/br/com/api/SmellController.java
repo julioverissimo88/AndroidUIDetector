@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 
 import static br.com.UTIL.Constants.*;
 
+@CrossOrigin(origins = "*")
+@RequestMapping("/detector")
 @Controller
 public class SmellController {
     private List<OutputSmells> listSmells;
@@ -33,7 +35,6 @@ public class SmellController {
 
         return new ResponseEntity<List<OutputSmells>>(new ArrayList<OutputSmells>(listSmells), HttpStatus.OK);
     }
-
 
     @RequestMapping(value = "/DuplicateStyleAttributes", method = RequestMethod.POST)
     public ResponseEntity<List<OutputSmells>> duplicateStyleAttributes(@RequestParam("repository") String repository) throws Exception {
@@ -70,7 +71,6 @@ public class SmellController {
         }
     }
 
-
     @RequestMapping(value = "/HiddenListener", method = RequestMethod.POST)
     public ResponseEntity<List<OutputSmells>> HiddenListener(@RequestParam("repository") String repository) throws Exception {
         try{
@@ -87,7 +87,6 @@ public class SmellController {
             throw new Exception();
         }
     }
-
 
     @RequestMapping(value = "/magicResource", method = RequestMethod.POST)
     public ResponseEntity<List<OutputSmells>> magicResource(@RequestParam("repository") String repository) throws Exception {
@@ -123,7 +122,6 @@ public class SmellController {
         }
     }
 
-
     @RequestMapping(value = "/inappropriateStringReuse", method = RequestMethod.POST)
     public ResponseEntity<List<OutputSmells>> inappropriateStringReuse(@RequestParam("repository") String repository) throws Exception {
         try{
@@ -141,7 +139,6 @@ public class SmellController {
         }
     }
 
-
     @RequestMapping(value = "/NotFoundImage", method = RequestMethod.POST)
     public ResponseEntity<List<OutputSmells>> NotFoundImage(@RequestParam("repository") String repository) throws Exception {
         try{
@@ -158,7 +155,6 @@ public class SmellController {
             throw new Exception();
         }
     }
-
 
     @RequestMapping(value = "/CoupledUIComponent", method = RequestMethod.POST)
     public ResponseEntity<List<OutputSmells>> CoupledUIComponent(@RequestParam("repository") String repository) throws Exception {
@@ -212,7 +208,6 @@ public class SmellController {
         }
     }
 
-
     @RequestMapping(value = "/FoolAdapter", method = RequestMethod.POST)
     public ResponseEntity<List<OutputSmells>> FoolAdapter(@RequestParam("repository") String repository) throws Exception {
         try{
@@ -230,7 +225,6 @@ public class SmellController {
         }
     }
 
-
     @RequestMapping(value = "/BrainUIComponent", method = RequestMethod.POST)
     public ResponseEntity<List<OutputSmells>> BrainUIComponent(@RequestParam("repository") String repository) throws Exception {
         try{
@@ -247,7 +241,6 @@ public class SmellController {
             throw new Exception();
         }
     }
-
 
     @RequestMapping(value = "/CompUIIO", method = RequestMethod.POST)
     public ResponseEntity<List<OutputSmells>> CompUIIO(@RequestParam("repository") String repository) throws Exception {
