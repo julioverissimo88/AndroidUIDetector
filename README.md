@@ -47,33 +47,28 @@ https://app-detector.herokuapp.com/
 
 **Endpoints**
 
-|   |   |
-| ------------ | ------------ |
-|   |   |
-|   |   |
-
 
 case local run replace https://detector-api.herokuapp.com with "http://yourlocalURL"
 
-|  Smell |Endpoint   | Post Parameter|
+|  Smell | Endpoint  | Post Parameter|
 | ------------ | ------------ |
-|Magic Resource|https://detector-api.herokuapp.com/MagicResource| Project Git Url
-|Deep Nested Layout|https://detector-api.herokuapp.com/DeepNestedLayout| Project Git Url
-|Missing Image|https://detector-api.herokuapp.com/MissingImage| Project Git Url
-|Coupled UI Component|https://detector-api.herokuapp.com/CoupledUIComponent| Project Git Url
-|Suspicious Behavior|https://detector-api.herokuapp.com/SuspiciousBehavior| Project Git Url
-|Longor Repeated Layout|https://detector-api.herokuapp.com/LongorRepeatedLayout| Project Git Url
-|Fool Adapter|https://detector-api.herokuapp.com/FoolAdapter| Project Git Url
-|Excessive Use of Fragments|https://detector-api.herokuapp.com/ExcessiveUseofFragments| Project Git Url
-|UI Component Doing IO|https://detector-api.herokuapp.com/UIComponentDoingIO| Project Git Url
-|No Use of Fragments|https://detector-api.herokuapp.com/NoUseofFragments| Project Git Url
-|God Style Resource|https://detector-api.herokuapp.com/GodStyleResource| Project Git Url
-|God String Resource|https://detector-api.herokuapp.com/GodStringResource| Project Git Url
-|Duplicate Style Attributes|https://detector-api.herokuapp.com/DuplicateStyleAttributes| Project Git Url
-|Flex Adapter|https://detector-api.herokuapp.com/FlexAdapter| Project Git Url
-|Inappropriate String Reuse|https://detector-api.herokuapp.com/InappropriateStringReuse| Project Git Url
-|Hidden Listener|https://detector-api.herokuapp.com/HiddenListener| Project Git Url
-|Brain UI Component|https://detector-api.herokuapp.com/BrainUIComponent| Project Git Url
+|Magic Resource|https://detector-api.herokuapp.com/MagicResource| Project Git Url|
+|Deep Nested Layout|https://detector-api.herokuapp.com/DeepNestedLayout| Project Git Url|
+|Missing Image|https://detector-api.herokuapp.com/MissingImage| Project Git Url|
+|Coupled UI Component|https://detector-api.herokuapp.com/CoupledUIComponent| Project Git Url|
+|Suspicious Behavior|https://detector-api.herokuapp.com/SuspiciousBehavior| Project Git Url|
+|Longor Repeated Layout|https://detector-api.herokuapp.com/LongorRepeatedLayout| Project Git Url|
+|Fool Adapter|https://detector-api.herokuapp.com/FoolAdapter| Project Git Url|
+|Excessive Use of Fragments|https://detector-api.herokuapp.com/ExcessiveUseofFragments| Project Git Url|
+|UI Component Doing IO|https://detector-api.herokuapp.com/UIComponentDoingIO| Project Git Url|
+|No Use of Fragments|https://detector-api.herokuapp.com/NoUseofFragments| Project Git Url|
+|God Style Resource|https://detector-api.herokuapp.com/GodStyleResource| Project Git Url|
+|God String Resource|https://detector-api.herokuapp.com/GodStringResource| Project Git Url|
+|Duplicate Style Attributes|https://detector-api.herokuapp.com/DuplicateStyleAttributes| Project Git Url|
+|Flex Adapter|https://detector-api.herokuapp.com/FlexAdapter| Project Git Url|
+|Inappropriate String Reuse|https://detector-api.herokuapp.com/InappropriateStringReuse| Project Git Url|
+|Hidden Listener|https://detector-api.herokuapp.com/HiddenListener| Project Git Url|
+|Brain UI Component|https://detector-api.herokuapp.com/BrainUIComponent| Project Git Url|
 
 
 
