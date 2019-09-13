@@ -51,7 +51,7 @@ https://app-detector.herokuapp.com/
 case local run replace https://detector-api.herokuapp.com with "http://yourlocalURL"
 
 |  Smell | Endpoint  | Post Parameter|
-| ------------ | ------------ |
+| ------------ | ------------ |------------ |
 |Magic Resource|https://detector-api.herokuapp.com/MagicResource| Project Git Url|
 |Deep Nested Layout|https://detector-api.herokuapp.com/DeepNestedLayout| Project Git Url|
 |Missing Image|https://detector-api.herokuapp.com/MissingImage| Project Git Url|
