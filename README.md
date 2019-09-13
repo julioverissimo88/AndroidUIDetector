@@ -47,6 +47,11 @@ https://app-detector.herokuapp.com/
 
 **Endpoints**
 
+|   |   |
+| ------------ | ------------ |
+|   |   |
+|   |   |
+
 
 case local run replace https://detector-api.herokuapp.com with "http://yourlocalURL"
 
