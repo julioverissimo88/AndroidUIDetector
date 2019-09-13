@@ -30,7 +30,7 @@ supported by **AndroidDetector 1.0**
 
 **DetectorUI**
 
-Grapic interface Java Swing
+Graphic interface Java Swing
 
 **AndroidDetector**
 
