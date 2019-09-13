@@ -46,9 +46,6 @@ Api Java Spring
 
 https://detector-api.herokuapp.com/
 
-**Example Front End in ReactJS consuming DetectorApi**
-https://app-detector.herokuapp.com/
-
 **Endpoints**
 
 
@@ -74,6 +71,8 @@ case local run replace https://detector-api.herokuapp.com with "http://yourlocal
 |Hidden Listener|https://detector-api.herokuapp.com/HiddenListener| Project Git Url|
 |Brain UI Component|https://detector-api.herokuapp.com/BrainUIComponent| Project Git Url|
 
+**Example Front End in ReactJS consuming DetectorApi**
+https://app-detector.herokuapp.com/
 
 
 ## Contributors
