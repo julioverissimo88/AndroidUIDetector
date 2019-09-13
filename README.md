@@ -38,7 +38,7 @@ library/API Java
 
 To run the tool via command-line, you need to invoke the following command:
 
-java -cp Detector-1.0.jar br.com.AndroidDetector.Command [path-to-android-app] [path-to-where-i-want-to save-the results] [smell]
+**java** -cp Detector-1.0.jar br.com.AndroidDetector.Command **[path-to-android-app]** **[path-to-where-i-want-to save-the results]** [**smell**]
 
 **DetectorApi**
 
