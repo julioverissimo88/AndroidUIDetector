@@ -1,18 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ed645100-bb7d-4c48-a5f2-f9a4be63070e" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/AndroidDetector/Command.java" afterDir="false" />
+    <list default="true" id="ed645100-bb7d-4c48-a5f2-f9a4be63070e" name="Default" comment="Merge branch 'v3' of https://github.com/julioverissimo88/AndroidUIDetector into v3&#10;# Please enter a commit message to explain why this merge is necessary,&#10;# especially if it merges an updated upstream into a topic branch.&#10;#&#10;# Lines starting with '#' will be ignored, and an empty message aborts&#10;# the commit.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/DetectUI/DetectorUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/DetectUI/DetectorUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/GitTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/Detector-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/Detector-1.0-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/com/DetectUI/DetectorUI$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/DetectUI/DetectorUI$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/com/DetectUI/DetectorUI$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/DetectUI/DetectorUI$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/com/DetectUI/DetectorUI$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/DetectUI/DetectorUI$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/com/DetectUI/DetectorUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/DetectUI/DetectorUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/com/DetectUI/FrmDetectorInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/DetectUI/FrmDetectorInterface.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/com/GitTest.class" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -31,7 +21,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/br/com/AndroidDetector/Command.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="357">
-              <caret line="21" column="18" lean-forward="true" selection-start-line="21" selection-start-column="18" selection-end-line="21" selection-end-column="18" />
+              <caret line="21" column="32" selection-start-line="21" selection-start-column="32" selection-end-line="21" selection-end-column="32" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -91,7 +81,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="474">
-              <caret line="29" column="61" lean-forward="true" selection-start-line="29" selection-start-column="61" selection-end-line="29" selection-end-column="61" />
+              <caret line="29" column="61" selection-start-line="29" selection-start-column="61" selection-end-line="29" selection-end-column="61" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -103,7 +93,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/br/com/br/com/api/SmellController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="401">
-              <caret line="183" column="13" lean-forward="true" selection-start-line="179" selection-start-column="12" selection-end-line="183" selection-end-column="13" />
+              <caret line="183" column="13" selection-start-line="179" selection-start-column="12" selection-end-line="183" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -173,6 +163,11 @@
     </dirStrings>
   </component>
   <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="Julio &lt;julio_verissimo@hotmail.com.br&gt;" />
+      </list>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
@@ -526,12 +521,20 @@
       <workItem from="1567963704531" duration="7166000" />
       <workItem from="1568293896279" duration="503000" />
       <workItem from="1568340018010" duration="462000" />
-      <workItem from="1568681094117" duration="4007000" />
+      <workItem from="1568681094117" duration="4796000" />
     </task>
+    <task id="LOCAL-00001" summary="Merge branch 'v3' of https://github.com/julioverissimo88/AndroidUIDetector into v3&#10;# Please enter a commit message to explain why this merge is necessary,&#10;# especially if it merges an updated upstream into a topic branch.&#10;#&#10;# Lines starting with '#' will be ignored, and an empty message aborts&#10;# the commit.">
+      <created>1568686535374</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1568686535374</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="257459000" />
+    <option name="totallyTimeSpent" value="258248000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -544,9 +547,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1358" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1988273" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1988273" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="3" />
@@ -562,9 +564,9 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3289689" />
       <window_info anchor="bottom" id="Tool Output" order="7" />
-      <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
+      <window_info active="true" anchor="bottom" id="Event Log" order="8" sideWeight="0.50053304" side_tool="true" visible="true" weight="0.31852654" />
       <window_info anchor="bottom" id="ANTLR Preview" order="9" />
-      <window_info anchor="bottom" id="Messages" order="10" visible="true" weight="0.31852654" />
+      <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.49946696" visible="true" weight="0.31852654" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.19967267" />
       <window_info anchor="bottom" id="Version Control" order="12" weight="0.32569557" />
       <window_info anchor="bottom" id="Docker" order="13" show_stripe_button="false" />
@@ -587,6 +589,10 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Merge branch 'v3' of https://github.com/julioverissimo88/AndroidUIDetector into v3&#10;# Please enter a commit message to explain why this merge is necessary,&#10;# especially if it merges an updated upstream into a topic branch.&#10;#&#10;# Lines starting with '#' will be ignored, and an empty message aborts&#10;# the commit." />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'v3' of https://github.com/julioverissimo88/AndroidUIDetector into v3&#10;# Please enter a commit message to explain why this merge is necessary,&#10;# especially if it merges an updated upstream into a topic branch.&#10;#&#10;# Lines starting with '#' will be ignored, and an empty message aborts&#10;# the commit." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1071,7 +1077,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="474">
-          <caret line="29" column="61" lean-forward="true" selection-start-line="29" selection-start-column="61" selection-end-line="29" selection-end-column="61" />
+          <caret line="29" column="61" selection-start-line="29" selection-start-column="61" selection-end-line="29" selection-end-column="61" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1081,7 +1087,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/br/com/br/com/api/SmellController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="401">
-          <caret line="183" column="13" lean-forward="true" selection-start-line="179" selection-start-column="12" selection-end-line="183" selection-end-column="13" />
+          <caret line="183" column="13" selection-start-line="179" selection-start-column="12" selection-end-line="183" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1091,7 +1097,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/br/com/AndroidDetector/Command.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
-          <caret line="21" column="18" lean-forward="true" selection-start-line="21" selection-start-column="18" selection-end-line="21" selection-end-column="18" />
+          <caret line="21" column="32" selection-start-line="21" selection-start-column="32" selection-end-line="21" selection-end-column="32" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
