@@ -2,14 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ed645100-bb7d-4c48-a5f2-f9a4be63070e" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/br/com/api/WebConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/AndroidDetector/Command.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/AndroidDetector/AndroidJavaCodeSmells.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/AndroidDetector/AndroidJavaCodeSmells.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/br/com/api/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/br/com/api/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/br/com/api/SmellController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/br/com/api/SmellController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/com/AndroidDetector/AndroidJavaCodeSmells.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/AndroidDetector/AndroidJavaCodeSmells.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/com/br/com/api/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/br/com/api/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/com/br/com/api/SmellController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/br/com/api/SmellController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/DetectUI/DetectorUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/DetectUI/DetectorUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/GitTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Detector-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/Detector-1.0-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/DetectUI/DetectorUI$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/DetectUI/DetectorUI$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/DetectUI/DetectorUI$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/DetectUI/DetectorUI$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/DetectUI/DetectorUI$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/DetectUI/DetectorUI$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/DetectUI/DetectorUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/DetectUI/DetectorUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/DetectUI/FrmDetectorInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/DetectUI/FrmDetectorInterface.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/br/com/GitTest.class" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -23,40 +26,12 @@
     <option name="isMigrated" value="true" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/br/com/github/GitManagement.java">
+    <leaf>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/br/com/AndroidDetector/Command.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="357">
-              <caret line="31" selection-start-line="31" selection-end-line="31" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#194#195#0" expanded="true" />
-                <element signature="e#240#241#0" expanded="true" />
-                <element signature="e#278#279#0" expanded="true" />
-                <element signature="e#312#313#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/br/com/br/com/api/SmellController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2788">
-              <caret line="176" column="33" selection-start-line="176" selection-start-column="30" selection-end-line="176" selection-end-column="33" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/br/com/br/com/api/Main.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="19" lean-forward="true" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="19" />
+              <caret line="21" column="18" lean-forward="true" selection-start-line="21" selection-start-column="18" selection-end-line="21" selection-end-column="18" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -67,8 +42,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/br/com/DetectUI/DetectorUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5474">
-              <caret line="342" column="109" selection-start-line="342" selection-start-column="109" selection-end-line="342" selection-end-column="109" />
+            <state relative-caret-position="340">
+              <caret line="268" column="111" selection-start-line="268" selection-start-column="85" selection-end-line="268" selection-end-column="111" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -77,22 +52,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/br/com/AndroidDetector/LoadFiles.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/br/com/AndroidDetector/CompilationUnitInstance.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="28" column="38" selection-start-line="28" selection-start-column="38" selection-end-line="28" selection-end-column="38" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Test.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1921">
-              <caret line="121" column="85" selection-start-line="121" selection-start-column="85" selection-end-line="121" selection-end-column="85" />
+            <state relative-caret-position="255">
+              <caret line="15" column="58" selection-start-line="15" selection-start-column="47" selection-end-line="15" selection-end-column="58" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -103,7 +66,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/br/com/AndroidDetector/AndroidLayoutSmells.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1224">
+            <state relative-caret-position="440">
               <caret line="592" column="85" selection-start-line="592" selection-start-column="50" selection-end-line="592" selection-end-column="85" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -125,30 +88,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/br/com/AndroidDetector/AndroidJavaCodeSmells.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="43">
-              <caret line="51" column="101" selection-start-line="51" selection-start-column="101" selection-end-line="51" selection-end-column="101" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#CoupledUIComponent#0;class#AndroidJavaCodeSmells#0" />
-                <element signature="method#SuspiciousBehavior#0;class#AndroidJavaCodeSmells#0" />
-                <element signature="method#FlexAdapter#0;class#AndroidJavaCodeSmells#0" />
-                <element signature="method#BrainUIComponent#0;class#AndroidJavaCodeSmells#0" />
-                <element signature="method#CompUIIO#0;class#AndroidJavaCodeSmells#0" />
-                <element signature="method#NotFragment#0;class#AndroidJavaCodeSmells#0" />
-                <element signature="method#ExcessiveFragment#0;class#AndroidJavaCodeSmells#0" />
-                <element signature="method#FoolAdapter#0;class#AndroidJavaCodeSmells#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/br/com/br/com/api/WebConfig.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="16" column="1" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
+            <state relative-caret-position="474">
+              <caret line="29" column="61" lean-forward="true" selection-start-line="29" selection-start-column="61" selection-end-line="29" selection-end-column="61" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -157,10 +100,25 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-webmvc/4.2.4.RELEASE/spring-webmvc-4.2.4.RELEASE.jar!/org/springframework/web/servlet/config/annotation/WebMvcConfigurer.class">
+        <entry file="file://$PROJECT_DIR$/src/main/java/br/com/br/com/api/SmellController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="663">
-              <caret line="49" column="9" selection-start-line="49" selection-start-column="9" selection-end-line="49" selection-end-column="9" />
+            <state relative-caret-position="401">
+              <caret line="183" column="13" lean-forward="true" selection-start-line="179" selection-start-column="12" selection-end-line="183" selection-end-column="13" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/br/com/AndroidDetector/Visitors.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="10" column="19" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -251,13 +209,14 @@
         <option value="$PROJECT_DIR$/src/main/java/br/com/github/GitManagement.java" />
         <option value="$PROJECT_DIR$/src/main/java/br/com/AndroidDetector/OutputSmells.java" />
         <option value="$PROJECT_DIR$/src/main/java/Test.java" />
-        <option value="$PROJECT_DIR$/src/main/java/br/com/DetectUI/DetectorUI.java" />
         <option value="$PROJECT_DIR$/src/main/java/br/com/AndroidDetector/AndroidLayoutSmells.java" />
         <option value="$PROJECT_DIR$/src/main/java/br/com/AndroidDetector/LoadFiles.java" />
         <option value="$PROJECT_DIR$/src/main/java/br/com/br/com/api/Main.java" />
         <option value="$PROJECT_DIR$/src/main/java/br/com/br/com/api/WebConfig.java" />
         <option value="$PROJECT_DIR$/src/main/java/br/com/br/com/api/SmellController.java" />
         <option value="$PROJECT_DIR$/src/main/java/br/com/AndroidDetector/AndroidJavaCodeSmells.java" />
+        <option value="$PROJECT_DIR$/src/main/java/br/com/DetectUI/DetectorUI.java" />
+        <option value="$PROJECT_DIR$/src/main/java/br/com/AndroidDetector/Command.java" />
       </list>
     </option>
   </component>
@@ -280,16 +239,17 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
+    <option name="x" value="1358" />
     <option name="y" value="-8" />
-    <option name="width" value="1382" />
-    <option name="height" value="784" />
+    <option name="width" value="1026" />
+    <option name="height" value="546" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
@@ -297,11 +257,6 @@
             <path>
               <item name="AndroidUIDetector" type="b2602c69:ProjectViewProjectNode" />
               <item name="AndroidUIDetector" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="AndroidUIDetector" type="b2602c69:ProjectViewProjectNode" />
-              <item name="AndroidUIDetector" type="462c0819:PsiDirectoryNode" />
-              <item name="resource" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="AndroidUIDetector" type="b2602c69:ProjectViewProjectNode" />
@@ -354,13 +309,12 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="github" type="462c0819:PsiDirectoryNode" />
+              <item name="DetectUI" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -394,9 +348,23 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.Main">
+  <component name="RunManager" selected="Application.DetectorUI (1)">
     <configuration default="true" type="Applet">
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DetectorUI (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="br.com.DetectUI.DetectorUI" />
+      <module name="Detector" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="br.com.DetectUI.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -431,14 +399,6 @@
     </configuration>
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
-      <module name="Detector" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Test2" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Test2" />
       <module name="Detector" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <method v="2">
@@ -490,19 +450,19 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.Test2" />
       <item itemvalue="Application.DetectorUI" />
       <item itemvalue="Application.Main" />
       <item itemvalue="Application.GitTest" />
+      <item itemvalue="Application.DetectorUI (1)" />
       <item itemvalue="Spring Boot.Main" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.DetectorUI (1)" />
         <item itemvalue="Spring Boot.Main" />
         <item itemvalue="Application.GitTest" />
         <item itemvalue="Application.Main" />
         <item itemvalue="Application.DetectorUI" />
-        <item itemvalue="Application.Test2" />
       </list>
     </recent_temporary>
   </component>
@@ -563,12 +523,15 @@
       <workItem from="1566753374086" duration="4158000" />
       <workItem from="1566862875860" duration="623000" />
       <workItem from="1567102387570" duration="431000" />
-      <workItem from="1567963704531" duration="2595000" />
+      <workItem from="1567963704531" duration="7166000" />
+      <workItem from="1568293896279" duration="503000" />
+      <workItem from="1568340018010" duration="462000" />
+      <workItem from="1568681094117" duration="4007000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="247916000" />
+    <option name="totallyTimeSpent" value="257459000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -580,9 +543,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="1358" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24281392" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1988273" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="3" />
@@ -592,15 +556,15 @@
       <window_info id="Web" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32761312" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32405892" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.43862522" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.21451788" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.43770313" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3289689" />
       <window_info anchor="bottom" id="Tool Output" order="7" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
       <window_info anchor="bottom" id="ANTLR Preview" order="9" />
-      <window_info anchor="bottom" id="Messages" order="10" weight="0.31852654" />
+      <window_info anchor="bottom" id="Messages" order="10" visible="true" weight="0.31852654" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.19967267" />
       <window_info anchor="bottom" id="Version Control" order="12" weight="0.32569557" />
       <window_info anchor="bottom" id="Docker" order="13" show_stripe_button="false" />
@@ -705,6 +669,18 @@
           <properties />
           <option name="timeStamp" value="202" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/br/com/DetectUI/DetectorUI.java</url>
+          <line>224</line>
+          <properties />
+          <option name="timeStamp" value="211" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/br/com/AndroidDetector/Command.java</url>
+          <line>61</line>
+          <properties />
+          <option name="timeStamp" value="212" />
+        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/br/com/AndroidDetector/AndroidLayoutSmells.java</url>
           <line>214</line>
@@ -735,14 +711,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/resource/api.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="529">
-          <caret line="54" column="35" selection-start-line="54" selection-start-column="35" selection-end-line="54" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/JavaParser/ParserProject.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/AndroidDetector/ImportantSmells2.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/AndroidDetector/ImportantSmells.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/AndroidDetector/SampleOfXmlLocator.java" />
@@ -813,16 +781,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/DropboxUpload.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1241">
-          <caret line="73" column="41" selection-start-line="73" selection-start-column="41" selection-end-line="73" selection-end-column="41" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Test2.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/br/com/UTIL/CLOC.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -838,44 +796,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="113">
           <caret line="500" column="36" selection-start-line="500" selection-start-column="36" selection-end-line="500" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/br/com/AndroidDetector/Visitors.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="19" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#424#425#0" expanded="true" />
-            <element signature="e#487#488#0" expanded="true" />
-            <element signature="e#548#549#0" expanded="true" />
-            <element signature="e#605#606#0" expanded="true" />
-            <element signature="e#675#676#0" expanded="true" />
-            <element signature="e#736#737#0" expanded="true" />
-            <element signature="e#796#797#0" expanded="true" />
-            <element signature="e#848#849#0" expanded="true" />
-            <element signature="e#911#912#0" expanded="true" />
-            <element signature="e#966#967#0" expanded="true" />
-            <element signature="e#1030#1031#0" expanded="true" />
-            <element signature="e#1086#1087#0" expanded="true" />
-            <element signature="e#1155#1156#0" expanded="true" />
-            <element signature="e#1214#1215#0" expanded="true" />
-            <element signature="e#1286#1287#0" expanded="true" />
-            <element signature="e#1343#1344#0" expanded="true" />
-            <element signature="e#1403#1404#0" expanded="true" />
-            <element signature="e#1455#1456#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/br/com/AndroidDetector/CompilationUnitInstance.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="58" selection-start-line="15" selection-start-column="47" selection-end-line="15" selection-end-column="58" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -922,16 +842,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="35" column="11" selection-start-line="35" selection-start-column="11" selection-end-line="35" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="716">
-          <caret line="47" selection-start-line="39" selection-end-line="47" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -998,13 +908,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/br/com/GitTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="104" selection-start-line="7" selection-start-column="51" selection-end-line="7" selection-end-column="104" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/br/com/AndroidDetector/OutputSmells.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="410">
@@ -1012,13 +915,6 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/br/com/UTIL/Constants.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="46" selection-start-line="9" selection-start-column="25" selection-end-line="9" selection-end-column="46" />
         </state>
       </provider>
     </entry>
@@ -1032,26 +928,6 @@
             <element signature="e#240#241#0" expanded="true" />
             <element signature="e#278#279#0" expanded="true" />
             <element signature="e#312#313#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/br/com/br/com/api/SmellController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2788">
-          <caret line="176" column="33" selection-start-line="176" selection-start-column="30" selection-end-line="176" selection-end-column="33" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/br/com/DetectUI/DetectorUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5474">
-          <caret line="342" column="109" selection-start-line="342" selection-start-column="109" selection-end-line="342" selection-end-column="109" />
-          <folding>
-            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1076,9 +952,93 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/br/com/br/com/api/WebConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="16" column="1" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-webmvc/4.2.4.RELEASE/spring-webmvc-4.2.4.RELEASE.jar!/org/springframework/web/servlet/config/annotation/WebMvcConfigurer.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="663">
+          <caret line="49" column="9" selection-start-line="49" selection-start-column="9" selection-end-line="49" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/br/com/GitTest.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/DropboxUpload.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="203">
+          <caret line="73" column="41" selection-start-line="73" selection-start-column="41" selection-end-line="73" selection-end-column="41" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/br/com/br/com/api/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="1" lean-forward="true" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="1" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/br/com/DetectUI/DetectorUI.form">
+      <provider selected="true" editor-type-id="ui-designer" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/br/com/AndroidDetector/AndroidJavaCodeSmells.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="23" column="29" selection-start-line="23" selection-start-column="29" selection-end-line="23" selection-end-column="29" />
+          <folding>
+            <element signature="method#CoupledUIComponent#0;class#AndroidJavaCodeSmells#0" />
+            <element signature="method#FlexAdapter#0;class#AndroidJavaCodeSmells#0" />
+            <element signature="method#BrainUIComponent#0;class#AndroidJavaCodeSmells#0" />
+            <element signature="method#CompUIIO#0;class#AndroidJavaCodeSmells#0" />
+            <element signature="method#NotFragment#0;class#AndroidJavaCodeSmells#0" />
+            <element signature="method#ExcessiveFragment#0;class#AndroidJavaCodeSmells#0" />
+            <element signature="method#FoolAdapter#0;class#AndroidJavaCodeSmells#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/br/com/UTIL/Constants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="41" selection-start-line="8" selection-start-column="25" selection-end-line="8" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/br/com/AndroidDetector/Visitors.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="10" column="19" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/br/com/AndroidDetector/CompilationUnitInstance.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="58" selection-start-line="15" selection-start-column="47" selection-end-line="15" selection-end-column="58" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/br/com/AndroidDetector/AndroidLayoutSmells.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1224">
+        <state relative-caret-position="440">
           <caret line="592" column="85" selection-start-line="592" selection-start-column="50" selection-end-line="592" selection-end-column="85" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1098,45 +1058,40 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/br/com/br/com/api/WebConfig.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/br/com/DetectUI/DetectorUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="16" column="1" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
+        <state relative-caret-position="340">
+          <caret line="268" column="111" selection-start-line="268" selection-start-column="85" selection-end-line="268" selection-end-column="111" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-webmvc/4.2.4.RELEASE/spring-webmvc-4.2.4.RELEASE.jar!/org/springframework/web/servlet/config/annotation/WebMvcConfigurer.class">
+    <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="663">
-          <caret line="49" column="9" selection-start-line="49" selection-start-column="9" selection-end-line="49" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/br/com/AndroidDetector/AndroidJavaCodeSmells.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="43">
-          <caret line="51" column="101" selection-start-line="51" selection-start-column="101" selection-end-line="51" selection-end-column="101" />
+        <state relative-caret-position="474">
+          <caret line="29" column="61" lean-forward="true" selection-start-line="29" selection-start-column="61" selection-end-line="29" selection-end-column="61" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#CoupledUIComponent#0;class#AndroidJavaCodeSmells#0" />
-            <element signature="method#SuspiciousBehavior#0;class#AndroidJavaCodeSmells#0" />
-            <element signature="method#FlexAdapter#0;class#AndroidJavaCodeSmells#0" />
-            <element signature="method#BrainUIComponent#0;class#AndroidJavaCodeSmells#0" />
-            <element signature="method#CompUIIO#0;class#AndroidJavaCodeSmells#0" />
-            <element signature="method#NotFragment#0;class#AndroidJavaCodeSmells#0" />
-            <element signature="method#ExcessiveFragment#0;class#AndroidJavaCodeSmells#0" />
-            <element signature="method#FoolAdapter#0;class#AndroidJavaCodeSmells#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/br/com/br/com/api/Main.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/br/com/br/com/api/SmellController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="19" lean-forward="true" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="19" />
+        <state relative-caret-position="401">
+          <caret line="183" column="13" lean-forward="true" selection-start-line="179" selection-start-column="12" selection-end-line="183" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/br/com/AndroidDetector/Command.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="21" column="18" lean-forward="true" selection-start-line="21" selection-start-column="18" selection-end-line="21" selection-end-column="18" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

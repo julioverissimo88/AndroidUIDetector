@@ -16,6 +16,7 @@ import java.io.PrintStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import static br.com.UTIL.Constants.*;
 
 /**
  * @author julio
@@ -244,71 +245,71 @@ public class DetectorUI extends javax.swing.JFrame {
                 writer.append("\n");
 
 
-                File file = new File("C:\\Users\\julio\\Desktop\\Repositorio01\\Repositorio01");
+                File file = new File(PATH_SAVE_OUTPUT);
                 File afile[] = file.listFiles();
 
                 for (int j = 0; j < afile.length; j++) {
-                    /*
                     if(jCheckCoupledUI.isSelected()){
-                        AndroidDetector.ImportantSmells.CoupledUIComponent(txtCaminhoApp.getText());
-                    }                
-
-                    if(jCheckDeepNestedLayout.isSelected()){
-                        AndroidDetector.ImportantSmells.DeepNestedLayout(txtCaminhoApp.getText(),3);
-                    }
-
-                    if(jCheckDuplicateStyle.isSelected()){
-                        AndroidDetector.ImportantSmells.DuplicateStyleAttributes(txtCaminhoApp.getText());
-                    }
-
-                    if(jCheckGodStyleResource.isSelected()){
-                        AndroidDetector.ImportantSmells.GodStyleResource(txtCaminhoApp.getText(),5);
+                        AndroidJavaCodeSmells.CoupledUIComponent(txtCaminhoApp.getText());
                     }
 
                     if(jCheckSuspiciousBehavior.isSelected()){
-                        AndroidDetector.ImportantSmells.SuspiciousBehavior(txtCaminhoApp.getText());
+                        AndroidJavaCodeSmells.SuspiciousBehavior(txtCaminhoApp.getText());
                     }
 
                     if(jCheckFlexAdapter.isSelected()){
-                        AndroidDetector.ImportantSmells.FlexAdapter(txtCaminhoApp.getText());
+                        AndroidJavaCodeSmells.FlexAdapter(txtCaminhoApp.getText());
+                    }
+
+                    if(jCheckGodStyleResource.isSelected()){
+                        AndroidLayoutSmells.GodStyleResource(txtCaminhoApp.getText(),THRESHOLD_GODSTYLERESOURCE);
+                    }
+
+                    if(jCheckDeepNestedLayout.isSelected()){
+                        AndroidLayoutSmells.DeepNestedLayout(txtCaminhoApp.getText(),THRESHOLD_DEEPNESTEDLAYOUT);
+                    }
+
+                    if(jCheckDuplicateStyle.isSelected()){
+                        AndroidLayoutSmells.DuplicateStyleAttributes(txtCaminhoApp.getText());
                     }
 
                     if(jCheckBrainUIComponent.isSelected()){
-                        AndroidDetector.ImportantSmells.BrainUIComponent(txtCaminhoApp.getText());
+                        AndroidJavaCodeSmells.BrainUIComponent(txtCaminhoApp.getText());
                     }
-                    
-                    if(jCheckBrainUIComponent.isSelected()){
-                        AndroidDetector.ImportantSmells.BrainUIComponent(txtCaminhoApp.getText());
+
+                    if(jCheckHideListener.isSelected()){
+                        AndroidLayoutSmells.HiddenListener(txtCaminhoApp.getText());
                     }
-                    
-                    if(jCheckBrainUIComponent.isSelected()){
-                        AndroidDetector.ImportantSmells.BrainUIComponent(txtCaminhoApp.getText());
+
+                    if(jCheckMagicResource.isSelected()){
+                        AndroidLayoutSmells.magicResource(txtCaminhoApp.getText());
                     }
-                    
-                    if(jCheckBrainUIComponent.isSelected()){
-                        AndroidDetector.ImportantSmells.BrainUIComponent(txtCaminhoApp.getText());
+
+                    if(jCheckBadStringResource.isSelected()){
+                        AndroidLayoutSmells.godStringResource(txtCaminhoApp.getText());
                     }
-                    
-                    if(jCheckBrainUIComponent.isSelected()){
-                        AndroidDetector.ImportantSmells.BrainUIComponent(txtCaminhoApp.getText());
+
+                    if(jCheckReusodeString.isSelected()){
+                        AndroidLayoutSmells.inappropriateStringReuse(txtCaminhoApp.getText());
                     }
-                    
-                    if(jCheckBrainUIComponent.isSelected()){
-                        AndroidDetector.ImportantSmells.BrainUIComponent(txtCaminhoApp.getText());
+
+                    if(jCheckNotFoundImage.isSelected()){
+                        AndroidLayoutSmells.NotFoundImage(txtCaminhoApp.getText());
                     }
-                    
-                    if(jCheckBrainUIComponent.isSelected()){
-                        AndroidDetector.ImportantSmells.BrainUIComponent(txtCaminhoApp.getText());
+
+                    if(jCheckCompUIIO.isSelected()){
+                        AndroidJavaCodeSmells.CompUIIO(txtCaminhoApp.getText());
                     }
-                    
-                    if(jCheckBrainUIComponent.isSelected()){
-                        AndroidDetector.ImportantSmells.BrainUIComponent(txtCaminhoApp.getText());
+
+                    if(jCheckNotFragment.isSelected()){
+                        AndroidJavaCodeSmells.NotFragment(txtCaminhoApp.getText());
                     }
-                    
-                    if(jCheckBrainUIComponent.isSelected()){
-                        AndroidDetector.ImportantSmells.BrainUIComponent(txtCaminhoApp.getText());
+
+                    if(jCheckExcessiveUseFragments.isSelected()){
+                        AndroidJavaCodeSmells.ExcessiveFragment(txtCaminhoApp.getText(), THRESHOLD_EXCESSIVEFRAGMENT);
                     }
-                    */
+
+
                     File f = new File(afile[j].toString());
                     LoadFiles.carregaArquivosXMLAnalise(f);
 
@@ -322,9 +323,9 @@ public class DetectorUI extends javax.swing.JFrame {
 
 
                     String app = f.getName();
-                    long totalDeepNested = AndroidLayoutSmells.DeepNestedLayout(caminho, 4).size();
+                    long totalDeepNested = AndroidLayoutSmells.DeepNestedLayout(caminho, THRESHOLD_DEEPNESTEDLAYOUT).size();
                     long totalDuplicateStyleAttributes = AndroidLayoutSmells.DuplicateStyleAttributes(caminho).size();
-                    long totalGodStyleResource = AndroidLayoutSmells.GodStyleResource(caminho, 11).size();
+                    long totalGodStyleResource = AndroidLayoutSmells.GodStyleResource(caminho, THRESHOLD_GODSTYLERESOURCE).size();
                     long totalHideListener = AndroidLayoutSmells.HiddenListener(caminho).size();
                     long totalmagicResource = AndroidLayoutSmells.magicResource(caminho).size();
                     long totalBadStringResource = AndroidLayoutSmells.godStringResource(caminho).size();
@@ -340,7 +341,7 @@ public class DetectorUI extends javax.swing.JFrame {
                     long totalBrainUIComponent = AndroidJavaCodeSmells.BrainUIComponent(caminho).size();
                     long totalCompUIIO = AndroidJavaCodeSmells.CompUIIO(caminho).size();
                     long totalNotFragment = AndroidJavaCodeSmells.NotFragment(caminho).size();
-                    long totalExcessiveFragment = AndroidJavaCodeSmells.ExcessiveFragment(caminho, 10).size();
+                    long totalExcessiveFragment = AndroidJavaCodeSmells.ExcessiveFragment(caminho, THRESHOLD_EXCESSIVEFRAGMENT).size();
 
                     writer.append(
                             app + ";" +
@@ -369,9 +370,9 @@ public class DetectorUI extends javax.swing.JFrame {
                 long fim = System.currentTimeMillis();
                 System.out.println(new SimpleDateFormat("HH:mm:ss").format(new Date(inicio - fim)));
 
-                JOptionPane.showMessageDialog(rootPane, "Analise Concluída resultados salvos em: " + txtOutput.getText());
+                JOptionPane.showMessageDialog(rootPane, "Análise Concluída resultados salvos em: " + txtOutput.getText());
             } else {
-                JOptionPane.showMessageDialog(rootPane, "Informe Aplicativo para a an�lise");
+                JOptionPane.showMessageDialog(rootPane, "Informe Aplicativo para a análise");
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(rootPane, ex.getMessage());
