@@ -36,15 +36,14 @@ Graphic interface Java Swing
 
 library/API Java
 
-To run the tool via command-line, you need to invoke the following command:
-
-**java** -cp Detector-1.0.jar br.com.AndroidDetector.Command **[path-to-android-app]** **[path-to-where-i-want-to save-the results]** [**smell**]
-
 **DetectorApi**
 
 Api Java Spring
 
 https://detector-api.herokuapp.com/
+
+**Example Front End in ReactJS consuming DetectorApi**
+https://app-detector.herokuapp.com/
 
 **Endpoints**
 
@@ -71,11 +70,13 @@ case local run replace https://detector-api.herokuapp.com with "http://yourlocal
 |Hidden Listener|https://detector-api.herokuapp.com/HiddenListener| Project Git Url|
 |Brain UI Component|https://detector-api.herokuapp.com/BrainUIComponent| Project Git Url|
 
-**Example Front End in ReactJS consuming DetectorApi**
-https://app-detector.herokuapp.com/
 
 
 ## Contributors
 
 - [Julio Cesar Verissimo dos Santos ](https://github.com/julioverissimo88 "Julio Cesar Verissimo dos Santos ")
 - [Rafael Serapilha Durelli](https://github.com/rdurelli "Rafael Serapilha Durelli")
+- [Maurício Aniche](https://github.com/mauricioaniche "Mauricio Aniche")
+- [Suelen Carvalho](https://github.com/SuelenGC "Suelen Carvalho")
+
+
