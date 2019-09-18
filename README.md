@@ -76,3 +76,7 @@ case local run replace https://detector-api.herokuapp.com with "http://yourlocal
 
 - [Julio Cesar Verissimo dos Santos ](https://github.com/julioverissimo88 "Julio Cesar Verissimo dos Santos ")
 - [Rafael Serapilha Durelli](https://github.com/rdurelli "Rafael Serapilha Durelli")
+- [Maurício Aniche](https://github.com/mauricioaniche "Mauricio Aniche")
+- [Suelen Carvalho](https://github.com/SuelenGC "Suelen Carvalho")
+
+
